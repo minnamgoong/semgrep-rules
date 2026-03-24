@@ -2,7 +2,7 @@ rules:
 - id: nsc-allows-plaintext-traffic
   languages:
   - generic
-  message: "nsc-allows-plaintext-traffic 잠재적 결함 및 보안 이탈율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
     (To hide this warning, set `xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="InsecureBaseConfiguration"` as parameters to your
     `<network-security-config>`)
@@ -29,7 +29,7 @@ rules:
 - id: nsc-pinning-without-backup
   languages:
   - generic
-  message: "nsc-pinning-without-backup 잠재적 결함 및 보안 이탈율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
   metadata:
     category: best-practice
     technology:
@@ -61,7 +61,7 @@ rules:
 - id: nsc-pinning-without-expiration
   languages:
   - generic
-  message: "nsc-pinning-without-expiration 잠재적 결함 및 보안 이탈율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
   metadata:
     category: best-practice
     technology:
@@ -85,7 +85,7 @@ rules:
 - id: nsc-allows-user-ca-certs
   languages:
   - generic
-  message: "nsc-allows-user-ca-certs 잠재적 결함 및 보안 이탈율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
     (To hide this warning, set `xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="AcceptsUserCertificates"` as parameters to your
     `<network-security-config>`)
@@ -114,7 +114,7 @@ rules:
 - id: nsc-allows-user-ca-certs-for-domain
   languages:
   - generic
-  message: "nsc-allows-user-ca-certs-for-domain 잠재적 결함 및 보안 이탈율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
     (To hide this warning, set `xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="AcceptsUserCertificates"` as parameters to your
     `<network-security-config>`)

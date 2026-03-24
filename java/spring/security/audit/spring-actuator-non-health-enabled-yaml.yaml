@@ -17,7 +17,7 @@ rules:
   - metavariable-comparison:
       metavariable: $ACTUATOR
       comparison: not str($ACTUATOR) in ["health","*"]
-  message: "spring-actuator-dangerous-endpoints-enabled-yaml 잠재적 결함 및 보안 이탈율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
     security risk. Please double-check if the actuator is needed and properly secured.
   severity: WARNING
   languages:
