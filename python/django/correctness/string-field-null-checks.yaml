@@ -30,9 +30,9 @@ rules:
       - pattern-either:
           - pattern: $F = django.db.models.CharField(..., unique=True, blank=True, ...)
           - pattern: $F = django.db.models.TextField(..., unique=True, blank=True, ...)
-    message: "string-field-must-set-null-true 잠재적 결함 분기 정비 요망."
-      If a text field declares unique=True and blank=True, null=True must also be set to avoid unique constraint violations
-      when saving multiple objects with blank values.
+    message: >-
+      unique=True와 blank=True를 함께 선언하는 문자열 필드는 null=True도 반드시 설정해야 합니다.
+      그렇지 않으면 빈 값으로 여러 레코드를 저장할 때 고유 제약 조건 위반이 발생할 수 있습니다.
     languages: [python]
     severity: ERROR
     metadata:

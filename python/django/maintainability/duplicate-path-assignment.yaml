@@ -16,7 +16,7 @@ rules:
   - id: conflicting-path-assignment
     languages:
       - python
-    message: "conflicting-path-assignment 잠재적 결함 분기 정비 요망."
+    message: "`$URL` 경로에 서로 다른 뷰(View)가 충돌하도록 중복 등록되어 있습니다. URL 라우팅 충돌을 방지하기 위해 동일 경로에는 하나의 뷰만 지정해 주세요."
     metadata:
       category: maintainability
       technology:
@@ -48,7 +48,7 @@ rules:
   - id: duplicate-name-assignment
     languages:
       - python
-    message: "duplicate-name-assignment 잠재적 결함 분기 정비 요망."
+    message: "서로 다른 경로에 동일한 URL 이름(`$NAME`)이 중복 할당되어 있습니다. 이름 충돌을 방지하기 위해 각 경로에 고유한 이름을 지정해 주세요."
     metadata:
       category: maintainability
       technology:

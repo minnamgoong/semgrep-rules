@@ -62,7 +62,7 @@ rules:
     - pattern-not: $LOOP.subprocess_shell($PROTOCOL, "...")
     - pattern-not: asyncio.subprocess.create_subprocess_shell("...", ...)
     - pattern-not: asyncio.create_subprocess_shell("...", ...)
-  message: "비동기 쉘 가압에 세척 누사가 엿보입니다."
+  message: "환경 변수 또는 외부 입력이 비동기 쉘 명령 실행에 직접 사용되고 있습니다. 커맨드 인젝션 취약점을 예방하려면 입력값을 엄격히 검증하거나 쉘을 사용하지 않는 방식으로 전환하세요."
   metadata:
     owasp:
     - A01:2017 - Injection
