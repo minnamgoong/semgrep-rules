@@ -1,4 +1,4 @@
-# Javascript Semgrep Rules Summary
+# JavaScript Semgrep Rules Summary
 
 `javascript` 디렉토리 하위의 규칙 목록입니다. (테스트 파일 제외)
 
@@ -12,9 +12,9 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `5.5.1` | `ERROR` | $window.location.href 연산에 사용자 입력이 그대로 대입되어 오픈 리디렉션 위협이 도사립니다. 도메인 화이트리스트 검출 후 도약... | `security/detect-angular-open-redirect.yaml` |
 | `detect-angular-element-methods` | `INFO` | Angular 프론트엔드 결함 주사 점검. | `security/detect-angular-element-methods.yaml` |
 | `detect-angular-element-taint` | `WARNING` | Angular 프론트엔드 결함 주사 점검. | `security/detect-angular-element-taint.yaml` |
+| `detect-angular-open-redirect` | `ERROR` | $window.location.href 연산에 사용자 입력이 그대로 대입되어 오픈 리디렉션 위협이 도사립니다. 도메인 화이트리스트 검출 후 도약... | `security/detect-angular-open-redirect.yaml` |
 | `detect-angular-resource-loading` | `WARNING` | Angular 프론트엔드 결함 주사 점검. | `security/detect-angular-resource-loading.yaml` |
 | `detect-angular-sce-disabled` | `ERROR` | $sceProvider가 false로 설정되어 엄격한 컨텍스트 이스케이프가 비활성화되었습니다. XSS 공격 방어를 위해 SCE를 활성화해야 합니... | `security/detect-angular-sce-disabled.yaml` |
 | `detect-angular-translateprovider-translations-method` | `WARNING` | Angular 프론트엔드 결함 주사 점검. | `security/detect-third-party-angular-translate.yaml` |
@@ -69,8 +69,8 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `5.2.4` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/eval-detected.yaml` |
 | `dom-based-xss` | `ERROR` | URL 쿼리나 해시 데이터가 이스케이프 없이 화면 렌더링에 전사됩니다. DOM 기반 XSS 예방을 위해 주입 전 스크립트 특문을 정적 필터링하세... | `security/dom-based-xss.yaml` |
+| `eval-detected` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/eval-detected.yaml` |
 | `insecure-document-method` | `ERROR` | document.write 또는 innerHTML 에 외부 오염 데이터가 탑재되어 DOM-XSS 위험이 보입니다. 안전한 DOM 트리 생성 메서... | `security/insecure-document-method.yaml` |
 | `insecure-innerhtml` | `ERROR` | $EL.innerHTML에 사용자 제어 데이터가 대입되고 있습니다. XSS 취약점을 유발하는 안티 패턴이므로 textContent 대체 사용 등... | `security/insecure-innerhtml.yaml` |
 | `insufficient-postmessage-origin-validation` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/insufficient-postmessage-origin-validation.yaml` |
@@ -96,19 +96,23 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `3.5.3` | `WARNING` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/audit/express-jwt-not-revoked.yaml` |
-| `5.5.2` | `ERROR` | XML Parser로 입력되는 데이터 가공 시 외부 사용자 입력이 유출됩니다. XXE(XML External Entity) 공격 취약점을 유발하... | `security/express-xml2json-xxe.yaml` |
-| `5.5.2` | `ERROR` | expat XML 파서 구동 시 외부 입력에 검증이 부실합니다. XML External Entity (XXE) 취약점 격출을 무마하기 위해 보안... | `security/express-expat-xxe.yaml` |
 | `cors-misconfiguration` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/cors-misconfiguration.yaml` |
 | `direct-response-write` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/xss/direct-response-write.yaml` |
 | `escape-function-overwrite` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/xss/mustache/escape-function-overwrite.yaml` |
 | `express-check-csurf-middleware-usage` | `INFO` | Express 프레임워크 라우팅 및 리디렉션 보안 수사. | `security/audit/express-check-csurf-middleware-usage.yaml` |
 | `express-check-directory-listing` | `WARNING` | Express 프레임워크 라우팅 및 리디렉션 보안 수사. | `security/audit/express-check-directory-listing.yaml` |
 | `express-cookie-session-default-name` | `WARNING` | Don’t use the default session cookie name Using the default session cookie name ... | `security/audit/express-cookie-settings.yaml` |
+| `express-cookie-session-no-domain` | `WARNING` | 쿠키 보안 속성(Secure/HttpOnly) 누출 우려가 있습니다. | `security/audit/express-cookie-settings.yaml` |
+| `express-cookie-session-no-expires` | `WARNING` | 쿠키 보안 속성(Secure/HttpOnly) 누출 우려가 있습니다. | `security/audit/express-cookie-settings.yaml` |
+| `express-cookie-session-no-httponly` | `WARNING` | 쿠키 보안 속성(Secure/HttpOnly) 누출 우려가 있습니다. | `security/audit/express-cookie-settings.yaml` |
+| `express-cookie-session-no-path` | `WARNING` | 쿠키 보안 속성(Secure/HttpOnly) 누출 우려가 있습니다. | `security/audit/express-cookie-settings.yaml` |
+| `express-cookie-session-no-secure` | `WARNING` | 쿠키 보안 속성(Secure/HttpOnly) 누출 우려가 있습니다. | `security/audit/express-cookie-settings.yaml` |
 | `express-data-exfiltration` | `WARNING` | Express 프레임워크 라우팅 및 리디렉션 보안 수사. | `security/express-data-exfiltration.yaml` |
 | `express-detect-notevil-usage` | `WARNING` | Express 프레임워크 라우팅 및 리디렉션 보안 수사. | `security/audit/express-detect-notevil-usage.yaml` |
+| `express-expat-xxe` | `ERROR` | expat XML 파서 구동 시 외부 입력에 검증이 부실합니다. XML External Entity (XXE) 취약점 격출을 무마하기 위해 보안... | `security/express-expat-xxe.yaml` |
 | `express-insecure-template-usage` | `WARNING` | Express 프레임워크 라우팅 및 리디렉션 보안 수사. | `security/express-insecure-template-usage.yaml` |
 | `express-jwt-hardcoded-secret` | `WARNING` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/express-jwt-hardcoded-secret.yaml` |
+| `express-jwt-not-revoked` | `WARNING` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/audit/express-jwt-not-revoked.yaml` |
 | `express-libxml-noent` | `ERROR` | libxml 라이브러리 처리 시 noent(Entity expansion) 속성이 true 로 인가되었습니다. XXE 취약점에 전방 노출되므로 ... | `security/audit/express-libxml-noent.yaml` |
 | `express-libxml-vm-noent` | `WARNING` | Express 프레임워크 라우팅 및 리디렉션 보안 수사. | `security/audit/express-libxml-vm-noent.yaml` |
 | `express-open-redirect` | `WARNING` | Express 프레임워크 라우팅 및 리디렉션 보안 수사. | `security/audit/express-open-redirect.yaml` |
@@ -123,6 +127,8 @@
 | `express-vm-injection` | `ERROR` | Node.js vm 모듈 스크립트 실행 스택 등에 동적 사용자 오염 테두리가 가압되는 피로도를 잡습니다. 샌드박스 우회를 우려해 사전에 분리 차... | `security/express-vm-injection.yaml` |
 | `express-vm2-injection` | `WARNING` | Express 프레임워크 라우팅 및 리디렉션 보안 수사. | `security/express-vm2-injection.yaml` |
 | `express-wkhtmltoimage-injection` | `ERROR` | wkhtmltoimage 변환 연산 스택에 동적 오염 인자가 포진했습니다. SSRF와 파괴 인자 인젝션 예방을 위해 입력 주소를 교정하세요. | `security/express-wkhtml-injection.yaml` |
+| `express-wkhtmltopdf-injection` | `ERROR` | wkhtmltopdf 변환 연산 스택에 동적 오염 인자가 포진했습니다. SSRF와 파괴 인자 인젝션 예방을 위해 입력 주소를 필터링하십시오. | `security/express-wkhtml-injection.yaml` |
+| `express-xml2json-xxe` | `ERROR` | XML Parser로 입력되는 데이터 가공 시 외부 사용자 입력이 유출됩니다. XXE(XML External Entity) 공격 취약점을 유발하... | `security/express-xml2json-xxe.yaml` |
 | `express-xml2json-xxe-event` | `WARNING` | Express 프레임워크 라우팅 및 리디렉션 보안 수사. | `security/audit/express-xml2json-xxe-event.yaml` |
 | `raw-html-format` | `WARNING` | HTML 템플릿 가속 피싱 대응. | `security/injection/raw-html-format.yaml` |
 | `remote-property-injection` | `ERROR` | 대괄호 표기법([])에 사용자 입력이 반영되어 객체 속성에 접근하고 있습니다. 프로퍼티 인젝션 및 프로토타입 오염 위험이 있으니 입력값을 사전에... | `security/audit/remote-property-injection.yaml` |
@@ -146,7 +152,7 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `insecure-createnodesfrommarkup` | `WARNING` | 보안 옵션 누사 및 예방 단속 필요. | `security/audit/insecure-createnodesfrommarkup.yaml` |
+| `insecure-createnodesfrommarkup` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/insecure-createnodesfrommarkup.yaml` |
 
 ## GRPC
 
@@ -158,32 +164,32 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `$USER_ID,` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/intercom-settings-user-identifier-without-user-hash.yaml` |
+| `intercom-settings-user-identifier-without-user-hash` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/intercom-settings-user-identifier-without-user-hash.yaml` |
 
 ## JOSE
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `3.5.2` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/jose-exposed-data.yaml` |
-| `3.5.3` | `ERROR` | jose 라이브러리 연산에서 서명 해제용 none 알고리즘 가압이 포착되었습니다. 변조 토큰 패싱을 예방하기 위해 보안 고정 알고리즘을 사용하십... | `security/jwt-none-alg.yaml` |
 | `hardcoded-jwt-secret` | `WARNING` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/jwt-hardcode.yaml` |
+| `jose-exposed-data` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/jose-exposed-data.yaml` |
+| `jwt-none-alg` | `ERROR` | jose 라이브러리 연산에서 서명 해제용 none 알고리즘 가압이 포착되었습니다. 변조 토큰 패싱을 예방하기 위해 보안 고정 알고리즘을 사용하십... | `security/jwt-none-alg.yaml` |
 
 ## JQUERY
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `jquery-insecure-method` | `WARNING` | 보안 옵션 누사 및 예방 단속 필요. | `security/audit/jquery-insecure-method.yaml` |
-| `jquery-insecure-selector` | `WARNING` | 보안 옵션 누사 및 예방 단속 필요. | `security/audit/jquery-insecure-selector.yaml` |
+| `jquery-insecure-method` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/jquery-insecure-method.yaml` |
+| `jquery-insecure-selector` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/jquery-insecure-selector.yaml` |
 | `prohibit-jquery-html` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/prohibit-jquery-html.yaml` |
 
 ## JSONWEBTOKEN
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `3.5.3` | `ERROR` | jsonwebtoken 서명 알고리즘에 검증 해제용 none 알고리즘 가압이 포착되었습니다. 변조 토큰 인용을 방지하기 위해 확실한 암호화 알고... | `security/jwt-none-alg.yaml` |
-| `3.5.3` | `WARNING` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/audit/jwt-decode-without-verify.yaml` |
-| `3.5.3` | `WARNING` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/audit/jwt-exposed-data.yaml` |
 | `hardcoded-jwt-secret` | `WARNING` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/jwt-hardcode.yaml` |
+| `jwt-decode-without-verify` | `WARNING` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/audit/jwt-decode-without-verify.yaml` |
+| `jwt-exposed-data` | `WARNING` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/audit/jwt-exposed-data.yaml` |
+| `jwt-none-alg` | `ERROR` | jsonwebtoken 서명 알고리즘에 검증 해제용 none 알고리즘 가압이 포착되었습니다. 변조 토큰 인용을 방지하기 위해 확실한 암호화 알고... | `security/jwt-none-alg.yaml` |
 
 ## JWT-SIMPLE
 
@@ -195,8 +201,6 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `13.5.1` | `ERROR` | 보안되지 않은 WebSocket(ws://) 연결이 감지되었습니다. 스니핑 공격을 예방하기 위해 암호화된 wss:// 연결을 사용하세요. | `security/detect-insecure-websocket.yaml` |
-| `6.3.1` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/detect-pseudoRandomBytes.yaml` |
 | `assigned-undefined` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `best-practice/assigned-undefined.yaml` |
 | `code-string-concat` | `ERROR` | 요청 데이터를 eval() 또는 Function() 실행 인자로 직접 연산 합사합니다. 원격 코드 실행(RCE) 타격을 유발하므로 동적 코드 실... | `security/audit/code-string-concat.yaml` |
 | `dangerous-spawn-shell` | `ERROR` | 비 리터럴 문자열을 실행 명령 매개체로 탑재하는 위험 spawn 구조를 감지했습니다. 명령 실행의 안정성을 위해 정적 리스트를 적용하세요. | `security/audit/dangerous-spawn-shell.yaml` |
@@ -204,17 +208,22 @@
 | `detect-child-process` | `ERROR` | child_process 범용 호출 시 유입 인자의 정적 분기가 누락되었습니다. 커맨드 스페이스 조작에 의한 인젝션 방지를 위해 규격 배열을 고... | `security/detect-child-process.yaml` |
 | `detect-disable-mustache-escape` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/detect-disable-mustache-escape.yaml` |
 | `detect-eval-with-expression` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/detect-eval-with-expression.yaml` |
+| `detect-insecure-websocket` | `ERROR` | 보안되지 않은 WebSocket(ws://) 연결이 감지되었습니다. 스니핑 공격을 예방하기 위해 암호화된 wss:// 연결을 사용하세요. | `security/detect-insecure-websocket.yaml` |
 | `detect-no-csrf-before-method-override` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/detect-no-csrf-before-method-override.yaml` |
 | `detect-non-literal-fs-filename` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/detect-non-literal-fs-filename.yaml` |
 | `detect-non-literal-regexp` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/detect-non-literal-regexp.yaml` |
 | `detect-non-literal-require` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/detect-non-literal-require.yaml` |
+| `detect-pseudoRandomBytes` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/detect-pseudoRandomBytes.yaml` |
 | `detect-redos` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/detect-redos.yaml` |
 | `eqeq-is-bad` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `correctness/useless-eqeq.yaml` |
 | `hardcoded-hmac-key` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/hardcoded-hmac-key.yaml` |
 | `html-in-template-string` | `WARNING` | HTML 템플릿 가속 피싱 대응. | `security/html-in-template-string.yaml` |
 | `incomplete-sanitization` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/incomplete-sanitization.yaml` |
-| `insecure-object-assign` | `WARNING` | 보안 옵션 누사 및 예방 단속 필요. | `security/insecure-object-assign.yaml` |
+| `insecure-object-assign` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/insecure-object-assign.yaml` |
 | `javascript-alert` | `WARNING` | found alert() call; should this be in production code? | `best-practice/leftover_debugging.yaml` |
+| `javascript-confirm` | `WARNING` | 프로덕션 코드에 `confirm()` 호출이 남아있습니다. 배포 전 반드시 제거해 주세요. | `best-practice/leftover_debugging.yaml` |
+| `javascript-debugger` | `WARNING` | 프로덕션 코드에 `debugger` 구문이 남아있습니다. 배포 전 반드시 제거해 주세요. | `best-practice/leftover_debugging.yaml` |
+| `javascript-prompt` | `WARNING` | 프로덕션 코드에 `prompt()` 호출이 남아있습니다. 배포 전 반드시 제거해 주세요. | `best-practice/leftover_debugging.yaml` |
 | `lazy-load-module` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `best-practice/lazy-load-module.yaml` |
 | `md5-used-as-password` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/md5-used-as-password.yaml` |
 | `missing-template-string-indicator` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `correctness/missing-template-string-indicator.yaml` |
@@ -363,4 +372,4 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `5.5.2` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/xml2json-xxe.yaml` |
+| `xml2json-xxe` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/xml2json-xxe.yaml` |

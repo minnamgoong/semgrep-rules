@@ -1,5 +1,5 @@
 rules:
-- id: - id: detect-angular-element-methods
+- id: detect-angular-element-methods
   message: "Angular 프론트엔드 결함 주사 점검."
   metadata:
     confidence: LOW

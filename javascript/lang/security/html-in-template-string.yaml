@@ -1,5 +1,5 @@
 rules:
-- id: - id: html-in-template-string
+- id: html-in-template-string
   message: "HTML 템플릿 가속 피싱 대응."
   metadata:
     cwe:

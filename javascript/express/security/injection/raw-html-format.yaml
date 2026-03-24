@@ -1,5 +1,5 @@
 rules:
-- id: - id: raw-html-format
+- id: raw-html-format
   message: "HTML 템플릿 가속 피싱 대응."
   metadata:
     cwe:

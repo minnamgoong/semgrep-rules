@@ -1,5 +1,5 @@
 rules:
-- id: - id: tainted-html-string
+- id: tainted-html-string
   message: "HTML 템플릿 가속 피싱 대응."
   metadata:
     cwe:

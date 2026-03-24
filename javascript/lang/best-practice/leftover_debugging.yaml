@@ -14,7 +14,7 @@ rules:
         - javascript
   - id: javascript-debugger
     pattern: debugger;
-    message: "javascript-debugger 잠재적 결함 분기 정비 요망."
+    message: "프로덕션 코드에 `debugger` 구문이 남아있습니다. 배포 전 반드시 제거해 주세요."
     languages:
       - javascript
       - typescript
@@ -25,7 +25,7 @@ rules:
         - javascript
   - id: javascript-confirm
     pattern: confirm(...)
-    message: "javascript-confirm 잠재적 결함 분기 정비 요망."
+    message: "프로덕션 코드에 `confirm()` 호출이 남아있습니다. 배포 전 반드시 제거해 주세요."
     languages:
       - javascript
       - typescript
@@ -35,7 +35,7 @@ rules:
       technology:
         - javascript
   - id: javascript-prompt
-    message: "javascript-prompt 잠재적 결함 분기 정비 요망."
+    message: "프로덕션 코드에 `prompt()` 호출이 남아있습니다. 배포 전 반드시 제거해 주세요."
     languages:
       - javascript
       - typescript

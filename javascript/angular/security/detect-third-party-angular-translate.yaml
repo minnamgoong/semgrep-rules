@@ -1,5 +1,5 @@
 rules:
-- id: - id: detect-angular-translateprovider-translations-method
+- id: detect-angular-translateprovider-translations-method
   message: "Angular 프론트엔드 결함 주사 점검."
   metadata:
     cwe:

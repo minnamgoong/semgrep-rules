@@ -1,5 +1,5 @@
 rules:
-- id: - id: knex-sqli
+- id: knex-sqli
   message: "잠재적 SQL 인젝션 경로에 대한 검토가 필요합니다."
     You can use parameterized statements like so:
     `knex.raw('SELECT $1 from table', [userinput])`

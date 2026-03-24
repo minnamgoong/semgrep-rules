@@ -1,5 +1,5 @@
 rules:
-- id: - id: node-mysql-sqli
+- id: node-mysql-sqli
   message: "잠재적 SQL 인젝션 경로에 대한 검토가 필요합니다."
   metadata:
     references:

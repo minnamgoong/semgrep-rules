@@ -1,5 +1,5 @@
 rules:
-- id: - id: detect-angular-trust-as-css-method
+- id: detect-angular-trust-as-css-method
   message: "Angular 프론트엔드 결함 주사 점검."
   metadata:
     cwe:

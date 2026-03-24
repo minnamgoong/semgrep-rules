@@ -1,5 +1,5 @@
 rules:
-- id: - id: no-stringify-keys
+- id: no-stringify-keys
   mode: taint
   pattern-sources:
   - pattern: JSON.stringify(...)

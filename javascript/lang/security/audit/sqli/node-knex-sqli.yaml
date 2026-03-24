@@ -1,5 +1,5 @@
 rules:
-- id: - id: node-knex-sqli
+- id: node-knex-sqli
   message: "잠재적 SQL 인젝션 경로에 대한 검토가 필요합니다."
     parameterized queries like so: `knex.raw('SELECT $1 from table',
     [userinput])` can help prevent SQLi.

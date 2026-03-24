@@ -1,6 +1,6 @@
 rules:
-- id: - id: insecure-createnodesfrommarkup
-  message: "보안 옵션 누사 및 예방 단속 필요."
+- id: insecure-createnodesfrommarkup
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
