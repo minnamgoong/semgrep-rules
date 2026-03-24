@@ -2,7 +2,7 @@ rules:
   - id: useless-ternary
     pattern: |
       $CONDITION ? $ANS : $ANS
-    message:
+    message: "불필요한 삼항 연산자(a ? true : false 등) 사용이 감지되었습니다. 논리 직관성을 위해 단순 불리언 캐스팅 등으로 대체하세요."
       It looks like no matter how $CONDITION is evaluated, this expression returns $ANS. This is probably a copy-paste
       error.
     languages:

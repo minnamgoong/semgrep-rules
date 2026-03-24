@@ -1,6 +1,6 @@
 rules:
 - id: aws-cdk-bucket-enforcessl
-  message: Bucket $X is not set to enforce encryption-in-transit, if not explictly setting this on the
+  message: "S3 버킷에 전송 중 암호화(SSL/TLS) 강제화 옵션이 누락되었습니다. 데이터 전송 기밀성을 위해 해당 옵션을 활성화하십시오."
     bucket policy - the property "enforceSSL" should be set to true
   metadata:
     cwe:
