@@ -1,8 +1,6 @@
 rules:
 - id: appservice-authentication-enabled
-  message: >-
-    Enabling authentication ensures that all communications in the application are authenticated.
-    The `auth_settings` block needs to be filled out with the appropriate auth backend settings
+  message: "IaC 보안 옵션 누사 경보: appservice-authentication-enabled 설정율을 탑재 하십시오."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

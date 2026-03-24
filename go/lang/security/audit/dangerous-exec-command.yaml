@@ -36,11 +36,7 @@ rules:
   - pattern-not-inside: |
       $CMD = "...";
       ...
-  message: >-
-    Detected non-static command inside Command. Audit the input to 'exec.Command'.
-    If unverified user data can reach this call site, this is a code injection
-    vulnerability. A malicious actor can inject a malicious script to execute
-    arbitrary code.
+  message: "Go 보안 및 무결성 관리: dangerous-exec-command 점검 처리 하세요."
   metadata:
     cwe:
     - "CWE-94: Improper Control of Generation of Code ('Code Injection')"

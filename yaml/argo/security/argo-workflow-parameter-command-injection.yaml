@@ -1,6 +1,6 @@
 rules:
   - id: argo-workflow-parameter-command-injection
-    message: Using input or workflow parameters in here-scripts can lead to command injection or code injection. Convert the parameters to env variables instead.
+    message: "Argo 워크플로우 매개변수 가동 중 원격 명령어 주입(Command Injection) 우려가 수렴됩니다."
     languages: [yaml]
     metadata:
       category: security

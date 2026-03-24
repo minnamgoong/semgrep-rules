@@ -1,8 +1,6 @@
 rules:
 - id: duplicate-pattern
-  message: >-
-    Two identical pattern clauses were detected. This will cause Semgrep to run the same pattern twice.
-    Remove one of the duplicate pattern clauses.
+  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: duplicate-pattern 누사 경보."
   severity: ERROR
   metadata:
     category: correctness

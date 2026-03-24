@@ -1,6 +1,6 @@
 rules:
   - id: example-allowed
-    message: Example
+    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-allowed 누사 경보."
     severity: ERROR
     languages: [json, yaml]
     pattern: "..."
@@ -10,7 +10,7 @@ rules:
       technoloy:
         - semgrep
   - id: example-prohibited
-    message: Example
+    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-prohibited 누사 경보."
     severity: ERROR
     languages: [json, yaml]
     pattern: "..."

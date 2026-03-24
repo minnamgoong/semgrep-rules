@@ -3,10 +3,7 @@ rules:
     languages:
       - generic
     severity: ERROR
-    message: >-
-      To remediate this issue, ensure that all URL parameters are properly
-      escaped before including them in scripts. Please update your code
-      to use either the JSENCODE method to escape URL parameters
+    message: "xss-from-unescaped-url-param 보안 인젝션 및 런타임 버그 전사 예방 점검."
       or the escape="true" attribute on <apex:outputText> tags.
       Passing URL parameters directly into scripts and DOM sinks creates
       an opportunity for Cross-Site Scripting attacks. Cross-Site

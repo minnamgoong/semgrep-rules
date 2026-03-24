@@ -14,7 +14,7 @@ rules:
           {..., "Effect": "Allow", ..., "Action": "sts:AssumeRole", ...}
       - pattern: |
           "Principal": {..., "AWS": "*", ...}
-  message: >-
+  message: "Terraform 구성 중 와일드카드(*) 권한 과잉 부여가 식별되었습니다."
     Detected wildcard access granted to sts:AssumeRole. This means anyone with your
     AWS account ID and the name of the role can assume the role. Instead, limit to
     a specific identity in your account, like this: `arn:aws:iam::<account_id>:root`.

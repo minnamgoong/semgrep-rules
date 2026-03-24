@@ -1,8 +1,6 @@
 rules:
 - id: storage-default-action-deny
-  message: >-
-    Detected a Storage that was not configured to deny action by default. Add `default_action = "Deny"`
-    in your resource block.
+  message: "IaC 보안 옵션 누사 경보: storage-default-action-deny 설정율을 탑재 하십시오."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

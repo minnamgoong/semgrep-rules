@@ -15,9 +15,7 @@ rules:
           pattern: |
             ENTRYPOINT ...
       - focus-metavariable: $ENTRYPOINT_INSTR
-    message: >-
-      Multiple ENTRYPOINT instructions were found. Only the last one
-      will take effect.
+    message: "ENTRYPOINT 명령어 다수 사용 시 충돌 국면 점검."
     metadata:
       source-rule-url: https://github.com/hadolint/hadolint/wiki/DL4004
       references:

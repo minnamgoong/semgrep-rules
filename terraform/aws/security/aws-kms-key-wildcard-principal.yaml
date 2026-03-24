@@ -21,10 +21,7 @@ rules:
             {..., "Principal": { "AWS": "*" }, "Action": "kms:*", "Resource": "*", ...}
         - pattern: |
             {..., "Principal": { "AWS": [..., "*", ...] }, "Action": "kms:*", "Resource": "*", ...}
-  message: >-
-    Detected wildcard access granted in your KMS key. This means anyone with this policy can perform administrative
-    actions over the keys. Instead, limit principals, actions and resources to what you need according
-    to least privilege.
+  message: "Terraform 구성 중 와일드카드(*) 권한 과잉 부여가 식별되었습니다."
   metadata:
     category: security
     technology:

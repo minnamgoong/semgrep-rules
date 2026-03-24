@@ -16,15 +16,7 @@ rules:
     - audit
     likelihood: LOW
     impact: LOW
-  message: >-
-    Found an insecure gRPC server without 'grpc.Creds()' or options with credentials.
-    This allows for a connection without
-    encryption to this server.
-    A malicious attacker could tamper with the gRPC message, which could compromise
-    the machine. Include credentials derived
-    from an SSL certificate in order to create a secure gRPC connection. You can create
-    credentials using 'credentials.NewServerTLSFromFile("cert.pem",
-    "cert.key")'.
+  message: "Go 보안 및 무결성 관리: grpc-server-insecure-connection 점검 처리 하세요."
   languages:
   - go
   severity: ERROR

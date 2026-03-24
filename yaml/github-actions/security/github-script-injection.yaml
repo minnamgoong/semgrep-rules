@@ -2,8 +2,7 @@ rules:
 - id: github-script-injection
   languages:
   - yaml
-  message: >-
-    Using variable interpolation `${{...}}` with `github` context data in a `actions/github-script`'s
+  message: "github-script-injection 보안 인젝션 및 런타임 버그 전사 예방 점검."
     `script:` step could allow an attacker to
     inject their own code into the runner. This would allow them to steal secrets and code. `github` context
     data can have

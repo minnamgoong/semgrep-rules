@@ -1,10 +1,6 @@
 rules:
 - id: filepath-clean-misuse
-  message: >-
-    `Clean` is not intended to sanitize against path traversal attacks.
-    This function is for finding the shortest path name equivalent to the given input.
-    Using `Clean` to sanitize file reads may expose this application to
-    path traversal attacks, where an attacker could access arbitrary files on the server.
+  message: "Go 보안 및 무결성 관리: filepath-clean-misuse 점검 처리 하세요."
     To fix this easily, write this: `filepath.FromSlash(path.Clean("/"+strings.Trim(req.URL.Path, "/")))`
     However, a better solution is using the `SecureJoin` function in the package `filepath-securejoin`.
     See https://pkg.go.dev/github.com/cyphar/filepath-securejoin#section-readme.

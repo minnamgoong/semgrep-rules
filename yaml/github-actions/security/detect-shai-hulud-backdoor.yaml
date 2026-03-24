@@ -2,7 +2,7 @@ rules:
   - id: detect-shai-hulud-backdoor
     languages:
       - yaml
-    message: The Shai-hulud backdoor creates a purposefully vulnerable github action
+    message: "detect-shai-hulud-backdoor 보안 인젝션 및 런타임 버그 전사 예방 점검."
       with the name `discussion.yaml`. 
     paths:
       include:

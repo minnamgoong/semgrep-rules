@@ -2,13 +2,7 @@ rules:
 - id: tainted-sql-string
   languages: [go]
   severity: ERROR
-  message: >-
-    Detected user input used to manually construct a SQL string. This is usually
-    bad practice because manual construction could accidentally result in a SQL
-    injection. An attacker could use a SQL injection to steal or modify contents
-    of the database. Instead, use a parameterized query which is available
-    by default in most database engines. Alternatively, consider using an
-    object-relational mapper (ORM) such as Sequelize which will protect your queries.
+  message: "Go 보안 및 무결성 관리: tainted-sql-string 점검 처리 하세요."
   metadata:
     references:
     - https://owasp.org/www-community/attacks/SQL_Injection

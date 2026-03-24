@@ -36,12 +36,7 @@ rules:
       regex: ^(Exec|ExecContent|Query|QueryContext|QueryRow|QueryRowContext)$
   languages:
   - go
-  message: >-
-    Detected string concatenation with a non-literal variable in a "database/sql"
-    Go SQL statement. This could lead to SQL injection if the variable is user-controlled
-    and not properly sanitized. In order to prevent SQL injection,
-    use parameterized queries or prepared statements instead.
-    You can use prepared statements with the 'Prepare' and 'PrepareContext' calls.
+  message: "Go Lang 다이렉트 SQL 쿼리 가압 단의 인젝션 우려 탑승."
   metadata:
     cwe:
     - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"

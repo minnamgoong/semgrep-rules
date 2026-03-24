@@ -1,11 +1,6 @@
 rules:
 - id: jwt-go-none-algorithm
-  message: >-
-    Detected use of the 'none' algorithm in a JWT token.
-    The 'none' algorithm assumes the integrity of the token has already
-    been verified. This would allow a malicious actor to forge a JWT token
-    that will automatically be verified. Do not explicitly use the 'none'
-    algorithm. Instead, use an algorithm such as 'HS256'.
+  message: "Go 보안 및 무결성 관리: jwt-go-none-algorithm 점검 처리 하세요."
   metadata:
     cwe:
     - 'CWE-327: Use of a Broken or Risky Cryptographic Algorithm'

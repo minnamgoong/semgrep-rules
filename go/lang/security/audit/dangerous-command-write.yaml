@@ -21,11 +21,7 @@ rules:
   - pattern-inside: |
       import "os/exec"
       ...
-  message: >-
-    Detected non-static command inside Write. Audit the input to '$CW.Write'.
-    If unverified user data can reach this call site, this is a code injection
-    vulnerability. A malicious actor can inject a malicious script to execute
-    arbitrary code.
+  message: "Go 보안 및 무결성 관리: dangerous-command-write 점검 처리 하세요."
   severity: ERROR
   languages: [go]
   metadata:

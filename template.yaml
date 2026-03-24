@@ -1,6 +1,6 @@
 rules:
   - id: eqeq-is-bad
     pattern: $X == $X
-    message: $X == $X is a useless equality check
+    message: "eqeq-is-bad 보안 인젝션 및 런타임 버그 전사 예방 점검."
     languages: [python]
     severity: ERROR

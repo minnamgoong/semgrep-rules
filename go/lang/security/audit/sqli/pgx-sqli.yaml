@@ -2,10 +2,7 @@ rules:
 - id: pgx-sqli
   languages:
   - go
-  message: >-
-    Detected string concatenation with a non-literal variable in a pgx
-    Go SQL statement. This could lead to SQL injection if the variable is user-controlled
-    and not properly sanitized. In order to prevent SQL injection,
+  message: "Go Lang 다이렉트 SQL 쿼리 가압 단의 인젝션 우려 탑승."
     use parameterized queries instead. You can use parameterized queries like so:
     (`SELECT $1 FROM table`, `data1)
   metadata:

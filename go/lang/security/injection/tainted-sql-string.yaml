@@ -1,14 +1,7 @@
 rules:
 - id: tainted-sql-string
   languages: [go]
-  message: >-
-    User data flows into this manually-constructed SQL string. User data
-    can be safely inserted into SQL strings using prepared statements or an
-    object-relational mapper (ORM). Manually-constructed SQL strings is a
-    possible indicator of SQL injection, which could let an attacker steal
-    or manipulate data from the database.
-    Instead, use prepared statements (`db.Query("SELECT * FROM t WHERE id = ?", id)`)
-    or a safe library.
+  message: "Go 보안 및 무결성 관리: tainted-sql-string 점검 처리 하세요."
   options:
     interfile: true
   metadata:

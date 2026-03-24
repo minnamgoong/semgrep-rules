@@ -1,9 +1,6 @@
 rules:
 - id: appservice-use-secure-tls-policy
-  message: >-
-    Detected an AppService that was not configured to use TLS 1.2. Add `site_config.min_tls_version =
-    "1.2"`
-    in your resource block.
+  message: "IaC 보안 옵션 누사 경보: appservice-use-secure-tls-policy 설정율을 탑재 하십시오."
   patterns:
   - pattern: min_tls_version = $ANYTHING
   - pattern-inside: |

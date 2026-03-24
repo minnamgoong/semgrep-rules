@@ -6,8 +6,7 @@ rules:
         - html
       references:
         - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#http-equiv
-    message: >-
-      The correct attribute name for this meta tag is `http-equiv`, not `https-equiv`.
+    message: "HTTPS 꼬리표 결여 및 메타 데이터 누출 경하 점검."
     severity: ERROR
     languages: [html]
     pattern-either:

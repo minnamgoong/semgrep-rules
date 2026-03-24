@@ -2,11 +2,7 @@ rules:
 - id: pg-sqli
   languages:
   - go
-  message: >-
-    Detected string concatenation with a non-literal variable in a go-pg
-    SQL statement. This could lead to SQL injection if the variable is user-controlled
-    and not properly sanitized. In order to prevent SQL injection,
-    use parameterized queries instead of string concatenation. You can use parameterized
+  message: "Go Lang 다이렉트 SQL 쿼리 가압 단의 인젝션 우려 탑승."
     queries like so:
     '(SELECT ? FROM table, data1)'
   metadata:

@@ -12,11 +12,7 @@ rules:
               metavariable: $X
               patterns:
                 - pattern-not: root
-  message: >-
-    The last user in the container is 'root'. This is a security
-    hazard because if an attacker gains control of the container
-    they will have root access. Switch back to another user after
-    running commands as 'root'.
+  message: "마지막 실행 컨텍스트가 root로 전사 탑재 되었습니다."
   severity: ERROR
   languages: 
     - dockerfile 

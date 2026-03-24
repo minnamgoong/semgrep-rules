@@ -1,7 +1,6 @@
 rules:
 - id: metadata-cwe-prohibited-or-discouraged
-  message: >-
-    Vulnerability mapping for this CWE is discouraged or prohibited.
+  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-cwe-prohibited-or-discouraged 누사 경보."
   severity: ERROR
   metadata:
     category: best-practice

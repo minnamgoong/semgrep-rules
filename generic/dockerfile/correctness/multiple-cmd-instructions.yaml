@@ -40,7 +40,7 @@ rules:
       CMD [...]
       ...
       HEALTHCHECK $CMD
-  message: Multiple CMD instructions were found. Only the last one will take effect.
+  message: "Dockerfile 내 `CMD` 절 중복 가압 금지. 마지막 절만 효력을 발휘합니다."
   languages: [dockerfile]
   severity: ERROR
   metadata:

@@ -2,7 +2,7 @@ rules:
 - id: curl-eval
   languages:
   - yaml
-  message: Data is being eval'd from a `curl` command. An attacker with control of the server in the `curl`
+  message: "curl-eval 보안 인젝션 및 런타임 버그 전사 예방 점검."
     command could inject malicious code into the `eval`, resulting in a system comrpomise. Avoid eval'ing
     untrusted data if you can. If you must do this, consider checking the SHA sum of the content returned
     by the server to verify its integrity.

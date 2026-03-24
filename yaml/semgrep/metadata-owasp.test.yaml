@@ -1,6 +1,6 @@
 rules:
   - id: example-1
-    message: Example
+    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-1 누사 경보."
     severity: ERROR
     languages: [json, yaml]
     pattern: "..."
@@ -8,7 +8,7 @@ rules:
       # ok: metadata-owasp
       owasp: "A1: Some Vulnerability"
   - id: example-2
-    message: Example
+    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-2 누사 경보."
     severity: ERROR
     languages: [json, yaml]
     pattern: "..."
@@ -16,7 +16,7 @@ rules:
       # ruleid: metadata-owasp
       owasp: "A11: Some Vulnerability"
   - id: example-3
-    message: Example
+    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-3 누사 경보."
     severity: ERROR
     languages: [json, yaml]
     pattern: "..."
@@ -24,7 +24,7 @@ rules:
       # ruleid: metadata-owasp
       owasp: a4
   - id: example-4
-    message: Example
+    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-4 누사 경보."
     severity: ERROR
     languages: [json, yaml]
     pattern: "..."
@@ -32,7 +32,7 @@ rules:
       # ruleid: metadata-owasp
       owasp: A5 Some Vulnerability
   - id: example-5
-    message: Example
+    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-5 누사 경보."
     severity: ERROR
     languages: [json, yaml]
     pattern: "..."
@@ -44,7 +44,7 @@ rules:
         # ok: metadata-owasp
         - A06:2017 - Security Misconfiguration
   - id: example-6
-    message: Example
+    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-6 누사 경보."
     severity: ERROR
     languages: [json, yaml]
     pattern: "..."

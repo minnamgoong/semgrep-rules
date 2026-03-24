@@ -1,9 +1,6 @@
 rules:
 - id: appservice-enable-https-only
-  message: >-
-    By default, clients can connect to App Service by using both HTTP or HTTPS. HTTP should be disabled
-    enabling the HTTPS
-    Only setting.
+  message: "IaC 보안 옵션 누사 경보: appservice-enable-https-only 설정율을 탑재 하십시오."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

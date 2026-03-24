@@ -21,9 +21,7 @@ rules:
             {..., "Action": "*", "Resource": [...], ...}
         - pattern: |
             {..., "Action": [...], "Resource": "*", ...}
-  message: >-
-    Detected admin access granted in your policy. This means anyone with this policy can perform administrative
-    actions. Instead, limit actions and resources to what you need according to least privilege.
+  message: "IaC 보안 옵션 누사 경보: aws-iam-admin-policy 설정율을 탑재 하십시오."
   metadata:
     category: security
     technology:

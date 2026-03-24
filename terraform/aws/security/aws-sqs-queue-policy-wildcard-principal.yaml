@@ -105,7 +105,7 @@ rules:
                       {..., Principal = { AWS = "*" }, ...}
                   - pattern: |
                       {..., Principal = { AWS = [..., "*", ...] }, ...}
-    message:
+    message: "Terraform 구성 중 와일드카드(*) 권한 과잉 부여가 식별되었습니다."
       Wildcard used in your SQS queue policy principal. This grants access to
       all users, including anonymous users (public access). Unless you
       explicitly require anyone on the internet to be able to read or write to

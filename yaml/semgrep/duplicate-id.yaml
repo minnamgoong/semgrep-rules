@@ -1,7 +1,6 @@
 rules:
 - id: duplicate-id
-  message: >-
-    The 'id' field $X was used multiple times. The 'id' field needs to be unique.
+  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: duplicate-id 누사 경보."
   severity: ERROR
   metadata:
     category: correctness

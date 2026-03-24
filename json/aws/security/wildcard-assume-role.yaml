@@ -7,7 +7,7 @@ rules:
       {..., "Effect": "Allow", ..., "Action": "sts:AssumeRole", ...}
   - pattern: |
       "Principal": {..., "AWS": "*", ...}
-  message: >-
+  message: "wildcard-assume-role 보안 인젝션 및 런타임 버그 전사 예방 점검."
     Detected wildcard access granted to sts:AssumeRole. This means anyone with your
     AWS account ID and the name of the role can assume the role. Instead, limit to
     a specific identity in your account, like this: `arn:aws:iam::<account_id>:root`.

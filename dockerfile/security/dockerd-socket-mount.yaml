@@ -1,8 +1,6 @@
 rules:
   - id: dockerfile-dockerd-socket-mount
-    message: >-
-        The Dockerfile(image) mounts docker.sock to the container which may allow an attacker already inside of the container
-        to escape container and execute arbitrary commands on the host machine.
+    message: "Dockerfile 연쇄 점검: dockerfile-dockerd-socket-mount 준행 오류 국면 감지."
     languages:
       - dockerfile
       - yaml

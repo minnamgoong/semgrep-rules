@@ -33,11 +33,7 @@ rules:
           $ARG := $REQ.PostForm.Get(...)
           ...
           $T, $ERR := $TMPL.Parse($TEMPLATE)
-  message: >-
-    A server-side template injection occurs when an attacker is able to use
-    native template syntax to inject a malicious payload into a template, which is then executed server-side.
-    When using "html/template" always check that user inputs are validated and sanitized before included
-    within the template.
+  message: "Go 보안 및 무결성 관리: go-ssti 점검 처리 하세요."
   languages: [go]
   severity: ERROR
   metadata:

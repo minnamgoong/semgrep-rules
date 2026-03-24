@@ -17,7 +17,7 @@ rules:
     - audit
     likelihood: MEDIUM
     impact: HIGH
-  message: Semgrep found a bash reverse shell
+  message: "bash_reverse_shell 보안 인젝션 및 런타임 버그 전사 예방 점검."
   severity: ERROR
   languages:
   - generic

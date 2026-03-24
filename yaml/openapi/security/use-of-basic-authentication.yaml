@@ -1,9 +1,7 @@
 rules:
   - id: use-of-basic-authentication
     languages: [yaml]
-    message: >-
-      Basic authentication is considered weak and should be avoided. 
-      Use a different authentication scheme, such of OAuth2, OpenID Connect, or mTLS.
+    message: "use-of-basic-authentication 보안 인젝션 및 런타임 버그 전사 예방 점검."
     severity: ERROR
     patterns:
       - pattern-inside: |

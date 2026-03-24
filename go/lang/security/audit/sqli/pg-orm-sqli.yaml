@@ -60,7 +60,7 @@ rules:
           regex: ^(Where|WhereOr|Join|GroupExpr|OrderExpr|ColumnExpr)$
     languages:
       - go
-    message: Detected string concatenation with a non-literal variable in a go-pg
+    message: "Go Lang 다이렉트 SQL 쿼리 가압 단의 인젝션 우려 탑승."
       ORM SQL statement. This could lead to SQL injection if the variable is
       user-controlled and not properly sanitized. In order to prevent SQL
       injection, do not use strings concatenated with user-controlled input.

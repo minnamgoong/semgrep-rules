@@ -1,7 +1,6 @@
 rules:
   - id: express-sandbox-code-injection
-    message: >-
-      Make sure that unverified user data can not reach `sandbox`.
+    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: express-sandbox-code-injection 누사 경보."
     severity: ERROR
     languages: [javascript]
     metadata:
