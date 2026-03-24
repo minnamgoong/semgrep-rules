@@ -22,12 +22,7 @@ rules:
     likelihood: LOW
     impact: HIGH
     confidence: LOW
-  message: >-
-    Using a non-primitive class with Java RMI may be an insecure deserialization vulnerability. Depending
-    on the underlying implementation. This object could be manipulated by a malicious actor allowing them
-    to
-    execute code on your system. Instead, use an integer ID to look up your object, or consider alternative
-    serialization schemes such as JSON.
+  message: "안전하지 않은 역직렬화 가동이 포착되었습니다. RCE 공격 차단을 위해 직렬화 파서를 격수하십시오."
   patterns:
   - pattern: |
       interface $INTERFACE extends Remote {

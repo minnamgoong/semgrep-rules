@@ -1,5 +1,5 @@
 rules:
-- id: gcp-datafusion-stack-driver-monitoring
+- id: - id: gcp-datafusion-stack-driver-monitoring
   patterns:
   - pattern-inside: |
       resource "google_data_fusion_instance" $ANYTHING {
@@ -11,7 +11,7 @@ rules:
         enable_stackdriver_monitoring = true        
         ...
       }
-  message: Ensure Datafusion has stack driver monitoring enabled.
+  message: "gcp-datafusion-stack-driver-monitoring 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

@@ -1,6 +1,6 @@
 rules:
-- id: path-traversal-inside-zip-extraction
-  message: File traversal when extracting zip archive
+- id: - id: path-traversal-inside-zip-extraction
+  message: "path-traversal-inside-zip-extraction 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"

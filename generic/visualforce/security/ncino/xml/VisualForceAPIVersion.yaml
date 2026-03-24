@@ -3,7 +3,7 @@ rules:
     languages:
       - generic
     severity: WARNING
-    message: Visualforce Pages must use API version 55 or higher for required use of the cspHeader attribute set to true.
+    message: "visualforce-page-api-version 잠재적 결함 분기 정비 요망."
     metadata:
       cwe:
       - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

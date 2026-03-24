@@ -20,7 +20,7 @@ rules:
           $S
       else:
           $S
-    message: Useless if statement; both blocks have the same body
+    message: "useless-if-body 잠재적 결함 분기 정비 요망."
     languages: [python]
     severity: WARNING
     metadata:

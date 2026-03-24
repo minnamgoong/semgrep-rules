@@ -1,5 +1,5 @@
 rules:
-- id: missing-throttle-config
+- id: - id: missing-throttle-config
   patterns:
   - pattern-not-inside: |
       REST_FRAMEWORK = {
@@ -9,12 +9,7 @@ rules:
   - pattern-inside: |
       REST_FRAMEWORK = ...
   - pattern: REST_FRAMEWORK
-  message: >-
-    Django REST framework configuration is missing default rate-
-    limiting options. This could inadvertently allow resource
-    starvation or Denial of Service (DoS) attacks. Add
-    'DEFAULT_THROTTLE_CLASSES' and 'DEFAULT_THROTTLE_RATES'
-    to add rate-limiting to your application.
+  message: "missing-throttle-config 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2021 - Security Misconfiguration

@@ -1,5 +1,5 @@
 rules:
-- id: gcp-memory-store-for-redis-intransit-encryption
+- id: - id: gcp-memory-store-for-redis-intransit-encryption
   patterns:
   - pattern: |
       resource "google_redis_instance" $ANYTHING {
@@ -11,7 +11,7 @@ rules:
         transit_encryption_mode = "SERVER_AUTHENTICATION"
         ...
       }
-  message: Ensure Memorystore for Redis uses intransit encryption
+  message: "gcp-memory-store-for-redis-intransit-encryption 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

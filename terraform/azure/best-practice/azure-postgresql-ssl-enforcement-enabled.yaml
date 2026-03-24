@@ -1,7 +1,6 @@
 rules:
   - id: azure-postgresql-ssl-enforcement-enabled
-    message: >-
-      Ensure Enforce SSL connection is set to Enabled for PostgreSQL servers
+    message: "azure-postgresql-ssl-enforcement-enabled 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-inside: |

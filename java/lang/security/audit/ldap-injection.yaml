@@ -1,10 +1,6 @@
 rules:
 - id: ldap-injection
-  message: >-
-    Detected non-constant data passed into an LDAP query. If this data can be
-    controlled by an external user, this is an LDAP injection.
-    Ensure data passed to an LDAP query is not controllable; or properly sanitize
-    the data.
+  message: "ldap-injection 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     cwe:
     - "CWE-90: Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection')"

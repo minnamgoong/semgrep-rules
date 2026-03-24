@@ -1,5 +1,5 @@
 rules:
-- id: exposing-docker-socket-volume
+- id: - id: exposing-docker-socket-volume
   patterns:
   - pattern-inside: |
       version: ...
@@ -49,11 +49,7 @@ rules:
             source: /run/docker.sock
             ...
           - ...
-  message: >-
-    Exposing host's Docker socket to containers via a volume. The owner of this
-    socket is root. Giving someone access to it is equivalent to giving
-    unrestricted root access to your host. Remove 'docker.sock' from volumes to
-    prevent this.
+  message: "exposing-docker-socket-volume 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     references:
     - https://docs.docker.com/compose/compose-file/compose-file-v3/#volume-configuration-reference

@@ -1,5 +1,5 @@
 rules:
-- id: package-dependencies-check
+- id: - id: package-dependencies-check
   patterns:
   - pattern-not-regex: \"[\w\-.]*\"\s*:\s*\"[\d.]+-[\w.]+\"
   - pattern-either:
@@ -29,7 +29,7 @@ rules:
   paths:
     include:
     - '*package.json'
-  message: Package dependencies with variant versions may lead to dependency hijack and confusion attacks.
+  message: "package-dependencies-check 잠재적 결함 및 보안 이격율 정비 요망."
     Better to specify an exact version or use package-lock.json for a specific version of the package.
   languages:
   - json

@@ -1,12 +1,10 @@
 rules:
-- id: skip-tls-verify-cluster
+- id: - id: skip-tls-verify-cluster
   pattern: |
     cluster:
       ...
       insecure-skip-tls-verify: true
-  message: >-
-    Cluster is disabling TLS certificate verification when communicating with
-    the server. This makes your HTTPS connections insecure. Remove the
+  message: "skip-tls-verify-cluster 잠재적 결함 및 보안 이격율 정비 요망."
     'insecure-skip-tls-verify: true' key to secure communication.
   metadata:
     cwe:

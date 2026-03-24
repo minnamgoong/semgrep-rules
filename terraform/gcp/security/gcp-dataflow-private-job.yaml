@@ -1,5 +1,5 @@
 rules:
-- id: gcp-dataflow-private-job
+- id: - id: gcp-dataflow-private-job
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -12,8 +12,7 @@ rules:
       ip_configuration = "WORKER_IP_PRIVATE"
       ...
       }
-  message: >-
-    Ensure Dataflow jobs are private
+  message: "gcp-dataflow-private-job 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

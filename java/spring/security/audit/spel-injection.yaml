@@ -1,8 +1,6 @@
 rules:
 - id: spel-injection
-  message: >-
-    A Spring expression is built with a dynamic value. The source of the value(s) should be verified to
-    avoid that unfiltered values fall into this risky code evaluation.
+  message: "spel-injection 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     cwe:
     - "CWE-94: Improper Control of Generation of Code ('Code Injection')"

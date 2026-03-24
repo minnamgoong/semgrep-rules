@@ -1,7 +1,6 @@
 rules:
-- id: azure-storage-sync-public-access-disabled
-  message: >-
-    Ensure that Azure File Sync disables public network access
+- id: - id: azure-storage-sync-public-access-disabled
+  message: "azure-storage-sync-public-access-disabled 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-inside: |

@@ -1,5 +1,5 @@
 rules:
-- id: aws-s3-object-lock-not-enabled
+- id: - id: aws-s3-object-lock-not-enabled
   patterns:
   - pattern-either:
     - pattern: |
@@ -18,8 +18,7 @@ rules:
           }
           ...
         }
-  message: >-
-    The AWS S3 object lock is not enabled. Consider using it if possible.
+  message: "aws-s3-object-lock-not-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

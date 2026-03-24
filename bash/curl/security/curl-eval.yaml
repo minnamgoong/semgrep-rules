@@ -1,9 +1,9 @@
 rules:
-- id: curl-eval
+- id: - id: curl-eval
   severity: WARNING
   languages:
   - bash
-  message: Data is being eval'd from a `curl` command. An attacker with control of the server in the `curl`
+  message: "curl-eval 잠재적 결함 및 보안 이격율 정비 요망."
     command could inject malicious code into the `eval`, resulting in a system comrpomise. Avoid eval'ing
     untrusted data if you can. If you must do this, consider checking the SHA sum of the content returned
     by the server to verify its integrity.

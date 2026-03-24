@@ -1,12 +1,7 @@
 rules:
-- id: mako-templates-detected
+- id: - id: mako-templates-detected
   pattern: mako.template.Template(...)
-  message: >-
-    Mako templates do not provide a global HTML escaping mechanism.
-    This means you must escape all sensitive data in your templates
-    using '| u' for URL escaping or '| h' for HTML escaping.
-    If you are using Mako to serve web content, consider using
-    a system such as Jinja2 which enables global escaping.
+  message: "mako-templates-detected 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

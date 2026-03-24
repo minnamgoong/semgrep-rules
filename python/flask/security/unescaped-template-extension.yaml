@@ -1,9 +1,6 @@
 rules:
-- id: unescaped-template-extension
-  message: >-
-    Flask does not automatically escape Jinja templates unless they have
-    .html, .htm, .xml, or .xhtml extensions. This could lead to XSS attacks.
-    Use .html, .htm, .xml, or .xhtml for your template extensions.
+- id: - id: unescaped-template-extension
+  message: "unescaped-template-extension 잠재적 결함 및 보안 이격율 정비 요망."
     See https://flask.palletsprojects.com/en/1.1.x/templating/#jinja-setup
     for more information.
   metadata:

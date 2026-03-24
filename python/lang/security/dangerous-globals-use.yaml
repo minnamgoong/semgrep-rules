@@ -1,5 +1,5 @@
 rules:
-- id: dangerous-globals-use
+- id: - id: dangerous-globals-use
   patterns:
   - pattern-either:
     - pattern: globals().get(...)
@@ -30,10 +30,7 @@ rules:
   - pattern-not-inside: locals()[...] = ...
   - pattern-not-inside: $G[...] = ...
   - pattern-not-inside: $FUNC.__globals__[...] = ...
-  message: >-
-    Found non static data as an index to 'globals()'. This is extremely
-    dangerous because it allows an attacker to execute arbitrary code
-    on the system. Refactor your code not to use 'globals()'.
+  message: "위험한 메서드 호출 피로도 점검."
   metadata:
     cwe:
     - "CWE-96: Improper Neutralization of Directives in Statically Saved Code ('Static Code Injection')"

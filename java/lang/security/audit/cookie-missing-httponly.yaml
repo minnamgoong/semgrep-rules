@@ -22,10 +22,7 @@ rules:
     likelihood: LOW
     impact: LOW
     confidence: LOW
-  message: >-
-    A cookie was detected without setting the 'HttpOnly' flag. The 'HttpOnly' flag
-    for cookies instructs the browser to forbid client-side scripts from reading the
-    cookie. Set the 'HttpOnly' flag by calling 'cookie.setHttpOnly(true);'
+  message: "쿠키에 보안 속성(Secure/HttpOnly)이 누락되어 세션 탈취(XSS/MitM)에 노출될 수 있습니다."
   severity: WARNING
   languages: [java]
   patterns:

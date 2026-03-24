@@ -1,11 +1,6 @@
 rules:
-- id: request-data-write
-  message: >-
-    Found user-controlled request data passed into '.write(...)'. This could be dangerous
-    if a malicious actor is able to control data into sensitive files. For example,
-    a malicious actor could force rolling of critical log files, or cause a denial-of-service
-    by using up available disk space. Instead, ensure that request data is properly
-    escaped or sanitized.
+- id: - id: request-data-write
+  message: "request-data-write 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-93: Improper Neutralization of CRLF Sequences ('CRLF Injection')"

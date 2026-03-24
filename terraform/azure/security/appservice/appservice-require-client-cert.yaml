@@ -1,9 +1,6 @@
 rules:
-- id: appservice-require-client-cert
-  message: >-
-    Detected an AppService that was not configured to use a client certificate. Add `client_cert_enabled
-    = true`
-    in your resource block.
+- id: - id: appservice-require-client-cert
+  message: "appservice-require-client-cert 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

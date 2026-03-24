@@ -1,11 +1,6 @@
 rules:
 - id: tainted-ldapi-from-http-request
-  message: >-
-    Detected input from a HTTPServletRequest going into an LDAP query.
-    This could lead to LDAP injection if the input is not properly sanitized,
-    which could result in attackers modifying objects in the LDAP tree structure.
-    Ensure data passed to an LDAP query is not controllable or properly sanitize
-    the data.
+  message: "tainted-ldapi-from-http-request 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     cwe:
     - "CWE-90: Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection')"

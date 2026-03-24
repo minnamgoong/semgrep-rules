@@ -1,8 +1,6 @@
 rules:
-- id: insecure-object-assign
-  message: >-
-    Depending on the context, user control data in `Object.assign` can cause web response
-    to include data that it should not have or can lead to a mass assignment vulnerability.
+- id: - id: insecure-object-assign
+  message: "보안 옵션 누사 및 예방 단속 필요."
   metadata:
     cwe:
     - "CWE-601: URL Redirection to Untrusted Site ('Open Redirect')"

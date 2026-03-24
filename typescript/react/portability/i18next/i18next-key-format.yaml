@@ -1,5 +1,5 @@
 rules:
-- id: i18next-key-format
+- id: - id: i18next-key-format
   patterns:
   - pattern-either:
     - patterns:
@@ -40,7 +40,7 @@ rules:
       - metavariable-regex:
           metavariable: $DYNAMIC_KEY
           regex: (?!^[`][a-z0-9-]+[.][a-z0-9-]+[.]\S+$)
-  message: Translation key '$KEY' should match format 'MODULE.FEATURE.*'
+  message: "i18next-key-format 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - typescript
   - javascript

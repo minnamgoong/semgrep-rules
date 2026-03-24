@@ -2,7 +2,7 @@ rules:
 - id: subscription-filter-missing-depends
   severity: WARNING
   languages: [hcl]
-  message: 'The `aws_cloudwatch_log_subscription_filter` resource "$NAME" needs a `depends_on` clause on the `aws_lambda_permission`, otherwise Terraform may try to create these out-of-order and fail.'
+  message: "subscription-filter-missing-depends IaC 보안 설정 정비 및 예방 조치 요망."
   metadata:
     category: correctness
     references:

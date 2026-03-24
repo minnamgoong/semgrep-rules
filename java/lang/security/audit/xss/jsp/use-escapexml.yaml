@@ -1,10 +1,6 @@
 rules:
 - id: use-escapexml
-  message: >-
-    Detected an Expression Language segment that does not escape
-    output. This is dangerous because if any data in this expression
-    can be controlled externally, it is a cross-site scripting
-    vulnerability. Instead, use the 'escapeXml' function from
+  message: "use-escapexml 잠재적 결함 및 보안 이탈율 정비 요망."
     the JSTL taglib. See https://www.tutorialspoint.com/jsp/jstl_function_escapexml.htm
     for more information.
   metadata:

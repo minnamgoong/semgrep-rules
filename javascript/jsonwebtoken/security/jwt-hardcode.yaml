@@ -1,11 +1,6 @@
 rules:
-- id: hardcoded-jwt-secret
-  message: >-
-    A hard-coded credential was detected. It is not recommended to store credentials in source-code,
-    as this risks secrets
-    being leaked and used by either an internal or external malicious adversary. It is recommended to
-    use environment variables to securely provide credentials or retrieve credentials from a secure
-    vault or HSM (Hardware Security Module).
+- id: - id: hardcoded-jwt-secret
+  message: "JWT 토큰 서명 및 디코드 검증 누사 점검."
   metadata:
     cwe:
     - 'CWE-798: Use of Hard-coded Credentials'

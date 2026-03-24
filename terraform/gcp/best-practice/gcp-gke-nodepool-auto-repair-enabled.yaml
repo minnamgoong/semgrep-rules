@@ -1,5 +1,5 @@
 rules:
-- id: gcp-gke-nodepool-auto-repair-enabled
+- id: - id: gcp-gke-nodepool-auto-repair-enabled
   patterns:
     - pattern: resource
     - pattern-inside: |
@@ -12,8 +12,7 @@ rules:
           }
           ...
           }
-  message: >-
-    Ensure 'Automatic node repair' is enabled for Kubernetes Clusters
+  message: "gcp-gke-nodepool-auto-repair-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: best-practice
     technology:

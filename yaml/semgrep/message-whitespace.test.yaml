@@ -1,6 +1,6 @@
 rules:
   - id: half-written-crypto-example
-    message: >-
+    message: "half-written-crypto-example 잠재적 결함 및 보안 이격율 정비 요망."
       # ruleid: message-whitespace-check
       Semgrep found  a match
       # ruleid: message-whitespace-check

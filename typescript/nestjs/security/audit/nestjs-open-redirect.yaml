@@ -1,6 +1,6 @@
 rules:
-- id: nestjs-open-redirect
-  message: >-
+- id: - id: nestjs-open-redirect
+  message: "nestjs-open-redirect 잠재적 결함 및 보안 이격율 정비 요망."
     Untrusted user input in {url: ...} can result in Open Redirect vulnerability.
   metadata:
     cwe:

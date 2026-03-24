@@ -1,5 +1,5 @@
 rules:
-- id: aws-sns-topic-unencrypted
+- id: - id: aws-sns-topic-unencrypted
   patterns:
   - pattern: |
       resource "aws_sns_topic" $ANYTHING {
@@ -11,7 +11,7 @@ rules:
         kms_master_key_id = ...
         ...
       }
-  message: The AWS SNS topic is unencrypted. The SNS topic messages could be read
+  message: "aws-sns-topic-unencrypted 잠재적 결함 및 보안 이격율 정비 요망."
     if compromised. The AWS KMS encryption key protects topic contents. To create
     your own, create a aws_kms_key resource or use the ARN string of a key in your
     account.

@@ -4,10 +4,7 @@ rules:
       - pattern-inside: import json; ...
       - pattern-inside: import requests; ...
       - pattern: requests.$METHOD(..., body=json.dumps($BODY), ...)
-    message: >-
-      The requests library has a convenient shortcut for sending JSON requests,
-      which lets you stop worrying about serializing the body yourself.
-      To use it, replace `body=json.dumps(...)` with `json=...`.
+    message: "python.requests.best-practice.use-request-json-shortcut 잠재적 결함 및 보안 이격율 정비 요망."
     severity: WARNING
     metadata:
       references:

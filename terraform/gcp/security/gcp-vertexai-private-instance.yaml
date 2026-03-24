@@ -1,5 +1,5 @@
 rules:
-- id: gcp-vertexai-private-instance
+- id: - id: gcp-vertexai-private-instance
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -12,8 +12,7 @@ rules:
       no_public_ip = true
       ...
       }
-  message: >-
-    Ensure Vertex AI instances are private
+  message: "gcp-vertexai-private-instance 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

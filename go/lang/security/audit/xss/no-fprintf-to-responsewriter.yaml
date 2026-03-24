@@ -1,10 +1,6 @@
 rules:
-- id: no-fprintf-to-responsewriter
-  message: >-
-    Detected 'Fprintf' or similar writing to 'http.ResponseWriter'.
-    This bypasses HTML escaping that prevents cross-site scripting
-    vulnerabilities. Instead, use the 'html/template' package
-    to render data to users.
+- id: - id: no-fprintf-to-responsewriter
+  message: "no-fprintf-to-responsewriter 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)

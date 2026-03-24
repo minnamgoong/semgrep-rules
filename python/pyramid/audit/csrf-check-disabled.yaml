@@ -1,6 +1,6 @@
 rules:
-- id: pyramid-csrf-check-disabled
-  message: CSRF protection is disabled for this view. This is a security risk.
+- id: - id: pyramid-csrf-check-disabled
+  message: "pyramid-csrf-check-disabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-352: Cross-Site Request Forgery (CSRF)'

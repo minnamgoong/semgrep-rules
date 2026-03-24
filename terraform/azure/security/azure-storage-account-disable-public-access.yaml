@@ -1,7 +1,6 @@
 rules:
-- id: azure-storage-account-disable-public-access
-  message: >-
-    Ensure default network access rule for Storage Accounts is set to deny
+- id: - id: azure-storage-account-disable-public-access
+  message: "azure-storage-account-disable-public-access 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-inside: |

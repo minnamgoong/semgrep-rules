@@ -2,10 +2,7 @@ rules:
   - id: missing-alb-drop-http-headers
     severity: WARNING
     languages: [hcl]
-    message: >-
-      Detected a AWS load balancer that is not configured to drop
-      invalid HTTP headers. Add `drop_invalid_header_fields = true`
-      in your resource block.
+    message: "missing-alb-drop-http-headers IaC 보안 설정 정비 및 예방 조치 요망."
     metadata:
       category: best-practice
       technology:

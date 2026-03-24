@@ -17,9 +17,7 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: MEDIUM
-  message: >-
-    Insecure SMTP connection detected. This connection will trust any SSL certificate.
-    Enable certificate verification by setting 'email.setSSLCheckServerIdentity(true)'.
+  message: "insecure-smtp-connection 잠재적 결함 및 보안 이탈율 정비 요망."
   severity: WARNING
   patterns:
   - pattern-not-inside: |

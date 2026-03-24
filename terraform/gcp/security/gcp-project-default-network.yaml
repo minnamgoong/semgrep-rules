@@ -1,5 +1,5 @@
 rules:
-- id: gcp-project-default-network
+- id: - id: gcp-project-default-network
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -12,9 +12,7 @@ rules:
       auto_create_network   = false
       ...
       }
-  message: >-
-    Ensure that the default network does not exist in a project. Set
-    auto_create_network to `false`.
+  message: "gcp-project-default-network 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

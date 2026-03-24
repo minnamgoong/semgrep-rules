@@ -2,7 +2,7 @@ rules:
   - id: wildcard-cors
     languages:
       - python
-    message: CORS policy allows any origin (using wildcard '*'). This is insecure
+    message: "wildcard-cors 잠재적 결함 및 보안 이격율 정비 요망."
       and should be avoided.
     mode: taint
     pattern-sources:

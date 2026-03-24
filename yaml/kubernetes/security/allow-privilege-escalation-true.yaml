@@ -1,5 +1,5 @@
 rules:
-- id: allow-privilege-escalation-true
+- id: - id: allow-privilege-escalation-true
   patterns:
   - pattern-inside: |
       containers:
@@ -22,17 +22,7 @@ rules:
   - focus-metavariable: $TRUE
   fix: |
     false
-  message: >-
-    In Kubernetes, each pod runs in its own isolated environment with its own 
-    set of security policies. However, certain container images may contain 
-    `setuid` or `setgid` binaries that could allow an attacker to perform 
-    privilege escalation and gain access to sensitive resources. To mitigate 
-    this risk, it's recommended to add a `securityContext` to the container in 
-    the pod, with the parameter `allowPrivilegeEscalation` set to `false`. 
-    This will prevent the container from running any privileged processes and 
-    limit the impact of any potential attacks. 
-    In the container `$CONTAINER` this parameter is set to `true` which makes
-    this container much more vulnerable to privelege escalation attacks.
+  message: "allow-privilege-escalation-true 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-732: Incorrect Permission Assignment for Critical Resource'

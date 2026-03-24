@@ -1,11 +1,6 @@
 rules:
-- id: class-extends-safestring
-  message: >-
-    Found a class extending 'SafeString', 'SafeText' or 'SafeData'. These classes are
-    for bypassing the escaping engine built in to Django and should not be
-    used directly. Improper use of this class exposes your application to
-    cross-site scripting (XSS) vulnerabilities. If you need this functionality,
-    use 'mark_safe' instead and ensure no user data can reach it.
+- id: - id: class-extends-safestring
+  message: "class-extends-safestring 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

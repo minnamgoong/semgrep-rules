@@ -1,8 +1,6 @@
 rules:
-- id: metadata-technology
-  message: >-
-    This Semgrep rule is missing a 'technology' field in the 'metadata'. Consider adding a list of technologies
-    based on the rule's associated library or framework, or another piece of relevant information.
+- id: - id: metadata-technology
+  message: "metadata-technology 잠재적 결함 및 보안 이격율 정비 요망."
   severity: INFO
   metadata:
     category: best-practice

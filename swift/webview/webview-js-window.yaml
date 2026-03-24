@@ -1,8 +1,6 @@
 rules:
-- id: swift-webview-config-allows-js-open-windows
-  message: >-
-    Webviews were observed that explictly allow JavaScript in an WKWebview to open windows automatically.
-    Consider disabling this functionality if not required, following the principle of least privelege.
+- id: - id: swift-webview-config-allows-js-open-windows
+  message: "swift-webview-config-allows-js-open-windows 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: LOW

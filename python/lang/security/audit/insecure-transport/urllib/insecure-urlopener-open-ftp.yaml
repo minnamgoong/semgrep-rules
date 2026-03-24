@@ -1,7 +1,6 @@
 rules:
-- id: insecure-urlopener-open-ftp
-  message: >-
-    Detected an insecure transmission channel. 'URLopener.open(...)' is
+- id: - id: insecure-urlopener-open-ftp
+  message: "보안 옵션 누사 및 예방 단속 필요."
     being used with 'ftp://'. Use SFTP instead. urllib does not support
     SFTP, so consider using a library which supports SFTP.
   metadata:

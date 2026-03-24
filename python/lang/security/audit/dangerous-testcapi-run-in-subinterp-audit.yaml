@@ -1,5 +1,5 @@
 rules:
-- id: dangerous-testcapi-run-in-subinterp-audit
+- id: - id: dangerous-testcapi-run-in-subinterp-audit
   patterns:
   - pattern-either:
     - pattern: |
@@ -10,11 +10,7 @@ rules:
       _testcapi.run_in_subinterp("...", ...)
   - pattern-not: |
       test.support.run_in_subinterp("...", ...)
-  message: >-
-    Found dynamic content in `run_in_subinterp`.
-    This is dangerous if external data can reach this function call because it allows
-    a malicious actor to run arbitrary Python code.
-    Ensure no external data reaches here.
+  message: "위험한 메서드 호출 피로도 점검."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

@@ -1,5 +1,5 @@
 rules:
-- id: seccomp-confinement-disabled
+- id: - id: seccomp-confinement-disabled
   patterns:
   - pattern-inside: |
       containers:
@@ -10,8 +10,7 @@ rules:
       securityContext:
         ...
         seccompProfile: unconfined
-  message: >-
-    Container is explicitly disabling seccomp confinement. This runs the
+  message: "seccomp-confinement-disabled 잠재적 결함 및 보안 이격율 정비 요망."
     service in an unrestricted state. Remove 'seccompProfile: unconfined' to
     prevent this.
   metadata:

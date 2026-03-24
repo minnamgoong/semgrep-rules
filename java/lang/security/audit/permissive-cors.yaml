@@ -1,6 +1,6 @@
 rules:
 - id: permissive-cors
-  message: >-
+  message: "CORS 정책이 와일드카드(*) 등으로 과도하게 허용되어 브라우저 데이터 유출 우려가 있습니다."
     https://find-sec-bugs.github.io/bugs.htm#PERMISSIVE_CORS
     Permissive CORS policy will allow a malicious application to communicate with
     the victim application in an inappropriate way, leading to spoofing, data theft,

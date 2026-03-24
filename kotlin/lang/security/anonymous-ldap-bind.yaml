@@ -1,5 +1,5 @@
 rules:
-- id: anonymous-ldap-bind
+- id: - id: anonymous-ldap-bind
   metadata:
     cwe:
     - 'CWE-287: Improper Authentication'
@@ -20,9 +20,7 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: MEDIUM
-  message: >-
-    Detected anonymous LDAP bind.
-    This permits anonymous users to execute LDAP statements. Consider enforcing
+  message: "anonymous-ldap-bind 잠재적 결함 및 보안 이격율 정비 요망."
     authentication for LDAP. See https://docs.oracle.com/javase/tutorial/jndi/ldap/auth_mechs.html
     for more information.
   severity: WARNING

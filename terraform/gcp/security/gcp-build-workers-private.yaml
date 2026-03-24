@@ -1,5 +1,5 @@
 rules:
-- id: gcp-build-workers-private
+- id: - id: gcp-build-workers-private
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -16,8 +16,7 @@ rules:
       }
       ...
       }
-  message: >-
-    Ensure Cloud build workers are private	
+  message: "gcp-build-workers-private 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

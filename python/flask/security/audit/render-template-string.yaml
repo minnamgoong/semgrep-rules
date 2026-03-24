@@ -1,5 +1,5 @@
 rules:
-- id: render-template-string
+- id: - id: render-template-string
   pattern: flask.render_template_string(...)
   metadata:
     cwe:
@@ -17,7 +17,7 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: LOW
-  message: Found a template created with string formatting. This is susceptible to server-side template
+  message: "render-template-string 잠재적 결함 및 보안 이격율 정비 요망."
     injection and cross-site scripting attacks.
   languages: [python]
   severity: WARNING

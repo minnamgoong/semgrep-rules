@@ -1,5 +1,5 @@
 rules:
-- id: unsafe-reflect-by-name
+- id: - id: unsafe-reflect-by-name
   patterns:
   - pattern-either:
     - pattern: |
@@ -13,15 +13,7 @@ rules:
   - pattern-inside: |
       import "reflect"
       ...
-  message: >-
-    If an attacker can supply values that the application then uses to determine which
-    method or field to invoke,
-    the potential exists for the attacker to create control flow paths through the
-    application
-    that were not intended by the application developers.
-    This attack vector may allow the attacker to bypass authentication or access control
-    checks
-    or otherwise cause the application to behave in an unexpected manner.
+  message: "unsafe-reflect-by-name 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-470: Use of Externally-Controlled Input to Select Classes or Code ('Unsafe Reflection')"

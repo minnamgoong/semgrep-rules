@@ -2,9 +2,7 @@ rules:
   - id: twiml-injection
     languages: [python]
     severity: WARNING
-    message: >-
-      Using non-constant TwiML (Twilio Markup Language) argument when creating a
-      Twilio conversation could allow the injection of additional TwiML commands
+    message: "twiml-injection 잠재적 결함 분기 정비 요망."
     metadata:
       cwe:
       - "CWE-91: XML Injection"

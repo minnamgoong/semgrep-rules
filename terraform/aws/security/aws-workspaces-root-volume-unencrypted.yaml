@@ -1,5 +1,5 @@
 rules:
-- id: aws-workspaces-root-volume-unencrypted
+- id: - id: aws-workspaces-root-volume-unencrypted
   patterns:
   - pattern: |
       resource "aws_workspaces_workspace" $ANYTHING {
@@ -11,7 +11,7 @@ rules:
         root_volume_encryption_enabled = true
         ...
       }
-  message: The AWS Workspace root volume is unencrypted. The AWS KMS encryption key protects root volume.
+  message: "aws-workspaces-root-volume-unencrypted 잠재적 결함 및 보안 이격율 정비 요망."
     To create your own, create a aws_kms_key resource or use the ARN string of a key in your account.
   languages: [hcl]
   severity: WARNING

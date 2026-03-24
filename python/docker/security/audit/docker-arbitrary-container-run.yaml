@@ -1,5 +1,5 @@
 rules:
-- id: docker-arbitrary-container-run
+- id: - id: docker-arbitrary-container-run
   patterns:
   - pattern-either:
     - pattern-inside: |
@@ -17,9 +17,7 @@ rules:
       $CLIENT.containers.run("...",...)
   - pattern-not: |
       $CLIENT.containers.create("...",...)
-  message: >-
-    If unverified user data can reach the `run` or `create` method it can result in running arbitrary
-    container.
+  message: "docker-arbitrary-container-run 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - python
   severity: WARNING

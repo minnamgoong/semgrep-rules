@@ -1,11 +1,6 @@
 rules:
-- id: angular-bypasssecuritytrust
-  message: >-
-    Detected the use of `$TRUST`. This can introduce a Cross-Site-Scripting
-    (XSS) vulnerability if this comes from user-provided input. If you have to
-    use `$TRUST`, ensure it does not come from user-input or use the
-    appropriate prevention mechanism e.g. input validation or
-    sanitization depending on the context.
+- id: - id: angular-bypasssecuritytrust
+  message: "Angular 프론트엔드 이격율 주사 점검."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

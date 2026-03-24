@@ -1,5 +1,5 @@
 rules:
-- id: aws-kinesis-video-stream-encrypted-with-cmk
+- id: - id: aws-kinesis-video-stream-encrypted-with-cmk
   patterns:
   - pattern: |
       resource "aws_kinesis_video_stream" $ANYTHING {
@@ -11,9 +11,7 @@ rules:
         kms_key_id = ...
         ...
       }
-  message: >-
-    Ensure Kinesis video stream is encrypted at rest using KMS CMKs. CMKs gives you control over the encryption
-    key in terms of access and rotation.
+  message: "aws-kinesis-video-stream-encrypted-with-cmk 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:

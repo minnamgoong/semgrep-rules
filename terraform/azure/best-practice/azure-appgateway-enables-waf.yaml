@@ -1,7 +1,6 @@
 rules:
   - id: azure-appgateway-enables-waf
-    message: >-
-      Ensure that Application Gateway enables WAF
+    message: "azure-appgateway-enables-waf 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-not-inside: |

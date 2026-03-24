@@ -30,7 +30,7 @@ rules:
       - pattern-either:
           - pattern: $F = django.db.models.CharField(..., unique=True, blank=True, ...)
           - pattern: $F = django.db.models.TextField(..., unique=True, blank=True, ...)
-    message: "string-field-must-set-null-true 보안 인젝션 및 런타임 버그 전사 예방 점검."
+    message: "string-field-must-set-null-true 잠재적 결함 분기 정비 요망."
       If a text field declares unique=True and blank=True, null=True must also be set to avoid unique constraint violations
       when saving multiple objects with blank values.
     languages: [python]

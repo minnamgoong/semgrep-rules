@@ -1,5 +1,5 @@
 rules:
-- id: elastic-search-encryption-at-rest
+- id: - id: elastic-search-encryption-at-rest
   patterns:
   - pattern: |
       resource
@@ -17,8 +17,7 @@ rules:
       resource "aws_elasticsearch_domain" "..." {...}
   languages:
   - hcl
-  message: >-
-    Encryption at rest is not enabled for the elastic search domain resource
+  message: "elastic-search-encryption-at-rest 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     category: security

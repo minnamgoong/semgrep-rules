@@ -1,8 +1,6 @@
 rules:
   - id: yaml-key-indentation-check-example 
-    message: >-
-      There should be a finding here, because the YAML
-      fuses the hyphen and the key together! 
+    message: "yaml-key-indentation-check-example 잠재적 결함 및 보안 이격율 정비 요망."
     languages:
       - js
     severity: WARNING

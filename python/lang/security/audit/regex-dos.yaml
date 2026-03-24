@@ -1,5 +1,5 @@
 rules:
-- id: regex_dos
+- id: - id: regex_dos
   patterns:
   - pattern: |
       $A = re.compile("$B", ...)
@@ -11,11 +11,7 @@ rules:
   - metavariable-regex:
       metavariable: $METHOD
       regex: (?!(escape)|(purge))
-  message: >-
-    Detected usage of re.compile with an inefficient regular expression.
-    This can lead to regular expression denial of service, which can result
-    in service down time. Instead, check all regexes or use safer alternatives
-    such as pyre2.
+  message: "regex_dos 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - python
   severity: WARNING

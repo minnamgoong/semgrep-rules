@@ -3,7 +3,7 @@ rules:
     languages:
       - python
     severity: INFO
-    message: "Possibly found usage of AI tooling: Tensorflow"
+    message: "detect-tensorflow 잠재적 결함 및 보안 이격율 정비 요망."
     pattern-either:
       - pattern: import tensorflow
     metadata:

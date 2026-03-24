@@ -13,10 +13,7 @@ rules:
   languages:
   - generic
   severity: WARNING
-  message: >-
-    '$http_host' and '$host' variables may contain a malicious value from attacker controlled 'Host' request
-    header.
-    Use an explicitly configured host value or a allow list for validation.
+  message: "request-host-used 잠재적 결함 분기 정비 요망."
   metadata:
     cwe:
     - 'CWE-290: Authentication Bypass by Spoofing'

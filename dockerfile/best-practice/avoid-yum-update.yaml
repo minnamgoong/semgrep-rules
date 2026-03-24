@@ -2,10 +2,7 @@ rules:
   - id: avoid-yum-update
     severity: INFO
     languages: [dockerfile]
-    message: >-
-      Packages in base images should be up-to-date, removing the need for
-      'yum update'. If packages are out-of-date, consider contacting the
-      base image maintainer.
+    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
     metadata:
       source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3031
       references:

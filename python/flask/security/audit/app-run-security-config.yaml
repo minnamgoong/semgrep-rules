@@ -1,5 +1,5 @@
 rules:
-- id: avoid_using_app_run_directly
+- id: - id: avoid_using_app_run_directly
   patterns:
   - pattern-not-inside: |
       if __name__ == '__main__':
@@ -8,7 +8,7 @@ rules:
       def $X(...):
         ...
   - pattern: app.run(...)
-  message: top-level app.run(...) is ignored by flask. Consider putting app.run(...) behind a guard, like
+  message: "avoid_using_app_run_directly 잠재적 결함 및 보안 이격율 정비 요망."
     inside a function
   metadata:
     cwe:

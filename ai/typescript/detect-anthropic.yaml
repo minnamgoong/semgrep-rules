@@ -4,7 +4,7 @@ rules:
       - js
       - ts
     severity: INFO
-    message: "Possibly found usage of AI: Anthropic"
+    message: "detect-anthropic 잠재적 결함 및 보안 이격율 정비 요망."
     pattern-either:
       - pattern: import "@anthropic-ai"
       - pattern: import $ANYTHING from "@anthropic-ai";

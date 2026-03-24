@@ -1,9 +1,6 @@
 rules:
-- id: empty-aes-key
-  message: >-
-    Potential empty AES encryption key. Using an empty key in AES encryption
-    can result in weak encryption and may allow attackers to easily decrypt sensitive
-    data. Ensure that a strong, non-empty key is used for AES encryption.
+- id: - id: empty-aes-key
+  message: "empty-aes-key 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: AES.new("",...)
   languages:

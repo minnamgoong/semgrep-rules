@@ -1,6 +1,6 @@
 rules:
-- id: awscdk-bucket-grantpublicaccessmethod
-  message: Using the GrantPublicAccess method on bucket contruct $X will make the objects in the bucket
+- id: - id: awscdk-bucket-grantpublicaccessmethod
+  message: "awscdk-bucket-grantpublicaccessmethod 잠재적 결함 및 보안 이격율 정비 요망."
     world accessible. Verify if this is intentional.
   metadata:
     cwe:

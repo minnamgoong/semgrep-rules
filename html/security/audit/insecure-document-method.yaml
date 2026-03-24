@@ -1,11 +1,6 @@
 rules:
-- id: insecure-document-method
-  message: >-
-    Detected the use of an inner/outerHTML assignment. 
-    This can introduce a Cross-Site-Scripting (XSS) vulnerability if this 
-    comes from user-provided input. If you have to use a dangerous web API, 
-    consider using a sanitization library such as DOMPurify to sanitize 
-    the HTML before it is assigned.
+- id: - id: insecure-document-method
+  message: "보안 옵션 누사 및 예방 단속 필요."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

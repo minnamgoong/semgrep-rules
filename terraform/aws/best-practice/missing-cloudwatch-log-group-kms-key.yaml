@@ -9,8 +9,7 @@ rules:
                 kms_key_id = ...
                 ...
               }
-    message: >-
-      The AWS CloudWatch Log group is missing a KMS key. While Log group data is always encrypted, you can optionally use a KMS key instead. Add `kms_key_id = "yourKey"` to your resource block.
+    message: "missing-cloudwatch-log-group-kms-key 잠재적 결함 및 보안 이격율 정비 요망."
     languages: [hcl]
     severity: WARNING
     metadata:

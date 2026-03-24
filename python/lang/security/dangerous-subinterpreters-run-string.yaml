@@ -1,5 +1,5 @@
 rules:
-- id: dangerous-subinterpreters-run-string
+- id: - id: dangerous-subinterpreters-run-string
   mode: taint
   options:
     symbolic_propagation: true
@@ -107,9 +107,7 @@ rules:
     - pattern-not: |
         _xxsubinterpreters.run_string($ID, "...", ...)
     - focus-metavariable: $PAYLOAD
-  message: >-
-    Found user controlled content in `run_string`.
-    This is dangerous because it allows a malicious actor to run arbitrary Python code.
+  message: "위험한 메서드 호출 피로도 점검."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

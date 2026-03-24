@@ -1,7 +1,6 @@
 rules:
-- id: flask-wtf-csrf-disabled
-  message: >-
-    Setting 'WTF_CSRF_ENABLED' to 'False' explicitly disables CSRF protection.
+- id: - id: flask-wtf-csrf-disabled
+  message: "flask-wtf-csrf-disabled 잠재적 결함 및 보안 이격율 정비 요망."
   options:
     symbolic_propagation: true
   metadata:

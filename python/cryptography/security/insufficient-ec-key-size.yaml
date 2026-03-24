@@ -1,5 +1,5 @@
 rules:
-- id: insufficient-ec-key-size
+- id: - id: insufficient-ec-key-size
   patterns:
     - pattern-inside: cryptography.hazmat.primitives.asymmetric.ec.generate_private_key(...)
     - pattern: cryptography.hazmat.primitives.asymmetric.ec.$SIZE
@@ -12,9 +12,7 @@ rules:
     - focus-metavariable: $SIZE
   fix: |
     SECP256R1
-  message: >-
-    Detected an insufficient curve size for EC. NIST recommends
-    a key size of 224 or higher. For example, use 'ec.SECP256R1'.
+  message: "insufficient-ec-key-size 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-326: Inadequate Encryption Strength'

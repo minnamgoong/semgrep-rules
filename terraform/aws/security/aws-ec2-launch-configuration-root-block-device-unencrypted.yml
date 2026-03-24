@@ -1,5 +1,5 @@
 rules:
-- id: aws-ec2-launch-configuration-root-block-device-unencrypted
+- id: - id: aws-ec2-launch-configuration-root-block-device-unencrypted
   patterns:
     - pattern: |
         resource "aws_launch_configuration" $ANYTHING {
@@ -15,10 +15,7 @@ rules:
           }
           ...
         }
-  message: >-
-    The AWS launch configuration root block device is unencrypted. The block device
-    could be read if compromised. Block devices should be encrypted to ensure sensitive
-    data is held securely at rest.
+  message: "aws-ec2-launch-configuration-root-block-device-unencrypted 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - hcl
   severity: WARNING

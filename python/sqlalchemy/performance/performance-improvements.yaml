@@ -14,7 +14,7 @@ rules:
     pattern: |
       for $X in $Y:
         db.session.add($Z)
-    message: Rather than adding one element at a time, consider batch loading to improve performance.
+    message: "batch-import 잠재적 결함 분기 정비 요망."
     languages: [python]
     severity: WARNING
     metadata:

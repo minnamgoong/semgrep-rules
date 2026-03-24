@@ -1,7 +1,6 @@
 rules:
-- id: azure-cognitiveservices-disables-public-network
-  message: >-
-    Ensure that Cognitive Services accounts disable public network access
+- id: - id: azure-cognitiveservices-disables-public-network
+  message: "azure-cognitiveservices-disables-public-network 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

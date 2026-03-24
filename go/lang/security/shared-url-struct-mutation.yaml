@@ -1,8 +1,6 @@
 rules:
-- id: shared-url-struct-mutation
-  message: >-
-    Shared URL struct may have been accidentally mutated. Ensure that
-    this behavior is intended.
+- id: - id: shared-url-struct-mutation
+  message: "shared-url-struct-mutation 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [go]
   severity: WARNING
   patterns:

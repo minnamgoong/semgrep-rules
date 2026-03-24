@@ -1,8 +1,6 @@
 rules:
 - id: url-rewriting
-  message: >-
-    URL rewriting has significant security risks.
-    Since session ID appears in the URL, it may be easily seen by third parties.
+  message: "url-rewriting 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     cwe:
     - 'CWE-200: Exposure of Sensitive Information to an Unauthorized Actor'

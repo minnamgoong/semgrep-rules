@@ -1,8 +1,8 @@
 rules:
-- id: extends-custom-expression
+- id: - id: extends-custom-expression
   languages:
   - python
-  message: >-
+  message: "extends-custom-expression 잠재적 결함 및 보안 이격율 정비 요망."
     Found extension of custom expression: $CLASS. Extending expressions in this way
     could inadvertently lead to a SQL injection vulnerability, which can result in
     attackers exfiltrating sensitive data. Instead, ensure no user input enters this

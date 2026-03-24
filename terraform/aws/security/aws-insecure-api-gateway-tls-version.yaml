@@ -1,5 +1,5 @@
 rules:
-- id: aws-insecure-api-gateway-tls-version
+- id: - id: aws-insecure-api-gateway-tls-version
   patterns:
   - pattern-either:
     - pattern: |
@@ -29,7 +29,7 @@ rules:
                   ...
               }
           }
-  message: Detected AWS API Gateway to be using an insecure version of TLS. To fix this issue make sure
+  message: "보안 옵션 누사 및 예방 단속 필요."
     to set "security_policy" equal to "TLS_1_2".
   languages:
   - terraform

@@ -1,12 +1,6 @@
 rules:
-- id: formathtml-fstring-parameter
-  message: >-
-    Passing a formatted string as first parameter to `format_html` disables the
-    proper encoding of variables. Any HTML in the first parameter is not
-    encoded. Using a formatted string as first parameter obscures which
-    parameters are encoded. Correct use of `format_html` is passing a static
-    format string as first parameter, and the variables to substitute as
-    subsequent parameters.
+- id: - id: formathtml-fstring-parameter
+  message: "HTML 템플릿 가속 피싱 대응."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

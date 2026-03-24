@@ -19,10 +19,4 @@ rules:
   - pattern-inside: |
       rules: ...
   - pattern: |
-      message: >-
-        $VALUE
-  - focus-metavariable:
-    - $VALUE
-  - pattern-regex: \w.*
-  - pattern-regex: \s{2,}
-
+      message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."

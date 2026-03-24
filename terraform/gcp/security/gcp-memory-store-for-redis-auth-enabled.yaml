@@ -1,5 +1,5 @@
 rules:
-- id: gcp-memory-store-for-redis-auth-enabled
+- id: - id: gcp-memory-store-for-redis-auth-enabled
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -12,8 +12,7 @@ rules:
       auth_enabled = true
       ...
       }
-  message: >-
-    Ensure Memorystore for Redis has AUTH enabled
+  message: "gcp-memory-store-for-redis-auth-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

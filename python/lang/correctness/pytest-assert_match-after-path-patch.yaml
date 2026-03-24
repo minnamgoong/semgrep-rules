@@ -13,8 +13,7 @@ rules:
             ...
       - pattern:
           snapshot.assert_match(...)
-    message: >-
-      snapshot.assert_match makes use of pathlib to create files. Patching $METHOD may result in unexpected snapshot behavior
+    message: "pytest-assert_match-after-path-patch 잠재적 결함 및 보안 이격율 정비 요망."
     languages: [python]
     severity: WARNING
     metadata:

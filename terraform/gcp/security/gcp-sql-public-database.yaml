@@ -1,5 +1,5 @@
 rules:
-- id: gcp-sql-public-database
+- id: - id: gcp-sql-public-database
   patterns:
   - pattern: resource
   - pattern-either:
@@ -35,8 +35,7 @@ rules:
         }
         ...
         }
-  message: >-
-    Ensure that Cloud SQL database Instances are not open to the world
+  message: "gcp-sql-public-database 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

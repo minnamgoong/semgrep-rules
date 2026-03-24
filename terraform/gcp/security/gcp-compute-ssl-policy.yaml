@@ -1,5 +1,5 @@
 rules:
-- id: gcp-compute-ssl-policy
+- id: - id: gcp-compute-ssl-policy
   patterns:
   - pattern: resource
   - pattern-either:
@@ -30,8 +30,7 @@ rules:
       custom_features = ["TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384", "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"]
       ...
       }
-  message: >-
-    Ensure no HTTPS or SSL proxy load balancers permit SSL policies with weak cipher suites
+  message: "gcp-compute-ssl-policy 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A03:2017 - Sensitive Data Exposure

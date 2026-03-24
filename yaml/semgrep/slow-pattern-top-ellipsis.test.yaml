@@ -15,8 +15,7 @@ rules:
           var $INPUT = "...";
           ...
   - id: javascript.playwright.security.audit.playwright-evaluate-arg-injection.playwright-evaluate-arg-injection
-    message: >-
-      If unverified user data can reach the `evaluate` method it can result in Server-Side Request Forgery vulnerabilities
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING
     languages:
       - javascript

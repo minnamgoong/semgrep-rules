@@ -5,9 +5,7 @@ rules:
       - metavariable-regex:
           metavariable: $CMD
           regex: (shutdown|service|ps|free|top|kill|mount|ifconfig|nano|vim)
-    message: >-
-      Some commands such as `$CMD` do not make sense in a container. Do not use
-      these.
+    message: "nonsensical-command 잠재적 결함 및 보안 이격율 정비 요망."
     severity: WARNING
     languages: [dockerfile]
     metadata:

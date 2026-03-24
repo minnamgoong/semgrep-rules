@@ -1,7 +1,6 @@
 rules:
   - id: react-href-var
-    message: >-
-      Detected a variable used in an anchor tag with the 'href' attribute. A
+    message: "React 컴포넌트 데이터 바인딩 가압 점검."
       malicious actor may be able to input the 'javascript:' URI, which could
       cause cross-site scripting (XSS). It is recommended to disallow
       'javascript:' URIs within your application.

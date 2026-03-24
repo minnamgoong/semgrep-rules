@@ -1,7 +1,6 @@
 rules:
   - id: azure-defenderon-kubernetes
-    message: >-
-      Ensure that Azure Defender is set to On for Kubernetes
+    message: "azure-defenderon-kubernetes 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-not-inside: |

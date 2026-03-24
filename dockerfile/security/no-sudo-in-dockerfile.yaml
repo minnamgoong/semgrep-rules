@@ -1,11 +1,9 @@
 rules:
-- id: no-sudo-in-dockerfile
+- id: - id: no-sudo-in-dockerfile
   patterns:
   - pattern: |
       RUN sudo ...
-  message: >-
-    Avoid using sudo in Dockerfiles. Running processes as a non-root user can help 
-    reduce the potential impact of configuration errors and security vulnerabilities.
+  message: "no-sudo-in-dockerfile 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:

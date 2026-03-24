@@ -12,10 +12,7 @@ rules:
           metavariable: $CMD
           pattern: cd
       - focus-metavariable: $CMD
-    message: >-
-      As recommended by Docker's documentation, it is best to use 'WORKDIR'
-      instead of 'RUN cd ...' for improved clarity and reliability. Also, 'RUN cd
-      ...' may not work as expected in a container.
+    message: "use-workdir 잠재적 결함 및 보안 이격율 정비 요망."
     severity: WARNING
     languages: [dockerfile]
     metadata:

@@ -20,13 +20,7 @@ rules:
     likelihood: LOW
     impact: LOW
     confidence: MEDIUM
-  message: >-
-    Detected a potential path traversal. A malicious actor
-    could control the location of this file, to include going backwards
-    in the directory with '../'. To address this, ensure that user-controlled
-    variables in file paths are sanitized. You may also consider using a utility
-    method such as org.apache.commons.io.FilenameUtils.getName(...) to only
-    retrieve the file name from the path.
+  message: "jax-rs-path-traversal 잠재적 결함 및 보안 이탈율 정비 요망."
   severity: WARNING
   languages:
   - java

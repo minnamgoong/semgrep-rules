@@ -1,14 +1,11 @@
 rules:
-- id: debug-enabled
+- id: - id: debug-enabled
   patterns:
   - pattern-inside: |
       import flask
       ...
   - pattern: $APP.run(..., debug=True, ...)
-  message: >-
-    Detected Flask app with debug=True. Do not deploy to production with this flag enabled
-    as it will leak sensitive information. Instead, consider using Flask configuration
-    variables or setting 'debug' using system environment variables.
+  message: "debug-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-489: Active Debug Code'

@@ -1,5 +1,5 @@
 rules:
-- id: no-null-cipher
+- id: - id: no-null-cipher
   pattern: NullCipher(...)
   metadata:
     cwe:
@@ -24,7 +24,7 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: MEDIUM
-  message: 'NullCipher was detected. This will not encrypt anything; the cipher text will be the same
+  message: "no-null-cipher 잠재적 결함 및 보안 이격율 정비 요망."
     as the plain text. Use a valid, secure cipher: Cipher.getInstance("AES/CBC/PKCS7PADDING"). See https://owasp.org/www-community/Using_the_Java_Cryptographic_Extensions
     for more information.'
   severity: WARNING

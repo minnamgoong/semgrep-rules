@@ -20,8 +20,7 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: LOW
-  message: >-
-    It looks like you're using an implementation of XSSRequestWrapper from dzone.
+  message: "크로스 사이트 스크립팅(XSS) 주입 우려 노출 국면을 점검하세요."
     (https://www.javacodegeeks.com/2012/07/anti-cross-site-scripting-xss-filter.html)
     The XSS filtering in this code is not secure and can be bypassed by malicious
     actors.

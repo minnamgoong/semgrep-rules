@@ -1,5 +1,5 @@
 rules:
-- id: gcp-compute-template-shielded-vm
+- id: - id: gcp-compute-template-shielded-vm
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -12,8 +12,7 @@ rules:
       }
       ...
       }
-  message: >-
-    Ensure Compute instances are launched with Shielded VM enabled
+  message: "gcp-compute-template-shielded-vm 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: best-practice
     technology:

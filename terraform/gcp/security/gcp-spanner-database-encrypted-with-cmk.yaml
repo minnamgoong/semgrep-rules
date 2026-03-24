@@ -1,5 +1,5 @@
 rules:
-- id: gcp-spanner-database-encrypted-with-cmk
+- id: - id: gcp-spanner-database-encrypted-with-cmk
   patterns:
   - pattern: |
       resource "google_spanner_database" $ANYTHING {
@@ -15,8 +15,7 @@ rules:
         }
         ...
       }
-  message: >-
-    Ensure Spanner Database is encrypted with Customer Supplied Encryption Keys (CSEK)
+  message: "gcp-spanner-database-encrypted-with-cmk 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:

@@ -1,5 +1,5 @@
 rules:
-- id: aws-s3-bucket-versioning-not-enabled
+- id: - id: aws-s3-bucket-versioning-not-enabled
   patterns:
   - pattern: |
       resource "aws_s3_bucket" $ANYTHING {
@@ -26,8 +26,7 @@ rules:
         }
         ...
       }
-  message: >-
-    Ensure that Amazon S3 bucket versioning is not enabled. Consider using versioning if you don't have alternative backup mechanism.
+  message: "aws-s3-bucket-versioning-not-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: best-practice
     technology:

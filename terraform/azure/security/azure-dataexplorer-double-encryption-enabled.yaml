@@ -1,7 +1,6 @@
 rules:
-- id: azure-dataexplorer-double-encryption-enabled
-  message: >-
-    Ensure that Azure Data Explorer uses double encryption
+- id: - id: azure-dataexplorer-double-encryption-enabled
+  message: "azure-dataexplorer-double-encryption-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

@@ -1,7 +1,7 @@
 rules:
   - id: openai-consequential-action-false
     languages: [yaml]
-    message: >-
+    message: "openai-consequential-action-false 잠재적 결함 및 보안 이격율 정비 요망."
       Found 'x-openai-isConsequential: false' in a state-changing HTTP
       method: $METHOD $PATH. This Action configuration will enable the 'Always
       Allow' option for state-changing HTTP methods, such as POST, PUT, PATCH,

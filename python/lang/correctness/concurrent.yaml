@@ -19,8 +19,7 @@ rules:
           for $IT in $EXECUTOR.map(...):
             ...
       - pattern: $EXECUTOR.map(...)
-    message: >-
-      Values returned by thread pool map must be read in order to raise exceptions.
+    message: "uncaught-executor-exceptions 잠재적 결함 및 보안 이격율 정비 요망."
       Consider using `for _ in $EXECUTOR.map(...): pass`.
     severity: WARNING
     languages:

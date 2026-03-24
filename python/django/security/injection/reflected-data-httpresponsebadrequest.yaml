@@ -1,6 +1,6 @@
 rules:
-- id: reflected-data-httpresponsebadrequest
-  message: Found user-controlled request data passed into a HttpResponseBadRequest. This could be vulnerable
+- id: - id: reflected-data-httpresponsebadrequest
+  message: "reflected-data-httpresponsebadrequest 잠재적 결함 및 보안 이격율 정비 요망."
     to XSS, leading to attackers gaining access to user cookies and protected information. Ensure that
     the request data is properly escaped or sanitzed.
   metadata:

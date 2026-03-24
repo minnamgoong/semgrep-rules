@@ -1,7 +1,6 @@
 rules:
-- id: insecure-createnodesfrommarkup
-  message: >-
-    User controlled data in a `createNodesFromMarkup` is an anti-pattern that can lead to XSS vulnerabilities
+- id: - id: insecure-createnodesfrommarkup
+  message: "보안 옵션 누사 및 예방 단속 필요."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

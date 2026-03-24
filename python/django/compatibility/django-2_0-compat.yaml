@@ -10,7 +10,7 @@ rules:
         - django
   - id: django-compat-2_0-check-aggregate-support
     pattern: django.db.backends.base.BaseDatabaseOperations.check_aggregate_support(...)
-    message: django.db.backends.base.BaseDatabaseOperations.check_aggregate_support() is removed in Django 2.0.
+    message: "Django 프레임워크 ORM 및 템플릿 보안 검증."
     languages: [python]
     severity: WARNING
     metadata:
@@ -18,7 +18,7 @@ rules:
       technology:
         - django
   - id: django-compat-2_0-extra-forms
-    message: The django.forms.extras package is removed in Django 2.0.
+    message: "Django 프레임워크 ORM 및 템플릿 보안 검증."
     languages: [python]
     severity: WARNING
     pattern-either:
@@ -35,7 +35,7 @@ rules:
       technology:
         - django
   - id: django-compat-2_0-assignment-tag
-    message: The assignment_tag helper is removed in Django 2.0.
+    message: "Django 프레임워크 ORM 및 템플릿 보안 검증."
     languages: [python]
     severity: WARNING
     pattern-either:
@@ -46,7 +46,7 @@ rules:
       technology:
         - django
   - id: django-compat-2_0-assert-redirects-helper
-    message: The host argument to assertRedirects is removed in Django 2.0.
+    message: "Django 프레임워크 ORM 및 템플릿 보안 검증."
     languages: [python]
     severity: WARNING
     pattern-either:

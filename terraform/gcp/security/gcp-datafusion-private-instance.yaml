@@ -1,5 +1,5 @@
 rules:
-- id: gcp-datafusion-private-instance
+- id: - id: gcp-datafusion-private-instance
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -12,8 +12,7 @@ rules:
       private_instance = true
       ...
       }
-  message: >-
-    Ensure Data fusion instances are private
+  message: "gcp-datafusion-private-instance 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

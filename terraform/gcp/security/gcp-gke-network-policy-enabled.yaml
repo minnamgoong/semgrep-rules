@@ -1,5 +1,5 @@
 rules:
-- id: gcp-gke-network-policy-enabled
+- id: - id: gcp-gke-network-policy-enabled
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -23,8 +23,7 @@ rules:
       }
       ...
       }
-  message: >-
-    Ensure Network Policy is enabled on Kubernetes Engine Clusters
+  message: "gcp-gke-network-policy-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

@@ -1,5 +1,5 @@
 rules:
-- id: aws-athena-client-can-disable-workgroup-encryption
+- id: - id: aws-athena-client-can-disable-workgroup-encryption
   patterns:
   - pattern: |
       resource "aws_athena_workgroup" $ANYTHING {
@@ -19,7 +19,7 @@ rules:
         }
         ...
       }
-  message: The Athena workgroup configuration can be overriden by client-side settings.
+  message: "aws-athena-client-can-disable-workgroup-encryption 잠재적 결함 및 보안 이격율 정비 요망."
     The client can make changes to disable encryption settings. Enforce the configuration
     to prevent client overrides.
   languages:

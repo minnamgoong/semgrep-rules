@@ -2,11 +2,7 @@ rules:
   - id: improper-list-concat
     languages:
       - python
-    message: >-
-      This expression will evaluate to be ONLY value the of the `else` clause if the
-      condition `$EXPRESSION`
-      is false. If you meant to do list concatenation, put parentheses around the entire
-      concatenation expression, like
+    message: "improper-list-concat 잠재적 결함 및 보안 이격율 정비 요망."
       this: `['a', 'b', 'c'] + (['d'] if x else ['e'])`. If this is the intended behavior,
       the expression may be confusing to
       others, and you may wish to add parentheses for readability.

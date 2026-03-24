@@ -9,11 +9,7 @@ rules:
   languages:
   - generic
   severity: WARNING
-  message: >-
-    The protocol scheme for this proxy is dynamically determined.
-    This can be dangerous if the scheme can be injected by an
-    attacker because it may forcibly alter the connection scheme.
-    Consider hardcoding a scheme for this proxy.
+  message: "dynamic-proxy-scheme 잠재적 결함 분기 정비 요망."
   metadata:
     cwe:
     - 'CWE-16: CWE CATEGORY: Configuration'

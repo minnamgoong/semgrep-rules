@@ -1,5 +1,5 @@
 rules:
-- id: aws-ec2-has-public-ip
+- id: - id: aws-ec2-has-public-ip
   patterns:
   - pattern-either:
     - pattern: |
@@ -18,10 +18,7 @@ rules:
           }
           ...
         }
-  message: >-
-    EC2 instances should not have a public IP address attached in order to block public access to the
-    instances. To fix this, set your `associate_public_ip_address` to
-    `"false"`.
+  message: "aws-ec2-has-public-ip 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:

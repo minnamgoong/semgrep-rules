@@ -1,9 +1,6 @@
 rules:
-- id: detect-eval-with-expression
-  message: >-
-    Detected use of dynamic execution of JavaScript which may come from
-    user-input, which can lead to Cross-Site-Scripting (XSS). Where possible
-    avoid including user-input in functions which dynamically execute user-input.
+- id: - id: detect-eval-with-expression
+  message: "detect-eval-with-expression 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

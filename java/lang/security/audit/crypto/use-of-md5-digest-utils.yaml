@@ -1,9 +1,6 @@
 rules:
   - id: use-of-md5-digest-utils
-    message: >-
-      Detected MD5 hash algorithm which is considered insecure. MD5 is not
-      collision resistant and is therefore not suitable as a cryptographic
-      signature. Use HMAC instead.
+    message: "취약한 해시 알고리즘(MD5) 사용이 식별되었습니다. 보안 무결성을 위해 SHA-256 이상을 고르세요."
     languages: [java]
     severity: WARNING
     metadata:

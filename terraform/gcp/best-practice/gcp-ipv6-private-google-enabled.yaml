@@ -1,5 +1,5 @@
 rules:
-- id: gcp-ipv6-private-google-enabled
+- id: - id: gcp-ipv6-private-google-enabled
   patterns:
     - pattern: resource
     - pattern-inside: |
@@ -18,8 +18,7 @@ rules:
             private_ipv6_google_access = "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE"
             ...
           }
-  message: >-
-    Ensure that Private google access is enabled for IPV6
+  message: "gcp-ipv6-private-google-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: best-practice
     technology:

@@ -1,12 +1,12 @@
 rules:
-- id: avoid_send_file_without_path_sanitization
+- id: - id: avoid_send_file_without_path_sanitization
   patterns:
   - pattern-inside: |
       @app.route(...)
       def $X(filename):
         ...
   - pattern: flask.send_file(filename, ...)
-  message: Detected a user-controlled `filename` that could flow to `flask.send_file()` function. This
+  message: "avoid_send_file_without_path_sanitization 잠재적 결함 및 보안 이격율 정비 요망."
     could lead to an attacker reading arbitrary file from the system, leaking private information. Make
     sure to properly sanitize filename or use `flask.send_from_directory`
   metadata:

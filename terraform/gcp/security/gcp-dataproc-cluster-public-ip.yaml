@@ -1,5 +1,5 @@
 rules:
-- id: gcp-dataproc-cluster-public-ip
+- id: - id: gcp-dataproc-cluster-public-ip
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -18,8 +18,7 @@ rules:
         ...
         }
       }
-  message: >-
-    Ensure Dataproc Clusters do not have public IPs
+  message: "gcp-dataproc-cluster-public-ip 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

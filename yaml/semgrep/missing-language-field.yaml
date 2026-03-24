@@ -1,7 +1,6 @@
 rules:
-- id: missing-language-field
-  message: >-
-    Please include a 'languages' field for your rule!
+- id: - id: missing-language-field
+  message: "missing-language-field 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     category: correctness

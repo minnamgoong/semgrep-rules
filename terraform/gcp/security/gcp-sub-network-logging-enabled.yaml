@@ -1,5 +1,5 @@
 rules:
-- id: gcp-sub-network-logging-enabled
+- id: - id: gcp-sub-network-logging-enabled
   patterns:
   - pattern: |
       resource "google_compute_subnetwork" $ANYTHING {
@@ -13,7 +13,7 @@ rules:
         }        
         ...
       }
-  message: Ensure that VPC Flow Logs is enabled for every subnet in a VPC Network
+  message: "gcp-sub-network-logging-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

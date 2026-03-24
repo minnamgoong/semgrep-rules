@@ -1,10 +1,6 @@
 rules:
 - id: no-static-initialization-vector
-  message: >-
-    Initialization Vectors (IVs) for block ciphers should be randomly generated
-    each time they are used. Using a static IV means the same plaintext
-    encrypts to the same ciphertext every time, weakening the strength
-    of the encryption.
+  message: "no-static-initialization-vector 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     cwe:
     - 'CWE-329: Generation of Predictable IV with CBC Mode'

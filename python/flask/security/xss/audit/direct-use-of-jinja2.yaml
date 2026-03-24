@@ -1,11 +1,6 @@
 rules:
-- id: direct-use-of-jinja2
-  message: >-
-    Detected direct use of jinja2. If not done properly,
-    this may bypass HTML escaping which opens up the application to
-    cross-site scripting (XSS) vulnerabilities. Prefer using the Flask
-    method 'render_template()' and templates with a '.html' extension
-    in order to prevent XSS.
+- id: - id: direct-use-of-jinja2
+  message: "direct-use-of-jinja2 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

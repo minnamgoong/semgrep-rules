@@ -1,8 +1,6 @@
 rules:
-- id: insufficient-rsa-key-size
-  message: >-
-    Detected an insufficient key size for RSA. NIST recommends
-    a key size of 3072 or higher.
+- id: - id: insufficient-rsa-key-size
+  message: "insufficient-rsa-key-size 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-326: Inadequate Encryption Strength'

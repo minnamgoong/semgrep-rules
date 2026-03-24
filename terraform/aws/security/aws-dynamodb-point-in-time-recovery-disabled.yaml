@@ -1,5 +1,5 @@
 rules:
-- id: aws-dynamodb-point-in-time-recovery-disabled
+- id: - id: aws-dynamodb-point-in-time-recovery-disabled
   patterns:
   - pattern: |
       resource "aws_dynamodb_table" $ANYTHING {
@@ -15,11 +15,7 @@ rules:
         }
         ...
       }
-  message: >- 
-    Point-in-time recovery is not enabled for the DynamoDB table. DynamoDB
-    tables should be protected against accidental or malicious write/delete actions.
-    By enabling point-in-time-recovery you can restore to a known point in the event
-    of loss of data.
+  message: "aws-dynamodb-point-in-time-recovery-disabled 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - hcl
   severity: INFO

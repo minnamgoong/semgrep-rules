@@ -1,5 +1,5 @@
 rules:
-- id: no-new-privileges
+- id: - id: no-new-privileges
   patterns:
   - pattern-inside: |
       version: ...
@@ -20,8 +20,7 @@ rules:
           - no-new-privileges:true
           - ...
   - focus-metavariable: $SERVICE
-  message: >-
-    Service '$SERVICE' allows for privilege escalation via setuid or setgid
+  message: "no-new-privileges 잠재적 결함 및 보안 이격율 정비 요망."
     binaries. Add 'no-new-privileges:true' in 'security_opt' to prevent this.
   metadata:
     cwe:

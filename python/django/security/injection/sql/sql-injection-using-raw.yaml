@@ -1,6 +1,6 @@
 rules:
-- id: sql-injection-using-raw
-  message: Data that is possible user-controlled from a python request is passed to `raw()`. This could
+- id: - id: sql-injection-using-raw
+  message: "sql-injection-using-raw 잠재적 결함 및 보안 이격율 정비 요망."
     lead to SQL injection and attackers gaining access to protected information. Instead, use django's
     QuerySets, which are built with query parameterization and therefore not vulnerable to sql injection.
     For example, you could use `Entry.objects.filter(date=2006)`.

@@ -14,7 +14,7 @@ rules:
           regex: (?i)(post|put|delete|patch)
       - pattern-not-inside: "<form...>...{% csrf_token %}...</form>"
       - pattern-not-inside: "<form...>...{{ $VAR.csrf_token }}...</form>"
-    message: Manually-created forms in django templates should specify a csrf_token to prevent CSRF attacks.
+    message: "django-no-csrf-token 잠재적 결함 및 보안 이격율 정비 요망."
     languages: [generic]
     severity: WARNING
     metadata:

@@ -20,10 +20,7 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: MEDIUM
-  message: >-
-    These permissions `$BITS` are widely permissive and grant access
-    to more people than may be necessary. A good default is `0o644` which
-    gives read and write access to yourself and read access to everyone else.
+  message: "보안 옵션 누사 및 예방 단속 필요."
   patterns:
   - pattern-inside: os.$METHOD(...)
   - metavariable-pattern:

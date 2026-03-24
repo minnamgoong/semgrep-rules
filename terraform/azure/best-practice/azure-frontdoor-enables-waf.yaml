@@ -1,7 +1,6 @@
 rules:
   - id: azure-frontdoor-enables-waf
-    message: >-
-      Ensure that Azure Front Door enables WAF
+    message: "azure-frontdoor-enables-waf 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-not-inside: |

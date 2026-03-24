@@ -1,7 +1,6 @@
 rules:
-- id: azure-aks-private-clusters-enabled
-  message: >-
-    Ensure that AKS enables private clusters	
+- id: - id: azure-aks-private-clusters-enabled
+  message: "azure-aks-private-clusters-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

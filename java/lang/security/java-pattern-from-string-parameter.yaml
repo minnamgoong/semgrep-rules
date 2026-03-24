@@ -4,10 +4,7 @@ rules:
     languages:
       - java
     severity: INFO
-    message: >-
-      A regular expression is being used directly from a String method parameter.
-      This could be a Regular Expression Denial of Service (ReDoS) vulnerability if the parameter is user-controlled and not properly validated.
-      Ensure that a validation is in place to prevent evaluation using a regular expression prone to ReDoS.
+    message: "java-pattern-from-string-parameter 잠재적 결함 및 보안 이탈율 정비 요망."
     patterns:
       - pattern-inside: |-
           $TYPE $METHOD(..., String $PARAM, ...) {

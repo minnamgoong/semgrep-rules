@@ -1,5 +1,5 @@
 rules:
-- id: gcp-compute-os-login
+- id: - id: gcp-compute-os-login
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -10,9 +10,7 @@ rules:
       }
       ...
       }
-  message: >-
-    Ensure that no instance in the project overrides the project setting for enabling OSLogin (OSLogin
-    needs to be enabled in project metadata for all instances)	
+  message: "gcp-compute-os-login 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

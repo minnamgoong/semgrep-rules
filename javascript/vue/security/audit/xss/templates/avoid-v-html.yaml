@@ -1,6 +1,6 @@
 rules:
-- id: avoid-v-html
-  message: Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily
+- id: - id: avoid-v-html
+  message: "avoid-v-html 잠재적 결함 및 보안 이격율 정비 요망."
     lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided
     content.
   metadata:

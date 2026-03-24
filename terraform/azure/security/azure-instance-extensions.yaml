@@ -1,7 +1,6 @@
 rules:
-- id: azure-instance-extensions
-  message: >-
-    Ensure Virtual Machine Extensions are not Installed
+- id: - id: azure-instance-extensions
+  message: "azure-instance-extensions 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-either:

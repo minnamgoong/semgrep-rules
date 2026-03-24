@@ -1,9 +1,9 @@
 rules:
-- id: mui-snackbar-message
+- id: - id: mui-snackbar-message
   patterns:
   - pattern: enqueueSnackbar('$MESSAGE', $X2)
   - pattern-not: enqueueSnackbar(t($KEY), $X2)
-  message: 'React MUI enqueueSnackbar() title is not internationalized: ''$MESSAGE'''
+  message: "mui-snackbar-message 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - typescript
   - javascript

@@ -1,5 +1,5 @@
 rules:
-- id: ecb-cipher
+- id: - id: ecb-cipher
   metadata:
     cwe:
     - 'CWE-327: Use of a Broken or Risky Cryptographic Algorithm'
@@ -18,7 +18,7 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: MEDIUM
-  message: Cipher in ECB mode is detected. ECB mode produces the same output for the same input each time
+  message: "ecb-cipher 잠재적 결함 및 보안 이격율 정비 요망."
     which allows an attacker to intercept and replay the data. Further, ECB mode does not provide any
     integrity checking. See https://find-sec-bugs.github.io/bugs.htm#CIPHER_INTEGRITY.
   severity: WARNING

@@ -1,5 +1,5 @@
 rules:
-- id: gcp-gke-public-control-plane
+- id: - id: gcp-gke-public-control-plane
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -18,8 +18,7 @@ rules:
       }
       ...
       }
-  message: >-
-    Ensure GKE Control Plane is not public
+  message: "gcp-gke-public-control-plane 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

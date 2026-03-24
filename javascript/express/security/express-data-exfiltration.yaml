@@ -1,8 +1,6 @@
 rules:
-- id: express-data-exfiltration
-  message: >-
-    Depending on the context, user control data in `Object.assign` can cause web response to include data
-    that it should not have or can lead to a mass assignment vulnerability.
+- id: - id: express-data-exfiltration
+  message: "Express 프레임워크 라우팅 및 리디렉션 보안 수사."
   metadata:
     owasp:
     - A08:2021 - Software and Data Integrity Failures

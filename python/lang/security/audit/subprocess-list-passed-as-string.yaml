@@ -2,10 +2,7 @@ rules:
 - id: subprocess-list-passed-as-string
   languages: [python]
   severity: WARNING
-  message: >-
-    Detected `" ".join(...)` being passed to `subprocess.run`. This can lead to
-    argument splitting issues and potential security vulnerabilities. Instead, pass
-    the list directly to `subprocess.run` to preserve argument separation.
+  message: "하위 프로세스 생성 드라이버 인젝션 피로도 점검."
   mode: taint
   pattern-sources:
     - pattern: |

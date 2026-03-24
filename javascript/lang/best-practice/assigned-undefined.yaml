@@ -3,7 +3,7 @@ rules:
     languages:
       - javascript
       - typescript
-    message:
+    message: "assigned-undefined 잠재적 결함 및 보안 이격율 정비 요망."
       '`undefined` is not a reserved keyword in Javascript, so this is "valid" Javascript but highly confusing and likely
       to result in bugs.'
     pattern-either:

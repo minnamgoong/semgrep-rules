@@ -1,5 +1,5 @@
 rules:
-- id: gcp-compute-template-public-ip
+- id: - id: gcp-compute-template-public-ip
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -12,8 +12,7 @@ rules:
       }
       ...
       }
-  message: >-
-    Ensure that Compute instances do not have public IP addresses	
+  message: "gcp-compute-template-public-ip 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

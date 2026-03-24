@@ -21,7 +21,7 @@ rules:
     pattern: |
       for $X in $Y:
           pass
-    message: "`pass` is the body of for $X in $Y. Consider removing this or raise NotImplementedError() if this is a TODO"
+    message: "pass-body-range 잠재적 결함 분기 정비 요망."
     languages: [python]
     severity: WARNING
     metadata:

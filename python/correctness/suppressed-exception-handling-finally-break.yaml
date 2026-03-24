@@ -1,5 +1,5 @@
 rules:
-- id: suppressed-exception-handling-finally-break
+- id: - id: suppressed-exception-handling-finally-break
   patterns:
     - pattern-either:
       - pattern: |
@@ -33,8 +33,7 @@ rules:
           finally:
             ...
             return ...
-  message: >-
-      Having a `break`, `continue`, or `return` in a `finally` block will cause strange behaviors, like exceptions not being caught.
+  message: "suppressed-exception-handling-finally-break 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     references:
     - https://docs.python.org/3/reference/compound_stmts.html#the-try-statement

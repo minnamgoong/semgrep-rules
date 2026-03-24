@@ -1,6 +1,6 @@
 rules:
-- id: bad-tmp-file-creation
-  message: File creation in shared tmp directory without using `io.CreateTemp`.
+- id: - id: bad-tmp-file-creation
+  message: "bad-tmp-file-creation 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [go]
   severity: WARNING
   metadata:

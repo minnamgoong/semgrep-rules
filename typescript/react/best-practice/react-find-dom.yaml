@@ -5,8 +5,7 @@ rules:
           findDOMNode(...)
       - pattern: |
           $DOM.findDOMNode(...)
-    message: >-
-      findDOMNode is an escape hatch used to access the underlying DOM node. In most cases, use of this escape hatch is discouraged because it pierces the component abstraction.
+    message: "React 컴포넌트 데이터 바인딩 가압 점검."
     metadata:
       references:
         - https://react.dev/reference/react-dom/findDOMNode

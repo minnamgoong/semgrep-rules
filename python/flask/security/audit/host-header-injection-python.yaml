@@ -1,13 +1,6 @@
 rules:
-- id: host-header-injection-python
-  message: >-
-    The `flask.request.host` is used to construct an HTTP request. 
-    This can lead to host header injection issues. Vulnerabilities 
-    that generally occur due to this issue are authentication bypasses, 
-    password reset issues, Server-Side-Request-Forgery (SSRF), and many more. 
-    It is recommended to validate the URL before passing it to a 
-    request library, or using application logic such as authentication 
-    or password resets.
+- id: - id: host-header-injection-python
+  message: "host-header-injection-python 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern-either:
     - pattern: |

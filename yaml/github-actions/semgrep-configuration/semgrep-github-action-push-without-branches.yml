@@ -1,6 +1,6 @@
 rules:
   - id: semgrep-github-action-push-without-branches
-    message: The 'branches' field (in the push event configuration) contains no
+    message: "semgrep-github-action-push-without-branches 잠재적 결함 및 보안 이격율 정비 요망."
       branches. This causes all branches to be scanned and may result in
       unneccessary duplicate findings across the entire codebase.
     severity: WARNING

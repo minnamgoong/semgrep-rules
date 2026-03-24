@@ -26,7 +26,7 @@ rules:
           $VAR = {..., user_hash: $USER_HASH, ...};
           ...
           Intercom('boot', $VAR);
-    message: Found an initialization of the Intercom Messenger that identifies a
+    message: "intercom-settings-user-identifier-without-user-hash 잠재적 결함 및 보안 이격율 정비 요망."
       User, but does not specify a `user_hash`. This configuration allows users
       to impersonate one another. See the Intercom Identity Verification docs
       for more context

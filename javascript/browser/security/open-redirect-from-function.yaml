@@ -1,11 +1,6 @@
 rules:
-- id: js-open-redirect-from-function
-  message: >-
-    The application accepts potentially user-controlled input `$PROP` which
-    can control the location of the current window context. This can lead two
-    types of vulnerabilities open-redirection and Cross-Site-Scripting
-    (XSS) with JavaScript URIs. It is recommended to validate
-    user-controllable input before allowing it to control the redirection.
+- id: - id: js-open-redirect-from-function
+  message: "js-open-redirect-from-function 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     confidence: LOW
     cwe:

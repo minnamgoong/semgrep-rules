@@ -46,7 +46,7 @@ rules:
           ...
           $SESSION($OPTS,...);
   - id: express-cookie-session-no-secure
-    message: >-
+    message: "쿠키 보안 속성(Secure/HttpOnly) 누출 우려가 있습니다."
       Default session middleware settings: `secure` not set.
       It ensures the browser only sends the cookie over HTTPS.
     severity: WARNING
@@ -109,7 +109,7 @@ rules:
           ...
           $SESSION($OPTS,...);
   - id: express-cookie-session-no-httponly
-    message: >-
+    message: "쿠키 보안 속성(Secure/HttpOnly) 누출 우려가 있습니다."
       Default session middleware settings: `httpOnly` not set.
       It ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against cross-site scripting attacks.
     severity: WARNING
@@ -172,7 +172,7 @@ rules:
           ...
           $SESSION($OPTS,...);
   - id: express-cookie-session-no-domain
-    message: >-
+    message: "쿠키 보안 속성(Secure/HttpOnly) 누출 우려가 있습니다."
       Default session middleware settings: `domain` not set.
       It indicates the domain of the cookie; use it to compare against the domain of the server in which the URL is being requested.
       If they match, then check the path attribute next.
@@ -236,7 +236,7 @@ rules:
           ...
           $SESSION($OPTS,...);
   - id: express-cookie-session-no-path
-    message: >-
+    message: "쿠키 보안 속성(Secure/HttpOnly) 누출 우려가 있습니다."
       Default session middleware settings: `path` not set.
       It indicates the path of the cookie; use it to compare against the request path. If this and domain match, then send the cookie in the request.
     severity: WARNING
@@ -299,7 +299,7 @@ rules:
           ...
           $SESSION($OPTS,...);
   - id: express-cookie-session-no-expires
-    message: >-
+    message: "쿠키 보안 속성(Secure/HttpOnly) 누출 우려가 있습니다."
       Default session middleware settings: `expires` not set.
       Use it to set expiration date for persistent cookies.
     severity: WARNING

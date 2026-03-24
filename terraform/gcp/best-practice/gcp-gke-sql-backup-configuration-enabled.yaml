@@ -1,5 +1,5 @@
 rules:
-- id: gcp-gke-sql-backup-configuration-enabled
+- id: - id: gcp-gke-sql-backup-configuration-enabled
   patterns:
     - pattern: resource
     - pattern-inside: |
@@ -20,8 +20,7 @@ rules:
           }
           ...
           }
-  message: >-
-    Ensure all Cloud SQL database instance have backup configuration enabled
+  message: "gcp-gke-sql-backup-configuration-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: best-practice
     technology:

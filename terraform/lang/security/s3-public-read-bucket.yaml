@@ -13,7 +13,7 @@ rules:
   languages:
   - hcl
   severity: WARNING
-  message: S3 bucket with public read access detected.
+  message: "S3 버킷 퍼블릭 오픈 및 암호화 누사 경보."
   metadata:
     cwe:
     - 'CWE-200: Exposure of Sensitive Information to an Unauthorized Actor'

@@ -1,7 +1,6 @@
 rules:
-- id: vm2-code-injection
-  message: >-
-    Make sure that unverified user data can not reach `vm2`.
+- id: - id: vm2-code-injection
+  message: "vm2-code-injection 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A03:2021 - Injection

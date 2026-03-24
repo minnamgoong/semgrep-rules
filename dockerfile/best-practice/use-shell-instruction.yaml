@@ -4,8 +4,7 @@ rules:
     languages: [dockerfile]
     pattern: |
       RUN ln ... $SHELL /bin/sh
-    message: >-
-      Use the SHELL instruction to set the default shell instead of overwriting '/bin/sh'.
+    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
     metadata:
       source-rule-url: https://github.com/hadolint/hadolint/wiki/DL4005
       references:

@@ -23,11 +23,7 @@ rules:
     likelihood: LOW
     impact: LOW
     confidence: LOW
-  message: >-
-    Detected empty trust manager implementations. This is dangerous because it accepts
-    any
-    certificate, enabling man-in-the-middle attacks. Consider using a KeyStore
-    and TrustManagerFactory instead.
+  message: "insecure-trust-manager 잠재적 결함 및 보안 이탈율 정비 요망."
     See https://stackoverflow.com/questions/2642777/trusting-all-certificates-using-httpclient-over-https
     for more information.
   severity: WARNING

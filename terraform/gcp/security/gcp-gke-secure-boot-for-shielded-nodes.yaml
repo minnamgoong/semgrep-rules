@@ -1,5 +1,5 @@
 rules:
-- id: gcp-gke-secure-boot-for-shielded-nodes
+- id: - id: gcp-gke-secure-boot-for-shielded-nodes
   patterns:
     - pattern: resource
     - pattern-inside: |
@@ -16,8 +16,7 @@ rules:
           }
           ...
           }
-  message: >-
-    Ensure Secure Boot for Shielded GKE Nodes is Enabled	
+  message: "gcp-gke-secure-boot-for-shielded-nodes 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: best-practice
     technology:

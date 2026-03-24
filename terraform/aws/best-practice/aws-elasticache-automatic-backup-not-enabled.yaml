@@ -1,5 +1,5 @@
 rules:
-- id: aws-elasticache-automatic-backup-not-enabled
+- id: - id: aws-elasticache-automatic-backup-not-enabled
   patterns:
   - pattern-either:
     - patterns:
@@ -29,8 +29,7 @@ rules:
       - metavariable-comparison:
           metavariable: $LIMIT
           comparison: $LIMIT == 0
-  message: >-
-    Ensure that Amazon ElastiCache clusters have automatic backup turned on. To fix this, set a `snapshot_retention_limit`.
+  message: "aws-elasticache-automatic-backup-not-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: best-practice
     technology:

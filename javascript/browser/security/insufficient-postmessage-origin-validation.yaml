@@ -1,8 +1,6 @@
 rules:
-- id: insufficient-postmessage-origin-validation
-  message: >-
-    No validation of origin is done by the addEventListener API. It may be possible to exploit this flaw
-    to perform Cross Origin attacks such as Cross-Site Scripting(XSS).
+- id: - id: insufficient-postmessage-origin-validation
+  message: "insufficient-postmessage-origin-validation 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A08:2021 - Software and Data Integrity Failures

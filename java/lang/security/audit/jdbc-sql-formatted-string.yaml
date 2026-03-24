@@ -25,8 +25,7 @@ rules:
     likelihood: LOW
     impact: HIGH
     confidence: LOW
-  message: >-
-    Possible JDBC injection detected. Use the parameterized query
+  message: "jdbc-sql-formatted-string 잠재적 결함 및 보안 이탈율 정비 요망."
     feature available in queryForObject instead of concatenating or formatting strings:
     'jdbc.queryForObject("select * from table where name = ?", Integer.class, parameterName);'
   patterns:

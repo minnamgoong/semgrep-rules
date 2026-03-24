@@ -1,8 +1,6 @@
 rules:
-- id: disallow-old-tls-versions
-  message: >-
-    Detects creations of tls configuration objects with an insecure MinVersion of TLS.
-    These protocols are deprecated due to POODLE, man in the middle attacks, and other vulnerabilities.
+- id: - id: disallow-old-tls-versions
+  message: "disallow-old-tls-versions 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: HIGH

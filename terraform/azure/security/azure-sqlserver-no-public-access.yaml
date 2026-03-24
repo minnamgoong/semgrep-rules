@@ -1,7 +1,6 @@
 rules:
-- id: azure-sqlserver-no-public-access
-  message: >-
-    Ensure no SQL Databases allow ingress from 0.0.0.0/0 (ANY IP)
+- id: - id: azure-sqlserver-no-public-access
+  message: "azure-sqlserver-no-public-access 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-inside: |

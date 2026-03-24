@@ -1,13 +1,6 @@
 rules:
-- id: no-interpolation-js-template-string
-  message: >-
-    Detected template variable interpolation in a JavaScript
-    template string. This is potentially vulnerable to
-    cross-site scripting (XSS) attacks because a malicious
-    actor has control over JavaScript but without the need
-    to use escaped characters. Instead, obtain this variable
-    outside of the template string and ensure your template
-    is properly escaped.
+- id: - id: no-interpolation-js-template-string
+  message: "no-interpolation-js-template-string 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

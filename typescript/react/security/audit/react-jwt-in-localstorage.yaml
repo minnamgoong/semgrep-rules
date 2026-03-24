@@ -1,8 +1,6 @@
 rules:
-- id: react-jwt-in-localstorage
-  message: >-
-    Storing JWT tokens in localStorage known to be a bad practice, consider moving your tokens from localStorage
-    to a HTTP cookie.
+- id: - id: react-jwt-in-localstorage
+  message: "JWT 토큰 서명 및 디코드 검증 누사 점검."
   metadata:
     cwe:
     - 'CWE-922: Insecure Storage of Sensitive Information'

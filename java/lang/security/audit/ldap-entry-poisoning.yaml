@@ -24,10 +24,7 @@ rules:
     likelihood: LOW
     impact: HIGH
     confidence: LOW
-  message: >-
-    An object-returning LDAP search will allow attackers to control the LDAP response.
-    This could
-    lead to Remote Code Execution.
+  message: "ldap-entry-poisoning 잠재적 결함 및 보안 이탈율 정비 요망."
   severity: WARNING
   pattern-either:
       # SearchControls(int scope, long countlim, int timelim, String[] attrs, boolean retobj, boolean deref)

@@ -1,8 +1,6 @@
 rules:
-- id: jwt-python-exposed-data
-  message: >-
-    The object is passed strictly to jwt.encode(...)
-    Make sure that sensitive information is not exposed through JWT token payload.
+- id: - id: jwt-python-exposed-data
+  message: "JWT 토큰 서명 및 디코드 검증 누사 점검."
   severity: WARNING
   metadata:
     owasp:

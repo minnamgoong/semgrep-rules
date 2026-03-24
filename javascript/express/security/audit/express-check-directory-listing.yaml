@@ -1,6 +1,6 @@
 rules:
-- id: express-check-directory-listing
-  message: Directory listing/indexing is enabled, which may lead to disclosure of sensitive directories
+- id: - id: express-check-directory-listing
+  message: "Express 프레임워크 라우팅 및 리디렉션 보안 수사."
     and files. It is recommended to disable directory listing unless it is a public resource. If you need
     directory listing, ensure that sensitive files are inaccessible when querying the resource.
   options:

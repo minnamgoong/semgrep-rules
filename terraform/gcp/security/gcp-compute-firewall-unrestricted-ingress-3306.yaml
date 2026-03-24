@@ -1,5 +1,5 @@
 rules:
-- id: gcp-compute-firewall-unrestricted-ingress-3306
+- id: - id: gcp-compute-firewall-unrestricted-ingress-3306
   patterns:
   - pattern: resource
   - pattern-either:
@@ -23,8 +23,7 @@ rules:
         source_ranges = ["0.0.0.0/0"]
         ...
         }
-  message: >-
-    Ensure Google compute firewall ingress does not allow unrestricted MySQL access
+  message: "gcp-compute-firewall-unrestricted-ingress-3306 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

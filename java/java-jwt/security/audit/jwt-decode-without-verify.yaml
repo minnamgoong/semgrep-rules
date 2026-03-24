@@ -1,10 +1,6 @@
 rules:
 - id: java-jwt-decode-without-verify
-  message: >-
-    Detected the decoding of a JWT token without a verify step.
-    JWT tokens must be verified before use, otherwise the token's
-    integrity is unknown. This means a malicious actor could forge
-    a JWT token with any claims. Call '.verify()' before using the token.
+  message: "java-jwt-decode-without-verify 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     cwe:
     - 'CWE-345: Insufficient Verification of Data Authenticity'

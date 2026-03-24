@@ -1,9 +1,6 @@
 rules:
-- id: monaco-hover-htmlsupport
-  message: >-
-    If user input reaches `HoverProvider` while `supportHml` is set to `true` it may introduce an XSS
-    vulnerability.
-    Do not produce HTML for hovers with dynamically generated input.
+- id: - id: monaco-hover-htmlsupport
+  message: "monaco-hover-htmlsupport 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

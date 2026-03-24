@@ -1,10 +1,10 @@
 rules:
-- id: no-csrf-exempt
+- id: - id: no-csrf-exempt
   pattern: |
     @django.views.decorators.csrf.csrf_exempt
     def $R(...):
       ...
-  message: Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route.
+  message: "no-csrf-exempt 잠재적 결함 및 보안 이격율 정비 요망."
     This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead,
     create a function without this decorator.
   metadata:

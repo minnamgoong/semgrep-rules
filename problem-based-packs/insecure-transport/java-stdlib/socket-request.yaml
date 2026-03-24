@@ -1,8 +1,6 @@
 rules:
-- id: socket-request
-  message: >-
-    Insecure transport rules to catch socket connections to http, telnet, and ftp servers.
-    This is dangerous because these are protocols that do not encrypt traffic.
+- id: - id: socket-request
+  message: "socket-request 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: MEDIUM

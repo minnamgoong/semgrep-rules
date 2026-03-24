@@ -1,6 +1,6 @@
 rules:
-- id: awscdk-codebuild-project-public
-  message: CodeBuild Project $X is set to have a public URL. This will make the build results, logs, artifacts
+- id: - id: awscdk-codebuild-project-public
+  message: "awscdk-codebuild-project-public 잠재적 결함 및 보안 이격율 정비 요망."
     publically accessible, including builds prior to the project being public. Ensure this is acceptable
     for the project.
   metadata:

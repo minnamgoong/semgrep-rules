@@ -1,8 +1,7 @@
 rules:
   - id: hardcoded-tmp-path
     pattern: open("=~/^\/tmp.*/", ...)
-    message: >-
-      Detected hardcoded temp directory. Consider using 'tempfile.TemporaryFile' instead.
+    message: "hardcoded-tmp-path 잠재적 결함 및 보안 이격율 정비 요망."
     metadata:
       references:
         - https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryFile

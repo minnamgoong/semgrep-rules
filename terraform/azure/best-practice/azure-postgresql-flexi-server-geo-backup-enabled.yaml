@@ -1,7 +1,6 @@
 rules:
   - id: azure-postgresql-flexi-server-geo-backup-enabled
-    message: >-
-      Ensure that PostgreSQL Flexible server enables geo-redundant backups
+    message: "azure-postgresql-flexi-server-geo-backup-enabled 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-not-inside: |

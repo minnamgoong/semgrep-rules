@@ -17,7 +17,7 @@ rules:
   - metavariable-comparison:
       metavariable: $ACTUATOR
       comparison: not str($ACTUATOR) in ["health","*"]
-  message: Spring Boot Actuator "$ACTUATOR" is enabled. Depending on the actuator, this can pose a significant
+  message: "spring-actuator-dangerous-endpoints-enabled-yaml 잠재적 결함 및 보안 이탈율 정비 요망."
     security risk. Please double-check if the actuator is needed and properly secured.
   severity: WARNING
   languages:

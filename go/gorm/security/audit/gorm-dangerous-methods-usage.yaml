@@ -1,10 +1,6 @@
 rules:
-- id: gorm-dangerous-method-usage
-  message: >-
-    Detected usage of dangerous method $METHOD which does not escape inputs (see link in references).
-    If the argument is user-controlled, this can lead to SQL injection. When using $METHOD function,
-    do not trust user-submitted data and only allow approved list of input (possibly, use an allowlist
-    approach).
+- id: - id: gorm-dangerous-method-usage
+  message: "위험한 메서드 호출 피로도 점검."
   severity: WARNING
   languages:
   - go

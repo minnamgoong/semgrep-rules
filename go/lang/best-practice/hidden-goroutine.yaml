@@ -14,11 +14,7 @@ rules:
               ...
             }(...)
           }
-    message: >-
-      Detected a hidden goroutine. Function invocations are expected to synchronous,
-      and this function will execute asynchronously because all it does is call a
-      goroutine. Instead, remove the internal goroutine and call the function using
-      'go'.
+    message: "hidden-goroutine 잠재적 결함 및 보안 이격율 정비 요망."
     languages: [go]
     severity: WARNING
     metadata:

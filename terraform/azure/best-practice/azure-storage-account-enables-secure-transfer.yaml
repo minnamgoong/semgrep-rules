@@ -1,7 +1,6 @@
 rules:
   - id: azure-storage-account-enables-secure-transfer
-    message: >-
-      Ensure that storage account enables secure transfer
+    message: "azure-storage-account-enables-secure-transfer 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-inside: |

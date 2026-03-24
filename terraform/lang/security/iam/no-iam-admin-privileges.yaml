@@ -1,5 +1,5 @@
 rules:
-- id: no-iam-admin-privileges
+- id: - id: no-iam-admin-privileges
   pattern-either:
   - patterns:
     - pattern-inside: |
@@ -68,10 +68,7 @@ rules:
           {..., resources = ["*"], ...}
       - pattern: |
           {..., actions = ["*"], ...}
-  message: >-
-    IAM policies that allow full "*-*" admin privileges violates the principle of least privilege.
-    This allows an attacker to take full control over all AWS account resources. Instead, give each user
-    more fine-grained control with only the privileges they need. $TYPE
+  message: "no-iam-admin-privileges 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     references:
     - https://github.com/bridgecrewio/checkov/blob/master/checkov/terraform/checks/data/aws/AdminPolicyDocument.py

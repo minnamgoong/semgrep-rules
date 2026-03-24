@@ -1,7 +1,6 @@
 rules:
   - id: azure-postgresql-server-log-checkpoint-enabled
-    message: >-
-      Ensure server parameter log_checkpoints is set to ON for PostgreSQL Database Server
+    message: "azure-postgresql-server-log-checkpoint-enabled 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-inside: |

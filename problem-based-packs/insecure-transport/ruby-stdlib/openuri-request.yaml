@@ -1,7 +1,6 @@
 rules:
-- id: openuri-request
-  message: >-
-    Checks for requests to http and ftp (unencrypted) sites using OpenURI.
+- id: - id: openuri-request
+  message: "openuri-request 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: MEDIUM

@@ -1,8 +1,6 @@
 rules:
-- id: unsafe-dynamic-method
-  message: >-
-    Using non-static data to retrieve and run functions from the object is dangerous.
-    If the data is user-controlled, it may allow executing arbitrary code.
+- id: - id: unsafe-dynamic-method
+  message: "unsafe-dynamic-method 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A03:2021 - Injection

@@ -1,6 +1,6 @@
 rules:
-- id: fs-directory-listing
-  message: >-
+- id: - id: fs-directory-listing
+  message: "fs-directory-listing 잠재적 결함 및 보안 이격율 정비 요망."
     Detected usage of 'http.FileServer' as handler: this allows directory listing
     and an attacker could navigate through directories looking for sensitive
     files. Be sure to disable directory listing or restrict access to specific

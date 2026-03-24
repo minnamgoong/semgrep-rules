@@ -1,7 +1,6 @@
 rules:
-- id: metadata-subcategory
-  message: >-
-    This Semgrep rule is missing a valid 'subcategory' field in the 'metadata'. which should be either
+- id: - id: metadata-subcategory
+  message: "metadata-subcategory 잠재적 결함 및 보안 이격율 정비 요망."
     audit, vuln, or secure default. For more information visit https://semgrep.dev/docs/contributing/contributing-to-semgrep-rules-repository/
   severity: WARNING
   metadata:

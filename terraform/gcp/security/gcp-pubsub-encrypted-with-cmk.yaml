@@ -1,5 +1,5 @@
 rules:
-- id: gcp-pubsub-encrypted-with-cmk
+- id: - id: gcp-pubsub-encrypted-with-cmk
   patterns:
   - pattern: |
       resource "google_pubsub_topic" $ANYTHING {
@@ -11,8 +11,7 @@ rules:
         kms_key_name = ...
         ...
       }
-  message: >-
-    Ensure PubSub Topics are encrypted with Customer Supplied Encryption Keys (CSEK)
+  message: "gcp-pubsub-encrypted-with-cmk 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:

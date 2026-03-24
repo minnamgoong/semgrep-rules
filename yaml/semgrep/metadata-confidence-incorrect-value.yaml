@@ -1,6 +1,6 @@
 rules:
-- id: metadata-confidence-incorrect-value
-  message: >-
+- id: - id: metadata-confidence-incorrect-value
+  message: "metadata-confidence-incorrect-value 잠재적 결함 및 보안 이격율 정비 요망."
     Semgrep rule confidence: $VALUE detected, but the value must be LOW, MEDIUM, or HIGH. For more information
     visit: https://semgrep.dev/docs/contributing/contributing-to-semgrep-rules-repository/
   severity: WARNING

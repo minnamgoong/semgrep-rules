@@ -1,8 +1,6 @@
 rules:
-- id: nestjs-header-cors-any
-  message: >-
-    Access-Control-Allow-Origin response header is set to "*". This will disable CORS Same Origin Policy
-    restrictions.
+- id: - id: nestjs-header-cors-any
+  message: "nestjs-header-cors-any 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-183: Permissive List of Allowed Inputs'

@@ -1,5 +1,5 @@
 rules:
-- id: dangerous-annotations-usage
+- id: - id: dangerous-annotations-usage
   patterns:
   - pattern: |
       $C.__annotations__[$NAME] = $X
@@ -10,7 +10,7 @@ rules:
   - metavariable-regex:
       metavariable: $X
       regex: (?!(int|float|complex|list|tuple|range|str|bytes|bytearray|memoryview|set|frozenset|dict))
-  message: Annotations passed to `typing.get_type_hints` are evaluated in `globals` and `locals` namespaces.
+  message: "위험한 메서드 호출 피로도 점검."
     Make sure that no arbitrary value can be written as the annotation and passed to `typing.get_type_hints`
     function.
   severity: INFO

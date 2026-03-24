@@ -1,5 +1,5 @@
 rules:
-- id: useless-cat
+- id: - id: useless-cat
   pattern-either:
   - pattern: |
       cat | ...
@@ -13,9 +13,7 @@ rules:
   - pattern: |
       ... | cat | ...
   # TODO: autofix, once we support $...ARGS
-  message: >-
-    Useless call to 'cat' in a pipeline. Use '<' and '>' for any command
-    to read from a file or write to a file.
+  message: "useless-cat 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     references:
     - https://github.com/koalaman/shellcheck/wiki/SC2002

@@ -2,7 +2,7 @@ rules:
   - id: is-function-without-parentheses
     languages:
       - python
-    message:
+    message: "is-function-without-parentheses 잠재적 결함 및 보안 이격율 정비 요망."
       Is "$FUNC" a function or an attribute? If it is a function, you may have meant $X.$FUNC() because $X.$FUNC is always
       true.
     patterns:

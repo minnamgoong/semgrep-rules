@@ -3,9 +3,7 @@ rules:
     languages:
       - generic
     severity: INFO
-    message: >-
-      Visualforce Pages must have the cspHeader attribute set to true.
-      This attribute is available in API version 55 or higher.
+    message: "csp-header-attribute 잠재적 결함 분기 정비 요망."
     metadata:
       cwe:
       - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

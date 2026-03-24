@@ -1,14 +1,11 @@
 rules:
-- id: parsing-external-entities-enabled
+- id: - id: parsing-external-entities-enabled
   patterns:
   - pattern-inside: |
       import ("github.com/lestrrat-go/libxml2/parser")
       ...
   - pattern: $PARSER := parser.New(parser.XMLParseNoEnt)
-  message: >-
-    Detected enabling of "XMLParseNoEnt", which allows parsing of external entities and can lead to XXE
-    if user controlled data is parsed by the library. Instead, do not enable "XMLParseNoEnt" or be sure
-    to adequately sanitize user-controlled data when it is being parsed by this library.
+  message: "parsing-external-entities-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - go
   severity: WARNING

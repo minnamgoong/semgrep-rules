@@ -1,8 +1,6 @@
 rules:
-- id: pyramid-csrf-origin-check-disabled
-  message: >-
-    Origin check for the CSRF token is disabled for this view.
-    This might represent a security risk if the CSRF storage policy is not known to be secure.
+- id: - id: pyramid-csrf-origin-check-disabled
+  message: "pyramid-csrf-origin-check-disabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-352: Cross-Site Request Forgery (CSRF)'

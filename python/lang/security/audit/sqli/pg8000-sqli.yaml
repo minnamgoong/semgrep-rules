@@ -1,12 +1,8 @@
 rules:
-- id: pg8000-sqli
+- id: - id: pg8000-sqli
   languages:
   - python
-  message: >-
-    Detected string concatenation with a non-literal variable in a pg8000
-    Python SQL statement. This could lead to SQL injection if the variable is user-controlled
-    and not properly sanitized. In order to prevent SQL injection,
-    use parameterized queries or prepared statements instead.
+  message: "잠재적 SQL 인젝션 경로에 대한 검토가 필요합니다."
     You can create parameterized queries like so:
     'conn.run("SELECT :value FROM table", value=myvalue)'.
     You can also create prepared statements with 'conn.prepare':

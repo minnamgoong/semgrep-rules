@@ -1,15 +1,12 @@
 rules:
-- id: hostpid-pod
+- id: - id: hostpid-pod
   patterns:
   - pattern-inside: |
       spec:
         ...
   - pattern: |
       hostPID: true
-  message: >-
-    Pod is sharing the host process ID namespace. When paired with ptrace
-    this can be used to escalate privileges outside of the container. Remove
-    the 'hostPID' key to disable this functionality.
+  message: "hostpid-pod 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-269: Improper Privilege Management'

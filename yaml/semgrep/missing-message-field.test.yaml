@@ -15,7 +15,7 @@ rules:
     pattern: <div>hello</div>
     languages: [generic]
     severity: INFO
-    message: ""
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
   # ok: missing-message-field
   - message: ""
     id: other-rule-2

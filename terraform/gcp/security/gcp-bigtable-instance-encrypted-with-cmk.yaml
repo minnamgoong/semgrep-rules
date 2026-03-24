@@ -1,5 +1,5 @@
 rules:
-- id: gcp-bigtable-instance-encrypted-with-cmk
+- id: - id: gcp-bigtable-instance-encrypted-with-cmk
   patterns:
   - pattern: |
       resource "google_bigtable_instance" $ANYTHING {
@@ -15,8 +15,7 @@ rules:
         }
         ...
       }
-  message: >-
-    Ensure Big Table Instances are encrypted with Customer Supplied Encryption Keys (CSEK)	
+  message: "gcp-bigtable-instance-encrypted-with-cmk 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:

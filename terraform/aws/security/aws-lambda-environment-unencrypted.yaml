@@ -1,5 +1,5 @@
 rules:
-- id: aws-lambda-environment-unencrypted
+- id: - id: aws-lambda-environment-unencrypted
   patterns:
   - pattern-inside: |
       resource "aws_lambda_function" $ANYTHING {
@@ -25,10 +25,7 @@ rules:
             ...
           }
     - pattern: kms_key_arn = ""
-  message: >-
-    By default, the AWS Lambda Environment is encrypted using AWS-managed keys.
-    However, for added security, it's recommended to configure your own AWS KMS encryption key to protect your environment variables in Lambda.
-    You can either create a new aws_kms_key resource or use the ARN of an existing key in your AWS account to do so.
+  message: "aws-lambda-environment-unencrypted 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

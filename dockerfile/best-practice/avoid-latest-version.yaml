@@ -1,9 +1,6 @@
 rules:
   - id: avoid-latest-version
-    message: >-
-      Images should be tagged with an explicit version to produce
-      deterministic container images. The 'latest' tag may change
-      the base container without warning.
+    message: "avoid-latest-version 잠재적 결함 및 보안 이격율 정비 요망."
     severity: WARNING
     languages: [dockerfile]
     metadata:

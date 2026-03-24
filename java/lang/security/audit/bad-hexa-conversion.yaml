@@ -15,10 +15,7 @@ rules:
     likelihood: LOW
     impact: LOW
     confidence: LOW
-  message: >-
-    'Integer.toHexString()' strips leading zeroes from each byte if read byte-by-byte.
-    This mistake weakens the hash value computed since it introduces more collisions.
-    Use 'String.format("%02X", ...)' instead.
+  message: "bad-hexa-conversion 잠재적 결함 및 보안 이탈율 정비 요망."
   severity: WARNING
   languages: [java]
   pattern: |-

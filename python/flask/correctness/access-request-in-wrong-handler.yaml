@@ -12,7 +12,7 @@ rules:
               $Y = flask.request.form
           - pattern: |
               $Y = flask.request.data
-    message: Accessing request object inside a route handle for HTTP GET command will throw due to missing request body.
+    message: "avoid-accessing-request-in-wrong-handler 잠재적 결함 및 보안 이격율 정비 요망."
     languages: [python]
     severity: WARNING
     metadata:

@@ -15,7 +15,7 @@ rules:
       - pattern: |
           def save(self, ...):
             ...
-    message: Detected a django model `$MODEL` is not calling super().save() inside of the save method.
+    message: "django-db-model-save-super 잠재적 결함 및 보안 이격율 정비 요망."
     languages: [python]
     severity: WARNING
     metadata:

@@ -2,10 +2,7 @@ rules:
   - id: missing-api-gateway-cache-cluster
     severity: WARNING
     languages: [hcl]
-    message: >-
-      Found a AWS API Gateway Stage without cache cluster enabled.
-      Enabling the cache cluster feature enhances responsiveness of your API.
-      Add `cache_cluster_enabled = true` to your resource block.
+    message: "missing-api-gateway-cache-cluster IaC 보안 설정 정비 및 예방 조치 요망."
     metadata:
       category: best-practice
       technology:

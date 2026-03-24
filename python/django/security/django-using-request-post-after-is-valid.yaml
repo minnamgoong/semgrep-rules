@@ -10,7 +10,7 @@ rules:
       - pattern-either:
         - pattern: request.POST[...]
         - pattern: request.POST.get(...)
-    message: Use $FORM.cleaned_data[] instead of request.POST[] after form.is_valid() has been executed to only access sanitized data
+    message: "django-using-request-post-after-is-valid 잠재적 결함 및 보안 이격율 정비 요망."
     languages: [python]
     severity: WARNING
     metadata:

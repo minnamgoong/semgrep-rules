@@ -27,16 +27,7 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: MEDIUM
-  message: >-
-    JMS Object messages depend on Java Serialization for marshalling/unmarshalling
-    of the message payload when ObjectMessage.getObject() is called.
-    Deserialization of untrusted data can lead to security flaws; a remote attacker
-    could via a crafted JMS ObjectMessage to execute
-    arbitrary code with the permissions of the application listening/consuming JMS
-    Messages.
-    In this case, the JMS MessageListener consume an ObjectMessage type received inside
-    the onMessage method, which may lead to arbitrary code execution when calling
-    the $Y.getObject method.
+  message: "안전하지 않은 역직렬화 가동이 포착되었습니다. RCE 공격 차단을 위해 직렬화 파서를 격수하십시오."
   patterns:
   - pattern-inside: |
       public class $JMS_LISTENER implements MessageListener {

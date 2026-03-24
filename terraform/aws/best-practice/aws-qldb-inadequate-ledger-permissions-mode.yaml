@@ -1,5 +1,5 @@
 rules:
-- id: aws-qldb-inadequate-ledger-permissions-mode
+- id: - id: aws-qldb-inadequate-ledger-permissions-mode
   patterns:
     - pattern: |
         resource "aws_qldb_ledger" $ANYTHING {
@@ -7,8 +7,7 @@ rules:
           permissions_mode = "ALLOW_ALL"
           ...
         }
-  message: >-
-    The AWS QLDB ledger permissions are too permissive. Consider using "'STANDARD'" permissions mode if possible.
+  message: "aws-qldb-inadequate-ledger-permissions-mode 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

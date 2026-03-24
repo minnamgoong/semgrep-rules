@@ -2,9 +2,7 @@ rules:
   - id: prefer-json-notation
     severity: INFO
     languages: [dockerfile]
-    message: >-
-      Prefer JSON notation when using CMD or ENTRYPOINT. This allows signals to be passed
-      from the OS.
+    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
     metadata:
       source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3025
       references:

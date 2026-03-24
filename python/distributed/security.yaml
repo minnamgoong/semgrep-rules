@@ -1,5 +1,5 @@
 rules:
-- id: require-encryption
+- id: - id: require-encryption
   patterns:
   - pattern: |
       distributed.security.Security(..., require_encryption=$VAL, ...)
@@ -10,9 +10,7 @@ rules:
   - focus-metavariable: $VAL
   fix: |
     True
-  message: >-
-    Initializing a security context for Dask (`distributed`) without "require_encryption" keyword
-    argument may silently fail to provide security.
+  message: "require-encryption 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     cwe:

@@ -2,10 +2,7 @@ rules:
   - id: go-unsafe-deserialization-interface
     languages:
       - go
-    message: >-
-      Deserializing into `interface{}` allows arbitrary data structures and types,
-      which can lead to security vulnerabilities (CWE-502). Use a concrete struct
-      type instead.
+    message: "go-unsafe-deserialization-interface 잠재적 결함 및 보안 이격율 정비 요망."
     severity: WARNING
     metadata:
       cwe:

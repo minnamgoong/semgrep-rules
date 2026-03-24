@@ -1,12 +1,8 @@
 rules:
-- id: sqlalchemy-sqli
+- id: - id: sqlalchemy-sqli
   languages:
   - python
-  message: >-
-    Detected SQL statement that is tainted by `event` object. This could lead to SQL injection if the
-    variable is user-controlled
-    and not properly sanitized. In order to prevent SQL injection,
-    use parameterized queries or prepared statements instead.
+  message: "잠재적 SQL 인젝션 경로에 대한 검토가 필요합니다."
     You can use parameterized statements like so:
     `cursor.execute('SELECT * FROM projects WHERE status = ?', 'active')`
   mode: taint

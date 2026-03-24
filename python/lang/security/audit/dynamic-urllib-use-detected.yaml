@@ -1,5 +1,5 @@
 rules:
-- id: dynamic-urllib-use-detected
+- id: - id: dynamic-urllib-use-detected
   patterns:
   - pattern-not: urllib.$W("...")
   - pattern-not: urllib.request.$W("...")
@@ -26,7 +26,7 @@ rules:
       - pattern-either:
         - pattern: $OPENER.open(...)
         - pattern: $OPENER.retrieve(...)
-  message: >-
+  message: "dynamic-urllib-use-detected 잠재적 결함 및 보안 이격율 정비 요망."
     Detected a dynamic value being used with urllib. urllib supports 'file://' schemes,
     so a dynamic value controlled by a malicious actor may allow them to read arbitrary
     files.

@@ -21,11 +21,7 @@ rules:
     likelihood: LOW
     impact: HIGH
     confidence: LOW
-  message: >-
-    Used SnakeYAML org.yaml.snakeyaml.Yaml() constructor with no arguments, which
-    is vulnerable to deserialization attacks.
-    Use the one-argument Yaml(...) constructor instead, with SafeConstructor or a
-    custom Constructor as the argument.
+  message: "use-snakeyaml-constructor 잠재적 결함 및 보안 이탈율 정비 요망."
   patterns:
   - pattern: |
       $Y = new org.yaml.snakeyaml.Yaml();

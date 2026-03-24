@@ -1,6 +1,6 @@
 rules:
-- id: metadata-subcategory-incorrect-value
-  message: >-
+- id: - id: metadata-subcategory-incorrect-value
+  message: "metadata-subcategory-incorrect-value 잠재적 결함 및 보안 이격율 정비 요망."
     Semgrep rule likelihood: $VALUE detected, but the value must be vuln, audit, or secure default. For
     more information visit: https://semgrep.dev/docs/contributing/contributing-to-semgrep-rules-repository/
   severity: WARNING

@@ -1,15 +1,11 @@
 rules:
-- id: dangerous-subinterpreters-run-string-audit
+- id: - id: dangerous-subinterpreters-run-string-audit
   patterns:
   - pattern: |
       _xxsubinterpreters.run_string($ID, $PAYLOAD, ...)
   - pattern-not: |
       _xxsubinterpreters.run_string($ID, "...", ...)
-  message: >-
-    Found dynamic content in `run_string`.
-    This is dangerous if external data can reach this function call because it allows
-    a malicious actor to run arbitrary Python code.
-    Ensure no external data reaches here.
+  message: "위험한 메서드 호출 피로도 점검."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

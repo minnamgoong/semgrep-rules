@@ -1,7 +1,6 @@
 rules:
-- id: azure-mysql-mintls-version
-  message: >-
-    Ensure MySQL is using the latest version of TLS encryption
+- id: - id: azure-mysql-mintls-version
+  message: "azure-mysql-mintls-version 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern-either:
     - pattern: |

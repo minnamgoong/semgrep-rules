@@ -2,11 +2,7 @@ rules:
   - id: manifest-usesCleartextTraffic-true
     languages:
       - generic
-    message: >-
-      The Android manifest is configured to allow non-encrypted connections.
-      Evaluate if this is necessary for your app, and disable it if appropriate.
-      This flag is ignored on Android 7 (API 24) and above if a Network Security
-      Config is present.
+    message: "평문 트래픽(Cleartext) 전송 옵션이 활성화되었습니다. 스니핑 격퇴를 위해 HTTPS 강제를 요합니다."
     metadata:
       category: best-practice
       technology:
@@ -26,7 +22,7 @@ rules:
   - id: manifest-usesCleartextTraffic-ignored-by-nsc
     languages:
       - generic
-    message: >-
+    message: "평문 트래픽(Cleartext) 전송 옵션이 활성화되었습니다. 스니핑 격퇴를 위해 HTTPS 강제를 요합니다."
       Manifest uses both `android:usesCleartextTraffic` and Network Security Config.
       The `usesCleartextTraffic` directive is ignored on Android 7 (API 24) and above
       if a Network Security Config is present.

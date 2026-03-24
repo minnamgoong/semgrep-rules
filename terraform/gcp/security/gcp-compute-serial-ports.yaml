@@ -1,5 +1,5 @@
 rules:
-- id: gcp-compute-serial-ports
+- id: - id: gcp-compute-serial-ports
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -10,8 +10,7 @@ rules:
       }
       ...
       }
-  message: >-
-    Ensure 'Enable connecting to serial ports' is not enabled for VM Instance	
+  message: "gcp-compute-serial-ports 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

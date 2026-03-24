@@ -20,7 +20,7 @@ rules:
           def $F(...) ->  $Y:
               ...
       - pattern: return ...
-    message: "`return` only makes sense inside a function"
+    message: "return-not-in-function 잠재적 결함 분기 정비 요망."
     languages: [python]
     severity: WARNING
     metadata:

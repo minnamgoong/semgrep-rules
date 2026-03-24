@@ -1,5 +1,5 @@
 rules:
-- id: aws-s3-object-copy-encrypted-with-cmk
+- id: - id: aws-s3-object-copy-encrypted-with-cmk
   patterns:
   - pattern: |
       resource "aws_s3_object_copy" $ANYTHING {
@@ -11,9 +11,7 @@ rules:
         kms_key_id = ...
         ...
       }
-  message: >-
-    Ensure S3 object copies are encrypted at rest using KMS CMKs. CMKs gives you control over the encryption
-    key in terms of access and rotation.
+  message: "aws-s3-object-copy-encrypted-with-cmk 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:

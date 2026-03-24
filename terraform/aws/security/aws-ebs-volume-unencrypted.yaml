@@ -1,5 +1,5 @@
 rules:
-- id: aws-ebs-volume-unencrypted
+- id: - id: aws-ebs-volume-unencrypted
   patterns:
   - pattern: |
       resource "aws_ebs_volume" $ANYTHING {
@@ -11,10 +11,7 @@ rules:
         encrypted = true
         ...
       }
-  message: >-
-    The AWS EBS volume is unencrypted. The volume, the disk I/O and any derived
-    snapshots could be read if compromised. Volumes should be encrypted to ensure
-    sensitive data is stored securely.
+  message: "aws-ebs-volume-unencrypted 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - hcl
   severity: WARNING

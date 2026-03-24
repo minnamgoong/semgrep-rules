@@ -1,5 +1,5 @@
 rules:
-- id: cookie-missing-httponly
+- id: - id: cookie-missing-httponly
   patterns:
   - pattern-not-inside: |
       http.Cookie{
@@ -11,12 +11,7 @@ rules:
       http.Cookie{
         ...,
       }
-  message: >-
-    A session cookie was detected without setting the 'HttpOnly' flag.
-    The 'HttpOnly' flag for cookies instructs the browser to forbid
-    client-side scripts from reading the cookie which mitigates XSS
-    attacks. Set the 'HttpOnly' flag by setting 'HttpOnly' to 'true'
-    in the Cookie.
+  message: "쿠키 보안 속성(Secure/HttpOnly) 누출 우려 점검."
   metadata:
     cwe:
     - "CWE-1004: Sensitive Cookie Without 'HttpOnly' Flag"

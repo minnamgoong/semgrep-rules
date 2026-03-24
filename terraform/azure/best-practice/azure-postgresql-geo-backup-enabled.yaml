@@ -1,7 +1,6 @@
 rules:
   - id: azure-postgresql-geo-backup-enabled
-    message: >-
-      Ensure that PostgreSQL server enables geo-redundant backups
+    message: "azure-postgresql-geo-backup-enabled 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-not-inside: |

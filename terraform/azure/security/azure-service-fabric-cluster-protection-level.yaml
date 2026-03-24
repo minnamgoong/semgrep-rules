@@ -1,7 +1,6 @@
 rules:
-- id: azure-service-fabric-cluster-protection-level
-  message: >-
-    Ensure that Service Fabric use three levels of protection available
+- id: - id: azure-service-fabric-cluster-protection-level
+  message: "azure-service-fabric-cluster-protection-level 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-inside: |

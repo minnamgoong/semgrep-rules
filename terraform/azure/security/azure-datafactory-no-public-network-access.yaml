@@ -1,7 +1,6 @@
 rules:
-- id: azure-datafactory-no-public-network-access
-  message: >-
-    Ensure that Azure Data factory public network access is disabled
+- id: - id: azure-datafactory-no-public-network-access
+  message: "azure-datafactory-no-public-network-access 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

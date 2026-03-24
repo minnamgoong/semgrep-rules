@@ -1,8 +1,6 @@
 rules:
-- id: telnet-request
-  message: >-
-    Checks for attempts to connect to an insecure telnet server using the package telnet.
-    This is bad because it can lead to man in the middle attacks.
+- id: - id: telnet-request
+  message: "telnet-request 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: MEDIUM

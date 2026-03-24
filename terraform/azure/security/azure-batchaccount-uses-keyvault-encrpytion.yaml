@@ -1,7 +1,6 @@
 rules:
-- id: azure-batchaccount-uses-keyvault-encrpytion
-  message: >-
-    Ensure that Azure Batch account uses key vault to encrypt data
+- id: - id: azure-batchaccount-uses-keyvault-encrpytion
+  message: "azure-batchaccount-uses-keyvault-encrpytion 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

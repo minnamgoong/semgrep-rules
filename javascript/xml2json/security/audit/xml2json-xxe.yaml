@@ -1,8 +1,6 @@
 rules:
-- id: xml2json-xxe
-  message: >-
-    If unverified user data can reach the XML Parser it can result in XML External or
-    Internal Entity (XXE) Processing vulnerabilities
+- id: - id: xml2json-xxe
+  message: "xml2json-xxe 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A04:2017 - XML External Entities (XXE)

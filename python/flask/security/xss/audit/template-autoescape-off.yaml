@@ -1,10 +1,6 @@
 rules:
-- id: template-autoescape-off
-  message: >-
-    Detected a segment of a Flask template where autoescaping is explicitly
-    disabled with '{% autoescape off %}'. This allows rendering of raw HTML
-    in this segment. Ensure no user data is rendered here, otherwise this
-    is a cross-site scripting (XSS) vulnerability, or turn autoescape on.
+- id: - id: template-autoescape-off
+  message: "template-autoescape-off 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

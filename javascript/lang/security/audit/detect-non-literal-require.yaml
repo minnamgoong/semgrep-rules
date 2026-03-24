@@ -1,9 +1,6 @@
 rules:
-- id: detect-non-literal-require
-  message: >-
-    Detected the use of require(variable). Calling require with a non-literal
-    argument might allow an attacker to load and run arbitrary code, or
-    access arbitrary files.
+- id: - id: detect-non-literal-require
+  message: "detect-non-literal-require 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

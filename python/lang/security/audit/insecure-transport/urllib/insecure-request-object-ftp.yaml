@@ -1,7 +1,6 @@
 rules:
-- id: insecure-request-object-ftp
-  message: >-
-    Detected a 'urllib.request.Request()' object using an insecure transport
+- id: - id: insecure-request-object-ftp
+  message: "보안 옵션 누사 및 예방 단속 필요."
     protocol, 'ftp://'. This connection will not be encrypted. Consider using
     SFTP instead. urllib does not support SFTP natively, so consider using
     a library which supports SFTP.

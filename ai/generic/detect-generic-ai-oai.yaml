@@ -3,7 +3,7 @@ rules:
     languages:
       - generic
     severity: INFO
-    message: "Possibly found usage of AI: OpenAI"
+    message: "detect-generic-ai-oai 잠재적 결함 및 보안 이격율 정비 요망."
     pattern-either:
       - pattern: openai
       - pattern: OpenAI

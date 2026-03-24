@@ -1,7 +1,6 @@
 rules:
-- id: azure-datalake-store-encryption
-  message: >-
-    Ensure that Data Lake Store accounts enables encryption
+- id: - id: azure-datalake-store-encryption
+  message: "azure-datalake-store-encryption 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

@@ -1,9 +1,6 @@
 rules:
-- id: direct-response-write
-  message: >-
-    Detected directly writing to a Response object from user-defined input.
-    This bypasses any HTML escaping and may expose your application to a Cross-Site-scripting
-    (XSS) vulnerability. Instead, use 'resp.render()' to render safely escaped HTML.
+- id: - id: direct-response-write
+  message: "direct-response-write 잠재적 결함 및 보안 이격율 정비 요망."
   options:
     interfile: true
   metadata:

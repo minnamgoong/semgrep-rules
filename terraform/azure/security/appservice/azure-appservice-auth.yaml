@@ -1,7 +1,6 @@
 rules:
-- id: azure-appservice-auth
-  message: >-
-    Ensure App Service Authentication is set on Azure App Service
+- id: - id: azure-appservice-auth
+  message: "azure-appservice-auth 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

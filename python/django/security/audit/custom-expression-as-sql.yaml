@@ -1,8 +1,8 @@
 rules:
-- id: custom-expression-as-sql
+- id: - id: custom-expression-as-sql
   languages:
   - python
-  message: Detected a Custom Expression ''$EXPRESSION'' calling ''as_sql(...).'' This could lead to SQL
+  message: "custom-expression-as-sql 잠재적 결함 및 보안 이격율 정비 요망."
     injection, which can result in attackers exfiltrating sensitive data. Instead, ensure no user input
     enters this function or that user input is properly sanitized.
   metadata:

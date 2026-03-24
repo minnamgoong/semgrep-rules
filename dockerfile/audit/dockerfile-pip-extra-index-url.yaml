@@ -1,19 +1,12 @@
 rules:
-- id: dockerfile-pip-extra-index-url
+- id: - id: dockerfile-pip-extra-index-url
   patterns:
     - pattern: |
         RUN ... $PIP install ... --extra-index-url ...
     - metavariable-regex:
         metavariable: $PIP
         regex: pip|pip3
-  message: >- 
-    When `--extra-index-url` is used in a `pip install` command, this is usually meant to 
-    install a package from a package index other than the public one. 
-    However, if a package is added with the same name
-    to the public PyPi repository, and if the version number is high enough, this package will
-    be installed when building this docker image. This package may be a malicious dependency.
-    Such an attack is called a dependency confusion attack.
-    If using a private package index, prefer to use `--index-url` if possible. 
+  message: "dockerfile-pip-extra-index-url 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - dockerfile
   severity: INFO

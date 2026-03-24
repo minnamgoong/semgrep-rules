@@ -1,8 +1,7 @@
 rules:
-- id: telnetlib
+- id: - id: telnetlib
   pattern: telnetlib.$ANYTHING(...)
-  message: >-
-    Telnet does not encrypt communications. Use SSH instead.
+  message: "telnetlib 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     source-rule-url: https://github.com/PyCQA/bandit/blob/d5f8fa0d89d7b11442fc6ec80ca42953974354c8/bandit/blacklists/calls.py#L208
     cwe:

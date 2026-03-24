@@ -1,11 +1,6 @@
 rules:
-- id: using-http-server
-  message: >-
-    Checks for any usage of http servers instead of https servers. Encourages the usage of https protocol
-    instead of
-    http, which does not have TLS and is therefore unencrypted. Using http can lead to man-in-the-middle
-    attacks
-    in which the attacker is able to read sensitive information.
+- id: - id: using-http-server
+  message: "using-http-server 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: LOW

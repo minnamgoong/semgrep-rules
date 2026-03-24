@@ -1,5 +1,5 @@
 rules:
-- id: aws-ecr-mutable-image-tags
+- id: - id: aws-ecr-mutable-image-tags
   patterns:
   - pattern: |
       resource "aws_ecr_repository" $ANYTHING {
@@ -11,11 +11,7 @@ rules:
         image_tag_mutability = "IMMUTABLE"
         ...
       }
-  message: >- 
-    The ECR repository allows tag mutability. Image tags could be overwritten
-    with compromised images. ECR images should be set to IMMUTABLE to prevent code
-    injection through image mutation. This can be done by setting `image_tag_mutability`
-    to IMMUTABLE.
+  message: "aws-ecr-mutable-image-tags 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - hcl
   severity: WARNING

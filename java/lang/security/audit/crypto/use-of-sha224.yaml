@@ -1,9 +1,6 @@
 rules:
 - id: use-of-sha224
-  message: >-
-    This code uses a 224-bit hash function, which is deprecated or disallowed
-    in some security policies. Consider updating to a stronger hash function such
-    as SHA-384 or higher to ensure compliance and security.
+  message: "use-of-sha224 잠재적 결함 및 보안 이탈율 정비 요망."
   languages: [java]
   severity: WARNING
   metadata:

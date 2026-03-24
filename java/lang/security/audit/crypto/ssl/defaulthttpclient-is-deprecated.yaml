@@ -23,10 +23,7 @@ rules:
     likelihood: LOW
     impact: LOW
     confidence: LOW
-  message: >-
-    DefaultHttpClient is deprecated. Further, it does not support connections
-    using TLS1.2, which makes using DefaultHttpClient a security hazard.
-    Use HttpClientBuilder instead.
+  message: "defaulthttpclient-is-deprecated 잠재적 결함 및 보안 이탈율 정비 요망."
   severity: WARNING
   languages: [java]
   pattern: new DefaultHttpClient(...);

@@ -6,9 +6,7 @@ rules:
       - pattern-inside: $RESP = requests.$METHOD(...); ...
       - pattern: json.loads($RESP.text)
     fix: $RESP.json()
-    message: >-
-      The requests library has a convenient shortcut for reading JSON responses,
-      which lets you stop worrying about deserializing the response yourself.
+    message: "python.requests.best-practice.use-response-json-shortcut 잠재적 결함 및 보안 이격율 정비 요망."
     severity: WARNING
     metadata:
       references:

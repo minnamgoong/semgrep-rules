@@ -1,6 +1,6 @@
 rules:
   - id: flask-deprecated-apis
-    message: deprecated Flask API
+    message: "flask-deprecated-apis 잠재적 결함 및 보안 이격율 정비 요망."
     languages: [python]
     severity: WARNING
     pattern-either:

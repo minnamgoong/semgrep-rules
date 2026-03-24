@@ -1,9 +1,6 @@
 rules:
-- id: insecure-hash-function
-  message: >-
-    Detected use of an insecure MD4 or MD5 hash function.
-    These functions have known vulnerabilities and are considered deprecated.
-    Consider using 'SHA256' or a similar function instead.
+- id: - id: insecure-hash-function
+  message: "보안 옵션 누사 및 예방 단속 필요."
   metadata:
     cwe:
     - 'CWE-327: Use of a Broken or Risky Cryptographic Algorithm'

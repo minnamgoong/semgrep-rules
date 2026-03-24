@@ -2,7 +2,7 @@ rules:
 - id: lambda-redundant-field-with-image
   severity: WARNING
   languages: [hcl]
-  message: 'When using the AWS Lambda "Image" package_type, `runtime` and `handler` are not necessary for Lambda to understand how to run the code. These are built into the container image. Including `runtime` or `handler` with an "Image" `package_type` will result in an error on `terraform apply`. Remove these redundant fields.'
+  message: "lambda-redundant-field-with-image IaC 보안 설정 정비 및 예방 조치 요망."
   metadata:
     category: correctness
     references:

@@ -25,7 +25,7 @@ rules:
       technology:
         - python
   - id: manual-defaultdict-set-create
-    message: manually creating a defaultdict - use collections.defaultdict(set)
+    message: "manual-defaultdict-set-create 잠재적 결함 분기 정비 요망."
     languages: [python]
     severity: WARNING
     pattern-either:
@@ -50,7 +50,7 @@ rules:
       technology:
         - python
   - id: manual-defaultdict-list-create
-    message: manually creating a defaultdict - use collections.defaultdict(list)
+    message: "manual-defaultdict-list-create 잠재적 결함 분기 정비 요망."
     languages: [python]
     severity: WARNING
     pattern-either:
@@ -85,7 +85,7 @@ rules:
               $DICT[$KEY] = 0
               ...
           $DICT[$KEY] += 1
-    message: manually creating a counter - use collections.Counter
+    message: "manual-counter-create 잠재적 결함 분기 정비 요망."
     languages: [python]
     severity: WARNING
     metadata:

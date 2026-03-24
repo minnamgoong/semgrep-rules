@@ -1,10 +1,6 @@
 rules:
-- id: use-of-unsafe-block
-  message: >-
-    Using the unsafe package in Go gives you low-level memory management and many of the strengths of
-    the C language, but also steps around the type safety of Go and can lead to buffer overflows and
-    possible arbitrary code execution by an attacker.
-    Only use this package if you absolutely know what you're doing.
+- id: - id: use-of-unsafe-block
+  message: "use-of-unsafe-block 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [go]
   severity: WARNING
   metadata:

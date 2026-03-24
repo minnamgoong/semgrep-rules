@@ -1,5 +1,5 @@
 rules:
-- id: paramiko-implicit-trust-host-key
+- id: - id: paramiko-implicit-trust-host-key
   patterns:
   - pattern-inside: |
       $CLIENT = paramiko.client.SSHClient(...)
@@ -8,11 +8,7 @@ rules:
   - pattern-either:
     - pattern: paramiko.client.AutoAddPolicy
     - pattern: paramiko.client.WarningPolicy
-  message: >-
-    Detected a paramiko host key policy that implicitly trusts a server's
-    host key. Host keys should be verified to ensure the connection
-    is not to a malicious server. Use RejectPolicy or a custom subclass
-    instead.
+  message: "paramiko-implicit-trust-host-key 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-322: Key Exchange without Entity Authentication'

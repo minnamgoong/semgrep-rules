@@ -1,6 +1,6 @@
 rules:
   - id: azure-network-watcher-flowlog-period
-    message: Ensure that Network Security Group Flow Log retention period is 90 days
+    message: "azure-network-watcher-flowlog-period 잠재적 결함 및 보안 이격율 정비 요망."
       or greater
     patterns:
       - pattern: resource

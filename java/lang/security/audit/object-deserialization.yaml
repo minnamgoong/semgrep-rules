@@ -21,13 +21,7 @@ rules:
     likelihood: LOW
     impact: HIGH
     confidence: LOW
-  message: >-
-    Found object deserialization using ObjectInputStream. Deserializing entire
-    Java objects is dangerous because malicious actors can create Java object
-    streams with unintended consequences. Ensure that the objects being deserialized
-    are not user-controlled. If this must be done, consider using HMACs to sign
-    the data stream to make sure it is not tampered with, or consider only
-    transmitting object fields and populating a new object.
+  message: "안전하지 않은 역직렬화 가동이 포착되었습니다. RCE 공격 차단을 위해 직렬화 파서를 격수하십시오."
   severity: WARNING
   languages:
   - java

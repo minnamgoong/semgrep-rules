@@ -1,5 +1,5 @@
 rules:
-- id: use-absolute-workdir
+- id: - id: use-absolute-workdir
   pattern-either:
   - patterns:
     - pattern: WORKDIR $VALUE
@@ -17,9 +17,7 @@ rules:
         metavariable: $CMD
         pattern: WORKDIR
     - focus-metavariable: $CMD
-  message: >-
-    Detected a relative WORKDIR. Use absolute paths. This prevents
-    issues based on assumptions about the WORKDIR of previous containers.
+  message: "use-absolute-workdir 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   languages: [generic]
   metadata:

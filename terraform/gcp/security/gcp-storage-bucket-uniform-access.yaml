@@ -1,5 +1,5 @@
 rules:
-- id: gcp-storage-bucket-uniform-access
+- id: - id: gcp-storage-bucket-uniform-access
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -12,10 +12,7 @@ rules:
       uniform_bucket_level_access = true
       ...
       }
-  message: >-
-    Ensure that Cloud Storage buckets have uniform bucket-level access enabled. Setting
-    `uniform_bucket_level_access` to `true` ensures that access is managed uniformly at
-    the bucket level, which improves security by disabling object-level ACLs.
+  message: "gcp-storage-bucket-uniform-access 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

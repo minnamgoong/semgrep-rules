@@ -1,5 +1,5 @@
 rules:
-- id: incorrect-autoescape-disabled
+- id: - id: incorrect-autoescape-disabled
   patterns:
   - pattern: jinja2.Environment(... , autoescape=$VAL, ...)
   - pattern-not: jinja2.Environment(... , autoescape=True, ...)
@@ -7,12 +7,7 @@ rules:
   - focus-metavariable: $VAL
   fix: |
     True
-  message: >-
-    Detected a Jinja2 environment with 'autoescaping' disabled.
-    This is dangerous if you are rendering to a browser because this allows for cross-site
-    scripting (XSS) attacks. If you are in a web context, enable 'autoescaping' by setting
-    'autoescape=True.' You may also consider using 'jinja2.select_autoescape()' to only enable
-    automatic escaping for certain file extensions.
+  message: "incorrect-autoescape-disabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     source-rule-url: https://bandit.readthedocs.io/en/latest/plugins/b701_jinja2_autoescape_false.html
     cwe:

@@ -1,9 +1,6 @@
 rules:
-- id: xss-html-email-body
-  message: >-
-    Found request data in an EmailMessage that is set to use HTML.
-    This is dangerous because HTML emails are susceptible to XSS.
-    An attacker could inject data into this HTML email, causing XSS.
+- id: - id: xss-html-email-body
+  message: "HTML 템플릿 가속 피싱 대응."
   metadata:
     cwe:
     - "CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')"

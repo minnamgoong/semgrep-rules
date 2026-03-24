@@ -9,9 +9,7 @@ rules:
           $MUX.Lock()
           $VALUE = <- $CHANNEL
           $MUX.Unlock()
-    message: >-
-      Detected a channel guarded with a mutex. Channels already have
-      an internal mutex, so this is unnecessary. Remove the mutex.
+    message: "channel-guarded-with-mutex 잠재적 결함 및 보안 이격율 정비 요망."
       See https://hackmongo.com/page/golang-antipatterns/#guarded-channel
       for more information.
     languages: [go]

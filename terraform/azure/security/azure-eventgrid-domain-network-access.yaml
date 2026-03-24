@@ -1,7 +1,6 @@
 rules:
-- id: azure-eventgrid-domain-network-access
-  message: >-
-    Ensure that Azure Event Grid Domain public network access is disabled
+- id: - id: azure-eventgrid-domain-network-access
+  message: "azure-eventgrid-domain-network-access 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

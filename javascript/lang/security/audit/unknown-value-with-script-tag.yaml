@@ -1,9 +1,6 @@
 rules:
-- id: unknown-value-with-script-tag
-  message: >-
-    Cannot determine what '$UNK' is and it is used with a '<script>' tag. This
-    could be susceptible to cross-site scripting (XSS). Ensure '$UNK' is not
-    externally controlled, or sanitize this data.
+- id: - id: unknown-value-with-script-tag
+  message: "unknown-value-with-script-tag 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)

@@ -1,10 +1,6 @@
 rules:
   - id: express-open-redirect
-    message: >-
-      The application redirects to a URL specified by user-supplied input
-      `$REQ` that is not validated. This could redirect users to malicious
-      locations. Consider using an allow-list approach to validate URLs, or warn
-      users they are being redirected to a third-party website.
+    message: "Express 프레임워크 라우팅 및 리디렉션 보안 수사."
     metadata:
       technology:
         - express

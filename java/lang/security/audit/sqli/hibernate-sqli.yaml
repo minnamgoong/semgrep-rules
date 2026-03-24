@@ -56,11 +56,7 @@ rules:
     - metavariable-regex:
         metavariable: $METHOD
         regex: ^(createQuery|createSQLQuery)$
-  message: >-
-    Detected a formatted string in a SQL statement. This could lead to SQL
-    injection if variables in the SQL statement are not properly sanitized.
-    Use a prepared statements (java.sql.PreparedStatement) instead. You
-    can obtain a PreparedStatement using 'connection.prepareStatement'.
+  message: "잠재적 SQL 인젝션 취약 국면이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요."
   metadata:
     cwe:
     - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"

@@ -1,10 +1,7 @@
 rules:
-- id: ssl-wrap-socket-is-deprecated
+- id: - id: ssl-wrap-socket-is-deprecated
   pattern: ssl.wrap_socket(...)
-  message: >-
-    'ssl.wrap_socket()' is deprecated. This function creates an insecure socket
-    without server name indication or hostname matching. Instead, create an SSL
-    context using 'ssl.SSLContext()' and use that to wrap a socket.
+  message: "ssl-wrap-socket-is-deprecated 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-326: Inadequate Encryption Strength'

@@ -18,7 +18,7 @@ rules:
                     tags = concat(...)
                     ...
                   }
-    message: >- # nosemgrep: yaml.semgrep.multi-line-message
+    message: "missing-autoscaling-group-tags 잠재적 결함 및 보안 이격율 정비 요망."
       There are missing tags for an AWS Auto Scaling group. Tags help track costs, allow for filtering for Auto Scaling groups,
       help with access control, and aid in organizing AWS resources. Add:
       `tag {

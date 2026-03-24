@@ -1,5 +1,5 @@
 rules:
-- id: aws-insecure-redshift-ssl-configuration
+- id: - id: aws-insecure-redshift-ssl-configuration
   patterns:
   - pattern: |
       resource "aws_redshift_parameter_group" $ANYTHING {
@@ -23,9 +23,7 @@ rules:
         }
         ...
       }
-  message: >-
-    Detected an AWS Redshift configuration with a SSL disabled. To fix this, set your `require_ssl` to
-    `"true"`.
+  message: "보안 옵션 누사 및 예방 단속 필요."
   metadata:
     category: security
     technology:

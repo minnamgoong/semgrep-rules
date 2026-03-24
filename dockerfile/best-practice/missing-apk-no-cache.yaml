@@ -7,10 +7,7 @@ rules:
           RUN apk ... --no-cache ...
     languages:
       - dockerfile
-    message: >-
-      This apk command is missing '--no-cache'. This forces apk to use a package
-      index instead of a local package cache, removing the need for '--update'
-      and the deletion of '/var/cache/apk/*'. Add '--no-cache' to your apk command.
+    message: "missing-apk-no-cache 잠재적 결함 및 보안 이격율 정비 요망."
     severity: INFO
     metadata:
       source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3019

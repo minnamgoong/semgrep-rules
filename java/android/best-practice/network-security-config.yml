@@ -2,9 +2,7 @@ rules:
 - id: nsc-allows-plaintext-traffic
   languages:
   - generic
-  message: >-
-    The Network Security Config is set to allow non-encrypted connections.
-    Evaluate if this is necessary for your app, and disable it if appropriate.
+  message: "nsc-allows-plaintext-traffic 잠재적 결함 및 보안 이탈율 정비 요망."
     (To hide this warning, set `xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="InsecureBaseConfiguration"` as parameters to your
     `<network-security-config>`)
@@ -31,12 +29,7 @@ rules:
 - id: nsc-pinning-without-backup
   languages:
   - generic
-  message: >-
-    Your app uses TLS public key pinning without specifying a backup key.
-    If you are forced to change TLS keys or CAs on short notice, not
-    having a backup pin can lead to connectivity issues until you can push
-    out an update. It is considered best practice to add at least one additional
-    pin as a backup.
+  message: "nsc-pinning-without-backup 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     category: best-practice
     technology:
@@ -68,12 +61,7 @@ rules:
 - id: nsc-pinning-without-expiration
   languages:
   - generic
-  message: >-
-    Your app uses TLS public key pinning without specifying an expiration date.
-    If your users do not update the app to receive new pins in time, expired or replaced
-    certificates can lead to connectivity issues until they install an update.
-    It is considered best practice to set an expiration time, after which the system will
-    default to trusting system CAs and disregard the pin.
+  message: "nsc-pinning-without-expiration 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     category: best-practice
     technology:
@@ -97,9 +85,7 @@ rules:
 - id: nsc-allows-user-ca-certs
   languages:
   - generic
-  message: >-
-    The Network Security Config is set to accept user-installed CAs.
-    Evaluate if this is necessary for your app, and disable it if appropriate.
+  message: "nsc-allows-user-ca-certs 잠재적 결함 및 보안 이탈율 정비 요망."
     (To hide this warning, set `xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="AcceptsUserCertificates"` as parameters to your
     `<network-security-config>`)
@@ -128,10 +114,7 @@ rules:
 - id: nsc-allows-user-ca-certs-for-domain
   languages:
   - generic
-  message: >-
-    The Network Security Config is set to accept user-installed CAs for the
-    domain `$DOMAIN`.
-    Evaluate if this is necessary for your app, and disable it if appropriate.
+  message: "nsc-allows-user-ca-certs-for-domain 잠재적 결함 및 보안 이탈율 정비 요망."
     (To hide this warning, set `xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="AcceptsUserCertificates"` as parameters to your
     `<network-security-config>`)

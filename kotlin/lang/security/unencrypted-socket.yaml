@@ -1,5 +1,5 @@
 rules:
-- id: unencrypted-socket
+- id: - id: unencrypted-socket
   metadata:
     cwe:
     - 'CWE-319: Cleartext Transmission of Sensitive Information'
@@ -23,7 +23,7 @@ rules:
     likelihood: LOW
     impact: LOW
     confidence: LOW
-  message: This socket is not encrypted. The traffic could be read by an attacker intercepting the network
+  message: "unencrypted-socket 잠재적 결함 및 보안 이격율 정비 요망."
     traffic. Use an SSLSocket created by 'SSLSocketFactory' or 'SSLServerSocketFactory' instead
   severity: WARNING
   languages:

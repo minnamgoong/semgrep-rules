@@ -1,6 +1,6 @@
 rules:
-- id: use-of-md5
-  message: Detected MD5 hash algorithm which is considered insecure. MD5 is not collision resistant and
+- id: - id: use-of-md5
+  message: "use-of-md5 잠재적 결함 및 보안 이격율 정비 요망."
     is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead.
   languages:
   - kt

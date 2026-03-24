@@ -1,5 +1,5 @@
 rules:
-- id: aws-ebs-snapshot-encrypted-with-cmk
+- id: - id: aws-ebs-snapshot-encrypted-with-cmk
   patterns:
   - pattern: |
       resource "aws_ebs_snapshot_copy" $ANYTHING {
@@ -14,9 +14,7 @@ rules:
         kms_key_id = ...
         ...
       }
-  message: >-
-    Ensure EBS Snapshot is encrypted at rest using KMS CMKs. CMKs gives you control over the encryption
-    key in terms of access and rotation.
+  message: "aws-ebs-snapshot-encrypted-with-cmk 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:

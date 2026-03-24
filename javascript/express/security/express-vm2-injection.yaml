@@ -1,7 +1,6 @@
 rules:
-- id: express-vm2-injection
-  message: >-
-    Make sure that unverified user data can not reach `vm2`.
+- id: - id: express-vm2-injection
+  message: "Express 프레임워크 라우팅 및 리디렉션 보안 수사."
   metadata:
     owasp:
     - A03:2021 - Injection

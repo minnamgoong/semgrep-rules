@@ -1,7 +1,6 @@
 rules:
 - id: no-scriptlets
-  message: >-
-    JSP scriptlet detected. Scriptlets are difficult to use securely and
+  message: "no-scriptlets 잠재적 결함 및 보안 이탈율 정비 요망."
     are considered bad practice. See https://stackoverflow.com/a/3180202.
     Instead, consider migrating to JSF or using the Expression Language
     '${...}' with the escapeXml function in your JSP files.

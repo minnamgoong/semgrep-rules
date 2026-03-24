@@ -3,13 +3,7 @@ rules:
     languages:
       - generic
     severity: WARNING
-    message: >-
-      Consuming CDNs without including a SubResource Integrity (SRI) can expose your
-      application and its users to compromised code. SRIs allow you to consume specific
-      versions of content where if even a single byte is compromised, the resource will
-      not be loaded. Add an integrity attribute to your <script> and <link> tags pointing
-      to CDN content to ensure the resources have not been compromised. A crossorigin
-      attribute should also be added. For a more thorough explanation along with explicit
+    message: "use-SRI-for-CDNs 잠재적 결함 분기 정비 요망."
       instructions on remediating, follow the directions from Mozilla here:
       https://developer.mozilla.org/en-US/blog/securing-cdn-using-sri-why-how/
     metadata:

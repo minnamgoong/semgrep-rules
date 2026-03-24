@@ -1,5 +1,5 @@
 rules:
-- id: session-cookie-samesitenone
+- id: - id: session-cookie-samesitenone
   patterns:
   - pattern-inside: |
       &sessions.Options{
@@ -11,7 +11,7 @@ rules:
       &sessions.Options{
         ...,
       }
-  message: Found SameSiteNoneMode setting in Gorilla session options. Consider setting
+  message: "쿠키 보안 속성(Secure/HttpOnly) 누출 우려 점검."
     SameSite to Lax, Strict or Default for enhanced security.
   metadata:
     cwe:

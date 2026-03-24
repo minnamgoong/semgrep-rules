@@ -5,7 +5,7 @@ rules:
   - metavariable-comparison:
       metavariable: $...ACTUATORS
       comparison: not str($...ACTUATORS) in ["health","*"]
-  message: Spring Boot Actuators "$...ACTUATORS" are enabled. Depending on the actuators, this can pose
+  message: "spring-actuator-dangerous-endpoints-enabled 잠재적 결함 및 보안 이탈율 정비 요망."
     a significant security risk. Please double-check if the actuators are needed and properly secured.
   severity: WARNING
   languages:

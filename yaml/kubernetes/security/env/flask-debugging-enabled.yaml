@@ -2,9 +2,7 @@ rules:
 - id: flask-debugging-enabled
   languages: [yaml]
   severity: WARNING
-  message: >-
-    Do not set FLASK_ENV to "development" since that sets `debug=True` in Flask.
-    Use "dev" or a similar term instead.
+  message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
   metadata:
     owasp: 'A06:2017 - Security Misconfiguration'
     cwe:

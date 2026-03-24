@@ -1,7 +1,6 @@
 rules:
-- id: azure-appservice-enabled-failed-request
-  message: >-
-    Ensure that App service enables failed request tracing
+- id: - id: azure-appservice-enabled-failed-request
+  message: "azure-appservice-enabled-failed-request 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

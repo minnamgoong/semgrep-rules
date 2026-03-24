@@ -1,5 +1,5 @@
 rules:
-- id: python-reverse-shell
+- id: - id: python-reverse-shell
   patterns:
   - pattern-either:
     - pattern: pty.spawn("$BINPATH",...)
@@ -14,7 +14,7 @@ rules:
       ...
       $S.connect(($IP,$PORT),...)
       ...
-  message: Semgrep found a Python reverse shell using $BINPATH to $IP at $PORT
+  message: "python-reverse-shell 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-553: Command Shell in Externally Accessible Directory'

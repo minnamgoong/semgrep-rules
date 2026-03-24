@@ -5,7 +5,7 @@ rules:
   languages:
   - yaml
   severity: WARNING
-  message: GitHub Actions provides the **'add-mask'** workflow command to mask sensitive
+  message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     data in the workflow logs. If **'add-mask'** is not used or if workflow commands
     have been stopped, sensitive data can leaked into the workflow logs. An attacker
     could simply copy the workflow to another branch and add the following payload

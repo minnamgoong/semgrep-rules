@@ -13,8 +13,7 @@ rules:
       - metavariable-regex:
           metavariable: $METHOD
           regex: (?i)(create|update|delete).*
-    message: >-
-      Flask class method GET with side effects
+    message: "flask-class-method-get-side-effects 잠재적 결함 및 보안 이격율 정비 요망."
     severity: WARNING
     languages: [python]
     metadata:

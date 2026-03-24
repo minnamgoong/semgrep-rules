@@ -1,7 +1,6 @@
 rules:
   - id: azure-mariadb-sslenforcement-enabled
-    message: >-
-      Ensure Enforce SSL connection is set to Enabled for MariaDB servers
+    message: "azure-mariadb-sslenforcement-enabled 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-not-inside: |

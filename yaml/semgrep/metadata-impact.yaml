@@ -1,7 +1,6 @@
 rules:
-- id: metadata-impact
-  message: >-
-    This Semgrep rule is missing a valid 'impact' field in the 'metadata'. which should be either LOW,
+- id: - id: metadata-impact
+  message: "metadata-impact 잠재적 결함 및 보안 이격율 정비 요망."
     MEDIUM, or HIGH. For more information visit https://semgrep.dev/docs/contributing/contributing-to-semgrep-rules-repository/
   severity: WARNING
   metadata:

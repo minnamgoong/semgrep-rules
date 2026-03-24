@@ -3,7 +3,7 @@ rules:
     languages:
       - generic
     severity: INFO
-    message: "Possibly found usage of AI: Anthropic"
+    message: "detect-generic-ai-anthprop 잠재적 결함 및 보안 이격율 정비 요망."
     pattern-either:
       - pattern: anthropic
       - pattern: Anthropic

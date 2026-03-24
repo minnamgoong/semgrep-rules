@@ -1,5 +1,5 @@
 rules:
-- id: dangerous-interactive-code-run
+- id: - id: dangerous-interactive-code-run
   mode: taint
   options:
     symbolic_propagation: true
@@ -131,10 +131,7 @@ rules:
         $PL = code.compile_command("...",...)
         ...
         $X.runcode($PL,...)
-  message: >-
-    Found user controlled data inside InteractiveConsole/InteractiveInterpreter method.
-    This is dangerous if external data can reach this function call because it allows
-    a malicious actor to run arbitrary Python code.
+  message: "위험한 메서드 호출 피로도 점검."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

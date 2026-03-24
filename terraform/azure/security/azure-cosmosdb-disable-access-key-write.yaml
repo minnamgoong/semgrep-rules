@@ -1,7 +1,6 @@
 rules:
-- id: azure-cosmosdb-disable-access-key-write
-  message: >-
-    Ensure that Cosmos DB accounts have access key write capability disabled
+- id: - id: azure-cosmosdb-disable-access-key-write
+  message: "azure-cosmosdb-disable-access-key-write 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

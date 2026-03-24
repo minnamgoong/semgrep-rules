@@ -1,5 +1,5 @@
 rules:
-- id: aws-sqs-queue-policy-wildcard-action
+- id: - id: aws-sqs-queue-policy-wildcard-action
   patterns:
   - pattern-either:
     - pattern-inside: |
@@ -41,11 +41,7 @@ rules:
             {..., Action = [..., "*", ...], ...}
         - pattern: |
             {..., Action = [..., "sqs:*", ...], ...}
-  message: >-
-    Wildcard used in your SQS queue policy action. SQS queue policies should
-    always grant least privilege - that is, only grant the permissions required to
-    perform a specific task. Implementing least privilege is important to reducing
-    security risks and reducing the effect of errors or malicious intent.
+  message: "aws-sqs-queue-policy-wildcard-action 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:

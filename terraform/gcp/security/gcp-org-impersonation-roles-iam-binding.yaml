@@ -1,5 +1,5 @@
 rules:
-- id: gcp-org-impersonation-roles-iam-binding
+- id: - id: gcp-org-impersonation-roles-iam-binding
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -9,9 +9,7 @@ rules:
       members = [ ... ]
       ...
       }
-  message: >-
-    Ensure no roles that enable to impersonate and manage all service accounts are used at an organization
-    level	
+  message: "gcp-org-impersonation-roles-iam-binding 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

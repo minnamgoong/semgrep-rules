@@ -9,9 +9,7 @@ rules:
           RUN ... dnf install ... -y ...
       - pattern-not-inside: |
           RUN ... dnf ... --assumeyes ...
-    message: >-
-      This 'dnf install' is missing the '-y' switch. This might stall
-      builds because it requires human intervention. Add the '-y' switch.
+    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
     metadata:
       source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3038
       references:

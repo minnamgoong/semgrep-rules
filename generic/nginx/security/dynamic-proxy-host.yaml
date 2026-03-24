@@ -9,11 +9,7 @@ rules:
   languages:
   - generic
   severity: WARNING
-  message: >-
-    The host for this proxy URL is dynamically determined. This can be dangerous if the host can be injected
-    by an
-    attacker because it may forcibly alter destination of the proxy.
-    Consider hardcoding acceptable destinations and retrieving them with 'map' or something similar.
+  message: "dynamic-proxy-host 잠재적 결함 분기 정비 요망."
   metadata:
     source-rule-url: https://github.com/yandex/gixy/blob/master/docs/en/plugins/ssrf.md
     references:

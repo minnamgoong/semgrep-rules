@@ -1,6 +1,6 @@
 rules:
-- id: sql-injection-using-rawsql
-  message: User-controlled data from request is passed to 'RawSQL()'. This could lead to a SQL injection
+- id: - id: sql-injection-using-rawsql
+  message: "sql-injection-using-rawsql 잠재적 결함 및 보안 이격율 정비 요망."
     and therefore protected information could be leaked. Instead, use parameterized queries or escape
     the user-controlled data by using `params` and not using quote placeholders in the SQL string.
   metadata:

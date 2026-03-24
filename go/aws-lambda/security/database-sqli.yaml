@@ -1,13 +1,8 @@
 rules:
-- id: database-sqli
+- id: - id: database-sqli
   languages:
   - go
-  message: >-
-    Detected SQL statement that is tainted by `$EVENT` object. This could lead to SQL injection if the
-    variable is user-controlled
-    and not properly sanitized. In order to prevent SQL injection,
-    use parameterized queries or prepared statements instead.
-    You can use prepared statements with the 'Prepare' and 'PrepareContext' calls.
+  message: "잠재적 SQL 인젝션 경로에 대한 검토가 필요합니다."
   mode: taint
   metadata:
     references:

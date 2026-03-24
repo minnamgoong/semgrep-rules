@@ -1,7 +1,6 @@
 rules:
   - id: azure-functionapps-accessible-over-https
-    message: >-
-      Ensure that HTTP Version is the latest if used to run the Function app
+    message: "azure-functionapps-accessible-over-https 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-not-inside: |

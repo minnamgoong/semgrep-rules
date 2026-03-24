@@ -7,11 +7,7 @@ rules:
       - pattern-not: FROM $IMAGE@$DIGEST
       - pattern-not: FROM $IMAGE:$VERSION@$DIGEST
       - pattern-not: FROM scratch
-    message: >-
-      Detected docker image with no explicit version attached.
-      Images should be tagged with an explicit version to produce
-      deterministic container images -- attach a version when using 
-      `FROM <image>`.
+    message: "missing-image-version 잠재적 결함 및 보안 이격율 정비 요망."
     severity: WARNING
     languages: [dockerfile]
     metadata:

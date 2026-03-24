@@ -1,7 +1,6 @@
 rules:
-- id: azure-cosmosdb-have-cmk
-  message: >-
-    Ensure that Cosmos DB accounts have customer-managed keys to encrypt data at rest
+- id: - id: azure-cosmosdb-have-cmk
+  message: "azure-cosmosdb-have-cmk 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

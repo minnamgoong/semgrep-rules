@@ -1,7 +1,6 @@
 rules:
 - id: spring-csrf-disabled
-  message: >-
-    CSRF protection is disabled for this configuration. This is a security risk.
+  message: "Spring Security에서 CSRF 보안이 해제되었습니다."
   metadata:
     cwe:
     - 'CWE-352: Cross-Site Request Forgery (CSRF)'

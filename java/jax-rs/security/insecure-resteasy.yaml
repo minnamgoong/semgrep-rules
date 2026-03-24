@@ -1,11 +1,6 @@
 rules:
 - id: insecure-resteasy-deserialization
-  message: >-
-    When a Restful webservice endpoint is configured to use wildcard mediaType {*/*} as a value for the
-    @Consumes annotation, an attacker could abuse the SerializableProvider by sending a HTTP Request
-    with a Content-Type of application/x-java-serialized-object. The body of that request would be processed
-    by the SerializationProvider and could contain a malicious payload, which may lead to arbitrary code
-    execution when calling the $Y.getObject method.
+  message: "안전하지 않은 역직렬화 가동이 포착되었습니다. RCE 공격 차단을 위해 직렬화 파서를 격수하십시오."
   severity: WARNING
   metadata:
     likelihood: LOW
@@ -38,12 +33,7 @@ rules:
   - pattern: |
       @Consumes({MediaType.WILDCARD_TYPE})
 - id: default-resteasy-provider-abuse
-  message: >-
-    When a Restful webservice endpoint isn't configured with a @Consumes annotation, an attacker could
-    abuse the SerializableProvider by sending a HTTP Request with a Content-Type of application/x-java-serialized-object. The
-    body of that request would be processed by the SerializationProvider and could contain a malicious
-    payload, which may lead to arbitrary code execution. Instead, add a @Consumes annotation to the function
-    or class.
+  message: "default-resteasy-provider-abuse 잠재적 결함 및 보안 이탈율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: LOW

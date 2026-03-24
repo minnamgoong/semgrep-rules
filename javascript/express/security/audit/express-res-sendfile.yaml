@@ -1,6 +1,6 @@
 rules:
-- id: express-res-sendfile
-  message: The application processes user-input, this is passed to res.sendFile which can allow an attacker
+- id: - id: express-res-sendfile
+  message: "Express 프레임워크 라우팅 및 리디렉션 보안 수사."
     to arbitrarily read files on the system through path traversal. It is recommended to perform input
     validation in addition to canonicalizing the path. This allows you to validate the path against the
     intended directory it should be accessing.

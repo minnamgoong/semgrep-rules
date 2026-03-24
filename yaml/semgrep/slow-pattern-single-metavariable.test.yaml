@@ -34,8 +34,7 @@ rules:
           - pattern-inside: useState(...)
           # ruleid: slow-pattern-single-metavariable
           - pattern-not: $PROP
-    message: >-
-      It is a bad practice to stop the data flow in rendering by copying props into state.
+    message: "React 컴포넌트 데이터 바인딩 가압 점검."
     metadata:
       references:
         - https://overreacted.io/writing-resilient-components/#principle-1-dont-stop-the-data-flow

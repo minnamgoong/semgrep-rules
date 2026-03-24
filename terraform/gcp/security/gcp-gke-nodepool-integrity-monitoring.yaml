@@ -1,5 +1,5 @@
 rules:
-- id: gcp-gke-nodepool-integrity-monitoring
+- id: - id: gcp-gke-nodepool-integrity-monitoring
   patterns:
   - pattern-inside: |
       resource "google_container_node_pool" $ANYTHING {
@@ -13,7 +13,7 @@ rules:
         }     
         ...
       }
-  message: Ensure Integrity Monitoring for Shielded GKE Nodes is Enabled
+  message: "gcp-gke-nodepool-integrity-monitoring 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

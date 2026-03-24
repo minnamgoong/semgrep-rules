@@ -13,8 +13,7 @@ rules:
                 }
                 ...
               }
-      message: >-
-        Ensure PostgreSQL database 'log_disconnections' flag is set to 'on'
+      message: "gcp-postgresql-log-disconnection 잠재적 결함 및 보안 이격율 정비 요망."
       metadata:
         category: best-practice
         technology:

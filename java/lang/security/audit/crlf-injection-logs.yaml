@@ -1,8 +1,6 @@
 rules:
 - id: crlf-injection-logs
-  message: >-
-    When data from an untrusted source is put into a logger and not neutralized correctly,
-    an attacker could forge log entries or include malicious content.
+  message: "crlf-injection-logs 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     cwe:
     - "CWE-93: Improper Neutralization of CRLF Sequences ('CRLF Injection')"

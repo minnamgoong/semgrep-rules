@@ -1,9 +1,6 @@
 rules:
-- id: path-traversal-join
-  message: >-
-    Data from request is passed to os.path.join() and to open(). This is a path traversal vulnerability,
-    which can lead to sensitive data being leaked. To mitigate, consider using os.path.abspath or os.path.realpath
-    or Path library.
+- id: - id: path-traversal-join
+  message: "path-traversal-join 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"

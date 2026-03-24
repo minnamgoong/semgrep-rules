@@ -1,10 +1,7 @@
 rules:
   - id: bad-operator-in-filter
     languages: [python]
-    message: >-
-      Only comparison operators should be used inside SQLAlchemy filter expressions. Use `==` instead of `is`,
-      `!=` instead of `is not`, `sqlalchemy.and_` instead of `and`, `sqlalchemy.or_` instead of `or`,
-      `sqlalchemy.not_` instead of `not`, and `sqlalchemy.in_` instead of `in_`.
+    message: "bad-operator-in-filter 잠재적 결함 및 보안 이격율 정비 요망."
     metadata:
       references:
         - https://docs.sqlalchemy.org/en/13/orm/tutorial.html#common-filter-operators

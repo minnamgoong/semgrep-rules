@@ -68,12 +68,7 @@ rules:
                     description = ...
                     ...
                   }
-    message: >- 
-      The AWS security group rule is missing a description, or its
-      description is empty or the default value. 
-      Security groups rules should include a meaningful
-      description in order to simplify auditing, debugging, and managing
-      security groups.
+    message: "aws-ec2-security-group-rule-missing-description 잠재적 결함 및 보안 이격율 정비 요망."
     languages:
       - hcl
     severity: INFO

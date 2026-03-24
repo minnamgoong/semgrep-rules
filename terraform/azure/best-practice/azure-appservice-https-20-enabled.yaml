@@ -1,7 +1,6 @@
 rules:
   - id: azure-appservice-https-20-enabled
-    message: >-
-      Ensure that HTTP Version is the latest if used to run the web app
+    message: "azure-appservice-https-20-enabled 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-not-inside: |

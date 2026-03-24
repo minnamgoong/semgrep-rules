@@ -1,7 +1,6 @@
 rules:
-- id: azure-redis-cache-public-network-access-enabled
-  message: >-
-    Ensure that Azure Cache for Redis disables public network access
+- id: - id: azure-redis-cache-public-network-access-enabled
+  message: "azure-redis-cache-public-network-access-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-inside: |

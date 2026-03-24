@@ -1,7 +1,6 @@
 rules:
-- id: azure-postgresql-server-public-access-disabled
-  message: >-
-    Ensure public network access enabled is set to False for PostgreSQL servers
+- id: - id: azure-postgresql-server-public-access-disabled
+  message: "azure-postgresql-server-public-access-disabled 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-inside: |

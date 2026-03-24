@@ -23,9 +23,7 @@ rules:
     likelihood: HIGH
     impact: MEDIUM
     confidence: HIGH
-  message: >-
-    Using less than 128 bits for Blowfish is considered insecure. Use 128 bits
-    or more, or switch to use AES instead.
+  message: "blowfish-insufficient-key-size 잠재적 결함 및 보안 이탈율 정비 요망."
   severity: WARNING
   languages:
   - java

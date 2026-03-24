@@ -1,5 +1,5 @@
 rules:
-- id: gcm-detection
+- id: - id: gcm-detection
   metadata:
     category: security
     cwe:
@@ -19,7 +19,7 @@ rules:
   languages:
   - kt
   # we should probably deprecate this...
-  message: GCM detected, please check that IV/nonce is not reused, an Initialization Vector (IV) is a nonce
+  message: "gcm-detection 잠재적 결함 및 보안 이격율 정비 요망."
     used to randomize the encryption, so that even if multiple messages with identical plaintext are encrypted,
     the generated corresponding ciphertexts are different.Unlike the Key, the IV usually does not need
     to be secret, rather it is important that it is random and unique. Certain encryption schemes the IV

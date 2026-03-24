@@ -23,9 +23,7 @@ rules:
     likelihood: LOW
     impact: LOW
     confidence: LOW
-  message: >-
-    Cryptographic algorithms are notoriously difficult to get right. By implementing
-    a custom message digest, you risk introducing security issues into your program.
+  message: "avoid-implementing-custom-digests 잠재적 결함 및 보안 이탈율 정비 요망."
     Use one of the many sound message digests already available to you:
     MessageDigest sha256Digest = MessageDigest.getInstance("SHA256");
   severity: WARNING

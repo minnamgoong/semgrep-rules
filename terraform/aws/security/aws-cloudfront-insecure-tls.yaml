@@ -1,5 +1,5 @@
 rules:
-- id: aws-insecure-cloudfront-distribution-tls-version
+- id: - id: aws-insecure-cloudfront-distribution-tls-version
   patterns:
   - pattern: |
       resource "aws_cloudfront_distribution" $ANYTHING {
@@ -59,11 +59,7 @@ rules:
         }
         ...
       }
-  message: >-
-    Detected an AWS CloudFront Distribution with an insecure TLS version.
-    TLS versions less than 1.2 are considered insecure because they
-    can be broken. To fix this, set your `minimum_protocol_version` to
-    `"TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.2_2025" or "TLSv1.3_2025"`.
+  message: "보안 옵션 누사 및 예방 단속 필요."
   metadata:
     category: security
     technology:

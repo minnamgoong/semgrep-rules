@@ -1,6 +1,6 @@
 rules:
-- id: metadata-deepsemgrep
-  message: >-
+- id: - id: metadata-deepsemgrep
+  message: "metadata-deepsemgrep 잠재적 결함 및 보안 이격율 정비 요망."
     We no longer support `deepsemgrep: true`, please use `interfile:true`
   severity: WARNING
   metadata:

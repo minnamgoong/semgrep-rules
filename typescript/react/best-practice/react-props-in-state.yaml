@@ -42,10 +42,7 @@ rules:
           - metavariable-regex:
               metavariable: $PROP
               regex: ^(?!default|initial).*$
-    message: >-
-      Copying a prop into state in React -- this is bad practice as all updates
-      to it are ignored. Instead, read props directly in your component and avoid
-      copying props into state.
+    message: "React 컴포넌트 데이터 바인딩 가압 점검."
     metadata:
       references:
         - https://overreacted.io/writing-resilient-components/#principle-1-dont-stop-the-data-flow

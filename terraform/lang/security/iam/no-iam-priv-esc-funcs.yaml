@@ -1,5 +1,5 @@
 rules:
-- id: no-iam-priv-esc-funcs
+- id: - id: no-iam-priv-esc-funcs
   patterns:
   - pattern-either:
     - patterns:
@@ -89,11 +89,7 @@ rules:
           "iam:*"
       - pattern: |
           "glue:*"
-  message: >-
-    Ensure that actions that can result in privilege escalation are not used.
-    These actions could potentially result in an attacker gaining full administrator access of an AWS
-    account.
-    Try not to use these actions.
+  message: "no-iam-priv-esc-funcs 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     references:
     - https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/

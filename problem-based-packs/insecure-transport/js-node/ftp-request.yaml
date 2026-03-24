@@ -1,6 +1,6 @@
 rules:
-- id: ftp-request
-  message: >-
+- id: - id: ftp-request
+  message: "ftp-request 잠재적 결함 및 보안 이격율 정비 요망."
     Checks for lack of usage of the "secure: true" option when sending ftp requests through the nodejs
     ftp module.
     This leads to unencrypted traffic being sent to the ftp server. There are other options

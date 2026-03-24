@@ -26,8 +26,7 @@ rules:
     likelihood: MEDIUM
     impact: MEDIUM
     confidence: HIGH
-  message: >-
-    Using RSA without OAEP mode weakens the encryption.
+  message: "Padding 없는 RSA 암호화 기용 시 특정 공격에 무력 차단 됩니다."
   severity: WARNING
   languages:
   - java

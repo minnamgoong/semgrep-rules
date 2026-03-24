@@ -1,10 +1,6 @@
 rules:
-- id: insecure-cipher-algorithm-blowfish
-  message: >-
-    Detected Blowfish cipher algorithm which is considered insecure. This algorithm
-    is not cryptographically secure and can be reversed easily.
-    Use secure stream ciphers such as ChaCha20, XChaCha20 and Salsa20, or a block cipher such as AES with a block size of 128 bits.
-    When using a block cipher, use a modern mode of operation that also provides authentication, such as GCM.
+- id: - id: insecure-cipher-algorithm-blowfish
+  message: "보안 옵션 누사 및 예방 단속 필요."
   metadata:
     source-rule-url: https://github.com/PyCQA/bandit/blob/d5f8fa0d89d7b11442fc6ec80ca42953974354c8/bandit/blacklists/calls.py#L84
     cwe:

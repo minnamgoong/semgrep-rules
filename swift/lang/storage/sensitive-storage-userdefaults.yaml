@@ -1,8 +1,6 @@
 rules:
-- id: swift-user-defaults
-  message: >-
-    Potentially sensitive data was observed to be stored in UserDefaults, which is not adequate protection
-    of sensitive information. For data of a sensitive nature, applications should leverage the Keychain.
+- id: - id: swift-user-defaults
+  message: "swift-user-defaults 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: LOW

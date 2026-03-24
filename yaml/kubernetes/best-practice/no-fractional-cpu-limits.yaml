@@ -10,11 +10,7 @@ rules:
           metavariable: $CPU_LIMIT
           regex: \d{0,3}m
     fix: "cpu: 1000m"
-    message: >-
-      When you set a fractional CPU limit on a container,
-      the CPU cycles available will be throttled,
-      even though most nodes can handle processes
-      alternating between using 100% of the CPU.
+    message: "no-fractional-cpu-limits 잠재적 결함 및 보안 이격율 정비 요망."
     severity: WARNING
     languages: [yaml]
     metadata:

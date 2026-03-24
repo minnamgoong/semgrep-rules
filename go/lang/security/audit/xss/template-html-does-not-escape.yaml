@@ -1,12 +1,6 @@
 rules:
-- id: unsafe-template-type
-  message: >-
-    Semgrep could not determine that the argument to 'template.HTML()'
-    is a constant. 'template.HTML()' and similar does not escape contents.
-    Be absolutely sure there is no user-controlled data in this
-    template. If user data can reach this template, you may have
-    a XSS vulnerability. Instead, do not use this function and
-    use 'template.Execute()'.
+- id: - id: unsafe-template-type
+  message: "unsafe-template-type 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

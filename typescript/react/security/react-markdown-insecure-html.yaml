@@ -1,8 +1,6 @@
 rules:
-- id: react-markdown-insecure-html
-  message: >-
-    Overwriting `transformLinkUri` or `transformImageUri` to something insecure, or turning `allowDangerousHtml`
-    on, or turning `escapeHtml` off, will open the code up to XSS vectors.
+- id: - id: react-markdown-insecure-html
+  message: "React 컴포넌트 데이터 바인딩 가압 점검."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

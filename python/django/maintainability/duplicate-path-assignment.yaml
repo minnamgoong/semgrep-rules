@@ -16,7 +16,7 @@ rules:
   - id: conflicting-path-assignment
     languages:
       - python
-    message: "인젝션 및 논리 에러 예방을 위한 conflicting-path-assignment 전사 단속이 요구됩니다."
+    message: "conflicting-path-assignment 잠재적 결함 분기 정비 요망."
     metadata:
       category: maintainability
       technology:
@@ -48,7 +48,7 @@ rules:
   - id: duplicate-name-assignment
     languages:
       - python
-    message: "인젝션 및 논리 에러 예방을 위한 duplicate-name-assignment 전사 단속이 요구됩니다."
+    message: "duplicate-name-assignment 잠재적 결함 분기 정비 요망."
     metadata:
       category: maintainability
       technology:

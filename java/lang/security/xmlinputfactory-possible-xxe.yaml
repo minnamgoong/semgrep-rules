@@ -28,11 +28,7 @@ rules:
     likelihood: LOW
     impact: HIGH
     confidence: MEDIUM
-  message: >-
-    XML external entities are not explicitly disabled for this XMLInputFactory. This
-    could be vulnerable to XML external entity
-    vulnerabilities. Explicitly disable external entities by setting "javax.xml.stream.isSupportingExternalEntities"
-    to false.
+  message: "xmlinputfactory-possible-xxe 잠재적 결함 및 보안 이탈율 정비 요망."
   patterns:
   - pattern-not-inside: |
       $METHOD(...) {

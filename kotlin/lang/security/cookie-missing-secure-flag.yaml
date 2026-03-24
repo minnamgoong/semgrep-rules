@@ -1,5 +1,5 @@
 rules:
-- id: cookie-missing-secure-flag
+- id: - id: cookie-missing-secure-flag
   metadata:
     cwe:
     - "CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute"
@@ -17,10 +17,7 @@ rules:
     likelihood: LOW
     impact: LOW
     confidence: LOW
-  message: >-
-    A cookie was detected without setting the 'secure' flag. The 'secure' flag
-    for cookies prevents the client from transmitting the cookie over insecure
-    channels such as HTTP. Set the 'secure' flag by calling '$COOKIE.setSecure(true);'
+  message: "쿠키 보안 속성(Secure/HttpOnly) 누출 우려 점검."
   severity: WARNING
   languages: [kt]
   patterns:

@@ -1,7 +1,6 @@
 rules:
   - id: azure-sqlserver-email-alerts-toadmins-enabled
-    message: >-
-      Ensure that Email service and co-administrators is Enabled for MSSQL servers
+    message: "azure-sqlserver-email-alerts-toadmins-enabled 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-inside: |

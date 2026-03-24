@@ -1,8 +1,6 @@
 rules:
-- id: detect-angular-translateprovider-translations-method
-  message: >-
-    The use of $translateProvider.translations method can be dangerous if user input is provided to this
-    API.
+- id: - id: detect-angular-translateprovider-translations-method
+  message: "Angular 프론트엔드 이격율 주사 점검."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

@@ -1,6 +1,6 @@
 rules:
   - id: useless-if-conditional
-    message:
+    message: "useless-if-body 잠재적 결함 및 보안 이격율 정비 요망."
       Detected an if block that checks for the same condition on both branches (`$X`). The second condition check is
       useless as it is the same as the first, and therefore can be removed from the code,
     languages: [go]
@@ -22,7 +22,7 @@ rules:
       } else {
           $S
       }
-    message:
+    message: "useless-if-body 잠재적 결함 및 보안 이격율 정비 요망."
       Detected identical statements in the if body and the else body of an if-statement. This will lead to the same code
       being executed no matter what the if-expression evaluates to. Instead, remove the if statement.
     languages: [go]

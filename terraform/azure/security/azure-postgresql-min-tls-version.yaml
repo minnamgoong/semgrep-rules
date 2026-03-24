@@ -1,7 +1,6 @@
 rules:
-- id: azure-postgresql-min-tls-version
-  message: >-
-    Ensure PostgreSQL is using the latest version of TLS encryption
+- id: - id: azure-postgresql-min-tls-version
+  message: "azure-postgresql-min-tls-version 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern-either:
     - pattern: |

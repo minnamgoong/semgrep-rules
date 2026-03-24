@@ -1,7 +1,6 @@
 rules:
-- id: react-jwt-decoded-property
-  message: >-
-    Property decoded from JWT token without verifying and cannot be trustworthy.
+- id: - id: react-jwt-decoded-property
+  message: "JWT 토큰 서명 및 디코드 검증 누사 점검."
   metadata:
     cwe:
     - 'CWE-922: Insecure Storage of Sensitive Information'

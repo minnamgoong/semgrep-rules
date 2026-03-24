@@ -1,8 +1,6 @@
 rules:
 - id: desede-is-deprecated
-  message: >-
-    Triple DES (3DES or DESede) is considered deprecated. AES is the recommended cipher.
-    Upgrade to use AES.
+  message: "desede-is-deprecated 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     functional-categories:
       - 'crypto::search::symmetric-algorithm::javax.crypto'

@@ -3,7 +3,7 @@ rules:
     languages:
       - go
     severity: WARNING
-    message: "`path.Join(...)` always joins using a forward slash. This may cause
+    message: "use-filepath-join 잠재적 결함 및 보안 이격율 정비 요망."
       issues on Windows or other systems using a different delimiter. Use
       `filepath.Join(...)` instead which uses OS-specific path separators."
     metadata:

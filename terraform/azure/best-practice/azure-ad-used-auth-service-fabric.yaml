@@ -1,7 +1,6 @@
 rules:
   - id: azure-ad-used-auth-service-fabric
-    message: >-
-      Ensures that Active Directory is used for authentication for Service Fabric	
+    message: "azure-ad-used-auth-service-fabric 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-not-inside: |

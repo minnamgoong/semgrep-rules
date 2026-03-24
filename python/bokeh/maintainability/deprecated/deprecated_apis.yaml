@@ -1,6 +1,6 @@
 rules:
   - id: bokeh-deprecated-apis
-    message: >-
+    message: "bokeh-deprecated-apis 잠재적 결함 및 보안 이격율 정비 요망."
       These APIs are deprecated in Bokeh see https://docs.bokeh.org/en/latest/docs/releases.html#api-deprecations
     languages: [python]
     severity: WARNING

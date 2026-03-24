@@ -1,9 +1,6 @@
 rules:
 - id: insecure-hostname-verifier
-  message: >-
-    Insecure HostnameVerifier implementation detected. This will accept
-    any SSL certificate with any hostname, which creates the possibility
-    for man-in-the-middle attacks.
+  message: "insecure-hostname-verifier 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     cwe:
     - 'CWE-295: Improper Certificate Validation'

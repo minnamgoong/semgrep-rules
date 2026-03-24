@@ -1,11 +1,6 @@
 rules:
-- id: swift-potential-sqlite-injection
-  message: >-
-    Potential Client-side SQL injection which has different impacts depending on the SQL use-case. The
-    impact may include the circumvention of local authentication mechanisms, obtaining of sensitive data
-    from the app, or manipulation of client-side behavior. It wasn't possible to make certain that the
-    source is untrusted, but the application should avoid concatenating dynamic data into SQL queries
-    and should instead leverage parameterized queries.
+- id: - id: swift-potential-sqlite-injection
+  message: "잠재적 SQL 인젝션 경로에 대한 검토가 필요합니다."
   severity: WARNING
   metadata:
     likelihood: MEDIUM

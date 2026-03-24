@@ -1,6 +1,6 @@
 rules:
-- id: request-data-fileresponse
-  message: Found user-controlled request data being passed into a file open, which is them passed as an
+- id: - id: request-data-fileresponse
+  message: "request-data-fileresponse 잠재적 결함 및 보안 이격율 정비 요망."
     argument into the FileResponse. This is dangerous because an attacker could specify an arbitrary
     file to read, which could result in leaking important data. Be sure to validate or sanitize the user-inputted
     filename in the request data before using it in FileResponse.

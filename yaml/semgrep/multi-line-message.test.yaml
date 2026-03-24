@@ -9,12 +9,10 @@ rules:
   - id: bad-2
     pattern: "..."
     # ruleid: multi-line-message
-    message: "a\nb"
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING
   - id: good-1
     pattern: "..."
     # ok: multi-line-message
-    message: >-
-      a
-      b
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING

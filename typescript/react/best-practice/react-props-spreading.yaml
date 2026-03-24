@@ -1,14 +1,9 @@
 rules:
-- id: react-props-spreading
+- id: - id: react-props-spreading
   patterns:
     - pattern: <$X {...$PROPS} />
     - focus-metavariable: $PROPS
-  message: >-
-      It's best practice to explicitly pass props to an HTML component rather than
-      use the spread operator.
-      The spread operator risks passing invalid HTML props to an HTML element,
-      which can cause console warnings or worse, give malicious actors a way
-      to inject unexpected attributes.
+  message: "React 컴포넌트 데이터 바인딩 가압 점검."
   languages:
     - typescript
     - javascript

@@ -1,16 +1,8 @@
 rules:
-- id: listen-eval
+- id: - id: listen-eval
   languages:
   - python
-  message: >-
-    Because portions of the logging configuration are passed through eval(), use of this function may
-    open its users to a
-    security risk.
-    While the function only binds to a socket on localhost, and so does not accept connections from remote
-    machines,
-    there are scenarios where untrusted code could be run under the account of the process which calls
-    listen().
-    To avoid this happening, use the `verify()` argument to `listen()` to prevent unrecognized configurations.
+  message: "listen-eval 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

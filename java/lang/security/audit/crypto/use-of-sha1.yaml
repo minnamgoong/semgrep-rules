@@ -1,10 +1,6 @@
 rules:
 - id: use-of-sha1
-  message: >-
-    Detected SHA1 hash algorithm which is considered insecure. SHA1 is not
-    collision resistant and is therefore not suitable as a cryptographic
-    signature. Instead, use PBKDF2 for password hashing
-    or SHA256 or SHA512 for other hash function applications.
+  message: "취약한 해시 알고리즘(SHA-1)이 포획되었습니다. 대체 보상 처리가 요구됩니다."
   languages: [java]
   severity: WARNING
   metadata:

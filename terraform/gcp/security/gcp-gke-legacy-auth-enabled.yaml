@@ -1,5 +1,5 @@
 rules:
-- id: gcp-gke-legacy-auth-enabled
+- id: - id: gcp-gke-legacy-auth-enabled
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -8,8 +8,7 @@ rules:
       enable_legacy_abac = true
       ...
       }
-  message: >-
-    Ensure Legacy Authorization is set to Disabled on Kubernetes Engine Clusters
+  message: "gcp-gke-legacy-auth-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

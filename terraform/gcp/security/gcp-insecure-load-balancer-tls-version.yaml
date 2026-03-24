@@ -1,5 +1,5 @@
 rules:
-- id: gcp-insecure-load-balancer-tls-version
+- id: - id: gcp-insecure-load-balancer-tls-version
   patterns:
   - pattern: |
       resource "google_compute_ssl_policy" $ANYTHING {
@@ -13,9 +13,7 @@ rules:
         min_tls_version = "TLS_1_2"
         ...
       }
-  message: >-
-    Detected GCP Load Balancer to be using an insecure version of TLS. To fix this set your "min_tls_version"
-    to "TLS_1_2"
+  message: "보안 옵션 누사 및 예방 단속 필요."
   languages:
   - terraform
   severity: WARNING

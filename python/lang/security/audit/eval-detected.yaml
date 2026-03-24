@@ -1,14 +1,10 @@
 rules:
-- id: eval-detected
+- id: - id: eval-detected
   patterns:
   - pattern-not: eval(f"")
   - pattern-not: eval("...")
   - pattern: eval(...)
-  message: >-
-    Detected the use of eval(). eval() can be dangerous if used to evaluate
-    dynamic content. If this content can be input from outside the program, this
-    may be a code injection vulnerability. Ensure evaluated content is not definable
-    by external sources.
+  message: "eval-detected 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     source-rule-url: https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b307-eval
     cwe:

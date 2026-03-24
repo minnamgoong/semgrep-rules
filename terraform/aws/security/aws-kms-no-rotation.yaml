@@ -1,5 +1,5 @@
 rules:
-- id: aws-kms-no-rotation
+- id: - id: aws-kms-no-rotation
   patterns:
   - pattern-either:
     - pattern: |
@@ -31,7 +31,7 @@ rules:
         customer_master_key_spec = "RSA_2096"
         ...
       }
-  message: The AWS KMS has no rotation. Missing rotation can cause leaked key to be used by attackers.
+  message: "aws-kms-no-rotation 잠재적 결함 및 보안 이격율 정비 요망."
     To fix this, set a `enable_key_rotation`.
   languages: [hcl]
   severity: WARNING

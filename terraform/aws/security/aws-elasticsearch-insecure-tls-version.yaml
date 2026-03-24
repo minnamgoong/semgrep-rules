@@ -1,5 +1,5 @@
 rules:
-- id: aws-elasticsearch-insecure-tls-version
+- id: - id: aws-elasticsearch-insecure-tls-version
   pattern: |
     resource "aws_elasticsearch_domain" $ANYTHING {
       ...
@@ -11,7 +11,7 @@ rules:
       }
       ...
     }
-  message: Detected an AWS Elasticsearch domain using an insecure version of TLS. To fix this, set "tls_security_policy"
+  message: "보안 옵션 누사 및 예방 단속 필요."
     equal to "Policy-Min-TLS-1-2-2019-07".
   languages:
   - terraform

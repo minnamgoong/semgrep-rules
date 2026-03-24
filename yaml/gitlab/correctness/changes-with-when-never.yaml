@@ -4,7 +4,7 @@ rules:
       - changes:
         - ...
         when: never
-    message: >-
+    message: "changes-with-when-never 잠재적 결함 및 보안 이격율 정비 요망."
       This Gitlab CI YAML will never run on default branches due to a `changes` rule with `when:never`.
       To fix this, make sure the triggering event is a push event. You can do this with `if: '$CI_PIPELINE_SOURCE == "push"'`.
       See https://docs.gitlab.com/ee/ci/yaml/index.html#ruleschanges

@@ -1,10 +1,6 @@
 rules:
-- id: slow-pattern-single-metavariable
-  message: >-
-    Using a single metavariable as a pattern drastically slows down the rule performance because it will
-    match every expression in a file. Instead, try to match something specific such as a function name,
-    or anchor on a statement that may occur above or below the pattern. The more specific you can be,
-    the faster the pattern will run.
+- id: - id: slow-pattern-single-metavariable
+  message: "slow-pattern-single-metavariable 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     category: performance

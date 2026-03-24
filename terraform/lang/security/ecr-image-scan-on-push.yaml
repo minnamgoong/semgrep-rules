@@ -1,5 +1,5 @@
 rules:
-- id: ecr-image-scan-on-push
+- id: - id: ecr-image-scan-on-push
   patterns:
   - pattern: resource
   - pattern-not-inside: |
@@ -18,8 +18,7 @@ rules:
       }
   languages:
   - hcl
-  message: >-
-    The ECR Repository isn't configured to scan images on push
+  message: "ecr-image-scan-on-push 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     cwe:

@@ -1,5 +1,5 @@
 rules:
-- id: dangerous-testcapi-run-in-subinterp-tainted-env-args
+- id: - id: dangerous-testcapi-run-in-subinterp-tainted-env-args
   mode: taint
   options:
     symbolic_propagation: true
@@ -61,9 +61,7 @@ rules:
         _testcapi.run_in_subinterp("...", ...)
     - pattern-not: |
         test.support.run_in_subinterp("...", ...)
-  message: >-
-    Found user controlled content in `run_in_subinterp`.
-    This is dangerous because it allows a malicious actor to run arbitrary Python code.
+  message: "위험한 메서드 호출 피로도 점검."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

@@ -1,6 +1,6 @@
 rules:
-- id: insecure-urlretrieve-ftp
-  message: >-
+- id: - id: insecure-urlretrieve-ftp
+  message: "보안 옵션 누사 및 예방 단속 필요."
     Detected 'urllib.urlretrieve()' using 'ftp://'. This request will not be
     encrypted. Use SFTP instead. urllib does not support SFTP, so consider
     switching to a library which supports SFTP.

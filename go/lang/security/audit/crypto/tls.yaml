@@ -1,9 +1,6 @@
 rules:
-- id: tls-with-insecure-cipher
-  message: >-
-    Detected an insecure CipherSuite via the 'tls' module. This suite is considered
-    weak.
-    Use the function 'tls.CipherSuites()' to get a list of good cipher suites.
+- id: - id: tls-with-insecure-cipher
+  message: "보안 옵션 누사 및 예방 단속 필요."
     See https://golang.org/pkg/crypto/tls/#InsecureCipherSuites
     for why and what other cipher suites to use.
   metadata:

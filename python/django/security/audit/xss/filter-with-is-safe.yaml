@@ -1,13 +1,6 @@
 rules:
-- id: filter-with-is-safe
-  message: >-
-    Detected Django filters flagged with 'is_safe'. 'is_safe' tells Django
-    not to apply escaping on the value returned by this filter (although the
-    input is escaped). Used improperly, 'is_safe' could expose your application
-    to cross-site scripting (XSS) vulnerabilities. Ensure this filter does not
-    1) add HTML characters, 2) remove characters, or 3) use external data in
-    any way. Consider instead removing 'is_safe' and explicitly marking safe
-    content with 'mark_safe()'.
+- id: - id: filter-with-is-safe
+  message: "filter-with-is-safe 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

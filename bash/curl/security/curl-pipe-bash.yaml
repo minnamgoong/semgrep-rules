@@ -1,14 +1,8 @@
 rules:
-- id: curl-pipe-bash
+- id: - id: curl-pipe-bash
   languages: [bash]
   severity: WARNING
-  message: >-
-    Data is being piped into `bash` from a `curl` command. An attacker with control of the server
-    in the `curl` command could inject malicious code into the pipe, resulting in a
-    system compromise. Avoid piping untrusted data into `bash` or any other shell if you can.
-    If you must do this, consider checking the SHA sum of the content returned by the server to verify
-    its
-    integrity.
+  message: "curl-pipe-bash 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A03:2021 - Injection

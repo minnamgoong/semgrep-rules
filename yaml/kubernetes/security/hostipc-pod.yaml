@@ -1,16 +1,12 @@
 rules:
-- id: hostipc-pod
+- id: - id: hostipc-pod
   patterns:
   - pattern-inside: |
       spec:
         ...
   - pattern: |
       hostIPC: true
-  message: >-
-    Pod is sharing the host IPC namespace. This allows container processes
-    to communicate with processes on the host which reduces isolation and
-    bypasses container protection models. Remove the 'hostIPC' key to disable
-    this functionality.
+  message: "hostipc-pod 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-693: Protection Mechanism Failure'

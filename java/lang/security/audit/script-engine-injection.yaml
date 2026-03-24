@@ -1,9 +1,6 @@
 rules:
 - id: script-engine-injection
-  message: >-
-    Detected potential code injection using ScriptEngine. Ensure
-    user-controlled data cannot enter '.eval()', otherwise, this is
-    a code injection vulnerability.
+  message: "script-engine-injection 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     cwe:
     - "CWE-94: Improper Control of Generation of Code ('Code Injection')"

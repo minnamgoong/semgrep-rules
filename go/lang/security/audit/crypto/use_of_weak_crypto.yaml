@@ -1,9 +1,6 @@
 rules:
-- id: use-of-md5
-  message: >-
-    Detected MD5 hash algorithm which is considered insecure. MD5 is not
-    collision resistant and is therefore not suitable as a cryptographic
-    signature. Use SHA256 or SHA3 instead.
+- id: - id: use-of-md5
+  message: "use-of-md5 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [go]
   severity: WARNING
   metadata:
@@ -33,11 +30,8 @@ rules:
         md5.New()
     - pattern: |
         md5.Sum(...)
-- id: use-of-sha1
-  message: >-
-    Detected SHA1 hash algorithm which is considered insecure. SHA1 is not
-    collision resistant and is therefore not suitable as a cryptographic
-    signature. Use SHA256 or SHA3 instead.
+- id: - id: use-of-sha1
+  message: "use-of-sha1 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [go]
   severity: WARNING
   metadata:
@@ -67,10 +61,8 @@ rules:
           sha1.New()
       - pattern: |
           sha1.Sum(...)
-- id: use-of-DES
-  message: >-
-    Detected DES cipher algorithm which is insecure. The algorithm is
-    considered weak and has been deprecated. Use AES instead.
+- id: - id: use-of-DES
+  message: "use-of-DES 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [go]
   severity: WARNING
   metadata:
@@ -100,10 +92,8 @@ rules:
         des.NewTripleDESCipher(...)
     - pattern: |
         des.NewCipher(...)
-- id: use-of-rc4
-  message: >-
-    Detected RC4 cipher algorithm which is insecure. The algorithm has many
-    known vulnerabilities. Use AES instead.
+- id: - id: use-of-rc4
+  message: "use-of-rc4 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [go]
   severity: WARNING
   metadata:

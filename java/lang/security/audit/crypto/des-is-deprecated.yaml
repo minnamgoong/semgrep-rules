@@ -1,8 +1,6 @@
 rules:
 - id: des-is-deprecated
-  message: >-
-    DES is considered deprecated. AES is the recommended cipher.
-    Upgrade to use AES.
+  message: "des-is-deprecated 잠재적 결함 및 보안 이탈율 정비 요망."
     See https://www.nist.gov/news-events/news/2005/06/nist-withdraws-outdated-data-encryption-standard
     for more information.
   metadata:

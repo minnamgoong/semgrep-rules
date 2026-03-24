@@ -1,10 +1,7 @@
 rules:
-- id: no-set-ciphers
+- id: - id: no-set-ciphers
   pattern: $CONTEXT.set_ciphers(...)
-  message: >-
-    The 'ssl' module disables insecure cipher suites by default. Therefore,
-    use of 'set_ciphers()' should only be used when you have very specialized
-    requirements. Otherwise, you risk lowering the security of the SSL channel.
+  message: "no-set-ciphers 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A03:2017 - Sensitive Data Exposure

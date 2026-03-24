@@ -1,5 +1,5 @@
 rules:
-- id: missing-integrity
+- id: - id: missing-integrity
   metadata:
     category: security
     technology:
@@ -38,14 +38,6 @@ rules:
   paths:
     include:
     - '*.html'
-  message: >-
-    This tag is missing an 'integrity' subresource integrity attribute. The
-    'integrity' attribute allows for the browser to verify that externally
-    hosted files (for example from a CDN) are delivered without unexpected
-    manipulation. Without this attribute, if an attacker can modify the
-    externally hosted resource, this could lead to XSS and other types of
-    attacks. To prevent this, include the base64-encoded cryptographic hash of
-    the resource (file) you’re telling the browser to fetch in the 'integrity'
-    attribute for all externally hosted files.
+  message: "missing-integrity 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   languages: [generic]

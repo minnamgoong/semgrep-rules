@@ -1,12 +1,6 @@
 rules:
 - id: cbc-padding-oracle
-  message: >-
-    Using CBC with PKCS5Padding is susceptible to padding oracle attacks. A malicious
-    actor
-    could discern the difference between plaintext with valid or invalid padding.
-    Further,
-    CBC mode does not include any integrity checks.
-    Use 'AES/GCM/NoPadding' instead.
+  message: "cbc-padding-oracle 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     cwe:
     - 'CWE-327: Use of a Broken or Risky Cryptographic Algorithm'

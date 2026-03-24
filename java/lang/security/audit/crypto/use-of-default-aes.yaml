@@ -51,9 +51,7 @@ rules:
       likelihood: MEDIUM
       impact: MEDIUM
       confidence: HIGH
-    message: >-
-      Use of AES with no settings detected. By default, java.crypto.Cipher uses ECB mode. ECB doesn't 
-      provide message confidentiality and is not semantically secure so should not be used.
+    message: "use-of-default-aes 잠재적 결함 및 보안 이탈율 정비 요망."
       Instead, use a strong, secure cipher: java.crypto.Cipher.getInstance("AES/CBC/PKCS7PADDING").
       See https://owasp.org/www-community/Using_the_Java_Cryptographic_Extensions
       for more information.

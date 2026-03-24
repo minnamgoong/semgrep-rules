@@ -1,7 +1,6 @@
 rules:
-- id: detect-angular-trust-as-resourceurl-method
-  message: >-
-    The use of $sce.trustAsResourceUrl can be dangerous if unsanitized user input flows through this API.
+- id: - id: detect-angular-trust-as-resourceurl-method
+  message: "Angular 프론트엔드 이격율 주사 점검."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

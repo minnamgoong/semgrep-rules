@@ -1,5 +1,5 @@
 rules:
-- id: gcp-artifact-registry-private-repo-iam-member
+- id: - id: gcp-artifact-registry-private-repo-iam-member
   patterns:
   - pattern: resource
   - pattern-either:
@@ -15,8 +15,7 @@ rules:
         member = "allAuthenticatedUsers"
         ...
         }
-  message: >-
-    Ensure that Artifact Registry repositories are not anonymously or publicly accessible	
+  message: "gcp-artifact-registry-private-repo-iam-member 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

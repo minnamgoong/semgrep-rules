@@ -1,10 +1,6 @@
 rules:
 - id: autoescape-disabled
-  message: >-
-    Detected an element with disabled HTML escaping. If external
-    data can reach this, this is a cross-site scripting (XSS)
-    vulnerability. Ensure no external data can reach here, or
-    remove 'escape=false' from this element.
+  message: "autoescape-disabled 잠재적 결함 및 보안 이탈율 정비 요망."
   metadata:
     owasp: 'A07:2017 - Cross-Site Scripting (XSS)'
     cwe:

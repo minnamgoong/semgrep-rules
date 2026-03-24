@@ -1,5 +1,5 @@
 rules:
-- id: avoid-jsonpickle
+- id: - id: avoid-jsonpickle
   patterns:
   - pattern: |
       jsonpickle.decode($PAYLOAD,...)
@@ -25,9 +25,6 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: LOW
-  message: >-
-    Avoid using `jsonpickle`, which is known to lead to code execution vulnerabilities.
-    When unpickling, the serialized data could be manipulated to run arbitrary code.
-    Instead, consider serializing the relevant data using `json` module.
+  message: "avoid-jsonpickle 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [python]
   severity: WARNING

@@ -1,8 +1,6 @@
 rules:
-- id: net-ftp-request
-  message: >-
-    Checks for outgoing connections to ftp servers with the 'net/ftp' package. FTP does not encrypt traffic, possibly
-    leading to PII being sent plaintext over the network. Instead, connect via the SFTP protocol.
+- id: - id: net-ftp-request
+  message: "net-ftp-request 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: MEDIUM

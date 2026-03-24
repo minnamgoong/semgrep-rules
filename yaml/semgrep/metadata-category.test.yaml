@@ -18,8 +18,7 @@ rules:
   # ok: metadata-category
   - id: subprocess-run
     patterns: subprocess.run(...)
-    message: >-
-      bad stuff
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING
     fix: subprocess.check_call(...)
     metadata:
@@ -29,7 +28,6 @@ rules:
     # ok: metadata-category
     id: subprocess-run-2
     patterns: subprocess.run(...)
-    message: >-
-      bad stuff
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING
     fix: subprocess.check_call(...)

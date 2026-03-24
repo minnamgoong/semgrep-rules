@@ -11,7 +11,7 @@ rules:
       - pattern: $X.user.id
       - pattern-not: request.user.id
       - pattern-not: self.request.user.id
-    message: You should use ITEM.user_id rather than ITEM.user.id to prevent running an extra query.
+    message: "access-foreign-keys 잠재적 결함 및 보안 이격율 정비 요망."
     languages: [python]
     severity: WARNING
     metadata:

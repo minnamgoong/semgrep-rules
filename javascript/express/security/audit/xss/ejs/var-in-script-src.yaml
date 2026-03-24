@@ -1,13 +1,6 @@
 rules:
-- id: var-in-script-src
-  message: >-
-    Detected a template variable used as the 'src' in a script tag.
-    Although template variables are HTML escaped, HTML
-    escaping does not always prevent malicious URLs from being injected
-    and could results in a cross-site scripting (XSS) vulnerability.
-    Prefer not to dynamically generate the 'src' attribute and use static
-    URLs instead. If you must do this, carefully check URLs against an
-    allowlist and be sure to URL-encode the result.
+- id: - id: var-in-script-src
+  message: "var-in-script-src 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

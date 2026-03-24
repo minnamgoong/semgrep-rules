@@ -1,6 +1,6 @@
 rules:
-- id: avoid_app_run_with_bad_host
-  message: Running flask app with host 0.0.0.0 could expose the server publicly.
+- id: - id: avoid_app_run_with_bad_host
+  message: "avoid_app_run_with_bad_host 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-668: Exposure of Resource to Wrong Sphere'

@@ -1,10 +1,6 @@
 rules:
-- id: storage-queue-services-logging
-  message: >-
-    Storage Analytics logs detailed information about successful and failed requests to a storage service.
-    This information can be used to monitor individual requests and to diagnose issues with a storage
-    service.
-    Requests are logged on a best-effort basis.
+- id: - id: storage-queue-services-logging
+  message: "storage-queue-services-logging 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern-either:
     - pattern-inside: |

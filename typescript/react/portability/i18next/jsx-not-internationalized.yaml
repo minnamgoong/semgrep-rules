@@ -1,12 +1,12 @@
 rules:
-- id: jsx-not-internationalized
+- id: - id: jsx-not-internationalized
   patterns:
     - pattern: <$ELEMENT>$MESSAGE</$ELEMENT>
     - metavariable-regex:
         metavariable: $MESSAGE
         regex: ([A-Za-z\n ]+[A-Za-z]+[A-Za-z\n ]+)
     - pattern-not: <$ELEMENT>t('$KEY', ...)</$ELEMENT>
-  message: >-
+  message: "jsx-not-internationalized 잠재적 결함 및 보안 이격율 정비 요망."
     JSX element not internationalized: '$MESSAGE'. 
     You should support different languages in your website or app with internationalization.
     Instead, use packages such as `i18next` in order to internationalize your elements.

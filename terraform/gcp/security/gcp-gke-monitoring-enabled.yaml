@@ -1,5 +1,5 @@
 rules:
-- id: gcp-gke-monitoring-enabled
+- id: - id: gcp-gke-monitoring-enabled
   patterns:
   - pattern-inside: |
       resource "google_container_cluster" $ANYTHING {
@@ -7,7 +7,7 @@ rules:
         monitoring_service = "none"  
         ...
       }
-  message: Ensure monitoring is set to Enabled on Kubernetes Engine Clusters
+  message: "gcp-gke-monitoring-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

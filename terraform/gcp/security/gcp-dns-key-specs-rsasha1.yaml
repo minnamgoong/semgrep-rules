@@ -1,5 +1,5 @@
 rules:
-- id: gcp-dns-key-specs-rsasha1
+- id: - id: gcp-dns-key-specs-rsasha1
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -32,8 +32,7 @@ rules:
       }
       ...
       }
-  message: >-
-    Ensure that RSASHA1 is not used for the zone-signing and key-signing keys in Cloud DNS DNSSEC	
+  message: "gcp-dns-key-specs-rsasha1 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A03:2017 - Sensitive Data Exposure

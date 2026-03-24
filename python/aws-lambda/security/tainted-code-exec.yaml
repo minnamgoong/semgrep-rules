@@ -1,5 +1,5 @@
 rules:
-- id: tainted-code-exec
+- id: - id: tainted-code-exec
   mode: taint
   pattern-sources:
   - patterns:
@@ -12,11 +12,7 @@ rules:
     - pattern-either:
       - pattern: eval($CODE, ...)
       - pattern: exec($CODE, ...)
-  message: >-
-    Detected the use of `exec/eval`.This can be dangerous if used to evaluate
-    dynamic content. If this content can be input from outside the program,
-    this may be a code injection vulnerability. Ensure evaluated content is
-    not definable by external sources.
+  message: "tainted-code-exec 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

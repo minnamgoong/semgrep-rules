@@ -5,8 +5,7 @@ rules:
     patterns:
       - pattern: RUN apt ...
       - pattern-not: RUN apt-get ...
-    message: >-
-      'apt-get' is preferred as an unattended tool for stability. 'apt' is discouraged.
+    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
     metadata:
       source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3027
       references:

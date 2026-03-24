@@ -4,7 +4,7 @@ rules:
       - js
       - ts
     severity: INFO
-    message: "Possibly found usage of AI: VercelAI"
+    message: "detect-vercel-ai 잠재적 결함 및 보안 이격율 정비 요망."
     pattern-either:
       - pattern: import "ai"
       - pattern: import "@ai-sdk"

@@ -1,8 +1,6 @@
 rules:
-- id: grequests-http-request
-  message: >-
-    Checks for requests to http (unencrypted) sites using grequests, a popular HTTP client library.
-    This is dangerous because it could result in plaintext PII being passed around the network.
+- id: - id: grequests-http-request
+  message: "grequests-http-request 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: MEDIUM

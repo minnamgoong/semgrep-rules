@@ -1,7 +1,6 @@
 rules:
-- id: unnecessary-parent-operator
-  message: >-
-    Unnecessary parent operator. Remove one to fix.
+- id: - id: unnecessary-parent-operator
+  message: "unnecessary-parent-operator 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     category: best-practice

@@ -1,7 +1,6 @@
 rules:
-- id: metadata-confidence
-  message: >-
-    This Semgrep rule is missing a valid 'confidence' field in the 'metadata'. which should be either
+- id: - id: metadata-confidence
+  message: "metadata-confidence 잠재적 결함 및 보안 이격율 정비 요망."
     LOW, MEDIUM, or HIGH. For more information visit https://semgrep.dev/docs/contributing/contributing-to-semgrep-rules-repository/
   severity: WARNING
   metadata:

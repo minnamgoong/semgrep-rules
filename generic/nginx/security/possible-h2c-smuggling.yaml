@@ -27,12 +27,7 @@ rules:
   languages:
   - generic
   severity: WARNING
-  message: >-
-    Conditions for Nginx H2C smuggling identified.
-    H2C smuggling allows upgrading HTTP/1.1 connections to lesser-known HTTP/2 over cleartext (h2c) connections
-    which can allow a bypass of reverse proxy access controls, and lead to long-lived, unrestricted HTTP
-    traffic directly to
-    back-end servers.
+  message: "possible-nginx-h2c-smuggling 잠재적 결함 분기 정비 요망."
     To mitigate:
     WebSocket support required: Allow only the value websocket for HTTP/1.1 upgrade headers (e.g., Upgrade:
     websocket).

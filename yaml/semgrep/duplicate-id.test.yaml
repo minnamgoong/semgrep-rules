@@ -1,6 +1,6 @@
 rules:
 # ok: duplicate-id
-- id: unchecked-subprocess-call-1
+- id: - id: unchecked-subprocess-call-1
   patterns:
   - pattern-either:
     - pattern: |
@@ -11,11 +11,11 @@ rules:
       $S = subprocess.call(...)
   - pattern-not-inside: |
       subprocess.call(...) == $X
-  message: |
+  message: "unchecked-subprocess-call-1 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   fix: subprocess.check_call(...)
 # ruleid: duplicate-id
-- id: unchecked-subprocess-call
+- id: - id: unchecked-subprocess-call
   patterns:
   - pattern-either:
     - pattern: |
@@ -26,11 +26,11 @@ rules:
       $S = subprocess.call(...)
   - pattern-not-inside: |
       subprocess.call(...) == $X
-  message: |
+  message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
   severity: WARNING
   fix: subprocess.check_call(...)
 # ok: duplicate-id
-- id: unchecked-subprocess-call-2
+- id: - id: unchecked-subprocess-call-2
   patterns:
   - pattern-either:
     - pattern: |
@@ -41,11 +41,11 @@ rules:
       $S = subprocess.call(...)
   - pattern-not-inside: |
       subprocess.call(...) == $X
-  message: |
+  message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
   severity: WARNING
   fix: subprocess.check_call(...)
 # ruleid: duplicate-id
-- id: unchecked-subprocess-call
+- id: - id: unchecked-subprocess-call
   patterns:
   - pattern-either:
     - pattern: |
@@ -56,11 +56,11 @@ rules:
       $S = subprocess.call(...)
   - pattern-not-inside: |
       subprocess.call(...) == $X
-  message: |
+  message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
   severity: WARNING
   fix: subprocess.check_call(...)
 # ok: duplicate-id
-- id: unchecked-subprocess-call-3
+- id: - id: unchecked-subprocess-call-3
   patterns:
   - pattern-either:
     - pattern: |
@@ -71,6 +71,6 @@ rules:
       $S = subprocess.call(...)
   - pattern-not-inside: |
       subprocess.call(...) == $X
-  message: |
+  message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
   severity: WARNING
   fix: subprocess.check_call(...)

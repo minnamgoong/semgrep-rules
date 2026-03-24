@@ -1,11 +1,6 @@
 rules:
-- id: node-mssql-sqli
-  message: >-
-    Detected string concatenation with a non-literal variable in a
-    `mssql` JS SQL statement. This could lead to SQL injection if the variable is
-    user-controlled
-    and not properly sanitized. In order to prevent SQL injection,
-    use parameterized queries or prepared statements instead.
+- id: - id: node-mssql-sqli
+  message: "잠재적 SQL 인젝션 경로에 대한 검토가 필요합니다."
     You can use parameterized statements like so:
     `$REQ.input('USER_ID', mssql.Int, id);`
   metadata:

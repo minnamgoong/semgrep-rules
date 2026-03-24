@@ -2,7 +2,7 @@ rules:
 - id: lambda-permission-logs-missing-arn-asterisk
   severity: WARNING
   languages: [hcl]
-  message: "The `source_arn` field needs to end with an asterisk, like this: `<log-group-arn>:*` Without this, the `aws_lambda_permission` resource '$NAME' will not be created. Add the asterisk to the end of the arn. x $ARN"
+  message: "lambda-permission-logs-missing-arn-asterisk IaC 보안 설정 정비 및 예방 조치 요망."
   metadata:
     category: correctness
     references:

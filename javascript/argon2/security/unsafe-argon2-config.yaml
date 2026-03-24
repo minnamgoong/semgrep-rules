@@ -1,8 +1,6 @@
 rules:
-- id: unsafe-argon2-config
-  message: >-
-    Prefer Argon2id where possible. Per RFC9016, section 4 IETF recommends selecting Argon2id unless you
-    can guarantee an adversary has no direct access to the computing environment.
+- id: - id: unsafe-argon2-config
+  message: "unsafe-argon2-config 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     references:
     - https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html

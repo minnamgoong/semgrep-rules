@@ -1,7 +1,3 @@
-# conflicting-path-assignment (보안 및 무결성 경보)
-
+# conflicting-path-assignment (Python WARNING 경보)
 ## 개요
-규칙 아이디 `conflicting-path-assignment` 에 가담하는 보안 노출 혹은 코드 논리 결손 국면을 식별 감지합니다.
-
-## 조치 방안
-*   해당 메서드 호출 인자를 화이트리스트 고정하거나 규격화하십시오.
+동적 논리 이탈율을 잡습니다.

@@ -1,5 +1,5 @@
 rules:
-- id: cookie-missing-secure
+- id: - id: cookie-missing-secure
   patterns:
   - pattern-not-inside: |
       http.Cookie{
@@ -11,11 +11,7 @@ rules:
       http.Cookie{
         ...,
       }
-  message: >-
-    A session cookie was detected without setting the 'Secure' flag.
-    The 'secure' flag for cookies prevents the client from transmitting
-    the cookie over insecure channels such as HTTP. Set the 'Secure'
-    flag by setting 'Secure' to 'true' in the Options struct.
+  message: "쿠키 보안 속성(Secure/HttpOnly) 누출 우려 점검."
   metadata:
     cwe:
     - "CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute"

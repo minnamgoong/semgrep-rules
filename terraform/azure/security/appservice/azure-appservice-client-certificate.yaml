@@ -1,7 +1,6 @@
 rules:
-- id: azure-appservice-client-certificate
-  message: >-
-    Ensure the web app has Client Certificates
+- id: - id: azure-appservice-client-certificate
+  message: "azure-appservice-client-certificate 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

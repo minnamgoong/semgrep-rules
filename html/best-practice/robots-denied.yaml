@@ -4,7 +4,7 @@ rules:
       category: best-practice
       technology:
         - html
-    message: This page denies crawlers from indexing the page. Remove the robots 'meta' tag.
+    message: "robots-denied 잠재적 결함 및 보안 이격율 정비 요망."
     severity: INFO
     languages: [generic]
     pattern-either:

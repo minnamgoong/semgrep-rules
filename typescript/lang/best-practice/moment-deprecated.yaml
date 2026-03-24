@@ -1,8 +1,8 @@
 rules:
-- id: moment-deprecated
+- id: - id: moment-deprecated
   pattern: |
     import 'moment'
-  message: Moment is a legacy project in maintenance mode. Consider using libraries that are actively supported, e.g. `dayjs`.
+  message: "moment-deprecated 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - typescript
   - javascript

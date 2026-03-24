@@ -1,8 +1,6 @@
 rules:
-- id: insufficient-dsa-key-size
-  message: >-
-    Detected an insufficient key size for DSA. NIST recommends
-    a key size of 2048 or higher.
+- id: - id: insufficient-dsa-key-size
+  message: "insufficient-dsa-key-size 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-326: Inadequate Encryption Strength'

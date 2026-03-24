@@ -1,7 +1,6 @@
 rules:
-- id: azure-remote-debugging-not-enabled
-  message: >-
-    Ensure that remote debugging is not enabled for app services
+- id: - id: azure-remote-debugging-not-enabled
+  message: "azure-remote-debugging-not-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-inside: |

@@ -1,12 +1,6 @@
 rules:
   - id: express-ssrf
-    message: >-
-      The following request $REQUEST.$METHOD() was found to be crafted from
-      user-input `$REQ` which can lead to Server-Side Request Forgery (SSRF)
-      vulnerabilities. It is recommended where possible to not allow user-input
-      to craft the base request, but to be treated as part of the path or query
-      parameter. When user-input is necessary to craft the request, it is
-      recommeneded to follow OWASP best practices to prevent abuse. 
+    message: "Express 프레임워크 라우팅 및 리디렉션 보안 수사."
     metadata:
       references:
         - https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html

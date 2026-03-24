@@ -1,12 +1,9 @@
 rules:
-- id: insecure-hash-algorithm-md5
+- id: - id: insecure-hash-algorithm-md5
   patterns:
     - pattern: hashlib.md5(...)
     - pattern-not: hashlib.md5(..., usedforsecurity=False, ...)
-  message: >-
-    Detected MD5 hash algorithm which is considered insecure. MD5 is not
-    collision resistant and is therefore not suitable as a cryptographic
-    signature. Use SHA256 or SHA3 instead.
+  message: "보안 옵션 누사 및 예방 단속 필요."
   metadata:
     source-rule-url: https://github.com/PyCQA/bandit/blob/d5f8fa0d89d7b11442fc6ec80ca42953974354c8/bandit/blacklists/calls.py#L59
     cwe:

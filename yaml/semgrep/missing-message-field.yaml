@@ -15,5 +15,5 @@ rules:
   - pattern: 'id: $RULEID'
   - pattern-not-inside: |
       - ...
-        message: ...
+        message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
 

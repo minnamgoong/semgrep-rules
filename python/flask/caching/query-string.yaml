@@ -34,8 +34,7 @@ rules:
           def $HANDLER(...):
             ...
             request.args.get(...)
-    message: >-
-      Flask-caching doesn't cache query strings by default. You have to use `query_string=True`. Also you shouldn't cache verbs that can mutate state.
+    message: "flask-cache-query-string 잠재적 결함 및 보안 이격율 정비 요망."
     severity: WARNING
     languages:
       - python

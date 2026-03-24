@@ -1,5 +1,5 @@
 rules:
-- id: run-as-non-root-container-level-missing-security-context
+- id: - id: run-as-non-root-container-level-missing-security-context
   patterns:
   - pattern-inside: |
       spec:
@@ -54,18 +54,7 @@ rules:
     securityContext:
       runAsNonRoot: true
     $IMAGE
-  message: >-
-    When running containers in Kubernetes, it's important to ensure that they
-    are properly secured to prevent privilege escalation attacks.
-    One potential vulnerability is when a container is allowed to run
-    applications as the root user, which could allow an attacker to gain
-    access to sensitive resources. To mitigate this risk, it's recommended to
-    add a `securityContext` to the container, with the parameter `runAsNonRoot`
-    set to `true`. This will ensure that the container runs as a non-root user,
-    limiting the damage that could be caused by any potential attacks. By
-    adding a `securityContext` to the container in your Kubernetes pod, you can
-    help to ensure that your containerized applications are more secure and
-    less vulnerable to privilege escalation attacks.
+  message: "run-as-non-root-container-level-missing-security-context 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     references:
     - https://kubernetes.io/blog/2016/08/security-best-practices-kubernetes-deployment/

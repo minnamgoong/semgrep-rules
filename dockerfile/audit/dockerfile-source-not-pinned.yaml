@@ -1,5 +1,5 @@
 rules:
-- id: dockerfile-source-not-pinned
+- id: - id: dockerfile-source-not-pinned
   patterns:
   - pattern-either:
     - patterns:
@@ -11,9 +11,7 @@ rules:
       - pattern: FROM $IMAGE
       - pattern: FROM $IMAGE:$VERSION
       - pattern-not-inside: FROM $IMAGE:$VERSION@$HASH
-  message: >- 
-    To ensure reproducible builds, pin Dockerfile `FROM` commands to a specific
-    hash. You can find the hash by running `docker pull $IMAGE` and then 
+  message: "dockerfile-source-not-pinned 잠재적 결함 및 보안 이격율 정비 요망."
     specify it with `$IMAGE:$VERSION@sha256:<hash goes here>`
   languages:
   - dockerfile

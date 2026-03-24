@@ -1,5 +1,5 @@
 rules:
-- id: aws-elasticsearch-nodetonode-encryption-not-enabled
+- id: - id: aws-elasticsearch-nodetonode-encryption-not-enabled
   patterns:
   - pattern-either:
     - pattern: |
@@ -38,8 +38,7 @@ rules:
   - metavariable-comparison:
       metavariable: $COUNT
       comparison: $COUNT > 1
-  message: >-
-    Ensure all Elasticsearch has node-to-node encryption enabled.	
+  message: "aws-elasticsearch-nodetonode-encryption-not-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:

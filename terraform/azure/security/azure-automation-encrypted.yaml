@@ -1,5 +1,5 @@
 rules:
-- id: azure-automation-encrypted
+- id: - id: azure-automation-encrypted
   patterns:
   - pattern-either:
     - pattern-inside: |
@@ -32,7 +32,7 @@ rules:
       encrypted = true
       ...
       }
-  message: Ensure that Automation account variables are encrypted
+  message: "azure-automation-encrypted 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

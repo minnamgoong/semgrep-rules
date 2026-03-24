@@ -1,9 +1,6 @@
 rules:
-- id: express-xml2json-xxe-event
-  message: >-
-    Xml Parser is used inside Request Event.
-    Make sure that unverified user data can not reach the XML Parser,
-    as it can result in XML External or Internal Entity (XXE) Processing vulnerabilities
+- id: - id: express-xml2json-xxe-event
+  message: "Express 프레임워크 라우팅 및 리디렉션 보안 수사."
   metadata:
     owasp:
     - A04:2017 - XML External Entities (XXE)

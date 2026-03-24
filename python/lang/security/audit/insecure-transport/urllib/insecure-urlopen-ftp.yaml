@@ -1,6 +1,6 @@
 rules:
-- id: insecure-urlopen-ftp
-  message: >-
+- id: - id: insecure-urlopen-ftp
+  message: "보안 옵션 누사 및 예방 단속 필요."
     Detected 'urllib.urlopen()' using 'ftp://'. This request will not be
     encrypted. Consider using SFTP instead. urllib does not support SFTP,
     so consider switching to a library which supports SFTP.

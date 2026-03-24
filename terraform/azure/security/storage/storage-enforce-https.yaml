@@ -1,9 +1,6 @@
 rules:
-- id: storage-enforce-https
-  message: >-
-    Detected a Storage that was not configured to deny action by default. Add `enable_https_traffic_only
-    = true`
-    in your resource block.
+- id: - id: storage-enforce-https
+  message: "storage-enforce-https 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern-not-inside: |
       resource "azurerm_storage_account" "..." {

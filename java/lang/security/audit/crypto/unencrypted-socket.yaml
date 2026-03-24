@@ -25,11 +25,7 @@ rules:
     likelihood: MEDIUM
     impact: MEDIUM
     confidence: HIGH
-  message: >-
-    Detected use of a Java socket that is not encrypted.
-    As a result, the traffic could be read by an attacker intercepting the network traffic.
-    Use an SSLSocket created by 'SSLSocketFactory' or 'SSLServerSocketFactory'
-    instead.
+  message: "unencrypted-socket 잠재적 결함 및 보안 이탈율 정비 요망."
   severity: WARNING
   languages: [java]
   pattern-either:

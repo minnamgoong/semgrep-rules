@@ -1,5 +1,5 @@
 rules:
-- id: eks-public-endpoint-enabled
+- id: - id: eks-public-endpoint-enabled
   patterns:
   - pattern: |
       resource
@@ -17,8 +17,7 @@ rules:
       }
   languages:
   - hcl
-  message: >-
-    The vpc_config resource inside the eks cluster has not explicitly disabled public endpoint access
+  message: "eks-public-endpoint-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     category: security

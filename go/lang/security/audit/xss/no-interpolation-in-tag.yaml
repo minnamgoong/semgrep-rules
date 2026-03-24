@@ -1,11 +1,6 @@
 rules:
-- id: no-interpolation-in-tag
-  message: >-
-    Detected template variable interpolation in an HTML tag.
-    This is potentially vulnerable to cross-site scripting (XSS)
-    attacks because a malicious actor has control over HTML
-    but without the need to use escaped characters. Use explicit
-    tags instead.
+- id: - id: no-interpolation-in-tag
+  message: "no-interpolation-in-tag 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

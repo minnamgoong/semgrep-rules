@@ -1,8 +1,6 @@
 rules:
-- id: functionapp-authentication-enabled
-  message: >-
-    Enabling authentication ensures that all communications in the application are authenticated.
-    The `auth_settings` block needs to be filled out with the appropriate auth backend settings
+- id: - id: functionapp-authentication-enabled
+  message: "functionapp-authentication-enabled 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

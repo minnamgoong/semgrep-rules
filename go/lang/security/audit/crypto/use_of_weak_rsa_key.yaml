@@ -1,6 +1,6 @@
 rules:
-- id: use-of-weak-rsa-key
-  message: RSA keys should be at least 2048 bits
+- id: - id: use-of-weak-rsa-key
+  message: "use-of-weak-rsa-key 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [go]
   severity: WARNING
   metadata:

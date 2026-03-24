@@ -1,10 +1,6 @@
 rules:
-- id: x-frame-options-misconfiguration
-  message: >-
-    By letting user input control `X-Frame-Options` header,
-    there is a risk that software does not properly verify whether or not a browser should be allowed
-    to render a page in
-    an `iframe`.
+- id: - id: x-frame-options-misconfiguration
+  message: "x-frame-options-misconfiguration 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     references:
     - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options

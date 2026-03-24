@@ -12,11 +12,7 @@ rules:
               ...
   - pattern: |
       include: "*"
-  message: >-
-    Spring Boot Actuator is fully enabled. This exposes sensitive endpoints such as /actuator/env, /actuator/logfile,
-    /actuator/heapdump and others.
-    Unless you have Spring Security enabled or another means to protect these endpoints, this functionality
-    is available without authentication, causing a severe security risk.
+  message: "Spring Boot Actuator 엔드포인트가 과도하게 활성화되어 정보 누출 우려가 있습니다."
   severity: WARNING
   languages: [yaml]
   metadata:

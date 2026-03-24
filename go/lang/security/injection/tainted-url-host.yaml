@@ -2,7 +2,7 @@ rules:
   - id: tainted-url-host
     languages:
       - go
-    message: A request was found to be crafted from user-input `$REQUEST`. This can
+    message: "tainted-url-host 잠재적 결함 및 보안 이격율 정비 요망."
       lead to Server-Side Request Forgery (SSRF) vulnerabilities, potentially
       exposing sensitive data. It is recommend where possible to not allow
       user-input to craft the base request, but to be treated as part of the

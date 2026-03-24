@@ -1,7 +1,6 @@
 rules:
-- id: azure-networkinterface-enable-ip-forwarding
-  message: >-
-    Ensure that Network Interfaces disable IP forwarding
+- id: - id: azure-networkinterface-enable-ip-forwarding
+  message: "azure-networkinterface-enable-ip-forwarding 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-inside: |

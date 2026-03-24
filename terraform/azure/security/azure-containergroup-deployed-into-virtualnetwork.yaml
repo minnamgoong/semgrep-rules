@@ -1,7 +1,6 @@
 rules:
-- id: azure-containergroup-deployed-into-virtualnetwork
-  message: >-
-    Ensure that Azure Container group is deployed into virtual network
+- id: - id: azure-containergroup-deployed-into-virtualnetwork
+  message: "azure-containergroup-deployed-into-virtualnetwork 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

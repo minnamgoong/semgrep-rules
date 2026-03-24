@@ -1,15 +1,11 @@
 rules:
-- id: non-literal-import
+- id: - id: non-literal-import
   patterns:
   - pattern: |
       importlib.import_module($NAME, ...)
   - pattern-not: |
       importlib.import_module("...", ...)
-  message: >-
-    Untrusted user input in `importlib.import_module()` function allows an attacker
-    to load arbitrary code.
-    Avoid dynamic values in `importlib.import_module()` or use a whitelist to prevent
-    running untrusted code.
+  message: "non-literal-import 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A01:2021 - Broken Access Control

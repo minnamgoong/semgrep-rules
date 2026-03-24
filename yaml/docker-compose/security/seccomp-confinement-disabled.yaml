@@ -1,5 +1,5 @@
 rules:
-- id: seccomp-confinement-disabled
+- id: - id: seccomp-confinement-disabled
   patterns:
   - pattern-inside: |
       version: ...
@@ -14,8 +14,7 @@ rules:
         security_opt:
           - ...
           - seccomp:unconfined
-  message: >-
-    Service '$SERVICE' is explicitly disabling seccomp confinement. This runs
+  message: "seccomp-confinement-disabled 잠재적 결함 및 보안 이격율 정비 요망."
     the service in an unrestricted state. Remove 'seccomp:unconfined' to prevent this.
   metadata:
     cwe:

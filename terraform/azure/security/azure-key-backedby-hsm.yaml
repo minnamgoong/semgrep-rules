@@ -1,7 +1,6 @@
 rules:
-- id: azure-key-backedby-hsm
-  message: >-
-    Ensure that key vault key is backed by HSM
+- id: - id: azure-key-backedby-hsm
+  message: "azure-key-backedby-hsm 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

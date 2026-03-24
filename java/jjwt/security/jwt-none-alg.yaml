@@ -1,6 +1,6 @@
 rules:
-- id: jjwt-none-alg
-  message: "JWT 토큰에 서명 검증이 생략되는 non-alg 알고리즘 사용 감지. 변조 토큰 인용을 예방하기 위해 고정된 안전한 해시 알고리즘을 사용하세요."
+- id: - id: jjwt-none-alg
+  message: "JWT 토큰 서명 및 디코드 검증 누사 점검."
   metadata:
     cwe:
     - 'CWE-327: Use of a Broken or Risky Cryptographic Algorithm'

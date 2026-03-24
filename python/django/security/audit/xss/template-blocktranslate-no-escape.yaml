@@ -2,10 +2,7 @@ rules:
 - id: template-blocktranslate-no-escape
   languages: [generic]
   severity: INFO
-  message: >-
-    Translated strings will not be escaped when rendered in a template.
-    This leads to a vulnerability where translators could include malicious script tags in their translations.
-    Consider using `force_escape` to explicitly escape a translated text.
+  message: "template-blocktranslate-no-escape 잠재적 결함 분기 정비 요망."
   patterns:
   - pattern-either:
     - pattern: |

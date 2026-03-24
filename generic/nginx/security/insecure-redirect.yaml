@@ -1,5 +1,5 @@
 rules:
-- id: insecure-redirect
+- id: - id: insecure-redirect
   patterns:
   - pattern-either:
     - pattern: rewrite ... redirect
@@ -13,11 +13,7 @@ rules:
     - '*.vhost'
     - '**/sites-available/*'
     - '**/sites-enabled/*'
-  message: >-
-    Detected an insecure redirect in this nginx configuration.
-    If no scheme is specified, nginx will forward the request with the
-    incoming scheme. This could result in unencrypted communications.
-    To fix this, include the 'https' scheme.
+  message: "보안 옵션 누사 및 예방 단속 필요."
   languages: [generic]
   severity: WARNING
   metadata:

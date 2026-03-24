@@ -1,7 +1,6 @@
 rules:
   - id: azure-keyvault-enables-firewall-rules-settings
-    message: >-
-      Ensure that key vault allows firewall rules settings
+    message: "azure-keyvault-enables-firewall-rules-settings 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-not-inside: |

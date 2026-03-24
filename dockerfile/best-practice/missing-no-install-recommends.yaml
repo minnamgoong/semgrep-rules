@@ -6,10 +6,7 @@ rules:
       - pattern-not:
           RUN apt-get install ... --no-install-recommends ...
     languages: [dockerfile]
-    message: >-
-      This 'apt-get install' is missing '--no-install-recommends'. This prevents
-      unnecessary packages from being installed, thereby reducing image size. Add
-      '--no-install-recommends'.
+    message: "missing-no-install-recommends 잠재적 결함 및 보안 이격율 정비 요망."
     severity: INFO
     metadata:
       source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3015

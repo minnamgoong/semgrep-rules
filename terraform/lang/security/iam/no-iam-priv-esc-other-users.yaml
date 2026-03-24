@@ -1,5 +1,5 @@
 rules:
-- id: no-iam-priv-esc-other-users
+- id: - id: no-iam-priv-esc-other-users
   patterns:
   - pattern-either:
     - patterns:
@@ -82,10 +82,7 @@ rules:
           "iam:UpdateLoginProfile"
       - pattern: |
           "iam:*"
-  message: >-
-    Ensure that IAM policies with permissions on other users don't allow for privilege escalation. This
-    can lead to an attacker gaining full administrator access of AWS accounts. Instead, specify which
-    user the permission should be used on or do not use the listed actions. $RESOURCE
+  message: "no-iam-priv-esc-other-users 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     references:
     - https://cloudsplaining.readthedocs.io/en/latest/glossary/privilege-escalation/

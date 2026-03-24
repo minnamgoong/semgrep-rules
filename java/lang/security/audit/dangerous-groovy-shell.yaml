@@ -21,9 +21,7 @@ rules:
       $SHELL.evaluate("...",...)
   - pattern-not: |
       $SHELL.parseClass("...",...)
-  message: >-
-    A expression is built with a dynamic value. The source of the value(s) should
-    be verified to avoid that unfiltered values fall into this risky code evaluation.
+  message: "Groovy Shell 직접 구동 파사드에 위험 요소 가압이 엿보입니다."
   metadata:
     cwe:
     - "CWE-94: Improper Control of Generation of Code ('Code Injection')"

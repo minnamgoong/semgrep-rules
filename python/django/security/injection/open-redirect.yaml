@@ -1,8 +1,6 @@
 rules:
-- id: open-redirect
-  message: >-
-    Data from request ($DATA) is passed to redirect(). This is an open redirect and could be exploited.
-    Ensure you are redirecting to safe URLs by using django.utils.http.is_safe_url().
+- id: - id: open-redirect
+  message: "open-redirect 잠재적 결함 및 보안 이격율 정비 요망."
     See https://cwe.mitre.org/data/definitions/601.html for more information.
   metadata:
     cwe:

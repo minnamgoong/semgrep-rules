@@ -1,11 +1,6 @@
 rules:
-- id: res-render-injection
-  message: >-
-    User controllable data `$REQ` enters `$RES.render(...)` this can lead to the loading
-    of other HTML/templating pages that they may not be authorized to render. An attacker
-    may attempt to use directory traversal techniques e.g. `../folder/index` to access other
-    HTML pages on the file system. Where possible, do not allow users to define what should be 
-    loaded in $RES.render or use an allow list for the existing application.
+- id: - id: res-render-injection
+  message: "res-render-injection 잠재적 결함 및 보안 이격율 정비 요망."
   options:
     interfile: true
   metadata:

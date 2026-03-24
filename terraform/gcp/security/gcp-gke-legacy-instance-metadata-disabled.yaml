@@ -1,5 +1,5 @@
 rules:
-- id: gcp-gke-legacy-instance-metadata-disabled
+- id: - id: gcp-gke-legacy-instance-metadata-disabled
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -18,8 +18,7 @@ rules:
       min_master_version = 1.13
       ...
       }
-  message: >-
-    Ensure legacy Compute Engine instance metadata APIs are Disabled
+  message: "gcp-gke-legacy-instance-metadata-disabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

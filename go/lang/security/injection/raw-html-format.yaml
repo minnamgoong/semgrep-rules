@@ -1,15 +1,8 @@
 rules:
-- id: raw-html-format
+- id: - id: raw-html-format
   languages: [go]
   severity: WARNING
-  message: >-
-    Detected user input flowing into a manually constructed HTML string. You may be
-    accidentally bypassing secure methods
-    of rendering HTML by manually constructing HTML and this could create a cross-site
-    scripting vulnerability, which could
-    let attackers steal sensitive user data. Use the `html/template` package which
-    will safely render HTML instead, or inspect
-    that the HTML is rendered safely.
+  message: "HTML 템플릿 가속 피싱 대응."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

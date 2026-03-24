@@ -1,8 +1,6 @@
 rules:
-- id: var-in-href
-  message: >-
-    Detected a template variable used in an anchor tag with
-    the 'href' attribute. This allows a malicious actor to
+- id: - id: var-in-href
+  message: "var-in-href 잠재적 결함 및 보안 이격율 정비 요망."
     input the 'javascript:' URI and is subject to cross-
     site scripting (XSS) attacks.
     If using Flask, use 'url_for()' to safely generate a URL.

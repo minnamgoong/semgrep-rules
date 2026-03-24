@@ -1,6 +1,6 @@
 rules:
-- id: spring-http-request
-  message: >-
+- id: - id: spring-http-request
+  message: "spring-http-request 잠재적 결함 및 보안 이격율 정비 요망."
     Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because
     the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead,
     send requests only to

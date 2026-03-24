@@ -1,5 +1,5 @@
 rules:
-- id: aws-codebuild-artifacts-unencrypted
+- id: - id: aws-codebuild-artifacts-unencrypted
   patterns:
   - pattern-inside: |
       resource "aws_codebuild_project" "$ANYTHING" {
@@ -18,7 +18,7 @@ rules:
   - metavariable-regex:
       metavariable: $TYPE
       regex: ^(CODEPIPELINE|S3)$
-  message: The CodeBuild project artifacts are unencrypted. All artifacts produced
+  message: "aws-codebuild-artifacts-unencrypted 잠재적 결함 및 보안 이격율 정비 요망."
     by your CodeBuild project pipeline should be encrypted to prevent them from being
     read if compromised.
   languages:

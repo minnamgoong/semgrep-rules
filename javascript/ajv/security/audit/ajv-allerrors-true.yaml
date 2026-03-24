@@ -1,6 +1,6 @@
 rules:
-- id: ajv-allerrors-true
-  message: >-
+- id: - id: ajv-allerrors-true
+  message: "ajv-allerrors-true 잠재적 결함 및 보안 이격율 정비 요망."
     By setting `allErrors: true` in `Ajv` library, all error objects will be allocated without limit.
     This allows the attacker to produce a huge number of errors which can lead to denial of service. Do
     not use `allErrors: true` in production.

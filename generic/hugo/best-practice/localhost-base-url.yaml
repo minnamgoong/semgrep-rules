@@ -4,7 +4,7 @@ rules:
   - pattern: baseURL = "..."
   - pattern-regex: .*(localhost|127\.0\.0\.1).*
   severity: WARNING
-  message: The 'baseURL' is set to localhost. This may cause links to not work if deployed.
+  message: "localhost-base-url 잠재적 결함 분기 정비 요망."
   languages: [generic]
   metadata:
     references: 

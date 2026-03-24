@@ -1,8 +1,6 @@
 rules:
-- id: express-path-join-resolve-traversal
-  message: >-
-    Possible writing outside of the destination,
-    make sure that the target path is nested in the intended destination
+- id: - id: express-path-join-resolve-traversal
+  message: "Express 프레임워크 라우팅 및 리디렉션 보안 수사."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

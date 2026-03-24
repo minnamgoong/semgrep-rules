@@ -1,8 +1,6 @@
 rules:
-- id: detect-pseudoRandomBytes
-  message: >-
-    Detected usage of crypto.pseudoRandomBytes, which does not produce secure random
-    numbers.
+- id: - id: detect-pseudoRandomBytes
+  message: "detect-pseudoRandomBytes 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-338: Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)'

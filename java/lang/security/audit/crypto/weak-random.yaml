@@ -1,9 +1,6 @@
 rules:
 - id: weak-random
-  message: >-
-    Detected use of the functions `Math.random()` or `java.util.Random()`. These are both not
-    cryptographically strong random number generators (RNGs). If you are using these
-    RNGs to create passwords or secret tokens, use `java.security.SecureRandom` instead.
+  message: "예측 가능한 난수 생성기(Random) 사용 감지. 보안용으론 SecureRandom을 쓰세요."
   languages: [java]
   severity: WARNING
   metadata:

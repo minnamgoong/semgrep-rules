@@ -1,5 +1,5 @@
 rules:
-- id: gcp-compute-boot-disk-encryption
+- id: - id: gcp-compute-boot-disk-encryption
   patterns:
   - pattern: |
       resource "google_compute_instance" $ANYTHING {
@@ -21,7 +21,7 @@ rules:
         }
         ...
       }
-  message: Ensure VM disks for critical VMs are encrypted with Customer Supplied Encryption Keys (CSEK)
+  message: "gcp-compute-boot-disk-encryption 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

@@ -1,5 +1,5 @@
 rules:
-- id: aws-documentdb-storage-unencrypted
+- id: - id: aws-documentdb-storage-unencrypted
   patterns:
   - pattern: |
       resource "aws_docdb_cluster" $ANYTHING {
@@ -11,9 +11,7 @@ rules:
         storage_encrypted = true
         ...
       }
-  message: >-
-    The AWS DocumentDB cluster is unencrypted. The data could be read if the
-    underlying disks are compromised. You should enable storage encryption.
+  message: "aws-documentdb-storage-unencrypted 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - hcl
   severity: WARNING

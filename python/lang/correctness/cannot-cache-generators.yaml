@@ -1,5 +1,5 @@
 rules:
-- id: cannot-cache-generators
+- id: - id: cannot-cache-generators
   patterns:
   - pattern-inside: |
       @functools.lru_cache(...)
@@ -7,7 +7,7 @@ rules:
           ...
           yield ...
   - pattern: functools.lru_cache(...)
-  message: Generators can only be consumed once, so in most cases, caching them will
+  message: "cannot-cache-generators 잠재적 결함 및 보안 이격율 정비 요망."
     cause an error when the already-consumed generator is retrieved from cache.
   languages:
   - python

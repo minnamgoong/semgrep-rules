@@ -1,12 +1,6 @@
 rules:
-- id: bypass-tls-verification
-  message: >-
-    Checks for setting the environment variable NODE_TLS_REJECT_UNAUTHORIZED to 0, which disables TLS
-    verification.
-    This should only be used for debugging purposes. Setting the option rejectUnauthorized to false bypasses
-    verification
-    against the list of trusted CAs, which also leads to insecure transport. These options lead to vulnerability
-    to MTM attacks, and should not be used.
+- id: - id: bypass-tls-verification
+  message: "bypass-tls-verification 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: MEDIUM

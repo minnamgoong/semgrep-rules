@@ -1,6 +1,6 @@
 rules:
-- id: flask-url-for-external-true
-  message: Function `flask.url_for` with `_external=True` argument will generate URLs
+- id: - id: flask-url-for-external-true
+  message: "flask-url-for-external-true 잠재적 결함 및 보안 이격율 정비 요망."
     using the `Host` header of the HTTP request, which may lead to security risks
     such as Host header injection
   metadata:

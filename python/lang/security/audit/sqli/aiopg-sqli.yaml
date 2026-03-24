@@ -1,12 +1,8 @@
 rules:
-- id: aiopg-sqli
+- id: - id: aiopg-sqli
   languages:
   - python
-  message: >-
-    Detected string concatenation with a non-literal variable in an aiopg
-    Python SQL statement. This could lead to SQL injection if the variable is user-controlled
-    and not properly sanitized. In order to prevent SQL injection,
-    use parameterized queries instead.
+  message: "잠재적 SQL 인젝션 경로에 대한 검토가 필요합니다."
     You can create parameterized queries like so:
     'cur.execute("SELECT %s FROM table", (user_value,))'.
   metadata:

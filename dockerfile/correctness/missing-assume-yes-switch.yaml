@@ -1,5 +1,5 @@
 rules:
-- id: missing-assume-yes-switch
+- id: - id: missing-assume-yes-switch
   patterns:
     - pattern: |
         RUN ... apt-get install ... $MULTIFLAG ... 
@@ -14,7 +14,7 @@ rules:
         regex: (^([^-])|(-[^y]+)$)
   languages:
     - dockerfile
-  message: This 'apt-get install' is missing the '-y' switch. This might stall
+  message: "missing-assume-yes-switch 잠재적 결함 및 보안 이격율 정비 요망."
     builds because it requires human intervention. Add the '-y' switch.
   severity: WARNING
   metadata:

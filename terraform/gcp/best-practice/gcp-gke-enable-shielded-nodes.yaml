@@ -1,5 +1,5 @@
 rules:
-- id: gcp-gke-enable-shielded-nodes
+- id: - id: gcp-gke-enable-shielded-nodes
   patterns:
     - pattern: resource
     - pattern-inside: |
@@ -8,8 +8,7 @@ rules:
           enable_shielded_nodes = false
           ...
           }
-  message: >-
-    Ensure Shielded GKE Nodes are Enabled
+  message: "gcp-gke-enable-shielded-nodes 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: best-practice
     technology:

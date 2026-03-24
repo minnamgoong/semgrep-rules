@@ -1,5 +1,5 @@
 rules:
-- id: gcp-compute-ip-forward
+- id: - id: gcp-compute-ip-forward
   patterns:
   - pattern: resource
   - pattern-inside: |
@@ -8,10 +8,7 @@ rules:
       can_ip_forward = true
       ...
       }
-  message: >-
-    Ensure that IP forwarding is not enabled on Instances. This lets the instance act as a traffic router
-    and
-    receive traffic not intended for it, which may route traffic through unintended passages.	
+  message: "gcp-compute-ip-forward 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A05:2017 - Broken Access Control

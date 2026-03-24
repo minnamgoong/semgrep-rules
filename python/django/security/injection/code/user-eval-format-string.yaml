@@ -1,8 +1,6 @@
 rules:
-- id: user-eval-format-string
-  message: >-
-    Found user data in a call to 'eval'. This is extremely dangerous because
-    it can enable an attacker to execute remote code. See
+- id: - id: user-eval-format-string
+  message: "user-eval-format-string 잠재적 결함 및 보안 이격율 정비 요망."
     https://owasp.org/www-community/attacks/Code_Injection for more information.
   metadata:
     cwe:

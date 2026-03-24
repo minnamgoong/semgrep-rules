@@ -1,7 +1,6 @@
 rules:
-- id: azure-appservice-https-only
-  message: >-
-    Ensure web app redirects all HTTP traffic to HTTPS in Azure App Service Slot
+- id: - id: azure-appservice-https-only
+  message: "azure-appservice-https-only 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

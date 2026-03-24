@@ -1,5 +1,5 @@
 rules:
-- id: missing-athena-workgroup-encryption
+- id: - id: missing-athena-workgroup-encryption
   patterns:
   - pattern: resource "aws_athena_workgroup" $ANYTHING {...}
   - pattern-not-inside: |
@@ -8,8 +8,7 @@ rules:
         encryption_configuration {...}
         ...
       }
-  message: >-
-    The AWS Athena Workgroup is unencrypted. Encryption protects query results in your workgroup.
+  message: "missing-athena-workgroup-encryption 잠재적 결함 및 보안 이격율 정비 요망."
     To enable, add: `encryption_configuration { encryption_option = "SSE_KMS" kms_key_arn = 
     aws_kms_key.example.arn }` within `result_configuration { }` in your resource block, 
     where `encryption_option` is your chosen encryption method and `kms_key_arn` 

@@ -19,10 +19,7 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: HIGH
-  message: >-
-    An insecure SSL context was detected. TLS versions 1.0, 1.1, and all SSL versions
-    are considered weak encryption and are deprecated.
-    Use SSLContext.getInstance("TLSv1.2") for the best security.
+  message: "취약하거나 검증되지 않은 SSL/TLS 컨텍스트가 감지되었습니다. 중간자 공격(MitM)을 조심하십시오."
   severity: WARNING
   languages: [java]
   patterns:

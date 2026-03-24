@@ -9,7 +9,7 @@ rules:
   languages:
   - hcl
   severity: WARNING
-  message: RDS instance accessible from the Internet detected.
+  message: "rds-public-access IaC 보안 설정 정비 및 예방 조치 요망."
   metadata:
     references:
     - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#publicly_accessible

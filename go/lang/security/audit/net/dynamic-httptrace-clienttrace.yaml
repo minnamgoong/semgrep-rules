@@ -1,13 +1,6 @@
 rules:
-- id: dynamic-httptrace-clienttrace
-  message: >-
-    Detected a potentially dynamic ClientTrace. This occurred because semgrep could
-    not
-    find a static definition for '$TRACE'. Dynamic ClientTraces are dangerous because
-    they deserialize function code to run when certain Request events occur, which
-    could lead
-    to code being run without your knowledge. Ensure that your ClientTrace is statically
-    defined.
+- id: - id: dynamic-httptrace-clienttrace
+  message: "dynamic-httptrace-clienttrace 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-913: Improper Control of Dynamically-Managed Code Resources'

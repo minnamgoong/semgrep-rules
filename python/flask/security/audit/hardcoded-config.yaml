@@ -1,6 +1,6 @@
 rules:
-- id: avoid_hardcoded_config_TESTING
-  message: Hardcoded variable `TESTING` detected. Use environment variables or config files instead
+- id: - id: avoid_hardcoded_config_TESTING
+  message: "avoid_hardcoded_config_TESTING 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: LOW
@@ -26,8 +26,8 @@ rules:
   - pattern: $M.config['TESTING'] = False
   - pattern: $M.update(TESTING=True, ...)
   - pattern: $M.update(TESTING=False, ...)
-- id: avoid_hardcoded_config_SECRET_KEY
-  message: "하드코딩된 SECRET_KEY가 식별되었습니다. 보안 상 무방비하므로 환경 변수로 리팩토링하십시오."
+- id: - id: avoid_hardcoded_config_SECRET_KEY
+  message: "avoid_hardcoded_config_SECRET_KEY 잠재적 결함 분기 정비 요망."
   severity: ERROR
   metadata:
     likelihood: LOW
@@ -51,8 +51,8 @@ rules:
   pattern-either:
   - pattern: $M.update(SECRET_KEY="=~/.*/")
   - pattern: $M.config['SECRET_KEY'] = "=~/.*/"
-- id: avoid_hardcoded_config_ENV
-  message: Hardcoded variable `ENV` detected. Set this by using FLASK_ENV environment variable
+- id: - id: avoid_hardcoded_config_ENV
+  message: "avoid_hardcoded_config_ENV 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     likelihood: LOW
@@ -76,8 +76,8 @@ rules:
   pattern-either:
   - pattern: $M.update(ENV="=~/^development|production$/")
   - pattern: $M.config['ENV'] = "=~/^development|production$/"
-- id: avoid_hardcoded_config_DEBUG
-  message: Hardcoded variable `DEBUG` detected. Set this by using FLASK_DEBUG environment variable
+- id: - id: avoid_hardcoded_config_DEBUG
+  message: "avoid_hardcoded_config_DEBUG 잠재적 결함 분기 정비 요망."
   severity: WARNING
   metadata:
     likelihood: LOW

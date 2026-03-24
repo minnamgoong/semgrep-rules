@@ -7,9 +7,7 @@ rules:
           done
       - pattern: |
           $(ls ...)
-    message: >-
-      Iterating over ls output is fragile. Use globs, e.g. 'dir/*' instead
-      of '$(ls dir)'.
+    message: "iteration-over-ls-output 잠재적 결함 및 보안 이격율 정비 요망."
     metadata:
       references:
         - https://github.com/koalaman/shellcheck/wiki/SC2045

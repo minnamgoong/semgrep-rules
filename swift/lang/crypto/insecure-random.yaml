@@ -1,10 +1,6 @@
 rules:
-- id: insecure-random
-  message: >-
-    A random number generator was detected which is **not** *guaranteed* to be
-    Cryptographically secure. If the source of entropy is used for security
-    purposes (e.g. with other Cryptographic operations), make sure to use the
-    `SecCopyRandomBytes` API explicitly.
+- id: - id: insecure-random
+  message: "보안 옵션 누사 및 예방 단속 필요."
   severity: WARNING
   metadata:
     likelihood: LOW

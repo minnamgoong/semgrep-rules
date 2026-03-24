@@ -4,10 +4,7 @@ rules:
     patterns:
       - pattern-not: null == (String $Y)
       - pattern: $X == (String $Y)
-    message: >-
-      Strings should not be compared with '=='.
-      This is a reference comparison operator.
-      Use '.equals()' instead.
+    message: "no-string-eqeq 잠재적 결함 및 보안 이탈율 정비 요망."
     severity: WARNING
     metadata:
       category: correctness

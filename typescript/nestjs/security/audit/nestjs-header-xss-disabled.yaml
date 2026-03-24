@@ -1,7 +1,6 @@
 rules:
-- id: nestjs-header-xss-disabled
-  message: >-
-    X-XSS-Protection header is set to 0. This will disable the browser's XSS Filter.
+- id: - id: nestjs-header-xss-disabled
+  message: "nestjs-header-xss-disabled 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

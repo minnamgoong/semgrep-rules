@@ -11,7 +11,7 @@ rules:
           $COOKIE = new Cookie(...);
           ...
           $COOKIE.setSecure(true);
-    message: "Default session middleware settings: `setSecure` not set to true. This
+    message: "쿠키에 보안 속성(Secure/HttpOnly)이 누락되어 세션 탈취(XSS/MitM)에 노출될 수 있습니다."
       ensures that the cookie is sent only over HTTPS to prevent cross-site
       scripting attacks."
     fix-regex:

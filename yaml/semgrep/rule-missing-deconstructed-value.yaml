@@ -1,9 +1,6 @@
 rules:
-- id: missing-deconstructed-value
-  message: >-
-    Looks like this value is deconstructing a const/var/let you need to use all three `const {...} =`
-    `var {...} =` and `let {...} =` to provide accurate coverage consider adding the missing patterns
-    in a `pattern-inside` for better coverage.
+- id: - id: missing-deconstructed-value
+  message: "missing-deconstructed-value 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   metadata:
     category: correctness

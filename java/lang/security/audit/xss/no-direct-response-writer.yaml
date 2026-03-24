@@ -1,6 +1,6 @@
 rules:
 - id: no-direct-response-writer
-  message: Detected a request with potential user-input going into a OutputStream
+  message: "no-direct-response-writer 잠재적 결함 및 보안 이탈율 정비 요망."
       or Writer object. This bypasses any view or template environments,
       including HTML escaping, which may expose this application to cross-site
       scripting (XSS) vulnerabilities. Consider using a view technology such as

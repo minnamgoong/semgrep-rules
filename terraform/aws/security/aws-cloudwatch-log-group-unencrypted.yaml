@@ -1,5 +1,5 @@
 rules:
-- id: aws-cloudwatch-log-group-unencrypted
+- id: - id: aws-cloudwatch-log-group-unencrypted
   patterns:
   - pattern: |
       resource "aws_cloudwatch_log_group" $ANYTHING {
@@ -11,10 +11,7 @@ rules:
         kms_key_id = ...
         ...
       }
-  message: >-
-    By default, AWS CloudWatch Log Group is encrypted using AWS-managed keys.
-    However, for added security, it's recommended to configure your own AWS KMS encryption key to protect your log group in CloudWatch.
-    You can either create a new aws_kms_key resource or use the ARN of an existing key in your AWS account to do so.
+  message: "aws-cloudwatch-log-group-unencrypted 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

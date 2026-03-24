@@ -1,7 +1,6 @@
 rules:
-- id: sandbox-code-injection
-  message: >-
-    Make sure that unverified user data can not reach `sandbox`.
+- id: - id: sandbox-code-injection
+  message: "sandbox-code-injection 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A03:2021 - Injection

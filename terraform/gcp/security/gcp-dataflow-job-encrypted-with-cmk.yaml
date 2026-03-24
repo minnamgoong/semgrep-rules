@@ -1,5 +1,5 @@
 rules:
-- id: gcp-dataflow-job-encrypted-with-cmk
+- id: - id: gcp-dataflow-job-encrypted-with-cmk
   patterns:
   - pattern: |
       resource "google_dataflow_job" $ANYTHING {
@@ -11,8 +11,7 @@ rules:
         kms_key_name = ...
         ...
       }
-  message: >-
-    Ensure data flow jobs are encrypted with Customer Supplied Encryption Keys (CSEK)
+  message: "gcp-dataflow-job-encrypted-with-cmk 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:

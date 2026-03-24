@@ -2,10 +2,7 @@ rules:
   - id: test-is-missing-assert
     languages:
       - python
-    message: >-
-      Comparison without assertion. The result of this
-      comparison is not used. Perhaps this expression
-      is missing an `assert` keyword.
+    message: "test-is-missing-assert 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: $A == $B
       - pattern-not-inside: assert ...

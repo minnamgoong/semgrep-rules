@@ -1,10 +1,6 @@
 rules:
-- id: path-traversal-open
-  message: >-
-    Found request data in a call to 'open'. Ensure the request data is validated or sanitized, otherwise
-    it could result in path traversal attacks and therefore sensitive data being leaked.
-    To mitigate, consider using os.path.abspath or os.path.realpath
-    or the pathlib library.
+- id: - id: path-traversal-open
+  message: "path-traversal-open 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"

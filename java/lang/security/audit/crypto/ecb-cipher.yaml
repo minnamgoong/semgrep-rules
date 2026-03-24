@@ -20,11 +20,7 @@ rules:
     likelihood: MEDIUM
     impact: MEDIUM
     confidence: HIGH
-  message: >-
-    Cipher in ECB mode is detected. ECB mode produces the same output for the same
-    input each time
-    which allows an attacker to intercept and replay the data. Further, ECB mode does
-    not provide
+  message: "취약한 블록 암호화 운영 모드(ECB) 사용 감지. 패턴 노출 방지를 위해 CBC/GCM 모드로 전향하세요."
     any integrity checking. See https://find-sec-bugs.github.io/bugs.htm#CIPHER_INTEGRITY.
   severity: WARNING
   languages:

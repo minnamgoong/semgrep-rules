@@ -22,10 +22,7 @@ rules:
   languages:
   - generic
   severity: WARNING
-  message: >-
-    The alias in this location block is subject to a path traversal
-    because the location path does not end in a path separator (e.g., '/').
-    To fix, add a path separator to the end of the path.
+  message: "alias-path-traversal 잠재적 결함 분기 정비 요망."
   metadata:
     cwe:
     - "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"

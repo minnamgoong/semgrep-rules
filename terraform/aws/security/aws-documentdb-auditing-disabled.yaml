@@ -1,5 +1,5 @@
 rules:
-- id: aws-documentdb-auditing-disabled
+- id: - id: aws-documentdb-auditing-disabled
   patterns:
   - pattern: |
       resource "aws_docdb_cluster" $ANYTHING {
@@ -11,10 +11,7 @@ rules:
         enabled_cloudwatch_logs_exports = [..., "audit", ...]
         ...
       }
-  message: >-
-    Auditing is not enabled for DocumentDB. To ensure that you are able to
-    accurately audit the usage of your DocumentDB cluster, you should enable auditing
-    and export logs to CloudWatch.
+  message: "aws-documentdb-auditing-disabled 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - hcl
   severity: INFO

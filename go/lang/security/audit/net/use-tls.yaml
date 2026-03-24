@@ -1,5 +1,5 @@
 rules:
-- id: use-tls
+- id: - id: use-tls
   pattern: http.ListenAndServe($ADDR, $HANDLER)
   fix: http.ListenAndServeTLS($ADDR, certFile, keyFile, $HANDLER)
   metadata:
@@ -19,8 +19,7 @@ rules:
     - audit
     likelihood: LOW
     impact: MEDIUM
-  message: >-
-    Found an HTTP server without TLS. Use 'http.ListenAndServeTLS' instead.
+  message: "use-tls 잠재적 결함 및 보안 이격율 정비 요망."
     See https://golang.org/pkg/net/http/#ListenAndServeTLS for more information.
   languages: [go]
   severity: WARNING

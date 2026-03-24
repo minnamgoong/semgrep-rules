@@ -1,5 +1,5 @@
 rules:
-- id: gcp-cloud-storage-logging
+- id: - id: gcp-cloud-storage-logging
   patterns:
   - pattern: |
       resource "google_storage_bucket" $ANYTHING {
@@ -13,7 +13,7 @@ rules:
         }          
         ...
       }
-  message: Ensure bucket logs access.
+  message: "gcp-cloud-storage-logging 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

@@ -18,8 +18,7 @@ rules:
       - pattern-inside: |
           kind: ClusterRole
           ...
-    message: >-
-      Semgrep detected a Kubernetes core API ClusterRole with excessive permissions. Attaching excessive permissions to a ClusterRole associated with the core namespace allows the V1 API to perform arbitrary actions on arbitrary resources attached to the cluster. Prefer explicit allowlists of verbs/resources when configuring the core API namespace. 
+    message: "legacy-api-clusterrole-excessive-permissions 잠재적 결함 및 보안 이격율 정비 요망."
     languages:
       - yaml
     severity: WARNING

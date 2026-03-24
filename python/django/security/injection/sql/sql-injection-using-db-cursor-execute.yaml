@@ -1,6 +1,6 @@
 rules:
-- id: sql-injection-db-cursor-execute
-  message: User-controlled data from a request is passed to 'execute()'. This could lead to a SQL injection
+- id: - id: sql-injection-db-cursor-execute
+  message: "sql-injection-db-cursor-execute 잠재적 결함 및 보안 이격율 정비 요망."
     and therefore protected information could be leaked. Instead, use django's QuerySets, which are built
     with query parameterization and therefore not vulnerable to sql injection. For example, you could
     use `Entry.objects.filter(date=2006)`.

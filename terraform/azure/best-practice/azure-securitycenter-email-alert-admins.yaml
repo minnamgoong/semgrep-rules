@@ -1,7 +1,6 @@
 rules:
   - id: azure-securitycenter-email-alert-admins
-    message: >-
-      Ensure that Send email notification for high severity alerts is set to On
+    message: "azure-securitycenter-email-alert-admins 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-inside: |

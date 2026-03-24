@@ -1,7 +1,6 @@
 rules:
   - id: azure-securitycenter-contact-emails
-    message: >-
-      Ensure that Security contact emails is set
+    message: "azure-securitycenter-contact-emails 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-inside: |

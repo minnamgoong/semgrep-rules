@@ -1,8 +1,6 @@
 rules:
-- id: playwright-evaluate-code-injection
-  message: >-
-    If unverified user data can reach the `evaluate` method it can result in Server-Side Request Forgery
-    vulnerabilities
+- id: - id: playwright-evaluate-code-injection
+  message: "playwright-evaluate-code-injection 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A10:2021 - Server-Side Request Forgery (SSRF)

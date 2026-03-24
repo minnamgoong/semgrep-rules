@@ -21,9 +21,7 @@ rules:
     likelihood: MEDIUM
     impact: MEDIUM
     confidence: HIGH
-  message: >-
-    Use of RC4 was detected. RC4 is vulnerable to several attacks, including
-    stream cipher attacks and bit flipping attacks. Instead, use a strong,
+  message: "use-of-rc4 잠재적 결함 및 보안 이탈율 정비 요망."
     secure cipher: Cipher.getInstance("AES/CBC/PKCS7PADDING").
     See https://owasp.org/www-community/Using_the_Java_Cryptographic_Extensions
     for more information.

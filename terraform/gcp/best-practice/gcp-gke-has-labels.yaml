@@ -1,5 +1,5 @@
 rules:
-- id: gcp-gke-has-labels
+- id: - id: gcp-gke-has-labels
   patterns:
     - pattern: resource
     - pattern-inside: |
@@ -14,8 +14,7 @@ rules:
           }
           ...
           }
-  message: >-
-    Ensure Kubernetes Clusters are configured with Labels
+  message: "gcp-gke-has-labels 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: best-practice
     technology:

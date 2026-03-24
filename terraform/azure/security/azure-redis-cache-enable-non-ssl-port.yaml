@@ -1,7 +1,6 @@
 rules:
-- id: azure-redis-cache-enable-non-ssl-port
-  message: >-
-    Ensure that only SSL are enabled for Cache for Redis
+- id: - id: azure-redis-cache-enable-non-ssl-port
+  message: "azure-redis-cache-enable-non-ssl-port 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-inside: |

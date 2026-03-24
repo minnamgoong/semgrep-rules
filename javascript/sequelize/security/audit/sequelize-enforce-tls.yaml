@@ -1,10 +1,6 @@
 rules:
-- id: sequelize-enforce-tls
-  message: >-
-    If TLS is disabled on server side (Postgresql server),
-    Sequelize establishes connection without TLS and no
-    error will be thrown. To prevent MITN (Man In The Middle)
-    attack, TLS must be enforce by Sequelize.
+- id: - id: sequelize-enforce-tls
+  message: "sequelize-enforce-tls 잠재적 결함 및 보안 이격율 정비 요망."
     Set "ssl: true" or define settings "ssl: {...}"
   metadata:
     cwe:

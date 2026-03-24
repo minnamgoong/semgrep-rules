@@ -1,8 +1,6 @@
 rules:
-- id: wildcard-postmessage-configuration
-  message: >-
-    The target origin of the window.postMessage() API is set to "*". This could allow for information
-    disclosure due to the possibility of any origin allowed to receive the message.
+- id: - id: wildcard-postmessage-configuration
+  message: "wildcard-postmessage-configuration 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A08:2021 - Software and Data Integrity Failures

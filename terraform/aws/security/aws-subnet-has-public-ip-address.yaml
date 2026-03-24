@@ -1,5 +1,5 @@
 rules:
-- id: aws-subnet-has-public-ip-address
+- id: - id: aws-subnet-has-public-ip-address
   patterns:
   - pattern-either:
     - pattern: |
@@ -18,11 +18,7 @@ rules:
         map_public_ip_on_launch = false
         ...
       }
-  message: >-
-    Resources in the AWS subnet are assigned a public IP address. Resources
-    should not be exposed on the public internet, but should have access limited to
-    consumers required for the function of your application. Set `map_public_ip_on_launch`
-    to false so that resources are not publicly-accessible.
+  message: "aws-subnet-has-public-ip-address 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
   - hcl
   severity: WARNING

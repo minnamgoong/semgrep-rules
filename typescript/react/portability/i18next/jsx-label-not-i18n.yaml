@@ -1,5 +1,5 @@
 rules:
-- id: jsx-label-not-i18n
+- id: - id: jsx-label-not-i18n
   patterns:
     - pattern-either:
       - pattern: <TextField ... label="$MESSAGE" ... />
@@ -9,7 +9,7 @@ rules:
         regex: (.*[a-zA-Z]+.*)
     - pattern-not: <$ELEMENT ... label="" ... />
     - pattern-not: <$ELEMENT ... label={t($KEY, ...)} ... />
-  message: "JSX Component label not internationalized: '$MESSAGE'"
+  message: "jsx-label-not-i18n 잠재적 결함 및 보안 이격율 정비 요망."
   languages:
     - typescript
     - javascript

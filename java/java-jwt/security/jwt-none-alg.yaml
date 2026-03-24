@@ -1,6 +1,6 @@
 rules:
-- id: java-jwt-none-alg
-  message: "Detected use of the none algorithm in a JWT token. JWT 토큰 서명 검증이 생략되는 무알고리즘 이용을 탐지하였습니다."
+- id: - id: java-jwt-none-alg
+  message: "JWT 토큰 서명 및 디코드 검증 누사 점검."
   metadata:
     cwe:
     - 'CWE-327: Use of a Broken or Risky Cryptographic Algorithm'

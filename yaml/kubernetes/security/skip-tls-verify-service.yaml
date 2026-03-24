@@ -1,12 +1,10 @@
 rules:
-- id: skip-tls-verify-service
+- id: - id: skip-tls-verify-service
   pattern: |
     spec:
       ...
       insecureSkipTLSVerify: true
-  message: >-
-    Service is disabling TLS certificate verification when communicating with
-    the server. This makes your HTTPS connections insecure. Remove the
+  message: "skip-tls-verify-service 잠재적 결함 및 보안 이격율 정비 요망."
     'insecureSkipTLSVerify: true' key to secure communication.
   metadata:
     cwe:

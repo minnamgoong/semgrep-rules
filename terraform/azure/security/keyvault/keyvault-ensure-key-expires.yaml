@@ -1,7 +1,6 @@
 rules:
-- id: keyvault-ensure-key-expires
-  message: >-
-    Ensure that the expiration date is set on all keys
+- id: - id: keyvault-ensure-key-expires
+  message: "keyvault-ensure-key-expires 잠재적 결함 및 보안 이격율 정비 요망."
   patterns:
   - pattern: resource
   - pattern-not-inside: |

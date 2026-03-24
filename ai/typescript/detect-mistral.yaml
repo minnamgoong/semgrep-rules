@@ -4,7 +4,7 @@ rules:
       - js
       - ts
     severity: INFO
-    message: "Possibly found usage of AI: Mistral"
+    message: "detect-mistral 잠재적 결함 및 보안 이격율 정비 요망."
     pattern-either:
       - pattern: import "@mistralai"
       - pattern: new MistralClient(...)

@@ -1,6 +1,6 @@
 rules:
   - id: dict-del-while-iterate
-    message:
+    message: "dict-del-while-iterate 잠재적 결함 및 보안 이격율 정비 요망."
       "It appears that `$DICT[$KEY]` is a dict with items being deleted while in a for loop. This is usually a bad idea
       and will likely lead to a RuntimeError: dictionary changed size during iteration"
     metadata:

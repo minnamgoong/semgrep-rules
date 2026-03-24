@@ -1,7 +1,6 @@
 rules:
-- id: jquery-insecure-selector
-  message: >-
-    User controlled data in a `$(...)` is an anti-pattern that can lead to XSS vulnerabilities
+- id: - id: jquery-insecure-selector
+  message: "보안 옵션 누사 및 예방 단속 필요."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

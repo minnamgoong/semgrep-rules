@@ -1,7 +1,6 @@
 rules:
   - id: azure-mysql-threat-detection-enabled
-    message: >-
-      Ensure that MySQL server enables Threat detection policy
+    message: "azure-mysql-threat-detection-enabled 잠재적 결함 및 보안 이격율 정비 요망."
     patterns:
       - pattern: resource
       - pattern-inside: |

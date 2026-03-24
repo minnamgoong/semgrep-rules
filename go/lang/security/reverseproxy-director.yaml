@@ -1,8 +1,6 @@
 rules:
-- id: reverseproxy-director
-  message: >-
-    ReverseProxy can remove headers added by Director. Consider using ReverseProxy.Rewrite
-    instead of ReverseProxy.Director.
+- id: - id: reverseproxy-director
+  message: "reverseproxy-director 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [go]
   severity: WARNING
   patterns:

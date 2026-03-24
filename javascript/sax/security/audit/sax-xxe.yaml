@@ -1,11 +1,6 @@
 rules:
-- id: sax-xxe
-  message: >-
-    Use of 'ondoctype' in 'sax' library detected. By default, 'sax'
-    won't do anything with custom DTD entity definitions. If you're
-    implementing a custom DTD entity definition, be sure not to introduce
-    XML External Entity (XXE) vulnerabilities, or be absolutely sure that
-    external entities received from a trusted source while processing XML.
+- id: - id: sax-xxe
+  message: "sax-xxe 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     owasp:
     - A04:2017 - XML External Entities (XXE)

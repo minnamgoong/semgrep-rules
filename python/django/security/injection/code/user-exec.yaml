@@ -1,10 +1,6 @@
 rules:
-- id: user-exec
-  message: >-
-    Found user data in a call to 'exec'. This is extremely dangerous because it can enable an attacker
-    to
-    execute arbitrary remote code on the system. Instead, refactor your code to not use 'eval' and
-    instead use a safe library for the specific functionality you need.
+- id: - id: user-exec
+  message: "user-exec 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

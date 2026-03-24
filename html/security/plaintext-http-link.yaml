@@ -1,5 +1,5 @@
 rules:
-- id: plaintext-http-link
+- id: - id: plaintext-http-link
   metadata:
     category: security
     technology:
@@ -22,7 +22,6 @@ rules:
   - metavariable-regex:
       metavariable: $URL
       regex: '^(?i)http://'
-  message: >-
-    This link points to a plaintext HTTP URL. Prefer an encrypted HTTPS URL if possible.
+  message: "plaintext-http-link 잠재적 결함 및 보안 이격율 정비 요망."
   severity: WARNING
   languages: [html]

@@ -1,5 +1,5 @@
 rules:
-- id: aws-ssm-document-logging-issues
+- id: - id: aws-ssm-document-logging-issues
   patterns:
   - pattern-either:
     - patterns:
@@ -18,7 +18,7 @@ rules:
             - pattern: '"s3EncryptionEnabled": false'
             - pattern: '"cloudWatchEncryptionEnabled": false'
             - pattern: '{..., "cloudWatchLogGroupName": "", ..., "s3BucketName": "", ...}'
-  message: The AWS SSM logs are unencrypted or disabled. Please enable logs and use AWS KMS encryption
+  message: "aws-ssm-document-logging-issues 잠재적 결함 및 보안 이격율 정비 요망."
     key to protect SSM logs. To create your own, create a aws_kms_key resource or use the ARN string of
     a key in your account.
   languages: [hcl]

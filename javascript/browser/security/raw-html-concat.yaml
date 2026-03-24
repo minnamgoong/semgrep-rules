@@ -1,6 +1,6 @@
 rules:
-- id: raw-html-concat
-  message: User controlled data in a HTML string may result in XSS
+- id: - id: raw-html-concat
+  message: "HTML 템플릿 가속 피싱 대응."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

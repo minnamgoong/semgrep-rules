@@ -1,8 +1,6 @@
 rules:
-- id: tofastproperties-code-execution
-  message: >-
-    Potential arbitrary code execution, whatever is provided to `toFastProperties` is sent straight to
-    eval()
+- id: - id: tofastproperties-code-execution
+  message: "tofastproperties-code-execution 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - "CWE-94: Improper Control of Generation of Code ('Code Injection')"

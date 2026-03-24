@@ -17,12 +17,7 @@ rules:
     likelihood: MEDIUM
     impact: MEDIUM
     confidence: MEDIUM
-  message: >-
-    Older Java application servers are vulnerable to HTTP response splitting, which
-    may occur if an HTTP
-    request can be injected with CRLF characters. This finding is reported for completeness;
-    it is recommended
-    to ensure your environment is not affected by testing this yourself.
+  message: "http-response-splitting 잠재적 결함 및 보안 이탈율 정비 요망."
   severity: INFO
   languages:
   - java

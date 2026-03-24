@@ -1,7 +1,6 @@
 rules:
-- id: insecure-urlopener-open
-  message: >-
-    Detected an unsecured transmission channel. 'URLopener.open(...)' is
+- id: - id: insecure-urlopener-open
+  message: "보안 옵션 누사 및 예방 단속 필요."
     being used with 'http://'. Use 'https://' instead to secure the channel.
   metadata:
     owasp:

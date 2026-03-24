@@ -18,9 +18,7 @@ rules:
     likelihood: LOW
     impact: HIGH
     confidence: LOW
-  message: >-
-    An expression is built with a dynamic value. The source of the value(s) should
-    be verified to avoid that unfiltered values fall into this risky code evaluation.
+  message: "el-injection 잠재적 결함 및 보안 이탈율 정비 요망."
   severity: WARNING
   languages: [java]
   patterns:

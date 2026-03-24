@@ -1,10 +1,6 @@
 rules:
-- id: detect-buffer-noassert
-  message: >-
-    Detected usage of noassert in Buffer API, which allows the offset the be beyond
-    the
-    end of the buffer. This could result in writing or reading beyond the end of the
-    buffer.
+- id: - id: detect-buffer-noassert
+  message: "detect-buffer-noassert 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     cwe:
     - 'CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer'

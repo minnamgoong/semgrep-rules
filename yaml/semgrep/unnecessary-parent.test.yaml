@@ -15,7 +15,7 @@ rules:
           - pattern: subprocess.call1(...)
           - pattern: subprocess.call2(...)
       - pattern: subprocess.call3(...)
-    message: test
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING
     fix: subprocess.check_call(...)
   - id: unchecked-subprocess-call3
@@ -24,7 +24,7 @@ rules:
       - patterns:
           - pattern: subprocess.call1(...)
           - pattern: subprocess.call2(...)
-    message: test
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING
     fix: subprocess.check_call(...)
   - id: unchecked-subprocess-call4
@@ -34,14 +34,14 @@ rules:
           - pattern: subprocess.call1(...)
           - pattern: subprocess.call2(...)
       - pattern: subprocess.call3(...)
-    message: test
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING
     fix: subprocess.check_call(...)
   - id: unchecked-subprocess-call5
     # ruleid: unnecessary-parent-operator
     pattern-either:
       - pattern: subprocess.call1(...)
-    message: test
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING
     fix: subprocess.check_call(...)
   - id: unchecked-subprocess-call6
@@ -49,14 +49,14 @@ rules:
     pattern-either:
       - pattern: subprocess.call1(...)
       - pattern: subprocess.call2(...)
-    message: test
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING
     fix: subprocess.check_call(...)
   - id: unchecked-subprocess-call7
     # ruleid: unnecessary-parent-operator
     patterns:
       - pattern: subprocess.call1(...)
-    message: test
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING
     fix: subprocess.check_call(...)
   - id: unchecked-subprocess-call8
@@ -64,6 +64,6 @@ rules:
     patterns:
       - pattern: subprocess.call1(...)
       - pattern: subprocess.call2(...)
-    message: test
+    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
     severity: WARNING
     fix: subprocess.check_call(...)

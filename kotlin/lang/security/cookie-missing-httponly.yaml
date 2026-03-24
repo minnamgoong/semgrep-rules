@@ -1,5 +1,5 @@
 rules:
-- id: cookie-missing-httponly
+- id: - id: cookie-missing-httponly
   metadata:
     cwe:
     - "CWE-1004: Sensitive Cookie Without 'HttpOnly' Flag"
@@ -17,10 +17,7 @@ rules:
     likelihood: LOW
     impact: LOW
     confidence: LOW
-  message: >-
-    A cookie was detected without setting the 'HttpOnly' flag. The 'HttpOnly' flag
-    for cookies instructs the browser to forbid client-side scripts from reading the
-    cookie. Set the 'HttpOnly' flag by calling 'cookie.setHttpOnly(true);'
+  message: "쿠키 보안 속성(Secure/HttpOnly) 누출 우려 점검."
   severity: WARNING
   languages: [kt]
   patterns:

@@ -1,5 +1,5 @@
 rules:
-- id: missing-aws-lb-deletion-protection
+- id: - id: missing-aws-lb-deletion-protection
   patterns:
     - pattern-either:
       - pattern-inside: |
@@ -16,8 +16,7 @@ rules:
           enable_deletion_protection = true
           ...
         }
-  message: >-
-    The AWS LoadBalancer deletion protection is not enabled.
+  message: "missing-aws-lb-deletion-protection 잠재적 결함 및 보안 이격율 정비 요망."
   languages: [hcl]
   severity: WARNING
   metadata:

@@ -1,5 +1,5 @@
 rules:
-- id: aws-emr-encrypted-with-cmk
+- id: - id: aws-emr-encrypted-with-cmk
   patterns:
   - pattern-inside: |
       resource "aws_emr_security_configuration" $ANYTHING {
@@ -12,9 +12,7 @@ rules:
       patterns:
       - pattern-not-inside: |
           "AwsKmsKey": ...
-  message: >-
-    Ensure EMR is encrypted at rest using KMS CMKs. CMKs gives you control over the encryption key in
-    terms of access and rotation.
+  message: "aws-emr-encrypted-with-cmk 잠재적 결함 및 보안 이격율 정비 요망."
   metadata:
     category: security
     technology:
