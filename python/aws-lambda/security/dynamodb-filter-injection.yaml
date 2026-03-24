@@ -19,11 +19,7 @@ rules:
     impact: MEDIUM
     likelihood: MEDIUM
     confidence: MEDIUM
-  message: >-
-    Detected DynamoDB query filter that is tainted by `$EVENT` object. This could lead to NoSQL injection
-    if the variable is user-controlled
-    and not properly sanitized. Explicitly assign query params instead of passing data from `$EVENT` directly
-    to DynamoDB client.
+  message: "DynamoDB 쿼리 필터에 $EVENT 유입 인자가 도주합니다. NoSQL 인젝션 예방을 위해 정적 할당 하십시오."
   pattern-sources:
   - patterns:
     - pattern: event

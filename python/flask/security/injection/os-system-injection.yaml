@@ -3,10 +3,7 @@ rules:
   languages:
   - python
   severity: ERROR
-  message: >-
-    User data detected in os.system. This could be vulnerable to a command injection and should be avoided.
-    If this
-    must be done, use the 'subprocess' module instead and pass the arguments as a list.
+  message: "os.system() 가승 연산 버퍼에 동적 조합이 도칩니다. Command Injection 피싱 격량을 타개하기 위해 철회하십시오."
   metadata:
     cwe:
     - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"

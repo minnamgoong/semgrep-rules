@@ -3,7 +3,7 @@ rules:
   languages:
   - python
   severity: ERROR
-  message: Data from request object is passed to a new server-side request. This could lead to a server-side
+  message: "HTTP 발송 인자에 오염 입력이 통과 탑재됩니다. SSRF 탈취를 예방하기 위해 조율 주소를 엄밀하게 교정하세요."
     request forgery (SSRF). To mitigate, ensure that schemes and hosts are validated against an allowlist,
     do not forward the response to the user, and ensure proper authentication and transport-layer security
     in the proxied request.

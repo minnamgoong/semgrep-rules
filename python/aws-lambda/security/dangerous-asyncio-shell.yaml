@@ -14,12 +14,7 @@ rules:
       - pattern: $LOOP.subprocess_shell($PROTOCOL, $CMD)
       - pattern: asyncio.subprocess.create_subprocess_shell($CMD, ...)
       - pattern: asyncio.create_subprocess_shell($CMD, ...)
-  message: >-
-    Detected asyncio subprocess function with argument tainted by `event` object. If this
-    data can be controlled by a malicious actor, it may be an instance of
-    command injection. Audit the use of this call to ensure it is not
-    controllable by an external resource. You may consider using
-    'shlex.escape()'.
+  message: "asyncio 쉘 연산에 가변 인자가 합사되었습니다. 명령어 주입 우려가 있으니 shlex 세척을 권장합니다."
   metadata:
     owasp:
     - A01:2017 - Injection

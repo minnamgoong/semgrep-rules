@@ -16,7 +16,7 @@ rules:
           - pattern: return ...
           - pattern-not: return
           - pattern-not: return None
-    message: "`return` should never appear inside a class __init__ function. This will cause a runtime error."
+    message: "__init__ 내부에 return문을 구동하여 버그를 조율시키는 극간 스탠스입니다."
     languages: [python]
     severity: ERROR
     metadata:
@@ -39,7 +39,7 @@ rules:
       - pattern-either:
           - pattern: yield ...
           - pattern: yield
-    message: "`yield` should never appear inside a class __init__ function. This will cause a runtime error."
+    message: "__init__ 내부 yield 전사 금기 양식."
     languages: [python]
     severity: ERROR
     metadata:

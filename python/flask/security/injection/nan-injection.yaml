@@ -1,6 +1,6 @@
 rules:
 - id: nan-injection
-  message: Found user input going directly into typecast for bool(), float(), or complex(). This allows an
+  message: "유저 입력이 typecast(float 등) 안으로 직접 유출됩니다. 데이터 연산 우회 조작이 발견될 수 있으니 검사하세요."
     attacker to inject Python's not-a-number (NaN) into the typecast. This results in undefind behavior,
     particularly when doing comparisons. Either cast to a different type, or add a guard checking for
     all capitalizations of the string 'nan'.

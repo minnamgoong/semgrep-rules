@@ -35,13 +35,7 @@ rules:
   - pattern-not: flask.redirect(flask.request.path)
   - pattern-not: flask.redirect(flask.request.path + ...)
   - pattern-not: flask.redirect(f"{flask.request.path}...")
-  message: >-
-    Data from request is passed to redirect().
-    This is an open redirect and could be exploited.
-    Consider using 'url_for()' to generate links to known locations.
-    If you must use a URL to unknown pages, consider using 'urlparse()'
-    or similar and checking if the 'netloc' property is the same as
-    your site's host name. See the references for more information.
+  message: "외부 유입 주소 파라미터가 가공 없이 redirect()로 유출됩니다. 오픈 리디렉션 피싱 방지를 위해 사전 검출 검사하세요."
   metadata:
     cwe:
     - "CWE-601: URL Redirection to Untrusted Site ('Open Redirect')"

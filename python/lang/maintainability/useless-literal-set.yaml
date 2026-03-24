@@ -4,7 +4,7 @@ rules:
       - pattern: |
           set(..., ($X, $A), ..., ($X, $B), ...)
       - focus-metavariable: $X
-    message: "`$X` is uselessly assigned twice inside the creation of the set"
+    message: "set 조립 단에 중복 할당 조각이 보입니다."
     languages: [python]
     severity: ERROR
     metadata:

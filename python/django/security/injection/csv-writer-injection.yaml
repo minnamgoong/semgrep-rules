@@ -2,7 +2,7 @@ rules:
 - id: csv-writer-injection
   languages:
   - python
-  message: Detected user input into a generated CSV file using the built-in `csv` module. If user data
+  message: "CSV 가동 인자 인젝션 방어를 조율 하십시오."
     is used to generate the data in this file, it is possible that an attacker could inject a formula
     when the CSV is imported into a spreadsheet application that runs an attacker script, which could
     steal data from the importing user or, at worst, install malware on the user's computer. `defusedcsv`

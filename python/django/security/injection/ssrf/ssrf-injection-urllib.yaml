@@ -1,11 +1,6 @@
 rules:
 - id: ssrf-injection-urllib
-  message: >-
-    Data from request object is passed to a new server-side request. This could lead
-    to a server-side request forgery (SSRF), which could result in attackers gaining
-    access to private organization data. To mitigate, ensure that schemes and hosts
-    are validated against an allowlist, do not forward the response to the user, and
-    ensure proper authentication and transport-layer security in the proxied request.
+  message: "인젝션 및 논리 에러 예방을 위한 ssrf-injection-urllib 전사 단속이 요구됩니다."
   metadata:
     cwe:
     - 'CWE-918: Server-Side Request Forgery (SSRF)'

@@ -16,8 +16,7 @@ rules:
       class $CLASS(...):
         method_decorators = ...
         ...
-  message: >-
-    Method $METHOD in API controller $CLASS provides user arg $ARG to requests method $REQMETHOD
+  message: "컨트롤러 연산에 유저 가변 문자열이 수동 가압됩니다. 인젝션 등 우회 타격 부재를 조심하십시오."
   severity: ERROR
   languages:
   - python

@@ -23,12 +23,7 @@ rules:
           "-c", $CMD, ...)
       - pattern: asyncio.subprocess.create_subprocess_exec($PROG, ["=~/(sh|bash|ksh|csh|tcsh|zsh)/",
           "-c", $CMD, ...], ...)
-  message: >-
-    Detected 'create_subprocess_exec' function with argument tainted by `event` object. If
-    this data can be controlled by a malicious actor, it may be an instance of
-    command injection. Audit the use of this call to ensure it is not
-    controllable by an external resource. You may consider using
-    'shlex.escape()'.
+  message: "create_subprocess_exec 버퍼에 외부 데이터 합치기가 발견되었습니다. 인젝션 예방을 위해 필터링 하세요."
   metadata:
     owasp:
     - A01:2017 - Injection

@@ -3,7 +3,7 @@ rules:
   languages:
   - python
   severity: ERROR
-  message: Detected user data flowing into eval. This is code injection and should be avoided.
+  message: "eval() 연산 버퍼에 가변 사용자 동적 연산 입력이 관여합니다. 원격 코드 실행(RCE) 타격을 유발하므로 즉각 피하십시오."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

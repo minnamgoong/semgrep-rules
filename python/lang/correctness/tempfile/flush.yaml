@@ -2,7 +2,7 @@ rules:
   - id: tempfile-without-flush
     languages:
       - python
-    message:
+    message: "tempfile-without-flush 보안 인젝션 및 런타임 버그 전사 예방 점검."
       Using '$F.name' without '.flush()' or '.close()' may cause an error because the file may not exist when '$F.name'
       is used. Use '.flush()' or close the file before using '$F.name'.
     pattern-either:

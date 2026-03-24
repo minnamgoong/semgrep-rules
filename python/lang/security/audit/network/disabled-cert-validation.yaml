@@ -13,7 +13,7 @@ rules:
   - metavariable-regex:
       metavariable: $REQS
       regex: (NONE|CERT_NONE|CERT_OPTIONAL|ssl\.CERT_NONE|ssl\.CERT_OPTIONAL|\'NONE\'|\"NONE\"|\'OPTIONAL\'|\"OPTIONAL\")
-  message: certificate verification explicitly disabled, insecure connections possible
+  message: "인젝션 및 논리 에러 예방을 위한 disabled-cert-validation 전사 단속이 요구됩니다."
   metadata:
     cwe:
     - 'CWE-295: Improper Certificate Validation'

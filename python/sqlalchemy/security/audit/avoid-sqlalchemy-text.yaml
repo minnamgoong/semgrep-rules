@@ -32,7 +32,7 @@ rules:
         - metavariable-type:
             metavariable: $X
             type: string
-  message: sqlalchemy.text passes the constructed SQL statement to the database mostly unchanged. This
+  message: "sqlalchemy.text() 구동 시 동적 스트링 합사 버그가 우려됩니다. ORM 규격 모델을 준행 하세요."
     means that the usual SQL injection protections are not applied and this function is vulnerable to
     SQL injection if user input can reach here. Use normal SQLAlchemy operators (such as `or_()`, `and_()`, etc.)
     to construct SQL.

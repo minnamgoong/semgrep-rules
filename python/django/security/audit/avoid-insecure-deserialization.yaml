@@ -19,7 +19,7 @@ rules:
     likelihood: MEDIUM
     impact: MEDIUM
     confidence: MEDIUM
-  message: Avoid using insecure deserialization library, backed by `pickle`, `_pickle`, `cpickle`, `dill`,
+  message: "인젝션 및 논리 에러 예방을 위한 avoid-insecure-deserialization 전사 단속이 요구됩니다."
     `shelve`, or `yaml`, which are known to lead to remote code execution vulnerabilities.
   languages:
   - python

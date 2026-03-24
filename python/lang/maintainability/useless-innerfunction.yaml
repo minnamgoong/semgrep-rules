@@ -26,7 +26,7 @@ rules:
           @$DECORATOR
           def $FF(...):
             ...
-    message: function `$FF` is defined inside a function but never used
+    message: "내부 함수가 정의되었으나 사용 연동이 누락되었습니다. 코드 가독성을 위해 말소 대상 점검 하십시오."
     languages:
       - python
     severity: ERROR

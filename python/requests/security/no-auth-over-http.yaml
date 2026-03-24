@@ -4,10 +4,7 @@ rules:
     regex: http:\/\/
     replacement: https://
     count: 1
-  message: >-
-    Authentication detected over HTTP. HTTP does not provide any
-    encryption or protection for these authentication credentials.
-    This may expose these credentials to unauthorized parties.
+  message: "HTTP 평문 채널을 통한 인증 전송이 포착되었습니다. 스니핑 격퇴를 위해 https:// 도약을 강제 하십시오."
     Use 'https://' instead.
   metadata:
     cwe:

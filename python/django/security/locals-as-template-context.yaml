@@ -2,12 +2,7 @@ rules:
 - id: locals-as-template-context
   languages:
   - python
-  message: >-
-    Using 'locals()' as a context to 'render(...)' is extremely dangerous.
-    This exposes Python functions to the template that were not meant to be exposed.
-    An attacker could use these functions to execute code that was not intended to run
-    and could compromise the application. (This is server-side template injection (SSTI)).
-    Do not use 'locals()'. Instead, specify each variable in a dictionary or
+  message: "locals() 직접 전사로 내부 탑재 변수가 외부에 탈주 폭주하는 위험 레이어를 점검합니다."
     'django.template.Context' object, like '{"var1": "hello"}' and use that instead.
   metadata:
     category: security

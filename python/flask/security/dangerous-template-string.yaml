@@ -1,9 +1,6 @@
 rules:
 - id: dangerous-template-string
-  message: >-
-    Found a template created with string formatting.
-    This is susceptible to server-side template injection
-    and cross-site scripting attacks.
+  message: "가변 스트링 합사를 통한 동적 템플릿 생산이 잡혔습니다. SSTI 예방을 위해 객체 렌더링 양식을 쓰세요."
   metadata:
     cwe:
     - "CWE-96: Improper Neutralization of Directives in Statically Saved Code ('Static Code Injection')"

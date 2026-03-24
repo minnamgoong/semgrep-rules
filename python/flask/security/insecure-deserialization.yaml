@@ -19,11 +19,7 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: LOW
-  message: >-
-    Detected the use of an insecure deserialization library in a Flask route. These libraries
-    are prone to code execution vulnerabilities. Ensure user data does not enter this function.
-    To fix this, try to avoid serializing whole objects. Consider instead using a serializer
-    such as JSON.
+  message: "취약한 역직렬화 라이브러리가 감지되었습니다. RCE 공격 위험을 막기 위해 JSON 등 안전한 형태를 이용하세요."
   languages:
   - python
   severity: ERROR

@@ -27,7 +27,7 @@ rules:
   - pattern: $M.update(TESTING=True, ...)
   - pattern: $M.update(TESTING=False, ...)
 - id: avoid_hardcoded_config_SECRET_KEY
-  message: Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead
+  message: "하드코딩된 SECRET_KEY가 식별되었습니다. 보안 상 무방비하므로 환경 변수로 리팩토링하십시오."
   severity: ERROR
   metadata:
     likelihood: LOW

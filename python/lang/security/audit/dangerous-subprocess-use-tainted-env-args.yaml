@@ -80,10 +80,7 @@ rules:
           - pattern: subprocess.$FUNC(["=~/(python)/", $CMD],...)
           - pattern: subprocess.$FUNC(("=~/(python)/", $CMD),...)
     - focus-metavariable: $CMD
-  message: >-
-    Detected subprocess function '$FUNC' with user controlled data. A malicious actor
-    could leverage this to perform command injection.
-    You may consider using 'shlex.quote()'.
+  message: "인젝션 및 논리 에러 예방을 위한 dangerous-subprocess-use-tainted-env-args 전사 단속이 요구됩니다."
   metadata:
     owasp:
     - A01:2017 - Injection

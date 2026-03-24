@@ -1,11 +1,6 @@
 rules:
   - id: no-strings-as-booleans
-    message: >-
-      Using strings as booleans in Python has unexpected results.
-      `"one" and "two"` will return "two".
-      `"one" or "two"` will return "one".
-      In Python, strings are truthy, and strings with a non-zero length evaluate to
-      True.
+    message: "문자열 결합 시 연산 논리 혼선 국면을 저지합니다."
     languages: [python]
     severity: ERROR
     pattern-either:

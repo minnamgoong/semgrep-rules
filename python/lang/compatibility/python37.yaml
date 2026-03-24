@@ -1,7 +1,7 @@
 rules:
   - id: python37-compatibility-importlib
     pattern: importlib.source_hash()
-    message:
+    message: "해당 문법 및 가동 모듈은 Python 3.7 이상 환경에서만 구동 및 하위 인프라 호환을 지원합니다."
       source_hash' is only available on Python 3.7+. This does not work in lower versions, and therefore is not backwards
       compatible. Instead, use another hash function.
     languages: [python]
@@ -23,7 +23,7 @@ rules:
         - python
   - id: python37-compatibility-httpconn
     pattern: http.client.HTTPConnection(blocksize=$X,...)
-    message:
+    message: "해당 문법 및 가동 모듈은 Python 3.7 이상 환경에서만 구동 및 하위 인프라 호환을 지원합니다."
       Found usage of the 'blocksize' argument in a HTTPConnection call. This is only available on Python 3.7+ and is
       therefore not backwards compatible. Remove this in order for this code to work in Python 3.6 and below.
     languages: [python]

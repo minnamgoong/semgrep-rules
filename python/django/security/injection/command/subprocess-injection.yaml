@@ -41,14 +41,7 @@ rules:
     - pattern: $DICT[$KEY]
     - focus-metavariable: $KEY
   severity: ERROR
-  message: >-
-    Detected user input entering a `subprocess` call unsafely. This could
-    result in a command injection vulnerability. An attacker could use this
-    vulnerability to execute arbitrary commands on the host, which allows
-    them to download malware, scan sensitive data, or run any command they
-    wish on the server. Do not let users choose the command to run. In general,
-    prefer to use Python API versions of system commands. If you must use subprocess,
-    use a dictionary to allowlist a set of commands.
+  message: "인젝션 및 논리 에러 예방을 위한 subprocess-injection 전사 단속이 요구됩니다."
   metadata:
     category: security
     technology:

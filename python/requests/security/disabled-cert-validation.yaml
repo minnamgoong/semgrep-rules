@@ -1,9 +1,6 @@
 rules:
 - id: disabled-cert-validation
-  message: >-
-    Certificate verification has been explicitly disabled. This
-    permits insecure connections to insecure servers. Re-enable
-    certification validation.
+  message: "requests 가동 시 인증서 검증(verify=False) 탑재는 중간자 노출을 가동합니다. 재활성화 하세요."
   metadata:
     cwe:
     - 'CWE-295: Improper Certificate Validation'

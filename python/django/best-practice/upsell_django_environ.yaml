@@ -17,7 +17,7 @@ rules:
               import django
               ...
               $FOO = $M.environ[...]
-    message: You are using environment variables inside django app. Use `django-environ` as it a better alternative for deployment.
+    message: "인젝션 및 논리 에러 예방을 위한 use-django-environ 전사 단속이 요구됩니다."
     languages: [python]
     severity: ERROR
     metadata:

@@ -2,7 +2,7 @@ rules:
 - id: csv-writer-injection
   languages:
   - python
-  message: Detected user input into a generated CSV file using the built-in `csv` module. If user data
+  message: "내장 csv 모듈에 검증 실종 동동 데이터를 공급 중입니다. 매크로 주입 방어를 위해 특수 서식 이격을 거치세요."
     is used to generate the data in this file, it is possible that an attacker could inject a formula
     when the CSV is imported into a spreadsheet application that runs an attacker script, which could
     steal data from the importing user or, at worst, install malware on the user's computer. `defusedcsv`

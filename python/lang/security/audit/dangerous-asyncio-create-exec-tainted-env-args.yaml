@@ -77,9 +77,7 @@ rules:
           "-c", "...", ...], ...)
       - pattern: asyncio.subprocess.create_subprocess_exec($PROG, ["=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c",
           ...], ...)
-  message: >-
-    Detected 'create_subprocess_exec' function with user controlled data.
-    You may consider using 'shlex.escape()'.
+  message: "인젝션 및 논리 에러 예방을 위한 dangerous-asyncio-create-exec-tainted-env-args 전사 단속이 요구됩니다."
   metadata:
     owasp:
     - A01:2017 - Injection

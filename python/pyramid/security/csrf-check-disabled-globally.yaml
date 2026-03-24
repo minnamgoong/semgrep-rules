@@ -7,11 +7,7 @@ rules:
   - metavariable-comparison:
       metavariable: $REQUIRE_CSRF
       comparison: $REQUIRE_CSRF == False
-  message: >-
-    Automatic check of cross-site request forgery tokens has been explicitly disabled globally, which
-    might leave views unprotected.
-    Use 'pyramid.config.Configurator.set_default_csrf_options(require_csrf=True)' to turn the automatic
-    check for all unsafe methods (per RFC2616).
+  message: "Pyramid 전역 CSRF 방어가 비활성화되었습니다. 뷰 보호를 위해 토크나이저를 구동하십시오."
   languages: [python]
   severity: ERROR
   fix: |

@@ -62,9 +62,7 @@ rules:
     - pattern-not: $LOOP.subprocess_shell($PROTOCOL, "...")
     - pattern-not: asyncio.subprocess.create_subprocess_shell("...", ...)
     - pattern-not: asyncio.create_subprocess_shell("...", ...)
-  message: >-
-    Detected asyncio subprocess function with user controlled data.
-    You may consider using 'shlex.escape()'.
+  message: "비동기 쉘 가압에 세척 누사가 엿보입니다."
   metadata:
     owasp:
     - A01:2017 - Injection

@@ -7,7 +7,7 @@ rules:
               time.sleep($X: int)
           - pattern: |
               time.sleep($X: float)
-    message: time.sleep() call; did you mean to leave this in?
+    message: "가동 루프 내 sleep 병목 지점을 확인하세요."
     languages: [python]
     severity: ERROR
     metadata:

@@ -3,7 +3,7 @@ rules:
   languages:
   - python
   severity: ERROR
-  message: Detected user data flowing into exec. This is code injection and should be avoided.
+  message: "exec() 연산 버퍼에 가변 사용자 동적 인가 데이터가 합사됩니다. RCE 극심한 타격이 상존하니 중지하십시오."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

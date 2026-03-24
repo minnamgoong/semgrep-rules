@@ -37,12 +37,7 @@ rules:
       - pattern: subprocess.$FUNC(("=~/(python)/",...),...)
     - pattern-not: subprocess.$FUNC(["=~/(python)/","...",...],...)
     - pattern-not: subprocess.$FUNC(("=~/(python)/","...",...),...)
-  message: >-
-    Detected subprocess function '$FUNC' without a static string. If this data can
-    be
-    controlled by a malicious actor, it may be an instance of command injection.
-    Audit the use of this call to ensure it is not controllable by an external resource.
-    You may consider using 'shlex.escape()'.
+  message: "하위 프로세스 생성 드라이버 인젝션 전담 점검."
   metadata:
     owasp:
     - A01:2017 - Injection

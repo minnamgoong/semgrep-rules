@@ -1,10 +1,6 @@
 rules:
 - id: pyramid-direct-use-of-response
-  message: >-
-    Detected data rendered directly to the end user via 'Response'.
-    This bypasses Pyramid's built-in cross-site scripting
-    (XSS) defenses and could result in an XSS vulnerability. Use Pyramid's
-    template engines to safely render HTML.
+  message: "Response 객체를 렌더링 없이 날것으로 출력합니다. XSS 방어 레이어 우회 우려가 있습니다."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

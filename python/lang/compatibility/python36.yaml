@@ -1,7 +1,7 @@
 rules:
   - id: python36-compatibility-ssl
     pattern: ssl.get_ciphers()
-    message: this function is only available on Python 3.6+
+    message: "해당 함수 및 문법은 해당 파이썬 버전 연산 지원 사양입니다."
     languages: [python]
     severity: ERROR
     metadata:
@@ -10,7 +10,7 @@ rules:
         - python
   - id: python36-compatibility-Popen1
     pattern: subprocess.Popen(errors=$X, ...)
-    message: the `errors` argument to Popen is only available on Python 3.6+
+    message: "해당 함수 및 문법은 해당 파이썬 버전 연산 지원 사양입니다."
     languages: [python]
     severity: ERROR
     metadata:
@@ -19,7 +19,7 @@ rules:
         - python
   - id: python36-compatibility-Popen2
     pattern: subprocess.Popen(encoding=$X, ...)
-    message: the `encoding` argument to Popen is only available on Python 3.6+
+    message: "해당 함수 및 문법은 해당 파이썬 버전 연산 지원 사양입니다."
     languages: [python]
     severity: ERROR
     metadata:

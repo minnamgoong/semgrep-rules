@@ -1,6 +1,6 @@
 rules:
 - id: sqlalchemy-execute-raw-query
-  message: >-
+  message: "SQLAlchemy 원시 쿼리 동적 결합 감지. 인젝션 투하를 막으려면 Parameterized 선언을 장착 하십시오."
     Avoiding SQL string concatenation: untrusted input concatenated with raw
     SQL query can result in SQL Injection. In order to execute raw query
     safely, prepared statement should be used.

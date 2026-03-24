@@ -2,12 +2,7 @@ rules:
 - id: globals-as-template-context
   languages:
   - python
-  message: >-
-    Using 'globals()' as a context to 'render(...)' is extremely dangerous.
-    This exposes Python functions to the template that were not meant to be exposed.
-    An attacker could use these functions to execute code that was not intended to run
-    and could compromise the application. (This is server-side template injection (SSTI)).
-    Do not use 'globals()'. Instead, specify each variable in a dictionary or
+  message: "globals() 전역 인출 피칭 국면을 경보합니다."
     'django.template.Context' object, like '{"var1": "hello"}' and use that instead.
   metadata:
     category: security

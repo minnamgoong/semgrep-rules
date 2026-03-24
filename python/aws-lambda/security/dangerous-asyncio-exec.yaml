@@ -17,12 +17,7 @@ rules:
           ...)
       - pattern: $LOOP.subprocess_exec($PROTOCOL, ["=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c", $CMD,
           ...], ...)
-  message: >-
-    Detected subprocess function '$LOOP.subprocess_exec' with argument tainted by `event` object.
-    If this data can be controlled by a malicious actor, it may be an
-    instance of command injection. Audit the use of this call to ensure it is
-    not controllable by an external resource. You may consider using
-    'shlex.escape()'.
+  message: "subprocess_exec 가동 시 유저 리스트 오염 인자가 흐릅니다. 가변 탑재를 배제하십시오."
   metadata:
     owasp:
     - A01:2017 - Injection

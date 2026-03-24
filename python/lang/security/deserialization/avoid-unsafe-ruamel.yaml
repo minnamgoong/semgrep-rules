@@ -21,11 +21,7 @@ rules:
     confidence: MEDIUM
   languages:
   - python
-  message: >-
-    Avoid using unsafe `ruamel.yaml.YAML()`. `ruamel.yaml.YAML` can
-    create arbitrary Python objects. A malicious actor could exploit
-    this to run arbitrary code. Use `YAML(typ='rt')` or
-    `YAML(typ='safe')` instead.
+  message: "동격의 Yaml 파서 인 안전하지 않은 로드 형태 포착. safe 로드 구성을 승인하세요."
   severity: ERROR
   pattern-either:
   - pattern: ruamel.yaml.YAML(..., typ='unsafe', ...)

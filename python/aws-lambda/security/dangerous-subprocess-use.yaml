@@ -1,13 +1,7 @@
 rules:
 - id: dangerous-subprocess-use
   mode: taint
-  message: >-
-    Detected subprocess function with argument tainted by an `event` object. 
-    If this data can be controlled by a malicious actor, it may be an instance of
-    command injection. The default option for `shell` is False, and this is secure by default.
-    Consider removing the `shell=True` or setting it to False explicitely.
-    Using `shell=False` means you have to split the command string into an array of
-    strings for the command and its arguments. You may consider using 'shlex.split()' for this purpose.
+  message: "subprocess 구동 시 shell=True 탑재 탑재로 보안 이탈율이 높습니다. 가변 인자 결합을 철회하십시오."
   metadata:
     owasp:
     - A01:2017 - Injection

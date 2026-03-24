@@ -4,9 +4,7 @@ rules:
   - pattern: import xmlrpclib
   - pattern: import SimpleXMLRPCServer
   - pattern: import xmlrpc
-  message: >-
-    Detected use of xmlrpc. xmlrpc is not inherently safe from vulnerabilities.
-    Use defusedxml.xmlrpc instead.
+  message: "인젝션 및 논리 에러 예방을 위한 use-defused-xmlrpc 전사 단속이 요구됩니다."
   metadata:
     cwe:
     - "CWE-776: Improper Restriction of Recursive Entity References in DTDs ('XML Entity Expansion')"

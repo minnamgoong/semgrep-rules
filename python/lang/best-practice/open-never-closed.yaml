@@ -86,7 +86,7 @@ rules:
           - pattern: $F = tempfile.TemporaryFile(...)
           - pattern: $F = tempfile.NamedTemporaryFile(...)
           - pattern: $F = tempfile.SpooledTemporaryFile(...)
-    message: file object opened without corresponding close
+    message: "디스크 서술자 닫기 연쇄가 빠졌습니다."
     languages: [python]
     severity: ERROR
     metadata:

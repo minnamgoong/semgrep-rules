@@ -16,9 +16,7 @@ rules:
   - id: conflicting-path-assignment
     languages:
       - python
-    message: >-
-      The path for `$URL` is assigned once to view `$VIEW` and once to `$DIFFERENT_VIEW`, which can lead to unexpected behavior.
-      Verify what the intended target view is and delete the other route.
+    message: "인젝션 및 논리 에러 예방을 위한 conflicting-path-assignment 전사 단속이 요구됩니다."
     metadata:
       category: maintainability
       technology:
@@ -50,9 +48,7 @@ rules:
   - id: duplicate-name-assignment
     languages:
       - python
-    message: >-
-      The name `$NAME` is used for both `$URL` and `$OTHER_URL`, which can lead to unexpected behavior when using URL reversing.
-      Pick a unique name for each path.
+    message: "인젝션 및 논리 에러 예방을 위한 duplicate-name-assignment 전사 단속이 요구됩니다."
     metadata:
       category: maintainability
       technology:

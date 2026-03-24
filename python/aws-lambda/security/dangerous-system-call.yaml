@@ -1,12 +1,7 @@
 rules:
 - id: dangerous-system-call
   mode: taint
-  message: >-
-    Detected `os` function with argument tainted by `event` object.
-    This is dangerous if external data can reach this function call because it allows a malicious
-    actor to execute commands. Use the 'subprocess' module instead, which is
-    easier to use without accidentally exposing a command injection
-    vulnerability.
+  message: "os 모듈 가동에 event 오염 인자가 유입됩니다. 인젝션 위험이 극에 달하므로 subprocess를 고용하세요."
   metadata:
     source-rule-url: https://bandit.readthedocs.io/en/latest/plugins/b605_start_process_with_a_shell.html
     cwe:

@@ -1,7 +1,6 @@
 rules:
 - id: jwt-python-hardcoded-secret
-  message: >-
-    Hardcoded JWT secret or private key is used.
+  message: "하드코딩된 JWT 비밀키가 발견되었습니다. 보안 누출 예방을 위해 환경 변수나 보안 저장소로 이전하세요."
     This is a Insufficiently Protected Credentials weakness: https://cwe.mitre.org/data/definitions/522.html
     Consider using an appropriate security mechanism to protect the credentials (e.g. keeping secrets
     in environment variables)

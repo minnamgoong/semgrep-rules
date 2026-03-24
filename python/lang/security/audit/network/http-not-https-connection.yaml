@@ -1,9 +1,6 @@
 rules:
 - id: http-not-https-connection
-  message: >-
-    Detected HTTPConnectionPool. This will transmit data in cleartext.
-    It is recommended to use HTTPSConnectionPool instead for to encrypt
-    communications.
+  message: "인젝션 및 논리 에러 예방을 위한 http-not-https-connection 전사 단속이 요구됩니다."
   metadata:
     cwe:
     - 'CWE-319: Cleartext Transmission of Sensitive Information'

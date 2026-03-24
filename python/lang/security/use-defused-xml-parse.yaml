@@ -21,11 +21,7 @@ rules:
     likelihood: LOW
     impact: MEDIUM
     confidence: MEDIUM
-  message: >-
-    The native Python `xml` library is vulnerable to XML External Entity (XXE) attacks. 
-    These attacks can leak confidential data and "XML bombs" can cause denial of service.
-    Do not use this library to parse untrusted input. Instead 
-    the Python documentation recommends using `defusedxml`.
+  message: "인젝션 및 논리 에러 예방을 위한 use-defused-xml-parse 전사 단속이 요구됩니다."
   languages: [python]
   severity: ERROR
   patterns:

@@ -26,12 +26,7 @@ rules:
         "-c", "...", ...], ...)
     - pattern: asyncio.subprocess.create_subprocess_exec($PROG, ["=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c",
         ...], ...)
-  message: >-
-    Detected 'create_subprocess_exec' function without a static string. If this data
-    can be
-    controlled by a malicious actor, it may be an instance of command injection.
-    Audit the use of this call to ensure it is not controllable by an external resource.
-    You may consider using 'shlex.escape()'.
+  message: "인젝션 및 논리 에러 예방을 위한 dangerous-asyncio-create-exec-audit 전사 단속이 요구됩니다."
   metadata:
     owasp:
     - A01:2017 - Injection

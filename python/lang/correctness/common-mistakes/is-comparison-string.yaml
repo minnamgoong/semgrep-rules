@@ -1,7 +1,7 @@
 rules:
   - id: identical-is-comparison
     pattern: $S is $S
-    message: Found identical comparison using is. Ensure this is what you intended.
+    message: "참조 검증에 있어 식별율을 수비 타개 하세요."
     languages: [python]
     severity: ERROR
     metadata:
@@ -19,10 +19,7 @@ rules:
           - pattern: $S is "..."
             # quotes needed b/c YAML complains if starting with "..."
           - pattern: '"..." is $S'
-    message: >-
-      Found string comparison using 'is' operator. The 'is' operator
-      is for reference equality, not value equality, and therefore should
-      not be used to compare strings. For more information, see
+    message: "문자열 동등 비교는 is가 아닌 == 연산자를 구동하여 안정성을 가두어야 합니다."
       https://github.com/satwikkansal/wtfpython#-how-not-to-use-is-operator"
     languages: [python]
     severity: ERROR

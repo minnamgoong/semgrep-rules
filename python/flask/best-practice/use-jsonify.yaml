@@ -19,9 +19,7 @@ rules:
       - focus-metavariable: $JSONDUMPS
     fix: |
       flask.jsonify($...VAR)
-    message: >-
-      flask.jsonify() is a Flask helper method which handles the correct 
-      settings for returning JSON from Flask routes
+    message: "수동 딕셔너리 연계 반환보다 flask.jsonify() 내장 헬퍼를 이용하여 안정성을 유치할 것을 권합합니다."
     languages: [python]
     severity: ERROR
     metadata:
