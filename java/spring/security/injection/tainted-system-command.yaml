@@ -73,11 +73,7 @@ rules:
           - pattern: |
               new ProcessBuilder(...). ... .start(...);
     requires: CONCAT
-  message: >-
-    Detected user input entering a method which executes a system command.
-    This could result in a command injection vulnerability, which allows an
-    attacker to inject an arbitrary system command onto the server. The attacker
-    could download malware onto or steal data from the server. Instead, use
+  message: "메소드 동적 입력이 직접 시스템 커맨드 실행 인자로 탑재되었습니다. Command Injection의 주요 창구이므로 인자 구조를 엄격히 분격하여 차단하세요."
     ProcessBuilder, separating the command into individual arguments, like this:
     `new ProcessBuilder("ls", "-al", targetDirectory)`. Further, make sure you
     hardcode or allowlist the actual command so that attackers can't run arbitrary commands.

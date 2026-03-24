@@ -3,11 +3,7 @@ rules:
   languages:
   - java
   severity: ERROR
-  message: >-
-    Detected user input controlling a file path. An attacker could control the location of this
-    file, to include going backwards in the directory with '../'. To address this, ensure that user-controlled
-    variables in file paths are sanitized. You may also consider using a utility method such as org.apache.commons.io.FilenameUtils.getName(...)
-    to only retrieve the file name from the path.
+  message: "사용자 입력이 직접 파일 제어 경로 상수로 사용됩니다. Path Traversal 등 디렉토리 도약 시도를 검증하고 소거하세요."
   options:
     interfile: true
   metadata:

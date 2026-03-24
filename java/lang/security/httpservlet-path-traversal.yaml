@@ -20,13 +20,7 @@ rules:
     likelihood: HIGH
     impact: MEDIUM
     confidence: MEDIUM
-  message: >-
-    Detected a potential path traversal. A malicious actor
-    could control the location of this file, to include going backwards
-    in the directory with '../'. To address this, ensure that user-controlled
-    variables in file paths are sanitized. You may also consider using a utility
-    method such as org.apache.commons.io.FilenameUtils.getName(...) to only
-    retrieve the file name from the path.
+  message: "외부 임력값으로 직접 파일 시스템 경로를 구성해 처리. Relative path 제어 유출을 막기 위해 입력값에 대한 검증을 수행하세요."
   mode: taint
   pattern-sources:
   - patterns:

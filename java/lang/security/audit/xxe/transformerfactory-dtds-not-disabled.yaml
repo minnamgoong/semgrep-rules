@@ -29,7 +29,7 @@ rules:
       likelihood: LOW
       impact: HIGH
       confidence: HIGH
-    message: DOCTYPE declarations are enabled for this TransformerFactory. This
+    message: "TransformerFactory에서 DTD 문서 선언 금지 설정이 누락되어 XXE 위험에 노출됩니다. 안전한 XML 가공을 위해 ACCESS_EXTERNAL_DTD 등 비허용 속성을 적용하세요."
       is vulnerable to XML external entity attacks. Disable this by setting the
       attributes "accessExternalDTD" and "accessExternalStylesheet" to "". 
     mode: taint

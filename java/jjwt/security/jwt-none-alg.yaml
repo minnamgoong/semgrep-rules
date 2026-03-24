@@ -1,11 +1,6 @@
 rules:
 - id: jjwt-none-alg
-  message: >-
-    Detected use of the 'none' algorithm in a JWT token.
-    The 'none' algorithm assumes the integrity of the token has already
-    been verified. This would allow a malicious actor to forge a JWT token
-    that will automatically be verified. Do not explicitly use the 'none'
-    algorithm. Instead, use an algorithm such as 'HS256'.
+  message: "JWT 토큰에 서명 검증이 생략되는 non-alg 알고리즘 사용 감지. 변조 토큰 인용을 예방하기 위해 고정된 안전한 해시 알고리즘을 사용하세요."
   metadata:
     cwe:
     - 'CWE-327: Use of a Broken or Risky Cryptographic Algorithm'

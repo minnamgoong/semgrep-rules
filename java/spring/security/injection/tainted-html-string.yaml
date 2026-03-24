@@ -3,13 +3,7 @@ rules:
   languages:
   - java
   severity: ERROR
-  message: >-
-    Detected user input flowing into a manually constructed HTML string.
-    You may be accidentally bypassing secure methods of rendering HTML by
-    manually constructing HTML and this could create a cross-site scripting
-    vulnerability, which could let attackers steal sensitive user data. To be
-    sure this is safe, check that the HTML is rendered safely. You can use
-    the OWASP ESAPI encoder if you must render user data.
+  message: "동적 HTML 주입 연산 시 외부 오염 유입 데이터가 전달되었습니다. XSS 보호막 무력화를 예방하기 위해 사전 이스케이프해야 합니다."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

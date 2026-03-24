@@ -1,7 +1,6 @@
 rules:
 - id: find-sql-string-concatenation
-  message: >-
-    In $METHOD, $X is used to construct a SQL query via string concatenation.
+  message: "SQL 쿼리 생성 시 문자열 결합(String Concatenation)을 사용하고 있습니다. SQL 인젝션 공격에 취약할 수 있으므로 PreparedStatement 등의 Parameterized Query 형식을 사용하세요."
   languages: [java]
   severity: ERROR
   pattern-either:

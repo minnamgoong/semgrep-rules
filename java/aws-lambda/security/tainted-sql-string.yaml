@@ -2,13 +2,7 @@ rules:
 - id: tainted-sql-string
   languages: [java]
   severity: ERROR
-  message: >-
-    Detected user input used to manually construct a SQL string. This is usually
-    bad practice because manual construction could accidentally result in a SQL
-    injection. An attacker could use a SQL injection to steal or modify contents
-    of the database. Instead, use a parameterized query which is available
-    by default in most database engines. Alternatively, consider using an
-    object-relational mapper (ORM) such as Sequelize which will protect your queries.
+  message: "AWS Lambda 핸들러 등의 외부 사용자 입력이 직접 SQL 문자열 조립에 사용되었습니다. Parameterized Query를 사용하여 SQL 인젝션을 예방하세요."
   options:
     interfile: true
   metadata:

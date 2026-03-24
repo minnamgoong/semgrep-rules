@@ -14,12 +14,7 @@ rules:
       metavariable: $INFO
       regex: (debug|error|fatal|info|trace|warn)
   languages: [java]
-  message: >-
-    Seam Logging API support an expression language to introduce bean property to log messages.
-    The expression language can also be the source to unwanted code execution.
-    In this context, an expression is built with a dynamic value.
-    The source of the value(s) should be verified to avoid that unfiltered values fall into this risky
-    code evaluation.
+  message: "Seam Logging API에 외부 데이터가 그대로 주입되었습니다. 표현식 언어(EL)를 통해 로깅 시스템이 공격받을 수 있으므로 주입 전 엄격한 검증을 통과해야 합니다."
   metadata:
     cwe:
     - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"

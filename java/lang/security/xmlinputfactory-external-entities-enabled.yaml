@@ -27,11 +27,7 @@ rules:
     likelihood: LOW
     impact: HIGH
     confidence: LOW
-  message: >-
-    XML external entities are enabled for this XMLInputFactory. This is vulnerable
-    to XML external entity
-    attacks. Disable external entities by setting "javax.xml.stream.isSupportingExternalEntities"
-    to false.
+  message: "XMLInputFactory에 외부 엔티티(External Entities)가 허용되어 있습니다. XML External Entity (XXE) 취약점 발생을 예방하기 위해 이를 비활성화하세요."
   patterns:
   - pattern-either:
       - pattern: (javax.xml.stream.XMLInputFactory $XMLFACTORY).setProperty("javax.xml.stream.isSupportingExternalEntities", true);

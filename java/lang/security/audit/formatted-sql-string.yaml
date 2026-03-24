@@ -30,11 +30,7 @@ rules:
   options:
     taint_assume_safe_numbers: true
     taint_assume_safe_booleans: true
-  message: >-
-    Detected a formatted string in a SQL statement. This could lead to SQL
-    injection if variables in the SQL statement are not properly sanitized.
-    Use a prepared statements (java.sql.PreparedStatement) instead. You
-    can obtain a PreparedStatement using 'connection.prepareStatement'.
+  message: "SQL 쿼리 내에서 Formatted String(서식 문자열)이 발견되었습니다. SQL 인젝션 요인을 막기 위해 PreparedStatement 스타일을 적용하세요."
   mode: taint
   pattern-sources:
   - patterns:

@@ -3,7 +3,7 @@ rules:
     languages:
       - java
     severity: ERROR
-    message: User data flows into this manually-constructed SQL string. User data
+    message: "외부 유입 오염 데이터가 직접 SQL 문자열 조립에 사용되었습니다. SQL 인젝션을 막기 위해 검증된 파라미터형 바인딩 양식을 도출하세요."
       can be safely inserted into SQL strings using prepared statements or an
       object-relational mapper (ORM). Manually-constructed SQL strings is a
       possible indicator of SQL injection, which could let an attacker steal or

@@ -1,6 +1,6 @@
 rules:
   - id: assignment-comparison
-    message: The value of `$X` is being ignored and will be used in the conditional test
+    message: "조건식 내부에서 대입 연산자(=)가 사용되고 있습니다. 의도치 않게 할당이 일어나 비교가 고장날 우려가 있습니다."
     languages: [java]
     severity: ERROR
     pattern-either:

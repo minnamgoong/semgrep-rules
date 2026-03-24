@@ -29,9 +29,7 @@ rules:
     likelihood: LOW
     impact: HIGH
     confidence: HIGH
-  message: >-
-    DOCTYPE declarations are enabled for $DBFACTORY.
-    Without prohibiting external entity declarations, this is vulnerable to XML external entity attacks.
+  message: "DocumentBuilderFactory에서 disallow-doctype-decl 속성이 false로 설정되어 있습니다. XML 파싱 공격(XXE 등) 예방을 위해 반드시 true로 조치하세요."
     Disable this by setting the feature "http://apache.org/xml/features/disallow-doctype-decl" to true.
     Alternatively, allow DOCTYPE declarations and only prohibit external entities declarations.
     This can be done by setting the features "http://xml.org/sax/features/external-general-entities" and

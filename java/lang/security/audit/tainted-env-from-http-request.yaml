@@ -1,9 +1,6 @@
 rules:
 - id: tainted-env-from-http-request
-  message: >-
-    Detected input from a HTTPServletRequest going into the environment variables of an 'exec' command. 
-    Instead, call the command with user-supplied arguments by using the overloaded method with one String array as the argument.
-    `exec({"command", "arg1", "arg2"})`.
+  message: "HTTP 요청이 시스템 커맨드(`exec`)의 환경 변수로 직주입됩니다. 임의 명령 실행 공격을 예방하기 위해 조치하세요."
   languages: [java]
   severity: ERROR
   mode: taint

@@ -21,7 +21,7 @@ rules:
     confidence: HIGH
   languages:
   - java
-  message: 'GCM IV/nonce is reused: encryption can be totally useless'
+  message: "GCM 모드 암호화 시 IV(Nonce) 값이 고정으로 재사용되고 있습니다. 암호화 보완성이 즉시 상실되므로 매번 랜덤하고 중복되지 않는 Nonce를 생성하여 주입하십시오."
   patterns:
   - pattern-either:
     - pattern: new GCMParameterSpec(..., "...".getBytes(...), ...);

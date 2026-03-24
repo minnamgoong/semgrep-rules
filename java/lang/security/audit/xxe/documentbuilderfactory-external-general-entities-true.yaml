@@ -28,8 +28,7 @@ rules:
     likelihood: LOW
     impact: HIGH
     confidence: HIGH
-  message: >-
-    External entities are allowed for $DBFACTORY.
+  message: "DocumentBuilderFactory에서 일반 외부 엔티티 호출이 허용되어 XXE 공격에 취약합니다. 가용 가능한 setFeature로 해당 기능을 비활성화 처리하세요."
     This is vulnerable to XML external entity attacks. Disable this by setting the feature "http://xml.org/sax/features/external-general-entities"
     to false.
   pattern: $DBFACTORY.setFeature("http://xml.org/sax/features/external-general-entities", true);
