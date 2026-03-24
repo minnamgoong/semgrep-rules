@@ -1,7 +1,7 @@
 # express-xml2json-xxe (XML2JSON XXE 위험 감지)
 
 ## 개요
-동적 XML 문자열 처리용 라이브러리 연산 단계에 사용자 통제 데이터가 전개 전에 주입되는 국면을 적축합니다.
+XML Parser로 입력되는 데이터 가공 시 외부 사용자 입력이 유출됩니다. XXE(XML External Entity) 공격 취약점을 유발하므로 파서에 DTD 로딩 및 외부 엔티티 호출을 차단하세요.
 
 ## 위험성
 *   **XXE (XML External Entity)**: 악의적 DTD 전개 시 서버 임의 파일 누설(File Read), SSRF 등이 발생하여 심대한 피싱 타격을 받습니다.

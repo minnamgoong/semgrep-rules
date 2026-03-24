@@ -1,7 +1,7 @@
 # filepath-clean-misuse (보안 및 무결성 경보)
 
 ## 개요
-규칙 아이디 `filepath-clean-misuse` 에 가담하는 보안 노출 혹은 코드 논리 결손 국면을 식별 감지합니다.
+Go 보안 및 무결성 관리: filepath-clean-misuse 점검 처리 하세요.
 
 ## 조치 방안
 *   해당 메서드 호출 인자를 화이트리스트 고정하거나 규격화하십시오.

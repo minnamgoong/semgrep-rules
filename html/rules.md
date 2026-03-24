@@ -6,7 +6,7 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `robots-denied` | `INFO` | robots-denied 잠재적 결함 및 보안 이격율 정비 요망. | `robots-denied.yaml` |
+| `robots-denied` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `robots-denied.yaml` |
 
 ## CORRECTNESS
 
@@ -18,7 +18,7 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `eval-detected` | `WARNING` | eval-detected 잠재적 결함 및 보안 이격율 정비 요망. | `audit/eval-detected.yaml` |
+| `eval-detected` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `audit/eval-detected.yaml` |
 | `insecure-document-method` | `WARNING` | 보안 옵션 누사 및 예방 단속 필요. | `audit/insecure-document-method.yaml` |
-| `missing-integrity` | `WARNING` | missing-integrity 잠재적 결함 및 보안 이격율 정비 요망. | `audit/missing-integrity.yaml` |
-| `plaintext-http-link` | `WARNING` | plaintext-http-link 잠재적 결함 및 보안 이격율 정비 요망. | `plaintext-http-link.yaml` |
+| `missing-integrity` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `audit/missing-integrity.yaml` |
+| `plaintext-http-link` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `plaintext-http-link.yaml` |

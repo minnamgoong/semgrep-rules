@@ -1,7 +1,7 @@
 # dynamodb-request-object (DynamoDB NoSQL 인젝션 위험)
 
 ## 개요
-Lambda의 유입 이벤트 객체(`$EVENT`) 내용물이 통과 여과 없이 DynamoDB의 `query()`, `scan()` 조건문 필터 객체 안으로 직유입되는 것을 경보합니다.
+DynamoDB 쿼리 매개변수 집계 시 $EVENT 유입 데이터가 소요됩니다. NoSQL 인젝션을 피하기 위해 입력 데이터를 정적 한정시키세요.
 
 ## 위험성
 *   **NoSQL Injection**: 공격자가 비교 연산자(`$gt`, `$ne` 등)를 JSON 형태로 밀어 넣어 인증을 바이패스하거나 허용되지 않은 모든 세트 데이터를 유출시킬 수 있습니다.

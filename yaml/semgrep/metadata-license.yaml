@@ -1,6 +1,6 @@
 rules:
 - id: metadata-license
-  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-license 누사 경보."
+  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-license 누락 경보."
   severity: ERROR
   metadata:
     category: correctness

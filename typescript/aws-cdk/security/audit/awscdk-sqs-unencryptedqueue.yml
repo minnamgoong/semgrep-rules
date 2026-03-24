@@ -1,6 +1,6 @@
 rules:
 - id: - id: awscdk-sqs-unencryptedqueue
-  message: "awscdk-sqs-unencryptedqueue 잠재적 결함 및 보안 이격율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
     Queue $X is missing encryption at rest. Add "encryption: $Y.QueueEncryption.KMS" or "encryption: $Y.QueueEncryption.KMS_MANAGED"
     to the queue props to enable encryption at rest for the queue.
   metadata:

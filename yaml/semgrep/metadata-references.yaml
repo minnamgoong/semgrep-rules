@@ -1,6 +1,6 @@
 rules:
 - id: metadata-references
-  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-references 누사 경보."
+  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-references 누락 경보."
   severity: ERROR
   metadata:
     category: correctness

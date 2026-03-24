@@ -6,7 +6,7 @@ rules:
     languages:
       - hcl
     severity: INFO
-    message: "S3 버킷 퍼블릭 오픈 및 암호화 누사 경보."
+    message: "S3 버킷 퍼블릭 오픈 및 암호화 누락 경보."
       no way to disable it. See https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
       for more info.
     metadata:

@@ -1,6 +1,6 @@
 rules:
 - id: - id: hardcoded-passport-secret
-  message: "자격증명/보안 기밀 문자열 누사 점검."
+  message: "자격증명/보안 기밀 문자열 누락 여부 점검."
   metadata:
     cwe:
     - 'CWE-798: Use of Hard-coded Credentials'

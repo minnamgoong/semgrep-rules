@@ -1,3 +1,3 @@
 # dangerous-testcapi-run-in-subinterp (보안 및 무결성 경보)
 ## 개요
-자동화 논리 이격율을 잡습니다.
+위험한 메서드 호출 피로도 점검.

@@ -1,3 +1,3 @@
 # s3-unencrypted-bucket (Terraform INFO 경보)
 ## 개요
-자동화 보안 논리 이격율을 잡습니다.
+S3 버킷 퍼블릭 오픈 및 암호화 누락 경보.

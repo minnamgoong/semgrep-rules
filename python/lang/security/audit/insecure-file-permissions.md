@@ -1,3 +1,3 @@
 # insecure-file-permissions (Python WARNING 경보)
 ## 개요
-동적 논리 이탈율을 잡습니다.
+보안 옵션 누사 및 예방 단속 필요.

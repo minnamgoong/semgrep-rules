@@ -1,6 +1,6 @@
 rules:
 - id: - id: express-jwt-not-revoked
-  message: "JWT 토큰 서명 및 디코드 검증 누사 점검."
+  message: "JWT 토큰 서명 및 디코드 검증 누락 여부 점검."
   metadata:
     cwe:
     - 'CWE-522: Insufficiently Protected Credentials'

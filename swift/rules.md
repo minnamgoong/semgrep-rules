@@ -7,7 +7,7 @@
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
 | `insecure-random` | `WARNING` | 보안 옵션 누사 및 예방 단속 필요. | `crypto/insecure-random.yaml` |
-| `swift-user-defaults` | `WARNING` | swift-user-defaults 잠재적 결함 및 보안 이격율 정비 요망. | `storage/sensitive-storage-userdefaults.yaml` |
+| `swift-user-defaults` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `storage/sensitive-storage-userdefaults.yaml` |
 
 ## SQLLITE
 
@@ -19,4 +19,4 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `swift-webview-config-allows-js-open-windows` | `WARNING` | swift-webview-config-allows-js-open-windows 잠재적 결함 및 보안 이격율 정비 요망. | `webview-js-window.yaml` |
+| `swift-webview-config-allows-js-open-windows` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `webview-js-window.yaml` |

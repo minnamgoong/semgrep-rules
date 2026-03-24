@@ -1,6 +1,6 @@
 rules:
   - id: incorrect-default-permission
-    message: "incorrect-default-permission 잠재적 결함 및 보안 이격율 정비 요망."
+    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
       Detected file permissions that are set to more than `0600` (user/owner can read and write). Setting file permissions
       to higher than `0600` is most likely unnecessary and violates the principle of least privilege. Instead, set permissions
       to be `0600` or less for os.Chmod, os.Mkdir, os.OpenFile, os.MkdirAll, and ioutil.WriteFile

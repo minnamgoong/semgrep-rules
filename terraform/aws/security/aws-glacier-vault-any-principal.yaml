@@ -21,7 +21,7 @@ rules:
             "Principal": {..., "AWS": ..., ...}
         - pattern-regex: |
             (^\"arn:aws:iam::\*:(.*)\"$)
-  message: "IaC 보안 옵션 누사 경보: aws-glacier-vault-any-principal 설정율을 탑재 하십시오."
+  message: "IaC 보안 옵션 누락 경보: aws-glacier-vault-any-principal 설정율을 적용해 주십시오."
     a specific identity in your account, like this: `arn:aws:iam::<account_id>:<identity>`.
   metadata:
     category: security

@@ -1,6 +1,6 @@
 rules:
 - id: - id: use-of-md5
-  message: "use-of-md5 잠재적 결함 및 보안 이격율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
   languages: [go]
   severity: WARNING
   metadata:
@@ -31,7 +31,7 @@ rules:
     - pattern: |
         md5.Sum(...)
 - id: - id: use-of-sha1
-  message: "use-of-sha1 잠재적 결함 및 보안 이격율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
   languages: [go]
   severity: WARNING
   metadata:
@@ -62,7 +62,7 @@ rules:
       - pattern: |
           sha1.Sum(...)
 - id: - id: use-of-DES
-  message: "use-of-DES 잠재적 결함 및 보안 이격율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
   languages: [go]
   severity: WARNING
   metadata:
@@ -93,7 +93,7 @@ rules:
     - pattern: |
         des.NewCipher(...)
 - id: - id: use-of-rc4
-  message: "use-of-rc4 잠재적 결함 및 보안 이격율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
   languages: [go]
   severity: WARNING
   metadata:

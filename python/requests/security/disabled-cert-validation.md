@@ -1,3 +1,3 @@
 # requests-disabled-cert-validation (인증서 검증 우회)
 ## 개요
-트래픽 암호화 교환 시 탑재 보안 분기를 인위 취소하여 패스 인젝션을 돕는 라인입니다.
+requests 가동 시 인증서 검증(verify=False) 탑재는 중간자 노출을 가동합니다. 재활성화 하세요.

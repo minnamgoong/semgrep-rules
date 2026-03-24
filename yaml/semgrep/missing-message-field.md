@@ -1,3 +1,3 @@
 # missing-message-field (Mixed WARNING 경보)
 ## 개요
-자동화 보안 논리 이격율을 잡습니다.
+설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.

@@ -1,7 +1,7 @@
 # metadata-cwe-prohibited-or-discouraged (보안 및 무결성 경보)
 
 ## 개요
-규칙 아이디 `metadata-cwe-prohibited-or-discouraged` 에 가담하는 보안 노출 혹은 코드 논리 결손 국면을 식별 감지합니다.
+Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-cwe-prohibited-or-discouraged 누락 경보.
 
 ## 조치 방안
 *   해당 메서드 호출 인자를 화이트리스트 고정하거나 규격화하십시오.

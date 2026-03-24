@@ -1,6 +1,6 @@
 rules:
   - id: useless-if-conditional
-    message: "useless-if-body 잠재적 결함 및 보안 이격율 정비 요망."
+    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
       Detected an if block that checks for the same condition on both branches (`$X`). The second condition check is
       useless as it is the same as the first, and therefore can be removed from the code,
     languages: [go]
@@ -22,7 +22,7 @@ rules:
       } else {
           $S
       }
-    message: "useless-if-body 잠재적 결함 및 보안 이격율 정비 요망."
+    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
       Detected identical statements in the if body and the else body of an if-statement. This will lead to the same code
       being executed no matter what the if-expression evaluates to. Instead, remove the if statement.
     languages: [go]

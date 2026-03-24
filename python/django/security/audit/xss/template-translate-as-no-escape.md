@@ -1,3 +1,3 @@
 # template-translate-as-no-escape (Python INFO 경보)
 ## 개요
-동적 논리 이탈율을 잡습니다.
+template-translate-as-no-escape 잠재적 결함 분기 정비 요망.

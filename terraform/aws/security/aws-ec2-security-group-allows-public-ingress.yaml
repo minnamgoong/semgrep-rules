@@ -57,7 +57,7 @@ rules:
 
       # *Also* exclude any CIDR range containing only 1 IP address, even if it is public
       - pattern-not-regex: ^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/32$
-  message: "aws-ec2-security-group-allows-public-ingress 잠재적 결함 및 보안 이격율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
   languages:
   - hcl
   severity: WARNING

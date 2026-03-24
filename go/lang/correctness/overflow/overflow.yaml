@@ -1,6 +1,6 @@
 rules:
   - id: integer-overflow-int16
-    message: "integer-overflow-int32 잠재적 결함 및 보안 이격율 정비 요망."
+    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
       Detected conversion of the result of a strconv.Atoi command to an int16. This could lead to an integer overflow,
       which could possibly result in unexpected behavior and even privilege escalation. Instead, use `strconv.ParseInt`.
     languages: [go]
@@ -19,7 +19,7 @@ rules:
       technology:
         - go
   - id: integer-overflow-int32
-    message: "integer-overflow-int32 잠재적 결함 및 보안 이격율 정비 요망."
+    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
       Detected conversion of the result of a strconv.Atoi command to an int32. This could lead to an integer overflow,
       which could possibly result in unexpected behavior and even privilege escalation. Instead, use `strconv.ParseInt`.
     languages: [go]

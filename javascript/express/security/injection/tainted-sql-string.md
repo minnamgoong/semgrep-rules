@@ -1,7 +1,7 @@
 # tainted-sql-string (Express SQL 인젝션 경보)
 
 ## 개요
-Express 컨트롤러에서 수신받은 유저 파라미터가 DAO 단의 네이티브 SQL 쿼리 문자열 조립에 그대로 끼어드는 것을 경보합니다.
+동적 SQL 문자열 결합이 탐지되었습니다. SQL Injection 예방을 위해 객체 모델 바인딩 및 Parameterized Query 기법을 사용하세요.
 
 ## 위험성
 *   **SQL Injection**: 외부 변수 조작으로 데이터베이스 정보 누설 및 쿼리 우회 인증 파훼가 성사될 심각한 리스크가 탑재됩니다.

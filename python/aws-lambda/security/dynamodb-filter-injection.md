@@ -1,3 +1,3 @@
 # dynamodb-filter-injection (NoSQL 인젝션 위험)
 ## 개요
-이벤트 유입 객체 타입이 DynamoDB 조건 필터 객체에 바인딩 없이 통째 대두 전개된 형편입니다.
+DynamoDB 쿼리 필터에 $EVENT 유입 인자가 도주합니다. NoSQL 인젝션 예방을 위해 정적 할당 하십시오.

@@ -1,7 +1,7 @@
 # detect-angular-sce-disabled (AngularSCE 비활성화 경고)
 
 ## 개요
-AngularJS 레거시 프레임워크 초기 구성 시 Strict Contextual Escaping(SCE) 보호 레이어를 인위적으로 해제한 상황을 안착합니다.
+$sceProvider가 false로 설정되어 엄격한 컨텍스트 이스케이프가 비활성화되었습니다. XSS 공격 방어를 위해 SCE를 활성화해야 합니다.
 
 ## 위험성
 *   **XSS**: HTML, 스타일, 리소스 바인딩 시 자동 클렌징이 작동하지 않아 악성 로드 탑재 스크립트 구동 피해가 빈발할 수 있습니다.

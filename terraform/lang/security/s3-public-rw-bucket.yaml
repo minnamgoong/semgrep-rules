@@ -4,7 +4,7 @@ rules:
   languages:
   - hcl
   severity: ERROR
-  message: "IaC 보안 옵션 누사 경보: s3-public-rw-bucket 설정율을 탑재 하십시오."
+  message: "IaC 보안 옵션 누락 경보: s3-public-rw-bucket 설정율을 적용해 주십시오."
   metadata:
     references:
     - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#acl

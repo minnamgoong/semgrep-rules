@@ -1,7 +1,7 @@
 # sequelize-tls-disabled-cert-validation (인증서 검증 우회 위험)
 
 ## 개요
-Sequelize ORM 설정 객체의 TLS/SSL 연결 옵션에서 `rejectUnauthorized: false`를 사용하는 국면을 적축합니다.
+Sequelize 설정 중 인증서 검증을 우회(rejectUnauthorized: false)하는 상태가 감지되었습니다. 중간자 공격에 도출되므로 프로덕션 배포 시 철회하십시오.
 
 ## 위험성
 *   **MitM 공격**: 데이터베이스와의 통신 구간에서 위조된 SSL 인증서를 수용하게 되어 패킷 도청 사고 확률을 높입니다.

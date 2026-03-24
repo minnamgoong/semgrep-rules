@@ -1,6 +1,6 @@
 rules:
 - id: appservice-use-secure-tls-policy
-  message: "IaC 보안 옵션 누사 경보: appservice-use-secure-tls-policy 설정율을 탑재 하십시오."
+  message: "IaC 보안 옵션 누락 경보: appservice-use-secure-tls-policy 설정율을 적용해 주십시오."
   patterns:
   - pattern: min_tls_version = $ANYTHING
   - pattern-inside: |

@@ -1,7 +1,7 @@
 # appservice-enable-https-only (보안 및 무결성 경보)
 
 ## 개요
-규칙 아이디 `appservice-enable-https-only` 에 가담하는 보안 노출 혹은 코드 논리 결손 국면을 식별 감지합니다.
+IaC 보안 옵션 누락 경보: appservice-enable-https-only 설정율을 적용해 주십시오.
 
 ## 조치 방안
 *   해당 메서드 호출 인자를 화이트리스트 고정하거나 규격화하십시오.

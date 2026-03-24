@@ -1,7 +1,7 @@
 # detect-child-process (Lambda 하위 프로세스 생성 경보)
 
 ## 개요
-AWS Lambda 내부에서 `child_process.exec` 또는 `spawn`을 호출할 때 유동적 인자를 탑재하는 패턴을 감지합니다.
+child_process를 통한 하위 프로세스 생성 시 임의 인자가 탑재될 위험이 있습니다. 실행 코더와 인자를 고정 배열 스타일로 전달하세요.
 
 ## 위험성
 *   **Command Injection**: 핸들러로 전달되는 레퓨테이션 이벤트 데이터가 검증 없이 명령어 라인에 조립되면 서버리스 런타임 내 임의 자산 탈출 명령이 실행됩니다.

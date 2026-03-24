@@ -1,6 +1,6 @@
 rules:
 - id: unsatisfiable-rule
-  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: unsatisfiable-rule 누사 경보."
+  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: unsatisfiable-rule 누락 경보."
   severity: ERROR
   metadata:
     category: correctness

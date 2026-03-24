@@ -1,7 +1,7 @@
 # detect-angular-open-redirect (Angular 오픈 리디렉션 경보)
 
 ## 개요
-Angular 컨트롤러단에서 사용자 파라미터를 `$window.location.href` 및 `$location.url()` 에 직접 적용하는 형태를 적발합니다.
+$window.location.href 연산에 사용자 입력이 그대로 대입되어 오픈 리디렉션 위협이 도사립니다. 도메인 화이트리스트 검출 후 도약시키세요.
 
 ## 위험성
 *   **Open Redirect**: 해커가 자사 피싱 유도 페이지 주소를 유도하여 클라이언트 브라우저 도약을 임의 조장시키는 보안 부적격 스탠스입니다.

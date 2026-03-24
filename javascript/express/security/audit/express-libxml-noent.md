@@ -1,7 +1,7 @@
 # express-libxml-noent (Libxml noent 활성화 위험)
 
 ## 개요
-`libxmljs` 등의 모듈에서 `noent: true` 옵션을 인위적으로 켜 엔티티 확산 권한을 부여한 국면을 진단합니다.
+libxml 라이브러리 처리 시 noent(Entity expansion) 속성이 true 로 인가되었습니다. XXE 취약점에 전방 노출되므로 이를 비활성화 처리하세요.
 
 ## 위험성
 *   **XXE**: 파서가 DTD 내부 엔티티를 자동 전개하게 만들어 공격자의 내부 자산 탈취 피싱에 영구 개방되는 보안 구멍이 열립니다.

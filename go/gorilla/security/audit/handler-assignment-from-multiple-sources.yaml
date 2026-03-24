@@ -40,7 +40,7 @@ rules:
         ...
         $VAR = $R
     - focus-metavariable: $R
-  message: "handler-assignment-from-multiple-sources 잠재적 결함 및 보안 이격율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
     Variable $VAR is assigned from two different sources: '$Y' and '$R'. Make sure this is intended,
     as this could cause logic bugs if they are treated as they are the same object.
   languages:

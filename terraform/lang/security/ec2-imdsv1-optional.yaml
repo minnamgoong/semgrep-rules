@@ -2,7 +2,7 @@ rules:
 - id: ec2-imdsv1-optional
   languages:
   - hcl
-  message: "IaC 보안 옵션 누사 경보: ec2-imdsv1-optional 설정율을 탑재 하십시오."
+  message: "IaC 보안 옵션 누락 경보: ec2-imdsv1-optional 설정율을 적용해 주십시오."
   metadata:
     cwe:
     - 'CWE-918: Server-Side Request Forgery (SSRF)'

@@ -1,3 +1,3 @@
 # tainted-html-string (Python WARNING 경보)
 ## 개요
-동적 논리 이탈율을 잡습니다.
+tainted-html-string 잠재적 결함 분기 정비 요망.

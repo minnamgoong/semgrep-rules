@@ -1,6 +1,6 @@
 rules:
 - id: - id: jwt-exposed-data
-  message: "JWT 토큰 서명 및 디코드 검증 누사 점검."
+  message: "JWT 토큰 서명 및 디코드 검증 누락 여부 점검."
   metadata:
     owasp:
     - A02:2017 - Broken Authentication

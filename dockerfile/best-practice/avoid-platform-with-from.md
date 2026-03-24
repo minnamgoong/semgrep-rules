@@ -1,3 +1,3 @@
 # avoid-platform-with-from (Mixed INFO 경보)
 ## 개요
-자동화 보안 논리 이격율을 잡습니다.
+Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검.

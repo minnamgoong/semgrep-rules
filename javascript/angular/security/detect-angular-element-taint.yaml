@@ -1,6 +1,6 @@
 rules:
 - id: - id: detect-angular-element-taint
-  message: "Angular 프론트엔드 이격율 주사 점검."
+  message: "Angular 프론트엔드 결함 주사 점검."
   metadata:
     confidence: MEDIUM
     cwe:

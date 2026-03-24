@@ -1,6 +1,6 @@
 rules:
 - id: metadata-owasp
-  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-owasp 누사 경보."
+  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-owasp 누락 경보."
     The `owasp` tag in Semgrep rule metadata should start with the format "A00:YYYY", where A00 is the
     OWASP top ten number and YYYY is the OWASP top ten year.
   severity: ERROR

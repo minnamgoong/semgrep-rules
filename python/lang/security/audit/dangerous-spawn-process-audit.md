@@ -1,7 +1,7 @@
 # dangerous-spawn-process-audit (보안 및 무결성 경보)
 
 ## 개요
-규칙 아이디 `dangerous-spawn-process-audit` 에 가담하는 보안 노출 혹은 코드 논리 결손 국면을 식별 감지합니다.
+인젝션 및 논리 에러 예방을 위한 dangerous-spawn-process-audit 전사 단속이 요구됩니다.
 
 ## 조치 방안
 *   해당 메서드 호출 인자를 화이트리스트 고정하거나 규격화하십시오.

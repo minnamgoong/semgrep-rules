@@ -1,6 +1,6 @@
 rules:
 - id: - id: avoid-v-html
-  message: "avoid-v-html 잠재적 결함 및 보안 이격율 정비 요망."
+  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
     lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided
     content.
   metadata:
