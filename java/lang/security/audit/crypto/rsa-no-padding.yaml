@@ -26,7 +26,7 @@ rules:
     likelihood: MEDIUM
     impact: MEDIUM
     confidence: HIGH
-  message: "Padding 없는 RSA 암호화 기용 시 특정 공격에 무력 차단 됩니다."
+  message: "Padding 없는 RSA 암호화 기용 시 특정 공격에 무방비하게 노출될 수 있습니다."
   severity: WARNING
   languages:
   - java

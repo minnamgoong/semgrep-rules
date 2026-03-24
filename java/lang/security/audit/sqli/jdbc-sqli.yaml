@@ -1,6 +1,6 @@
 rules:
 - id: jdbc-sqli
-  message: "잠재적 SQL 인젝션 취약 국면이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요."
+  message: "잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요."
   languages: [java]
   severity: WARNING
   patterns:

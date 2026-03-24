@@ -1,7 +1,7 @@
 # servletresponse-writer-xss (출력 응답 XSS 위험)
 
 ## 개요
-서블릿 응답 Stream으로 전달되는 동적 문자열(파라미터 등)이 HTML 문법이나 스크립트 특수문자를 인코딩 없이 전달하는 코드 상태를 탐지합니다.
+HttpServletResponse writer에 사용자 입력이 그대로 출력돼 XSS가 우려됩니다. 출력 전 HTML 인코딩을 적용하거나 보안 전용 API를 사용하세요.
 
 ## 위험성
 *   **Stored/Reflected XSS**: 브라우저 로딩 시 불법 세션 하이재킹 Script, 피싱 유도가 가동되어 클라이언트 단 보안이 영구적으로 무력화됩니다.

@@ -1,6 +1,6 @@
 rules:
 - id: spring-unvalidated-redirect
-  message: "오픈 리디렉션 피싱 가능 지점이 엿보입니다. 도약 전 검증을 거치세요."
+  message: "오픈 리디렉션 피싱 가능성이 존재합니다. 도약 전 검증을 거치세요."
   metadata:
     cwe:
     - "CWE-601: URL Redirection to Untrusted Site ('Open Redirect')"

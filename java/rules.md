@@ -15,7 +15,7 @@
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
 | `tainted-sql-string` | `ERROR` | AWS Lambda 핸들러 등의 외부 사용자 입력이 직접 SQL 문자열 조립에 사용되었습니다. Parameterized Query를 사용하여 S... | `security/tainted-sql-string.yaml` |
-| `tainted-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약 국면이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/tainted-sqli.yaml` |
+| `tainted-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/tainted-sqli.yaml` |
 
 ## JAVA-JWT
 
@@ -23,7 +23,7 @@
 | :--- | :---: | :--- | :--- |
 | `java-jwt-decode-without-verify` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/jwt-decode-without-verify.yaml` |
 | `java-jwt-hardcoded-secret` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/jwt-hardcode.yaml` |
-| `java-jwt-none-alg` | `ERROR` | JWT 토큰 서명 및 디코드 검증 누사 점검. | `security/jwt-none-alg.yaml` |
+| `java-jwt-none-alg` | `ERROR` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/jwt-none-alg.yaml` |
 
 ## JAX-RS
 
@@ -43,7 +43,7 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `jjwt-none-alg` | `ERROR` | JWT 토큰 서명 및 디코드 검증 누사 점검. | `security/jwt-none-alg.yaml` |
+| `jjwt-none-alg` | `ERROR` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/jwt-none-alg.yaml` |
 
 ## LANG
 
@@ -61,7 +61,7 @@
 | `cookie-missing-httponly` | `WARNING` | 쿠키에 보안 속성(Secure/HttpOnly)이 누락되어 세션 탈취(XSS/MitM)에 노출될 수 있습니다. | `security/audit/cookie-missing-httponly.yaml` |
 | `cookie-missing-secure-flag` | `WARNING` | 쿠키에 보안 속성(Secure/HttpOnly)이 누락되어 세션 탈취(XSS/MitM)에 노출될 수 있습니다. | `security/audit/cookie-missing-secure-flag.yaml` |
 | `crlf-injection-logs` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/crlf-injection-logs.yaml` |
-| `dangerous-groovy-shell` | `WARNING` | Groovy Shell 직접 구동 파사드에 위험 요소 가압이 엿보입니다. | `security/audit/dangerous-groovy-shell.yaml` |
+| `dangerous-groovy-shell` | `WARNING` | Groovy Shell 직접 구동 파사드에 위험 요소 존재할 수 있습니다. | `security/audit/dangerous-groovy-shell.yaml` |
 | `defaulthttpclient-is-deprecated` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/crypto/ssl/defaulthttpclient-is-deprecated.yaml` |
 | `des-is-deprecated` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/crypto/des-is-deprecated.yaml` |
 | `desede-is-deprecated` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/crypto/desede-is-deprecated.yaml` |
@@ -77,9 +77,9 @@
 | `gcm-detection` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/crypto/gcm-detection.yaml` |
 | `gcm-nonce-reuse` | `ERROR` | GCM 모드 암호화 시 IV(Nonce) 값이 고정으로 재사용되고 있습니다. 암호화 보완성이 즉시 상실되므로 매번 랜덤하고 중복되지 않는 Non... | `security/audit/crypto/gcm-nonce-reuse.yaml` |
 | `hardcoded-conditional` | `ERROR` | 조건문(if 등)의 조건식이 항상 true 또는 false로 고정되어 의미 없는 연산을 하거나 로직 버그일 가능성이 높습니다. | `correctness/hardcoded-conditional.yaml` |
-| `hibernate-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약 국면이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/hibernate-sqli.yaml` |
+| `hibernate-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/hibernate-sqli.yaml` |
 | `http-response-splitting` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/http-response-splitting.yaml` |
-| `httpservlet-path-traversal` | `ERROR` | 외부 임력값으로 직접 파일 시스템 경로를 구성해 처리. Relative path 제어 유출을 막기 위해 입력값에 대한 검증을 수행하세요. | `security/httpservlet-path-traversal.yaml` |
+| `httpservlet-path-traversal` | `ERROR` | 외부 입력값으로 직접 파일 시스템 경로를 구성해 처리. Relative path 제어 유출을 막기 위해 입력값에 대한 검증을 수행하세요. | `security/httpservlet-path-traversal.yaml` |
 | `insecure-hostname-verifier` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/crypto/ssl/insecure-hostname-verifier.yaml` |
 | `insecure-jms-deserialization` | `WARNING` | 안전하지 않은 역직렬화 가동이 포착되었습니다. RCE 공격 차단을 위해 직렬화 파서를 격수하십시오. | `security/insecure-jms-deserialization.yaml` |
 | `insecure-smtp-connection` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/insecure-smtp-connection.yaml` |
@@ -88,9 +88,9 @@
 | `java-pattern-from-string-parameter` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/java-pattern-from-string-parameter.yaml` |
 | `java-reverse-shell` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/java-reverse-shell.yaml` |
 | `jdbc-sql-formatted-string` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/jdbc-sql-formatted-string.yaml` |
-| `jdbc-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약 국면이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/jdbc-sqli.yaml` |
-| `jdo-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약 국면이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/jdo-sqli.yaml` |
-| `jpa-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약 국면이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/jpa-sqli.yaml` |
+| `jdbc-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/jdbc-sqli.yaml` |
+| `jdo-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/jdo-sqli.yaml` |
+| `jpa-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/jpa-sqli.yaml` |
 | `ldap-entry-poisoning` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/ldap-entry-poisoning.yaml` |
 | `ldap-injection` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/ldap-injection.yaml` |
 | `md5-used-as-password` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/md5-used-as-password.yaml` |
@@ -103,7 +103,7 @@
 | `ognl-injection` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/ognl-injection.yaml` |
 | `overly-permissive-file-permission` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/overly-permissive-file-permission.yaml` |
 | `permissive-cors` | `WARNING` | CORS 정책이 와일드카드(*) 등으로 과도하게 허용되어 브라우저 데이터 유출 우려가 있습니다. | `security/audit/permissive-cors.yaml` |
-| `rsa-no-padding` | `WARNING` | Padding 없는 RSA 암호화 기용 시 특정 공격에 무력 차단 됩니다. | `security/audit/crypto/rsa-no-padding.yaml` |
+| `rsa-no-padding` | `WARNING` | Padding 없는 RSA 암호화 기용 시 특정 공격에 무방비하게 노출될 수 있습니다. | `security/audit/crypto/rsa-no-padding.yaml` |
 | `saxparserfactory-disallow-doctype-decl-missing` | `ERROR` | SAXParserFactory 초기화 시 disallow-doctype-decl 선언 설정이 누락되었습니다. XXE 공격 창구를 원천 차단하기 ... | `security/audit/xxe/saxparserfactory-disallow-doctype-decl-missing.yaml` |
 | `script-engine-injection` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/script-engine-injection.yaml` |
 | `servletresponse-writer-xss` | `ERROR` | HttpServletResponse writer에 사용자 입력이 그대로 출력돼 XSS가 우려됩니다. 출력 전 HTML 인코딩을 적용하거나 보안 ... | `security/servletresponse-writer-xss.yaml` |
@@ -114,10 +114,10 @@
 | `tainted-sql-from-http-request` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/sqli/tainted-sql-from-http-request.yaml` |
 | `tainted-xpath-from-http-request` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/tainted-xpath-from-http-request.yaml` |
 | `transformerfactory-dtds-not-disabled` | `ERROR` | TransformerFactory에서 DTD 문서 선언 금지 설정이 누락되어 XXE 위험에 노출됩니다. 안전한 XML 가공을 위해 ACCESS_... | `security/audit/xxe/transformerfactory-dtds-not-disabled.yaml` |
-| `turbine-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약 국면이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/turbine-sqli.yaml` |
+| `turbine-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/turbine-sqli.yaml` |
 | `unencrypted-socket` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/crypto/unencrypted-socket.yaml` |
 | `unsafe-reflection` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/unsafe-reflection.yaml` |
-| `unvalidated-redirect` | `WARNING` | 오픈 리디렉션 피싱 가능 지점이 엿보입니다. 도약 전 검증을 거치세요. | `security/audit/unvalidated-redirect.yaml` |
+| `unvalidated-redirect` | `WARNING` | 오픈 리디렉션 피싱 가능성이 존재합니다. 도약 전 검증을 거치세요. | `security/audit/unvalidated-redirect.yaml` |
 | `url-rewriting` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/url-rewriting.yaml` |
 | `use-escapexml` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/xss/jsp/use-escapexml.yaml` |
 | `use-jstl-escaping` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/xss/jsp/use-jstl-escaping.yaml` |
@@ -132,19 +132,19 @@
 | `use-of-sha224` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/crypto/use-of-sha224.yaml` |
 | `use-of-weak-rsa-key` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/crypto/weak-rsa.yaml` |
 | `use-snakeyaml-constructor` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/use-snakeyaml-constructor.yaml` |
-| `vertx-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약 국면이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/vertx-sqli.yaml` |
+| `vertx-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/sqli/vertx-sqli.yaml` |
 | `weak-random` | `WARNING` | 예측 가능한 난수 생성기(Random) 사용 감지. 보안용으론 SecureRandom을 쓰세요. | `security/audit/crypto/weak-random.yaml` |
 | `weak-ssl-context` | `WARNING` | 취약하거나 검증되지 않은 SSL/TLS 컨텍스트가 감지되었습니다. 중간자 공격(MitM)을 조심하십시오. | `security/audit/weak-ssl-context.yaml` |
 | `xml-decoder` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/xml-decoder.yaml` |
 | `xmlinputfactory-external-entities-enabled` | `ERROR` | XMLInputFactory에 외부 엔티티(External Entities)가 허용되어 있습니다. XML External Entity (XXE)... | `security/xmlinputfactory-external-entities-enabled.yaml` |
 | `xmlinputfactory-possible-xxe` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/xmlinputfactory-possible-xxe.yaml` |
-| `xssrequestwrapper-is-insecure` | `WARNING` | 크로스 사이트 스크립팅(XSS) 주입 우려 노출 국면을 점검하세요. | `security/audit/xssrequestwrapper-is-insecure.yaml` |
+| `xssrequestwrapper-is-insecure` | `WARNING` | 크로스 사이트 스크립팅(XSS) 주입 취약점 우려을 점검하세요. | `security/audit/xssrequestwrapper-is-insecure.yaml` |
 
 ## MONGODB
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `mongodb-nosqli` | `WARNING` | 잠재적 SQL 인젝션 취약 국면이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/injection/audit/mongodb-nosqli.yaml` |
+| `mongodb-nosqli` | `WARNING` | 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/injection/audit/mongodb-nosqli.yaml` |
 
 ## RMI
 
@@ -172,8 +172,8 @@
 | `spring-actuator-fully-enabled-yaml` | `WARNING` | Spring Boot Actuator 엔드포인트가 과도하게 활성화되어 정보 누출 우려가 있습니다. | `security/audit/spring-actuator-fully-enabled-yaml.yaml` |
 | `spring-csrf-disabled` | `WARNING` | Spring Security에서 CSRF 보안이 해제되었습니다. | `security/audit/spring-csrf-disabled.yaml` |
 | `spring-jsp-eval` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/spring-jsp-eval.yaml` |
-| `spring-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약 국면이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/spring-sqli.yaml` |
-| `spring-unvalidated-redirect` | `WARNING` | 오픈 리디렉션 피싱 가능 지점이 엿보입니다. 도약 전 검증을 거치세요. | `security/audit/spring-unvalidated-redirect.yaml` |
+| `spring-sqli` | `WARNING` | 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요. | `security/audit/spring-sqli.yaml` |
+| `spring-unvalidated-redirect` | `WARNING` | 오픈 리디렉션 피싱 가능성이 존재합니다. 도약 전 검증을 거치세요. | `security/audit/spring-unvalidated-redirect.yaml` |
 | `tainted-file-path` | `ERROR` | 사용자 입력이 직접 파일 제어 경로 상수로 사용됩니다. Path Traversal 등 디렉토리 도약 시도를 검증하고 소거하세요. | `security/injection/tainted-file-path.yaml` |
 | `tainted-html-string` | `ERROR` | 동적 HTML 주입 연산 시 외부 오염 유입 데이터가 전달되었습니다. XSS 보호막 무력화를 예방하기 위해 사전 이스케이프해야 합니다. | `security/injection/tainted-html-string.yaml` |
 | `tainted-sql-string` | `ERROR` | 외부 유입 오염 데이터가 직접 SQL 문자열 조립에 사용되었습니다. SQL 인젝션을 막기 위해 검증된 파라미터형 바인딩 양식을 도출하세요. | `security/injection/tainted-sql-string.yaml` |

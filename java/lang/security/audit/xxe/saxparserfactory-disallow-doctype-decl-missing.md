@@ -1,7 +1,7 @@
 # saxparserfactory-disallow-doctype-decl-missing (SAX Parser DOCTYPE 금지 누락)
 
 ## 개요
-SAX 방식의 대용량 XML 처리를 담당하는 `SAXParserFactory` 도구에서 DTD 선언 파쇄 방직이 비어있음을 점검합니다.
+SAXParserFactory 초기화 시 disallow-doctype-decl 선언 설정이 누락되었습니다. XXE 공격 창구를 원천 차단하기 위해 이 특성을 활성화하십시오.
 
 ## 위험성
 *   SAX 스트림 처리 특성상 로딩 부하는 적으나 엔티티 전개 시 시스템 파일 누설 등 XXE 타격 범위는 동일하게 받습니다.

@@ -1,7 +1,7 @@
 # tainted-system-command (시스템 커맨드 오염 주입 감지)
 
 ## 개요
-Spring 환경에서 외부 데이터가 `Runtime.exec`나 `ProcessBuilder`의 명령 집행 스택으로 직접 유입되는 지점을 검출합니다.
+메소드 동적 입력이 직접 시스템 커맨드 실행 인자로 탑재되었습니다. Command Injection의 주요 창구이므로 인자 구조를 엄격히 분격하여 차단하세요.
 
 ## 위험성
 *   **OS Command Injection**: 클라이언트 파급 공격자가 서버 상에서 리눅스/윈도우 쉘 명령어를 마스터 권한으로 자유 자재 하달 가동할 수 있습니다.

@@ -20,7 +20,7 @@ rules:
     likelihood: HIGH
     impact: MEDIUM
     confidence: MEDIUM
-  message: "외부 임력값으로 직접 파일 시스템 경로를 구성해 처리. Relative path 제어 유출을 막기 위해 입력값에 대한 검증을 수행하세요."
+  message: "외부 입력값으로 직접 파일 시스템 경로를 구성해 처리. Relative path 제어 유출을 막기 위해 입력값에 대한 검증을 수행하세요."
   mode: taint
   pattern-sources:
   - patterns:

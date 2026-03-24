@@ -1,7 +1,7 @@
 # formatted-sql-string (서식 SQL 쿼리 경고)
 
 ## 개요
-`String.format()` 혹은 `%s` 같은 형식의 서식 마크업을 동원해 SQL 전체를 동적 구성해 사용하는 패턴을 경고합니다.
+SQL 쿼리 내에서 Formatted String(서식 문자열)이 발견되었습니다. SQL 인젝션 요인을 막기 위해 PreparedStatement 스타일을 적용하세요.
 
 ## 위험성
 *   구조적으로 문자열 조립 형식과 일맥상통하여, 변수가 직접 대입될 때 조작된 SQL 문법의 영향을 배제하지 못해 전형적 SQL Injection 창구가 됩니다.

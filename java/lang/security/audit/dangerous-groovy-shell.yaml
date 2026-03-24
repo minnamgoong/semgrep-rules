@@ -21,7 +21,7 @@ rules:
       $SHELL.evaluate("...",...)
   - pattern-not: |
       $SHELL.parseClass("...",...)
-  message: "Groovy Shell 직접 구동 파사드에 위험 요소 가압이 엿보입니다."
+  message: "Groovy Shell 직접 구동 파사드에 위험 요소 존재할 수 있습니다."
   metadata:
     cwe:
     - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
