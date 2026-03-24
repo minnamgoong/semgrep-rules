@@ -1,8 +1,6 @@
 rules:
 - id: express-xml2json-xxe
-  message: >-
-    Make sure that unverified user data can not reach the XML Parser,
-    as it can result in XML External or Internal Entity (XXE) Processing vulnerabilities
+  message: "XML Parser로 입력되는 데이터 가공 시 외부 사용자 입력이 유출됩니다. XXE(XML External Entity) 공격 취약점을 유발하므로 파서에 DTD 로딩 및 외부 엔티티 호출을 차단하세요."
   metadata:
     owasp:
     - A04:2017 - XML External Entities (XXE)

@@ -1,10 +1,6 @@
 rules:
 - id: vm-runincontext-injection
-  message: >-
-    The `vm` module enables compiling and running code within V8 Virtual Machine contexts.
-    The `vm` module is not a security mechanism. Do not use it to run untrusted code.
-    If code passed to `vm` functions is controlled by user input it could result in command injection.
-    Do not let user input in `vm` functions.
+  message: "vm.runInContext() 호출에 외부 입력 데이터가 유입되어 샌드박스 우회 위험이 있습니다. 가변 코드 실행 연산을 중단하세요."
   metadata:
     owasp:
     - A03:2021 - Injection

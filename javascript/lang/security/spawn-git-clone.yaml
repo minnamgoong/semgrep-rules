@@ -1,7 +1,6 @@
 rules:
 - id: spawn-git-clone
-  message: >-
-    Git allows shell commands to be specified in ext URLs for remote repositories.
+  message: "git clone 실행 인자에 사용자 오염 가변 데이터가 유입되었습니다. 인자 인젝션 위험이 있으므로 주소를 고정하거나 정적 세탁하세요."
     For example, git clone 'ext::sh -c whoami% >&2' will execute the whoami command
     to try to connect to a remote repository.
     Make sure that the URL is not controlled by external input.

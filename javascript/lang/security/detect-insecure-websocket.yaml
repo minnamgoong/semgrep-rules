@@ -1,6 +1,6 @@
 rules:
 - id: detect-insecure-websocket
-  message: Insecure WebSocket Detected. WebSocket Secure (wss) should be used for all WebSocket connections.
+  message: "보안되지 않은 WebSocket(ws://) 연결이 감지되었습니다. 스니핑 공격을 예방하기 위해 암호화된 wss:// 연결을 사용하세요."
   metadata:
     cwe:
     - 'CWE-319: Cleartext Transmission of Sensitive Information'

@@ -1,9 +1,6 @@
 rules:
 - id: gcm-no-tag-length
-  message: >-
-    The call to 'createDecipheriv' with the Galois Counter Mode (GCM) mode of operation is missing an expected authentication tag length.
-    If the expected authentication tag length is not specified or otherwise checked, the application might be tricked into verifying a shorter-than-expected authentication tag.
-    This can be abused by an attacker to spoof ciphertexts or recover the implicit authentication key of GCM, allowing arbitrary forgeries.
+  message: "GCM 모드 구동 시 createDecipheriv 에 인증 태그(Tag) 탑재 확인 옵션이 누락되었습니다. 데이터 무결성 검증을 위해 반드시 활성화하세요."
   metadata:
     cwe:
     - 'CWE-310: CWE CATEGORY: Cryptographic Issues'

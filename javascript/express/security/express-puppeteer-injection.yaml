@@ -1,8 +1,6 @@
 rules:
 - id: express-puppeteer-injection
-  message: >-
-    If unverified user data can reach the `puppeteer` methods it can result in Server-Side Request Forgery
-    vulnerabilities
+  message: "puppeteer 인스턴스 메서드 구동 영역에 외부 동적 데이터가 도출됩니다. SSRF 유도 및 원격 클라이언트 브라우저 구동 조작을 차단하십시오."
   metadata:
     owasp:
     - A10:2021 - Server-Side Request Forgery (SSRF)

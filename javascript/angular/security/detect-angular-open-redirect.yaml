@@ -1,7 +1,6 @@
 rules:
 - id: detect-angular-open-redirect
-  message: >-
-    Use of $window.location.href can lead to open-redirect if user input is used for redirection.
+  message: "$window.location.href 연산에 사용자 입력이 그대로 대입되어 오픈 리디렉션 위협이 도사립니다. 도메인 화이트리스트 검출 후 도약시키세요."
   metadata:
     asvs:
       section: V5 Validation, Sanitization and Encoding

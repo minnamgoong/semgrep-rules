@@ -1,8 +1,6 @@
 rules:
 - id: express-phantom-injection
-  message: >-
-    If unverified user data can reach the `phantom` methods it can result in Server-Side Request Forgery
-    vulnerabilities
+  message: "phantom API 호출에 사용자 통제 입력 데이터가 결합되었습니다. SSRF 및 인젝션 예방을 위해 사전에 검증된 정적 화이트리스트 맵을 구비하세요."
   metadata:
     owasp:
     - A10:2021 - Server-Side Request Forgery (SSRF)

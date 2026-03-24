@@ -1,10 +1,6 @@
 rules:
   - id: express-sequelize-injection
-    message: >-
-      Detected a sequelize statement that is tainted by user-input. This
-      could lead to SQL injection if the variable is user-controlled and is not
-      properly sanitized. In order to prevent SQL injection, it is recommended
-      to use parameterized queries or prepared statements.
+    message: "Sequelize 바인딩 스택에 인화성 가변 파라미터가 유입됩니다. SQL Injection 방어를 위해 ORM 규격 바인딩(replacements)을 쓰세요."
     options:
       interfile: true
     metadata:

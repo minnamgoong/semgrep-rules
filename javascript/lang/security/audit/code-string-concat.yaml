@@ -1,9 +1,6 @@
 rules:
 - id: code-string-concat
-  message: >-
-    Found data from an Express or Next web request flowing to `eval`. If this data is user-controllable
-    this can lead to execution of arbitrary system commands in the context of your application process.
-    Avoid `eval` whenever possible.
+  message: "요청 데이터를 eval() 또는 Function() 실행 인자로 직접 연산 합사합니다. 원격 코드 실행(RCE) 타격을 유발하므로 동적 코드 실행을 금지하십시오."
   options:
     interfile: true
   metadata:

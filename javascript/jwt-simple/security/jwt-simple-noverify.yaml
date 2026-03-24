@@ -1,10 +1,6 @@
 rules:
 - id: jwt-simple-noverify
-  message: >-
-    Detected the decoding of a JWT token without a verify step.
-    JWT tokens must be verified before use, otherwise the token's
-    integrity is unknown. This means a malicious actor could forge
-    a JWT token with any claims. Set 'verify' to `true` before using the token.
+  message: "jwt-simple 디코딩 수동 호출 시 서명 검증(verify) 단계가 누락되었습니다. 변조 토큰 우회를 막기 위해 반드시 검증 옵션을 활성화하세요."
   severity: ERROR
   metadata:
     owasp:

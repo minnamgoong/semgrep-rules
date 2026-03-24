@@ -1,9 +1,6 @@
 rules:
 - id: remote-property-injection
-  message: >-
-    Bracket object notation with user input is present, this might allow an
-    attacker to access all properties of the object and even it's prototype. Use
-    literal values for object properties.
+  message: "대괄호 표기법([])에 사용자 입력이 반영되어 객체 속성에 접근하고 있습니다. 프로퍼티 인젝션 및 프로토타입 오염 위험이 있으니 입력값을 사전에 검증하세요."
   metadata:
     confidence: LOW
     owasp:

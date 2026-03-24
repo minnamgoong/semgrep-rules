@@ -1,8 +1,6 @@
 rules:
 - id: require-request
-  message: >-
-    If an attacker controls the x in require(x) then they can cause code to load that was not intended
-    to run on the server.
+  message: "require() 인자 위치에 동적 외부 입력이 발견되었습니다. 예상치 못한 스크립트/모듈 로딩 예방을 위해 정적 모듈 경로로 고정하십시오."
   options:
     interfile: true
   metadata:

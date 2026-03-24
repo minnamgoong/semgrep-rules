@@ -1,7 +1,6 @@
 rules:
 - id: insecure-innerhtml
-  message: >-
-    User controlled data in a `$EL.innerHTML` is an anti-pattern that can lead to XSS vulnerabilities
+  message: "$EL.innerHTML에 사용자 제어 데이터가 대입되고 있습니다. XSS 취약점을 유발하는 안티 패턴이므로 textContent 대체 사용 등을 고려하세요."
   metadata:
     cwe:
     - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"

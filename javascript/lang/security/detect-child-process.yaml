@@ -1,9 +1,6 @@
 rules:
 - id: detect-child-process
-  message: >-
-    Detected calls to child_process from a function argument `$FUNC`. This could lead to a command injection
-    if the input is user controllable. Try to avoid calls to child_process, and if it is needed
-    ensure user input is correctly sanitized or sandboxed. 
+  message: "child_process 범용 호출 시 유입 인자의 정적 분기가 누락되었습니다. 커맨드 스페이스 조작에 의한 인젝션 방지를 위해 규격 배열을 고수하세요."
   metadata:
     cwe:
     - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"

@@ -1,10 +1,6 @@
 rules:
 - id: dynamodb-request-object
-  message: >-
-    Detected DynamoDB query params that are tainted by `$EVENT` object. This could lead to NoSQL injection
-    if the variable is user-controlled
-    and not properly sanitized. Explicitly assign query params instead of passing data from `$EVENT` directly
-    to DynamoDB client.
+  message: "DynamoDB 쿼리 매개변수 집계 시 $EVENT 유입 데이터가 소요됩니다. NoSQL 인젝션을 피하기 위해 입력 데이터를 정적 한정시키세요."
   metadata:
     cwe:
     - 'CWE-943: Improper Neutralization of Special Elements in Data Query Logic'

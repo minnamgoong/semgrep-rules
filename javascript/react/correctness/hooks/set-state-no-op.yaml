@@ -5,8 +5,7 @@ rules:
       - pattern-inside: |
           const [$X, $Y] = useState(...);
           ...
-    message: >-
-      Calling setState on the current state is always a no-op. Did you mean to change the state like $Y(!$X) instead?
+    message: "React Hooks에서 현재 상태(state) 값을 그대로 다시 setState에 주입하는 무의미한 연산이 감지되었습니다. 로직 실수를 검토하세요."
     languages:
       - javascript
     severity: ERROR

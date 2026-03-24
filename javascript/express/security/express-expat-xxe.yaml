@@ -1,9 +1,6 @@
 rules:
 - id: express-expat-xxe
-  message: >-
-    Make sure that unverified user data can not reach the XML Parser, as it
-    can result in XML External or Internal Entity (XXE) Processing
-    vulnerabilities.
+  message: "expat XML 파서 구동 시 외부 입력에 검증이 부실합니다. XML External Entity (XXE) 취약점 격출을 무마하기 위해 보안 옵션을 비활성화 처리하십시오."
   options:
     interfile: true
   metadata:

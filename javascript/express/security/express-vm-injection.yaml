@@ -1,7 +1,6 @@
 rules:
 - id: express-vm-injection
-  message: >-
-    Make sure that unverified user data can not reach `$VM`.
+  message: "Node.js vm 모듈 스크립트 실행 스택 등에 동적 사용자 오염 테두리가 가압되는 피로도를 잡습니다. 샌드박스 우회를 우려해 사전에 분리 차단하세요."
   metadata:
     owasp:
     - A03:2021 - Injection

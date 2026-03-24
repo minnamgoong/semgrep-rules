@@ -1,7 +1,6 @@
 rules:
   - id: express-wkhtmltoimage-injection
-    message: >-
-      If unverified user data can reach the `phantom` methods it can result in Server-Side Request Forgery vulnerabilities
+    message: "wkhtmltoimage 변환 연산 스택에 동적 오염 인자가 포진했습니다. SSRF와 파괴 인자 인젝션 예방을 위해 입력 주소를 교정하세요."
     metadata:
       owasp:
       - A10:2021 - Server-Side Request Forgery (SSRF)
@@ -60,9 +59,7 @@ rules:
           - pattern: $WK.generate($SINK,...)
           - focus-metavariable: $SINK
   - id: express-wkhtmltopdf-injection
-    message: >-
-      If unverified user data can reach the `wkhtmltopdf` methods it can result in Server-Side Request Forgery
-      vulnerabilities
+    message: "wkhtmltopdf 변환 연산 스택에 동적 오염 인자가 포진했습니다. SSRF와 파괴 인자 인젝션 예방을 위해 입력 주소를 필터링하십시오."
     metadata:
       owasp:
       - A10:2021 - Server-Side Request Forgery (SSRF)

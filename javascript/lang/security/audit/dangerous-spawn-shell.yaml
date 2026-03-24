@@ -1,8 +1,6 @@
 rules:
 - id: dangerous-spawn-shell
-  message: >-
-    Detected non-literal calls to $EXEC(). This could lead to a command
-    injection vulnerability.
+  message: "비 리터럴 문자열을 실행 명령 매개체로 탑재하는 위험 spawn 구조를 감지했습니다. 명령 실행의 안정성을 위해 정적 리스트를 적용하세요."
   metadata:
     cwe:
     - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"

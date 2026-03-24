@@ -1,7 +1,6 @@
 rules:
 - id: express-sandbox-code-injection
-  message: >-
-    Make sure that unverified user data can not reach `sandbox`.
+  message: "sandbox 관련 호출에 사용자 입력 데이터가 도달했습니다. 샌드박스 내부에서 임의 코드가 실행될 수 있으므로 동적 조립을 배제하세요."
   metadata:
     owasp:
     - A03:2021 - Injection

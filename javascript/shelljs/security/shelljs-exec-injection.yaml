@@ -1,7 +1,6 @@
 rules:
 - id: shelljs-exec-injection
-  message: >-
-    If unverified user data can reach the `exec` method it can result in Remote Code Execution
+  message: "shelljs.exec() 호출 연산에 외부 사용자 오염 가변 데이터가 주입되었습니다. RCE(원격코드실행) 위협이 가중되므로 인자 분할 형식으로 전환하십시오."
   metadata:
     owasp:
     - A01:2017 - Injection

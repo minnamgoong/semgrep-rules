@@ -1,6 +1,6 @@
 rules:
 - id: spawn-shell-true
-  message: >-
+  message: "spawn 구동 시 {shell: true} 옵션이 사용되었습니다. 인자 하이재킹에 취약하므로 옵션을 철회하고 배열형 인자를 명시하세요."
     Found '$SPAWN' with '{shell: $SHELL}'. This is dangerous because this call will
     spawn
     the command using a shell process. Doing so propagates current shell settings

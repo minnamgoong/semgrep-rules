@@ -1,8 +1,6 @@
 rules:
 - id: deno-dangerous-run
-  message: >-
-    Detected non-literal calls to Deno.run(). This could lead to a command
-    injection vulnerability.
+  message: "Deno.run() 호출 시 동적 문자열이 사용되었습니다. 명령어나 인자가 조작되어 커맨드 인젝션(Command Injection)이 발생할 수 있으므로 고정 배열 스타일을 적용하세요."
   metadata:
     cwe:
     - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
