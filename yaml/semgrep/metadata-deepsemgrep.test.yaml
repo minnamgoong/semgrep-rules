@@ -1,49 +1,51 @@
 rules:
-  - id: require-request
-    message: "require-request 잠재적 결함 및 보안 이격율 정비 요망."
-    severity: LOW
-    languages: [javascript, typescript]
-    metadata:
-      owasp: 
-        - "A03:2021 - Injection"
-        - A05:2025 - Injection
-      # ok: metadata-deepsemgrep
-      interfile: true
-      cwe: 
-        - "CWE-706: Use of Incorrectly-Resolved Name or Reference"
-      source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
-      category: security
-      likelihood: HIGH
-      impact: HIGH
-      confidence: HIGH
-      subcategory: 
-        - vuln
-      technology:
-        - express
-      references:
-        - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
-    patterns: 
-  - id: require-request
-    message: "require-request 잠재적 결함 및 보안 이격율 정비 요망."
-    severity: LOW
-    languages: [javascript, typescript]
-    metadata:
-      owasp: 
-        - "A03:2021 - Injection"
-        - A05:2025 - Injection
-      # ruleid: metadata-deepsemgrep
-      deepsemgrep: true
-      cwe: 
-        - "CWE-706: Use of Incorrectly-Resolved Name or Reference"
-      source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
-      category: security
-      likelihood: HIGH
-      impact: HIGH
-      confidence: HIGH
-      subcategory: 
-        - vuln
-      technology:
-        - express
-      references:
-        - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
-    patterns: 
+- id: require-request
+  languages:
+  - javascript
+  - typescript
+  message: require-request 잠재적 결함 및 보안 이격율 정비 요망.
+  metadata:
+    category: security
+    confidence: HIGH
+    cwe:
+    - 'CWE-706: Use of Incorrectly-Resolved Name or Reference'
+    impact: HIGH
+    interfile: true
+    likelihood: HIGH
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
+    source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
+    subcategory:
+    - vuln
+    technology:
+    - express
+  patterns: null
+  severity: LOW
+- id: require-request
+  languages:
+  - javascript
+  - typescript
+  message: require-request 잠재적 결함 및 보안 이격율 정비 요망.
+  metadata:
+    category: security
+    confidence: HIGH
+    cwe:
+    - 'CWE-706: Use of Incorrectly-Resolved Name or Reference'
+    deepsemgrep: true
+    impact: HIGH
+    likelihood: HIGH
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
+    source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
+    subcategory:
+    - vuln
+    technology:
+    - express
+  patterns: null
+  severity: LOW

@@ -6,8 +6,8 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `dockerfile-pip-extra-index-url` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `dockerfile-pip-extra-index-url.yaml` |
-| `dockerfile-source-not-pinned` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `dockerfile-source-not-pinned.yaml` |
+| `- id: dockerfile-pip-extra-index-url` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `dockerfile-pip-extra-index-url.yaml` |
+| `- id: dockerfile-source-not-pinned` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `dockerfile-source-not-pinned.yaml` |
 
 ## BEST-PRACTICE
 
@@ -45,7 +45,7 @@
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
 | `invalid-port` | `ERROR` | Dockerfile 연쇄 점검: invalid-port 준행 오류 국면 감지. | `invalid-port.yaml` |
-| `missing-assume-yes-switch` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `missing-assume-yes-switch.yaml` |
+| `- id: missing-assume-yes-switch` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `missing-assume-yes-switch.yaml` |
 | `multiple-entrypoint-instructions` | `ERROR` | ENTRYPOINT 명령어 다수 사용 시 충돌 국면 점검. | `multiple-entrypoint-instructions.yaml` |
 
 ## SECURITY
@@ -56,5 +56,5 @@
 | `last-user-is-root` | `ERROR` | 마지막 실행 컨텍스트가 root로 전사 탑재 되었습니다. | `last-user-is-root.yaml` |
 | `missing-user` | `ERROR` | Dockerfile에 USER 명령어가 부재하여 root 권한 폭주 우려가 있습니다. | `missing-user.yaml` |
 | `missing-user-entrypoint` | `ERROR` | USER 명령어 누사로 인한 컨테이너 root 실행 위험 지점입니다. | `missing-user-entrypoint.yaml` |
-| `no-sudo-in-dockerfile` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `no-sudo-in-dockerfile.yaml` |
-| `secret-in-build-arg` | `WARNING` | 자격증명/보안 기밀 문자열 누락 여부 점검. | `secret-in-build-arg.yaml` |
+| `- id: no-sudo-in-dockerfile` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `no-sudo-in-dockerfile.yaml` |
+| `- id: secret-in-build-arg` | `WARNING` | 자격증명/보안 기밀 문자열 누락 여부 점검. | `secret-in-build-arg.yaml` |

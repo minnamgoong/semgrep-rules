@@ -1,63 +1,72 @@
 rules:
 - id: spring-sqli
-  mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern: $ARG
-    - pattern-inside: |
-        public $T $M (..., String $ARG,...){...}
-  pattern-sanitizers:
-  - not_conflicting: true
-    pattern-either:
-    - patterns:
-      - focus-metavariable: $A
-      - pattern-inside: |
-          new $TYPE(...,$A,...);
-  pattern-sinks:
-  - patterns:
-    - pattern-either:
-      - patterns:
-        - focus-metavariable: $A
-        - pattern: |
-            new PreparedStatementCreatorFactory($A,...);
-      - patterns:
-        - focus-metavariable: $A
-        - pattern: |
-            (JdbcTemplate $T).$M($A,...)
-      - patterns:
-        - pattern: (String $A)
-        - pattern-inside: |
-            (JdbcTemplate $T).batchUpdate(...)
-      - patterns:
-        - focus-metavariable: $A
-        - pattern: |
-            NamedParameterBatchUpdateUtils.$M($A,...)
-      - patterns:
-        - focus-metavariable: $A
-        - pattern: |
-            BatchUpdateUtils.$M($A,...)
-  message: "잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요."
-  languages: [java]
-  severity: WARNING
-  options:
-    taint_assume_safe_numbers: true
-    taint_assume_safe_booleans: true
+  languages:
+  - java
+  message: 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요.
   metadata:
-    cwe:
-    - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
     category: security
-    technology:
-    - spring
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command
+      (''SQL Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - spring
+  mode: taint
+  options:
+    taint_assume_safe_booleans: true
+    taint_assume_safe_numbers: true
+  pattern-sanitizers:
+  - not_conflicting: true
+    pattern-either:
+    - patterns:
+      - focus-metavariable: $A
+      - pattern-inside: 'new $TYPE(...,$A,...);
+
+          '
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - patterns:
+        - focus-metavariable: $A
+        - pattern: 'new PreparedStatementCreatorFactory($A,...);
+
+            '
+      - patterns:
+        - focus-metavariable: $A
+        - pattern: '(JdbcTemplate $T).$M($A,...)
+
+            '
+      - patterns:
+        - pattern: (String $A)
+        - pattern-inside: '(JdbcTemplate $T).batchUpdate(...)
+
+            '
+      - patterns:
+        - focus-metavariable: $A
+        - pattern: 'NamedParameterBatchUpdateUtils.$M($A,...)
+
+            '
+      - patterns:
+        - focus-metavariable: $A
+        - pattern: 'BatchUpdateUtils.$M($A,...)
+
+            '
+  pattern-sources:
+  - patterns:
+    - pattern: $ARG
+    - pattern-inside: 'public $T $M (..., String $ARG,...){...}
+
+        '
+  severity: WARNING

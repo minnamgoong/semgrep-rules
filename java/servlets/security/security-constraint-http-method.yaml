@@ -1,27 +1,27 @@
 rules:
-  - id: security-constraint-http-method
-    languages:
-      - xml
-    severity: WARNING
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    pattern: <http-method>$X</http-method>
-    paths:
-      include:
-        - "**/web.xml"
-    metadata:
-      category: security
-      owasp:
-        - A05:2021 Security Misconfiguration
-        - A01:2021 Broken Access Control
-      technology:
-        - java
-      references:
-        - https://docs.oracle.com/javaee/7/tutorial/security-webtier002.htm
-        - https://jakarta.ee/learn/docs/jakartaee-tutorial/current/security/security-advanced/security-advanced.html#_securing_http_resources
-      cwe:
-        - "CWE-863: Incorrect Authorization"
-      likelihood: LOW
-      impact: LOW
-      confidence: LOW
-      subcategory:
-        - audit
+- id: security-constraint-http-method
+  languages:
+  - xml
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-863: Incorrect Authorization'
+    impact: LOW
+    likelihood: LOW
+    owasp:
+    - A05:2021 Security Misconfiguration
+    - A01:2021 Broken Access Control
+    references:
+    - https://docs.oracle.com/javaee/7/tutorial/security-webtier002.htm
+    - https://jakarta.ee/learn/docs/jakartaee-tutorial/current/security/security-advanced/security-advanced.html#_securing_http_resources
+    subcategory:
+    - audit
+    technology:
+    - java
+  paths:
+    include:
+    - '**/web.xml'
+  pattern: <http-method>$X</http-method>
+  severity: WARNING

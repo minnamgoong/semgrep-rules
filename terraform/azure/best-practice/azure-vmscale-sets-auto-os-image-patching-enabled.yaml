@@ -1,27 +1,23 @@
 rules:
-  - id: azure-vmscale-sets-auto-os-image-patching-enabled
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    patterns:
-      - pattern: resource
-      - pattern-inside: |
-          resource "azurerm_virtual_machine_scale_set" "..." {
-          ...
-          }
-      - pattern-not-inside: |
-          resource "azurerm_virtual_machine_scale_set" "..." {
-          ...
-          automatic_os_upgrade = true
-          os_profile_windows_config {
-            ...
-            enable_automatic_upgrades = true
-            ...
-          }
-          ...
-          }
-    metadata:
-      category: best-practice
-      technology:
-        - terraform
-        - azure
-    languages: [hcl]
-    severity: WARNING
+- id: azure-vmscale-sets-auto-os-image-patching-enabled
+  languages:
+  - hcl
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - terraform
+    - azure
+  patterns:
+  - pattern: resource
+  - pattern-inside: 'resource "azurerm_virtual_machine_scale_set" "..." {
+
+      ...
+
+      }
+
+      '
+  - pattern-not-inside: "resource \"azurerm_virtual_machine_scale_set\" \"...\" {\n\
+      ...\nautomatic_os_upgrade = true\nos_profile_windows_config {\n  ...\n  enable_automatic_upgrades\
+      \ = true\n  ...\n}\n...\n}\n"
+  severity: WARNING

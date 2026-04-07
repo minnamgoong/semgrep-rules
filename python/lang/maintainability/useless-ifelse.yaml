@@ -1,31 +1,25 @@
 rules:
-  - id: useless-if-conditional
-    message: if block checks for the same condition on both branches (`$X`)
-    languages: [python]
-    severity: WARNING
-    pattern: |
-      if $X:
-          ...
-      elif $X:
-          ...
-    metadata:
-      references:
-        - https://docs.python.org/3/tutorial/controlflow.html
-      category: maintainability
-      technology:
-        - python
-  - id: useless-if-body
-    pattern: |
-      if $X:
-          $S
-      else:
-          $S
-    message: "useless-if-body 잠재적 결함 분기 정비 요망."
-    languages: [python]
-    severity: WARNING
-    metadata:
-      references:
-        - https://docs.python.org/3/tutorial/controlflow.html
-      category: maintainability
-      technology:
-        - python
+- id: useless-if-conditional
+  languages:
+  - python
+  message: if 블록은 두 분기(`$X`)에서 동일한 조건을 확인합니다.
+  metadata:
+    category: maintainability
+    references:
+    - https://docs.python.org/3/tutorial/controlflow.html
+    technology:
+    - python
+  pattern: "if $X:\n    ...\nelif $X:\n    ...\n"
+  severity: WARNING
+- id: useless-if-body
+  languages:
+  - python
+  message: useless-if-body 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: maintainability
+    references:
+    - https://docs.python.org/3/tutorial/controlflow.html
+    technology:
+    - python
+  pattern: "if $X:\n    $S\nelse:\n    $S\n"
+  severity: WARNING

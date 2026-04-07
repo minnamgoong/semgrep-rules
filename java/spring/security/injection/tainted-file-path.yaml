@@ -2,47 +2,30 @@ rules:
 - id: tainted-file-path
   languages:
   - java
-  severity: ERROR
-  message: "사용자 입력이 직접 파일 제어 경로 상수로 사용됩니다. Path Traversal 등 디렉토리 도약 시도를 검증하고 소거하세요."
-  options:
-    interfile: true
+  message: 사용자 입력이 직접 파일 제어 경로 상수로 사용됩니다. Path Traversal 등 디렉토리 도약 시도를 검증하고 소거하세요.
   metadata:
+    category: security
+    confidence: HIGH
     cwe:
     - 'CWE-23: Relative Path Traversal'
+    impact: HIGH
+    interfile: true
+    likelihood: MEDIUM
     owasp:
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
     references:
     - https://owasp.org/www-community/attacks/Path_Traversal
-    category: security
+    subcategory:
+    - vuln
     technology:
     - java
     - spring
-    subcategory:
-    - vuln
-    impact: HIGH
-    likelihood: MEDIUM
-    confidence: HIGH
-    interfile: true
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          $METHODNAME(..., @$REQ(...) $TYPE $SOURCE,...) {
-            ...
-          }
-      - pattern-inside: |
-          $METHODNAME(..., @$REQ $TYPE $SOURCE,...) {
-            ...
-          }
-    - metavariable-regex:
-        metavariable: $TYPE
-        regex: ^(?!(Integer|Long|Float|Double|Char|Boolean|int|long|float|double|char|boolean))
-    - metavariable-regex:
-        metavariable: $REQ
-        regex: (RequestBody|PathVariable|RequestParam|RequestHeader|CookieValue|ModelAttribute)
-    - focus-metavariable: $SOURCE
+  options:
+    interfile: true
+  pattern-sanitizers:
+  - pattern: org.apache.commons.io.FilenameUtils.getName(...)
   pattern-sinks:
   - patterns:
     - pattern-either:
@@ -54,8 +37,9 @@ rules:
       - pattern: new java.io.FileInputStream(...)
       - pattern: (Paths $PATHS).get(...)
       - patterns:
-        - pattern: |
-            $CLASS.$FUNC(...)
+        - pattern: '$CLASS.$FUNC(...)
+
+            '
         - metavariable-regex:
             metavariable: $FUNC
             regex: ^(getResourceAsStream|getResource)$
@@ -69,5 +53,17 @@ rules:
           - pattern: new javax.xml.transform.StreamSource($FILE, ...)
           - pattern: FileUtils.openOutputStream($FILE, ...)
         - focus-metavariable: $FILE
-  pattern-sanitizers:
-  - pattern: org.apache.commons.io.FilenameUtils.getName(...)
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - pattern-inside: "$METHODNAME(..., @$REQ(...) $TYPE $SOURCE,...) {\n  ...\n\
+          }\n"
+      - pattern-inside: "$METHODNAME(..., @$REQ $TYPE $SOURCE,...) {\n  ...\n}\n"
+    - metavariable-regex:
+        metavariable: $TYPE
+        regex: ^(?!(Integer|Long|Float|Double|Char|Boolean|int|long|float|double|char|boolean))
+    - metavariable-regex:
+        metavariable: $REQ
+        regex: (RequestBody|PathVariable|RequestParam|RequestHeader|CookieValue|ModelAttribute)
+    - focus-metavariable: $SOURCE
+  severity: ERROR

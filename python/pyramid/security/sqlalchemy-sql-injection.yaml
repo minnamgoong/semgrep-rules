@@ -1,49 +1,46 @@
 rules:
-- id: pyramid-sqlalchemy-sql-injection
-  message: "distinct/having절 내 원시 SQL 인젝션 가동 현상 감지. bindparams 규격을 준행하세요."
+- fix-regex:
+    regex: format
+    replacement: bindparams
+  id: pyramid-sqlalchemy-sql-injection
   languages:
   - python
-  severity: ERROR
+  message: distinct/having절 내 원시 SQL 인젝션 가동 현상 감지. bindparams 규격을 준행하세요.
   metadata:
     category: security
+    confidence: MEDIUM
     cwe:
-    - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+    - 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command
+      (''SQL Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: MEDIUM
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://docs.sqlalchemy.org/en/14/tutorial/data_select.html#tutorial-selecting-data
-    technology:
-    - pyramid
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: HIGH
-    confidence: MEDIUM
+    technology:
+    - pyramid
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-inside: |
-        from pyramid.view import view_config
-        ...
-        @view_config( ... )
-        def $VIEW($REQ):
-          ...
-    - pattern: $REQ.$ANYTHING
-    - pattern-not: $REQ.dbsession
   pattern-sinks:
   - patterns:
-    - pattern-inside: |
-        $QUERY = $REQ.dbsession.query(...)
+    - pattern-inside: '$QUERY = $REQ.dbsession.query(...)
+
         ...
+
+        '
     - pattern-either:
-      - pattern: |
-          $QUERY.$SQLFUNC("...".$FORMATFUNC(..., $SINK, ...))
-      - pattern: |
-          $QUERY.join(...).$SQLFUNC("...".$FORMATFUNC(..., $SINK, ...))
+      - pattern: '$QUERY.$SQLFUNC("...".$FORMATFUNC(..., $SINK, ...))
+
+          '
+      - pattern: '$QUERY.join(...).$SQLFUNC("...".$FORMATFUNC(..., $SINK, ...))
+
+          '
     - pattern: $SINK
     - metavariable-regex:
         metavariable: $SQLFUNC
@@ -51,6 +48,10 @@ rules:
     - metavariable-regex:
         metavariable: $FORMATFUNC
         regex: (?!bindparams)
-  fix-regex:
-    regex: format
-    replacement: bindparams
+  pattern-sources:
+  - patterns:
+    - pattern-inside: "from pyramid.view import view_config\n...\n@view_config( ...\
+        \ )\ndef $VIEW($REQ):\n  ...\n"
+    - pattern: $REQ.$ANYTHING
+    - pattern-not: $REQ.dbsession
+  severity: ERROR

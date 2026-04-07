@@ -1,42 +1,53 @@
 rules:
 - id: overly-permissive-file-permission
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  severity: WARNING
-  languages: [java]
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-276: Incorrect Default Permissions'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#OVERLY_PERMISSIVE_FILE_PERMISSION
-    category: security
-    technology:
-    - java
     references:
     - https://owasp.org/Top10/A01_2021-Broken_Access_Control
-    cwe2022-top25: true
-    cwe2021-top25: true
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#OVERLY_PERMISSIVE_FILE_PERMISSION
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
+    technology:
+    - java
   pattern-either:
   - pattern: java.nio.file.Files.setPosixFilePermissions($FILE, java.nio.file.attribute.PosixFilePermissions.fromString("=~/(^......r..$)|(^.......w.$)|(^........x$)/"));
-  - pattern: |
-      $TYPE $P = java.nio.file.attribute.PosixFilePermissions.fromString("=~/(^......r..$)|(^.......w.$)|(^........x$)/");
+  - pattern: '$TYPE $P = java.nio.file.attribute.PosixFilePermissions.fromString("=~/(^......r..$)|(^.......w.$)|(^........x$)/");
+
       ...
+
       java.nio.file.Files.setPosixFilePermissions($FILE, $P);
-  - pattern: |
-      $P.add(java.nio.file.attribute.PosixFilePermission.OTHERS_READ);
+
+      '
+  - pattern: '$P.add(java.nio.file.attribute.PosixFilePermission.OTHERS_READ);
+
       ...
+
       java.nio.file.Files.setPosixFilePermissions($FILE, $P);
-  - pattern: |
-      $P.add(java.nio.file.attribute.PosixFilePermission.OTHERS_WRITE);
+
+      '
+  - pattern: '$P.add(java.nio.file.attribute.PosixFilePermission.OTHERS_WRITE);
+
       ...
+
       java.nio.file.Files.setPosixFilePermissions($FILE, $P);
-  - pattern: |-
-      $P.add(java.nio.file.attribute.PosixFilePermission.OTHERS_EXECUTE);
+
+      '
+  - pattern: '$P.add(java.nio.file.attribute.PosixFilePermission.OTHERS_EXECUTE);
+
       ...
-      java.nio.file.Files.setPosixFilePermissions($FILE, $P);
+
+      java.nio.file.Files.setPosixFilePermissions($FILE, $P);'
+  severity: WARNING

@@ -1,80 +1,41 @@
 rules:
 - id: url-rewriting
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-200: Exposure of Sensitive Information to an Unauthorized Actor'
+    cwe2021-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#URL_REWRITING
-    category: security
-    technology:
-    - java
     references:
     - https://owasp.org/Top10/A01_2021-Broken_Access_Control
-    cwe2021-top25: true
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#URL_REWRITING
     subcategory:
     - vuln
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  severity: WARNING
-  languages: [java]
+    technology:
+    - java
   pattern-either:
-  - pattern: |
-      $X $METHOD(...,HttpServletResponse $RES,...) {
-        ...
-        $RES.encodeURL(...);
-        ...
-      }
-  - pattern: |
-      $X $METHOD(...,HttpServletResponse $RES,...) {
-        ...
-        $RES.encodeUrl(...);
-        ...
-      }
-  - pattern: |
-      $X $METHOD(...,HttpServletResponse $RES,...) {
-        ...
-        $RES.encodeRedirectURL(...);
-        ...
-      }
-  - pattern: |
-      $X $METHOD(...,HttpServletResponse $RES,...) {
-        ...
-        $RES.encodeRedirectUrl(...);
-        ...
-      }
-  - pattern: |
-      $X $METHOD(...) {
-        ...
-        HttpServletResponse $RES = ...;
-        ...
-        $RES.encodeURL(...);
-        ...
-      }
-  - pattern: |
-      $X $METHOD(...) {
-        ...
-        HttpServletResponse $RES = ...;
-        ...
-        $RES.encodeUrl(...);
-        ...
-      }
-  - pattern: |
-      $X $METHOD(...) {
-        ...
-        HttpServletResponse $RES = ...;
-        ...
-        $RES.encodeRedirectURL(...);
-        ...
-      }
-  - pattern: |-
-      $X $METHOD(...) {
-        ...
-        HttpServletResponse $RES = ...;
-        ...
-        $RES.encodeRedirectUrl(...);
-        ...
-      }
+  - pattern: "$X $METHOD(...,HttpServletResponse $RES,...) {\n  ...\n  $RES.encodeURL(...);\n\
+      \  ...\n}\n"
+  - pattern: "$X $METHOD(...,HttpServletResponse $RES,...) {\n  ...\n  $RES.encodeUrl(...);\n\
+      \  ...\n}\n"
+  - pattern: "$X $METHOD(...,HttpServletResponse $RES,...) {\n  ...\n  $RES.encodeRedirectURL(...);\n\
+      \  ...\n}\n"
+  - pattern: "$X $METHOD(...,HttpServletResponse $RES,...) {\n  ...\n  $RES.encodeRedirectUrl(...);\n\
+      \  ...\n}\n"
+  - pattern: "$X $METHOD(...) {\n  ...\n  HttpServletResponse $RES = ...;\n  ...\n\
+      \  $RES.encodeURL(...);\n  ...\n}\n"
+  - pattern: "$X $METHOD(...) {\n  ...\n  HttpServletResponse $RES = ...;\n  ...\n\
+      \  $RES.encodeUrl(...);\n  ...\n}\n"
+  - pattern: "$X $METHOD(...) {\n  ...\n  HttpServletResponse $RES = ...;\n  ...\n\
+      \  $RES.encodeRedirectURL(...);\n  ...\n}\n"
+  - pattern: "$X $METHOD(...) {\n  ...\n  HttpServletResponse $RES = ...;\n  ...\n\
+      \  $RES.encodeRedirectUrl(...);\n  ...\n}"
+  severity: WARNING

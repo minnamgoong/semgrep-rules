@@ -1,31 +1,32 @@
 rules:
-- id: weak-ssl-context
+- fix-regex:
+    regex: (.*?)\.getInstance\(.*?\)
+    replacement: \1.getInstance("TLSv1.2")
+  id: weak-ssl-context
+  languages:
+  - java
+  message: 취약하거나 검증되지 않은 SSL/TLS 컨텍스트가 감지되었습니다. 중간자 공격(MitM)을 조심하십시오.
   metadata:
+    category: security
+    confidence: HIGH
     cwe:
     - 'CWE-326: Inadequate Encryption Strength'
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A03:2017 - Sensitive Data Exposure
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
-    source_rule_url: https://find-sec-bugs.github.io/bugs.htm#SSL_CONTEXT
     references:
     - https://tools.ietf.org/html/rfc7568
     - https://tools.ietf.org/id/draft-ietf-tls-oldversions-deprecate-02.html
-    category: security
-    technology:
-    - java
+    source_rule_url: https://find-sec-bugs.github.io/bugs.htm#SSL_CONTEXT
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: HIGH
-  message: "취약하거나 검증되지 않은 SSL/TLS 컨텍스트가 감지되었습니다. 중간자 공격(MitM)을 조심하십시오."
-  severity: WARNING
-  languages: [java]
+    technology:
+    - java
   patterns:
   - pattern-not: SSLContext.getInstance("TLSv1.3")
   - pattern-not: SSLContext.getInstance("TLSv1.2")
   - pattern: SSLContext.getInstance("...")
-  fix-regex:
-    regex: (.*?)\.getInstance\(.*?\)
-    replacement: \1.getInstance("TLSv1.2")
+  severity: WARNING

@@ -1,13 +1,14 @@
 rules:
-  - id: avoid-latest-version
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    severity: WARNING
-    languages: [dockerfile]
-    metadata:
-      source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3007
-      references:
-        - https://github.com/hadolint/hadolint/wiki/DL3007
-      category: best-practice
-      technology:
-        - dockerfile
-    pattern: FROM $FROM:latest
+- id: avoid-latest-version
+  languages:
+  - dockerfile
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL3007
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3007
+    technology:
+    - dockerfile
+  pattern: FROM $FROM:latest
+  severity: WARNING

@@ -1,42 +1,48 @@
 rules:
 - id: detect-redos
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - javascript
+  - typescript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-1333: Inefficient Regular Expression Complexity'
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A05:2021 - Security Misconfiguration
     - A06:2017 - Security Misconfiguration
     - A02:2025 - Security Misconfiguration
-    cwe:
-    - "CWE-1333: Inefficient Regular Expression Complexity"
     references:
     - https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS
     - https://www.regular-expressions.info/redos.html
-    category: security
-    technology:
-    - javascript
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: LOW
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
+    technology:
+    - javascript
   patterns:
-    - pattern-either:
-        - pattern: |
-            new RegExp(/$REDOS/,...)
-        - pattern: |
-           new RegExp("$REDOS",...)
-        - pattern: |
-            /$REDOS/.test(...)
-        - pattern: |
-            "$REDOS".test(...)
-        - pattern: |
-            $X.match(/$REDOS/)
-        - pattern: |
-            $X.match("$REDOS")
-    - metavariable-analysis:
-        analyzer: redos
-        metavariable: $REDOS
+  - pattern-either:
+    - pattern: 'new RegExp(/$REDOS/,...)
+
+        '
+    - pattern: 'new RegExp("$REDOS",...)
+
+        '
+    - pattern: '/$REDOS/.test(...)
+
+        '
+    - pattern: '"$REDOS".test(...)
+
+        '
+    - pattern: '$X.match(/$REDOS/)
+
+        '
+    - pattern: '$X.match("$REDOS")
+
+        '
+  - metavariable-analysis:
+      analyzer: redos
+      metavariable: $REDOS
+  severity: WARNING

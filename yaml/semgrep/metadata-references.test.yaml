@@ -1,18 +1,20 @@
 rules:
-  - id: example-1
-    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-1 누사 경보."
-    severity: ERROR
-    languages: [json, yaml]
-    pattern: "..."
-    metadata:
-      # ok: metadata-references
-      references:
-        - https://google.com
-  - id: example-2
-    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-2 누사 경보."
-    severity: ERROR
-    languages: [json, yaml]
-    pattern: "..."
-    metadata:
-      # ruleid: metadata-references
-      references: https://google.com
+- id: example-1
+  languages:
+  - json
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: example-1 누사 경보.'
+  metadata:
+    references:
+    - https://google.com
+  pattern: '...'
+  severity: ERROR
+- id: example-2
+  languages:
+  - json
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: example-2 누사 경보.'
+  metadata:
+    references: https://google.com
+  pattern: '...'
+  severity: ERROR

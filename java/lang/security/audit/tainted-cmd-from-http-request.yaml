@@ -1,70 +1,68 @@
 rules:
 - id: tainted-cmd-from-http-request
-  message: "HTTP 요청 데이터가 exec 또는 ProcessBuilder 명령 인자로 직주입되고 있습니다. 커맨드 인젝션을 격퇴하기 위해 외부 데이터 사용 시 사전에 구성된 인자형 맵 구조로 매핑하세요."
-  languages: [java]
-  severity: ERROR
-  mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-either:
-      - pattern: |
-          (HttpServletRequest $REQ)
-      - patterns:   # this pattern is a hack to get the rule to recognize `map` as tainted source when `cookie.getValue(user_input)` is used.
-        - pattern-inside: |
-            (javax.servlet.http.Cookie[] $COOKIES) = (HttpServletRequest $REQ).getCookies(...);
-            ...
-            for (javax.servlet.http.Cookie $COOKIE: $COOKIES) {
-              ...
-            }
-        - pattern: |
-            $COOKIE.getValue(...)
-  pattern-sinks:
-      - patterns:
-          - pattern-either:
-              - pattern: |
-                  (ProcessBuilder $PB) = ...;
-              - patterns:
-                - pattern: |
-                    (Process $P) = ...;
-                - pattern-not: |
-                    (Process $P) = (java.lang.Runtime $R).exec(...);
-              - patterns:
-                  - pattern: (java.lang.Runtime $R).exec($CMD, ...);
-                  - focus-metavariable: $CMD
-              - patterns:
-                  - pattern-either:
-                      - pattern-inside: |
-                          (java.util.List<$TYPE> $ARGLIST) = ...;  
-                          ...
-                          (ProcessBuilder $PB) = ...;
-                          ...
-                          $PB.command($ARGLIST);
-                      - pattern-inside: |
-                          (java.util.List<$TYPE> $ARGLIST) = ...;  
-                          ...
-                          (ProcessBuilder $PB) = ...;
-                      - pattern-inside: |
-                          (java.util.List<$TYPE> $ARGLIST) = ...;  
-                          ...
-                          (Process $P) = ...;
-                  - pattern: |
-                      $ARGLIST.add(...);
+  languages:
+  - java
+  message: HTTP 요청 데이터가 exec 또는 ProcessBuilder 명령 인자로 직주입되고 있습니다. 커맨드 인젝션을 격퇴하기 위해
+    외부 데이터 사용 시 사전에 구성된 인자형 맵 구조로 매핑하세요.
   metadata:
     category: security
-    technology:
-    - java
+    confidence: MEDIUM
     cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - java
+  mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - pattern: '(ProcessBuilder $PB) = ...;
+
+          '
+      - patterns:
+        - pattern: '(Process $P) = ...;
+
+            '
+        - pattern-not: '(Process $P) = (java.lang.Runtime $R).exec(...);
+
+            '
+      - patterns:
+        - pattern: (java.lang.Runtime $R).exec($CMD, ...);
+        - focus-metavariable: $CMD
+      - patterns:
+        - pattern-either:
+          - pattern-inside: "(java.util.List<$TYPE> $ARGLIST) = ...;  \n...\n(ProcessBuilder\
+              \ $PB) = ...;\n...\n$PB.command($ARGLIST);\n"
+          - pattern-inside: "(java.util.List<$TYPE> $ARGLIST) = ...;  \n...\n(ProcessBuilder\
+              \ $PB) = ...;\n"
+          - pattern-inside: "(java.util.List<$TYPE> $ARGLIST) = ...;  \n...\n(Process\
+              \ $P) = ...;\n"
+        - pattern: '$ARGLIST.add(...);
+
+            '
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - pattern: '(HttpServletRequest $REQ)
+
+          '
+      - patterns:
+        - pattern-inside: "(javax.servlet.http.Cookie[] $COOKIES) = (HttpServletRequest\
+            \ $REQ).getCookies(...);\n...\nfor (javax.servlet.http.Cookie $COOKIE:\
+            \ $COOKIES) {\n  ...\n}\n"
+        - pattern: '$COOKIE.getValue(...)
+
+            '
+  severity: ERROR

@@ -1,75 +1,60 @@
 rules:
-  - id: argo-workflow-parameter-command-injection
-    message: "Argo 워크플로우 매개변수 가동 중 원격 명령어 주입(Command Injection) 우려가 수렴됩니다."
-    languages: [yaml]
-    metadata:
-      category: security
-      cwe: 
-        - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
-        - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
-      owasp: 
-        - A03:2021 – Injection
-      confidence: MEDIUM
-      likelihood: MEDIUM
-      impact: HIGH
-      subcategory:
-        - vuln
-      references:
-        - https://github.com/argoproj/argo-workflows/issues/5061
-        - https://github.com/argoproj/argo-workflows/issues/5114#issue-808865370
-      technology:
-        - ci
-        - argo
-    severity: ERROR
-    patterns:
-      - pattern-inside: |
-          apiVersion: $VERSION
-          ...
-      - metavariable-regex:
-          metavariable: $VERSION
-          regex: (argoproj.io.*)
-      - pattern-either:
-          - patterns:
-            - pattern-inside: |
-                command:
-                  ...
-                  - $LANG
-                  ...
-                ...
-                source:
-                  $SCRIPT
-            - metavariable-regex:
-                metavariable: $LANG
-                regex: .*(sh|bash|ksh|csh|tcsh|zsh|python|python3|node|perl|ruby|php|lua|awk|sed|powershell|fish|dash|R|grooby|scala|clj|elixir|coffee|dart|haskell|ocaml).*
-            - metavariable-pattern:
-                metavariable: $SCRIPT
-                pattern-either:
-                  - pattern-regex: (.*{{.*inputs.parameters.*}}.*)
-                  - pattern-regex: (.*{{.*workflow.parameters.*}}.*)
-            - focus-metavariable: $SCRIPT
-          - patterns:
-            - pattern-either:
-              - pattern-inside: |
-                  container:
-                    ...
-                    command: $LANG
-                    ...
-                    args: $PARAM
-              - pattern-inside: |
-                  containerSet:
-                    ...
-                    containers:
-                      - ...
-                        command: $LANG
-                        ...
-                        args: $PARAM
-            - metavariable-regex:
-                metavariable: $LANG
-                regex: .*(sh|bash|ksh|csh|tcsh|zsh|python|python3|node|perl|ruby|php|lua|awk|sed|powershell|fish|dash|R|grooby|scala|clj|elixir|coffee|dart|haskell|ocaml).*
-            - metavariable-pattern:
-                metavariable: $PARAM
-                pattern-either:
-                  - pattern-regex: (.*{{.*inputs.parameters.*}}.*)
-                  - pattern-regex: (.*{{.*workflow.parameters.*}}.*)
-            - focus-metavariable: $PARAM
+- id: argo-workflow-parameter-command-injection
+  languages:
+  - yaml
+  message: Argo 워크플로우 매개변수 가동 중 원격 명령어 주입(Command Injection) 우려가 수렴됩니다.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    impact: HIGH
+    likelihood: MEDIUM
+    owasp:
+    - A03:2021 – Injection
+    references:
+    - https://github.com/argoproj/argo-workflows/issues/5061
+    - https://github.com/argoproj/argo-workflows/issues/5114#issue-808865370
+    subcategory:
+    - vuln
+    technology:
+    - ci
+    - argo
+  patterns:
+  - pattern-inside: 'apiVersion: $VERSION
 
+      ...
+
+      '
+  - metavariable-regex:
+      metavariable: $VERSION
+      regex: (argoproj.io.*)
+  - pattern-either:
+    - patterns:
+      - pattern-inside: "command:\n  ...\n  - $LANG\n  ...\n...\nsource:\n  $SCRIPT\n"
+      - metavariable-regex:
+          metavariable: $LANG
+          regex: .*(sh|bash|ksh|csh|tcsh|zsh|python|python3|node|perl|ruby|php|lua|awk|sed|powershell|fish|dash|R|grooby|scala|clj|elixir|coffee|dart|haskell|ocaml).*
+      - metavariable-pattern:
+          metavariable: $SCRIPT
+          pattern-either:
+          - pattern-regex: (.*{{.*inputs.parameters.*}}.*)
+          - pattern-regex: (.*{{.*workflow.parameters.*}}.*)
+      - focus-metavariable: $SCRIPT
+    - patterns:
+      - pattern-either:
+        - pattern-inside: "container:\n  ...\n  command: $LANG\n  ...\n  args: $PARAM\n"
+        - pattern-inside: "containerSet:\n  ...\n  containers:\n    - ...\n      command:\
+            \ $LANG\n      ...\n      args: $PARAM\n"
+      - metavariable-regex:
+          metavariable: $LANG
+          regex: .*(sh|bash|ksh|csh|tcsh|zsh|python|python3|node|perl|ruby|php|lua|awk|sed|powershell|fish|dash|R|grooby|scala|clj|elixir|coffee|dart|haskell|ocaml).*
+      - metavariable-pattern:
+          metavariable: $PARAM
+          pattern-either:
+          - pattern-regex: (.*{{.*inputs.parameters.*}}.*)
+          - pattern-regex: (.*{{.*workflow.parameters.*}}.*)
+      - focus-metavariable: $PARAM
+  severity: ERROR

@@ -1,23 +1,22 @@
 rules:
-  - id: len-all-count
-    pattern: len($X.all())
-    message:
-      Using QUERY.count() instead of len(QUERY.all()) sends less data to the client since the SQLAlchemy method is performed
-      server-side.
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: performance
-      technology:
-        - sqlalchemy
-  - id: batch-import
-    pattern: |
-      for $X in $Y:
-        db.session.add($Z)
-    message: "batch-import 잠재적 결함 분기 정비 요망."
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: performance
-      technology:
-        - sqlalchemy
+- id: len-all-count
+  languages:
+  - python
+  message: len(QUERY.all()) 대신 QUERY.count()를 사용하면 SQLAlchemy 메서드가 서버 측에서 수행되므로 클라이언트에
+    더 적은 데이터가 전송됩니다.
+  metadata:
+    category: performance
+    technology:
+    - sqlalchemy
+  pattern: len($X.all())
+  severity: WARNING
+- id: batch-import
+  languages:
+  - python
+  message: batch-import 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: performance
+    technology:
+    - sqlalchemy
+  pattern: "for $X in $Y:\n  db.session.add($Z)\n"
+  severity: WARNING

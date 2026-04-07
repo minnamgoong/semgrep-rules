@@ -1,13 +1,13 @@
 rules:
-  - id: hardcoded-tmp-path
-    pattern: open("=~/^\/tmp.*/", ...)
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    metadata:
-      references:
-        - https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryFile
-      category: best-practice
-      technology:
-        - python
-    severity: WARNING
-    languages:
-      - python
+- id: hardcoded-tmp-path
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    references:
+    - https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryFile
+    technology:
+    - python
+  pattern: open("=~/^\/tmp.*/", ...)
+  severity: WARNING

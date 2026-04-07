@@ -2,65 +2,71 @@ rules:
 - id: eval-injection
   languages:
   - python
-  severity: ERROR
-  message: "eval() 연산 버퍼에 가변 사용자 동적 연산 입력이 관여합니다. 원격 코드 실행(RCE) 타격을 유발하므로 즉각 피하십시오."
+  message: eval() 연산 버퍼에 가변 사용자 동적 연산 입력이 관여합니다. 원격 코드 실행(RCE) 타격을 유발하므로 즉각 피하십시오.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
-    - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"
+    - 'CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code
+      (''Eval Injection'')'
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://nedbatchelder.com/blog/201206/eval_really_is_dangerous.html
-    category: security
-    technology:
-    - flask
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - flask
   pattern-either:
   - patterns:
     - pattern: eval(...)
     - pattern-either:
-      - pattern-inside: |
-          @$APP.route($ROUTE, ...)
-          def $FUNC(..., $ROUTEVAR, ...):
-            ...
-            eval(..., <... $ROUTEVAR ...>, ...)
-      - pattern-inside: |
-          @$APP.route($ROUTE, ...)
-          def $FUNC(..., $ROUTEVAR, ...):
-            ...
-            $INTERM = <... $ROUTEVAR ...>
-            ...
-            eval(..., <... $INTERM ...>, ...)
+      - pattern-inside: "@$APP.route($ROUTE, ...)\ndef $FUNC(..., $ROUTEVAR, ...):\n\
+          \  ...\n  eval(..., <... $ROUTEVAR ...>, ...)\n"
+      - pattern-inside: "@$APP.route($ROUTE, ...)\ndef $FUNC(..., $ROUTEVAR, ...):\n\
+          \  ...\n  $INTERM = <... $ROUTEVAR ...>\n  ...\n  eval(..., <... $INTERM\
+          \ ...>, ...)\n"
   - pattern: eval(..., <... flask.request.$W.get(...) ...>, ...)
   - pattern: eval(..., <... flask.request.$W[...] ...>, ...)
   - pattern: eval(..., <... flask.request.$W(...) ...>, ...)
   - pattern: eval(..., <... flask.request.$W ...>, ...)
   - patterns:
-    - pattern-inside: |
-        $INTERM = <... flask.request.$W.get(...) ...>
+    - pattern-inside: '$INTERM = <... flask.request.$W.get(...) ...>
+
         ...
+
         eval(..., <... $INTERM ...>, ...)
+
+        '
     - pattern: eval(...)
   - patterns:
-    - pattern-inside: |
-        $INTERM = <... flask.request.$W[...] ...>
+    - pattern-inside: '$INTERM = <... flask.request.$W[...] ...>
+
         ...
+
         eval(..., <... $INTERM ...>, ...)
+
+        '
     - pattern: eval(...)
   - patterns:
-    - pattern-inside: |
-        $INTERM = <... flask.request.$W(...) ...>
+    - pattern-inside: '$INTERM = <... flask.request.$W(...) ...>
+
         ...
+
         eval(..., <... $INTERM ...>, ...)
+
+        '
     - pattern: eval(...)
   - patterns:
-    - pattern-inside: |
-        $INTERM = <... flask.request.$W ...>
+    - pattern-inside: '$INTERM = <... flask.request.$W ...>
+
         ...
+
         eval(..., <... $INTERM ...>, ...)
+
+        '
     - pattern: eval(...)
+  severity: ERROR

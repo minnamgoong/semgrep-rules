@@ -1,34 +1,36 @@
 rules:
-  - id: id-request
-    message: "ok-request 잠재적 결함 및 보안 이격율 정비 요망."
-    severity: LOW
-    languages: [javascript, typescript]
-    metadata:
-      owasp: "A03:2021 - Injection"
-      cwe: "CWE-706: Use of Incorrectly-Resolved Name or Reference"
-      source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
-      category: security
-      # ruleid: metadata-likelihood-incorrect-value
-      likelihood: lOW
-      impact: LOW
-      technology:
-        - express
-      references:
-        - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
-    patterns: 
-  - id: ok-request
-    message: "ok-request 잠재적 결함 및 보안 이격율 정비 요망."
-    severity: LOW
-    languages: [javascript, typescript]
-    metadata:
-      owasp: "A03:2021 - Injection"
-      cwe: "CWE-706: Use of Incorrectly-Resolved Name or Reference"
-      source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
-      category: security
-      # ok: metadata-likelihood-incorrect-value
-      likelihood: LOW
-      technology:
-        - express
-      references:
-        - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
-    patterns: 
+- id: id-request
+  languages:
+  - javascript
+  - typescript
+  message: ok-request 잠재적 결함 및 보안 이격율 정비 요망.
+  metadata:
+    category: security
+    cwe: 'CWE-706: Use of Incorrectly-Resolved Name or Reference'
+    impact: LOW
+    likelihood: lOW
+    owasp: A03:2021 - Injection
+    references:
+    - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
+    source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
+    technology:
+    - express
+  patterns: null
+  severity: LOW
+- id: ok-request
+  languages:
+  - javascript
+  - typescript
+  message: ok-request 잠재적 결함 및 보안 이격율 정비 요망.
+  metadata:
+    category: security
+    cwe: 'CWE-706: Use of Incorrectly-Resolved Name or Reference'
+    likelihood: LOW
+    owasp: A03:2021 - Injection
+    references:
+    - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
+    source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
+    technology:
+    - express
+  patterns: null
+  severity: LOW

@@ -1,40 +1,43 @@
 rules:
 - id: subprocess-list-passed-as-string
-  languages: [python]
-  severity: WARNING
-  message: "하위 프로세스 생성 드라이버 인젝션 피로도 점검."
-  mode: taint
-  pattern-sources:
-    - pattern: |
-        " ".join($LIST)
-  pattern-sinks:
-    - patterns:
-      - pattern: subprocess.run($ARGS, ...)
-      - focus-metavariable: $ARGS
-    - patterns:
-      - pattern: subprocess.Popen($ARGS, ...)
-      - focus-metavariable: $ARGS
-    - patterns:
-      - pattern: subprocess.call($ARGS, ...)
-      - focus-metavariable: $ARGS
-    - patterns:
-      - pattern: subprocess.check_call($ARGS, ...)
-      - focus-metavariable: $ARGS
-    - patterns:
-      - pattern: subprocess.check_output($ARGS, ...)
-      - focus-metavariable: $ARGS
+  languages:
+  - python
+  message: 하위 프로세스 생성 드라이버 인젝션 피로도 점검.
   metadata:
     category: security
-    cwe: "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
-    references:
-      - "https://docs.python.org/3/library/subprocess.html#frequently-used-arguments"
+    confidence: LOW
+    cwe: 'CWE-78: Improper Neutralization of Special Elements used in an OS Command
+      (''OS Command Injection'')'
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
-    technology:
-    - python
-    confidence: LOW
+    references:
+    - https://docs.python.org/3/library/subprocess.html#frequently-used-arguments
     subcategory:
     - audit
-    likelihood: LOW
-    impact: HIGH
+    technology:
+    - python
+  mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern: subprocess.run($ARGS, ...)
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern: subprocess.Popen($ARGS, ...)
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern: subprocess.call($ARGS, ...)
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern: subprocess.check_call($ARGS, ...)
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern: subprocess.check_output($ARGS, ...)
+    - focus-metavariable: $ARGS
+  pattern-sources:
+  - pattern: '" ".join($LIST)
+
+      '
+  severity: WARNING

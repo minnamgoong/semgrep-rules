@@ -1,69 +1,61 @@
 rules:
-  - id: unchecked-subprocess-call1
-    # ruleid: unnecessary-parent-operator
-    patterns:
-      - pattern-either:
-          - pattern: subprocess.call1(...)
-          - pattern: subprocess.call2(...)
-    message: test
-    severity: WARNING
-    fix: subprocess.check_call(...)
-  - id: unchecked-subprocess-call2
-    # ok: unnecessary-parent-operator
-    patterns:
-      - pattern-either:
-          - pattern: subprocess.call1(...)
-          - pattern: subprocess.call2(...)
-      - pattern: subprocess.call3(...)
-    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
-    severity: WARNING
-    fix: subprocess.check_call(...)
-  - id: unchecked-subprocess-call3
-    # ruleid: unnecessary-parent-operator
-    pattern-either:
-      - patterns:
-          - pattern: subprocess.call1(...)
-          - pattern: subprocess.call2(...)
-    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
-    severity: WARNING
-    fix: subprocess.check_call(...)
-  - id: unchecked-subprocess-call4
-    # ok: unnecessary-parent-operator
-    pattern-either:
-      - patterns:
-          - pattern: subprocess.call1(...)
-          - pattern: subprocess.call2(...)
-      - pattern: subprocess.call3(...)
-    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
-    severity: WARNING
-    fix: subprocess.check_call(...)
-  - id: unchecked-subprocess-call5
-    # ruleid: unnecessary-parent-operator
-    pattern-either:
-      - pattern: subprocess.call1(...)
-    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
-    severity: WARNING
-    fix: subprocess.check_call(...)
-  - id: unchecked-subprocess-call6
-    # ok: unnecessary-parent-operator
-    pattern-either:
-      - pattern: subprocess.call1(...)
-      - pattern: subprocess.call2(...)
-    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
-    severity: WARNING
-    fix: subprocess.check_call(...)
-  - id: unchecked-subprocess-call7
-    # ruleid: unnecessary-parent-operator
-    patterns:
-      - pattern: subprocess.call1(...)
-    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
-    severity: WARNING
-    fix: subprocess.check_call(...)
-  - id: unchecked-subprocess-call8
-    # ok: unnecessary-parent-operator
-    patterns:
-      - pattern: subprocess.call1(...)
-      - pattern: subprocess.call2(...)
-    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
-    severity: WARNING
-    fix: subprocess.check_call(...)
+- fix: subprocess.check_call(...)
+  id: unchecked-subprocess-call1
+  message: 시험
+  patterns:
+  - pattern-either:
+    - pattern: subprocess.call1(...)
+    - pattern: subprocess.call2(...)
+  severity: WARNING
+- fix: subprocess.check_call(...)
+  id: unchecked-subprocess-call2
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
+  patterns:
+  - pattern-either:
+    - pattern: subprocess.call1(...)
+    - pattern: subprocess.call2(...)
+  - pattern: subprocess.call3(...)
+  severity: WARNING
+- fix: subprocess.check_call(...)
+  id: unchecked-subprocess-call3
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
+  pattern-either:
+  - patterns:
+    - pattern: subprocess.call1(...)
+    - pattern: subprocess.call2(...)
+  severity: WARNING
+- fix: subprocess.check_call(...)
+  id: unchecked-subprocess-call4
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
+  pattern-either:
+  - patterns:
+    - pattern: subprocess.call1(...)
+    - pattern: subprocess.call2(...)
+  - pattern: subprocess.call3(...)
+  severity: WARNING
+- fix: subprocess.check_call(...)
+  id: unchecked-subprocess-call5
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
+  pattern-either:
+  - pattern: subprocess.call1(...)
+  severity: WARNING
+- fix: subprocess.check_call(...)
+  id: unchecked-subprocess-call6
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
+  pattern-either:
+  - pattern: subprocess.call1(...)
+  - pattern: subprocess.call2(...)
+  severity: WARNING
+- fix: subprocess.check_call(...)
+  id: unchecked-subprocess-call7
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
+  patterns:
+  - pattern: subprocess.call1(...)
+  severity: WARNING
+- fix: subprocess.check_call(...)
+  id: unchecked-subprocess-call8
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
+  patterns:
+  - pattern: subprocess.call1(...)
+  - pattern: subprocess.call2(...)
+  severity: WARNING

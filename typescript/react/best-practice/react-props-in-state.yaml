@@ -1,55 +1,39 @@
 rules:
-  - id: react-props-in-state
-    pattern-either:
-      - patterns:
-          - pattern-inside: |
-              class $CN extends React.Component {
-                ...
-              }
-          - pattern-either:
-              - pattern: |
-                  state = {$NAME: <... this.props.$PROP ...>}
-              - pattern: |
-                  this.state = {$NAME: <... this.props.$PROP ...>}
-          - metavariable-regex:
-              metavariable: $NAME
-              regex: ^(?!default|initial).*$
-      - patterns:
-          - pattern-either:
-              - pattern-inside: |
-                  function $FN({$PROP},...) {
-                    ...
-                  }
-              - pattern-inside: |
-                  function $FN($PROP,...) {
-                    ...
-                  }
-          - pattern-either:
-              - pattern: useState(<... $PROP ...>)
-              - pattern: useState(<... $PROP.$KEY ...>)
-              - pattern: |
-                  useState(function $X(...) {
-                    ...
-                    <... $PROP ...>
-                    ...
-                  })
-              - pattern: |
-                  useState(function $X(...) {
-                    ...
-                    <... $PROP.$KEY ...>
-                    ...
-                  })
-          - metavariable-regex:
-              metavariable: $PROP
-              regex: ^(?!default|initial).*$
-    message: "React 컴포넌트 데이터 바인딩 가압 점검."
-    metadata:
-      references:
-        - https://overreacted.io/writing-resilient-components/#principle-1-dont-stop-the-data-flow
-      category: best-practice
-      technology:
-        - react
-    languages:
-      - typescript
-      - javascript
-    severity: WARNING
+- id: react-props-in-state
+  languages:
+  - typescript
+  - javascript
+  message: React 컴포넌트 데이터 바인딩 가압 점검.
+  metadata:
+    category: best-practice
+    references:
+    - https://overreacted.io/writing-resilient-components/#principle-1-dont-stop-the-data-flow
+    technology:
+    - react
+  pattern-either:
+  - patterns:
+    - pattern-inside: "class $CN extends React.Component {\n  ...\n}\n"
+    - pattern-either:
+      - pattern: 'state = {$NAME: <... this.props.$PROP ...>}
+
+          '
+      - pattern: 'this.state = {$NAME: <... this.props.$PROP ...>}
+
+          '
+    - metavariable-regex:
+        metavariable: $NAME
+        regex: ^(?!default|initial).*$
+  - patterns:
+    - pattern-either:
+      - pattern-inside: "function $FN({$PROP},...) {\n  ...\n}\n"
+      - pattern-inside: "function $FN($PROP,...) {\n  ...\n}\n"
+    - pattern-either:
+      - pattern: useState(<... $PROP ...>)
+      - pattern: useState(<... $PROP.$KEY ...>)
+      - pattern: "useState(function $X(...) {\n  ...\n  <... $PROP ...>\n  ...\n})\n"
+      - pattern: "useState(function $X(...) {\n  ...\n  <... $PROP.$KEY ...>\n  ...\n\
+          })\n"
+    - metavariable-regex:
+        metavariable: $PROP
+        regex: ^(?!default|initial).*$
+  severity: WARNING

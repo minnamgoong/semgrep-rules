@@ -1,20 +1,35 @@
 rules:
 - id: subprocess-injection
-  languages: [python]
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 subprocess-injection 전사 단속이 요구됩니다.
+  metadata:
+    category: security
+    confidence: HIGH
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: MEDIUM
+    owasp:
+    - A01:2017 - Injection
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://semgrep.dev/docs/cheat-sheets/python-command-injection/
+    subcategory:
+    - vuln
+    technology:
+    - flask
   mode: taint
   options:
     symbolic_propagation: true
-  pattern-sources:
+  pattern-sanitizers:
   - patterns:
-    - pattern-inside: |
-        def $FUNC(..., $REQUEST, ...):
-          ...
-    - focus-metavariable: $REQUEST
-    - metavariable-pattern:
-        metavariable: $REQUEST
-        patterns:
-        - pattern: request
-        - pattern-not-inside: request.build_absolute_uri
+    - pattern: $DICT[$KEY]
+    - focus-metavariable: $KEY
   pattern-sinks:
   - patterns:
     - pattern-either:
@@ -22,10 +37,13 @@ rules:
         - pattern: subprocess.$FUNC(...)
         - pattern-not: subprocess.$FUNC("...", ...)
         - pattern-not: subprocess.$FUNC(["...", ...], ...)
-        - pattern-not-inside: |
-            $CMD = ["...", ...]
+        - pattern-not-inside: '$CMD = ["...", ...]
+
             ...
+
             subprocess.$FUNC($CMD, ...)
+
+            '
       - patterns:
         - pattern: subprocess.$FUNC(["$SHELL", "-c", ...], ...)
         - metavariable-regex:
@@ -36,28 +54,13 @@ rules:
         - metavariable-regex:
             metavariable: $INTERPRETER
             regex: ^(python|python\d)$
-  pattern-sanitizers:
+  pattern-sources:
   - patterns:
-    - pattern: $DICT[$KEY]
-    - focus-metavariable: $KEY
+    - pattern-inside: "def $FUNC(..., $REQUEST, ...):\n  ...\n"
+    - focus-metavariable: $REQUEST
+    - metavariable-pattern:
+        metavariable: $REQUEST
+        patterns:
+        - pattern: request
+        - pattern-not-inside: request.build_absolute_uri
   severity: ERROR
-  message: "인젝션 및 논리 에러 예방을 위한 subprocess-injection 전사 단속이 요구됩니다."
-  metadata:
-    category: security
-    technology:
-    - flask
-    owasp:
-    - A01:2017 - Injection
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
-    references:
-    - https://semgrep.dev/docs/cheat-sheets/python-command-injection/
-    confidence: HIGH
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: HIGH

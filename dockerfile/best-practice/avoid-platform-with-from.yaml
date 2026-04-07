@@ -1,15 +1,15 @@
 rules:
-  - id: avoid-platform-with-from
-    severity: INFO
-    languages: [dockerfile]
-    pattern: FROM --platform=$PLATFORM $IMAGE
-    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
-    metadata:
-      source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3029
-      references:
-        - https://github.com/hadolint/hadolint/wiki/DL3029
-        - https://docs.docker.com/buildx/working-with-buildx/
-      category: best-practice
-      technology:
-        - dockerfile
-#   fix: FROM $IMAGE
+- id: avoid-platform-with-from
+  languages:
+  - dockerfile
+  message: Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검.
+  metadata:
+    category: best-practice
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL3029
+    - https://docs.docker.com/buildx/working-with-buildx/
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3029
+    technology:
+    - dockerfile
+  pattern: FROM --platform=$PLATFORM $IMAGE
+  severity: INFO

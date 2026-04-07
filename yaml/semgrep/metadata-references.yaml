@@ -1,19 +1,24 @@
 rules:
 - id: metadata-references
-  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-references 누락 경보."
-  severity: ERROR
+  languages:
+  - json
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-references 누락 경보.'
   metadata:
     category: correctness
     technology:
     - semgrep
-  languages: [json, yaml]
   patterns:
-  - pattern-inside: |
-      rules: ...
-  - pattern-inside: |
-      metadata: ...
-  - pattern: |
-      references: ...
-  - pattern-not: |
-      references: [...]
+  - pattern-inside: 'rules: ...
 
+      '
+  - pattern-inside: 'metadata: ...
+
+      '
+  - pattern: 'references: ...
+
+      '
+  - pattern-not: 'references: [...]
+
+      '
+  severity: ERROR

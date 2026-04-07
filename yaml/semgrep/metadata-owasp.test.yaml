@@ -1,57 +1,59 @@
 rules:
-  - id: example-1
-    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-1 누사 경보."
-    severity: ERROR
-    languages: [json, yaml]
-    pattern: "..."
-    metadata:
-      # ok: metadata-owasp
-      owasp: "A1: Some Vulnerability"
-  - id: example-2
-    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-2 누사 경보."
-    severity: ERROR
-    languages: [json, yaml]
-    pattern: "..."
-    metadata:
-      # ruleid: metadata-owasp
-      owasp: "A11: Some Vulnerability"
-  - id: example-3
-    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-3 누사 경보."
-    severity: ERROR
-    languages: [json, yaml]
-    pattern: "..."
-    metadata:
-      # ruleid: metadata-owasp
-      owasp: a4
-  - id: example-4
-    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-4 누사 경보."
-    severity: ERROR
-    languages: [json, yaml]
-    pattern: "..."
-    metadata:
-      # ruleid: metadata-owasp
-      owasp: A5 Some Vulnerability
-  - id: example-5
-    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-5 누사 경보."
-    severity: ERROR
-    languages: [json, yaml]
-    pattern: "..."
-    metadata:
-      # ok: metadata-owasp
-      owasp:
-        # ok: metadata-owasp
-        - A05:2021 - Security Misconfiguration
-        # ok: metadata-owasp
-        - A06:2017 - Security Misconfiguration
-  - id: example-6
-    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: example-6 누사 경보."
-    severity: ERROR
-    languages: [json, yaml]
-    pattern: "..."
-    metadata:
-      # ok: metadata-owasp
-      owasp:
-        # ruleid: metadata-owasp
-        - A5:2021 - Security Misconfiguration
-        # ruleid: metadata-owasp
-        - A06:201789 - Security Misconfiguration
+- id: example-1
+  languages:
+  - json
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: example-1 누사 경보.'
+  metadata:
+    owasp: 'A1: Some Vulnerability'
+  pattern: '...'
+  severity: ERROR
+- id: example-2
+  languages:
+  - json
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: example-2 누사 경보.'
+  metadata:
+    owasp: 'A11: Some Vulnerability'
+  pattern: '...'
+  severity: ERROR
+- id: example-3
+  languages:
+  - json
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: example-3 누사 경보.'
+  metadata:
+    owasp: a4
+  pattern: '...'
+  severity: ERROR
+- id: example-4
+  languages:
+  - json
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: example-4 누사 경보.'
+  metadata:
+    owasp: A5 Some Vulnerability
+  pattern: '...'
+  severity: ERROR
+- id: example-5
+  languages:
+  - json
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: example-5 누사 경보.'
+  metadata:
+    owasp:
+    - A05:2021 - Security Misconfiguration
+    - A06:2017 - Security Misconfiguration
+  pattern: '...'
+  severity: ERROR
+- id: example-6
+  languages:
+  - json
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: example-6 누사 경보.'
+  metadata:
+    owasp:
+    - A5:2021 - Security Misconfiguration
+    - A06:201789 - Security Misconfiguration
+  pattern: '...'
+  severity: ERROR

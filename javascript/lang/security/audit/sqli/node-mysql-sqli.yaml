@@ -1,46 +1,38 @@
 rules:
 - id: node-mysql-sqli
-  message: "잠재적 SQL 인젝션 경로에 대한 검토가 필요합니다."
+  languages:
+  - javascript
+  - typescript
+  message: 잠재적 SQL 인젝션 경로에 대한 검토가 필요합니다.
   metadata:
-    references:
-    - https://www.npmjs.com/package/mysql2
-    - https://www.npmjs.com/package/mysql
-    - https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
     category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command
+      (''SQL Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
-    cwe:
-    - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
-    confidence: LOW
+    references:
+    - https://www.npmjs.com/package/mysql2
+    - https://www.npmjs.com/package/mysql
+    - https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+    subcategory:
+    - vuln
     technology:
     - mysql
     - mysql2
     - javascript
     - nodejs
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
   mode: taint
-  pattern-sources:
+  pattern-sanitizers:
   - patterns:
-    - pattern-inside: function ... (..., $Y,...) {...}
-    - pattern: $Y
-    - pattern-not-inside: |
-        function ... (..., $Y: number,...) {...}
-    - pattern-not-inside: $Y.query
-    - pattern-not-inside: $Y.body
-    - pattern-not-inside: $Y.params
-    - pattern-not-inside: $Y.cookies
-    - pattern-not-inside: $Y.headers
+    - pattern: parseInt(...)
   pattern-sinks:
   - patterns:
     - focus-metavariable: $QUERY
@@ -48,21 +40,39 @@ rules:
       - pattern-inside: $POOL.query($QUERY, ...)
       - pattern-inside: $POOL.execute($QUERY, ...)
     - pattern-either:
-      - pattern-inside: |
-          import $S from "$IMPORT"
+      - pattern-inside: 'import $S from "$IMPORT"
+
           ...
-      - pattern-inside: |
-          import { ... } from "$IMPORT"
+
+          '
+      - pattern-inside: 'import { ... } from "$IMPORT"
+
           ...
-      - pattern-inside: |
-          import * as $S from "$IMPORT"
+
+          '
+      - pattern-inside: 'import * as $S from "$IMPORT"
+
           ...
-      - pattern-inside: |
-          require("$IMPORT")
+
+          '
+      - pattern-inside: 'require("$IMPORT")
+
           ...
+
+          '
     - metavariable-regex:
         metavariable: $IMPORT
         regex: (mysql|mysql2)
-  pattern-sanitizers:
+  pattern-sources:
   - patterns:
-    - pattern: parseInt(...)
+    - pattern-inside: function ... (..., $Y,...) {...}
+    - pattern: $Y
+    - pattern-not-inside: 'function ... (..., $Y: number,...) {...}
+
+        '
+    - pattern-not-inside: $Y.query
+    - pattern-not-inside: $Y.body
+    - pattern-not-inside: $Y.params
+    - pattern-not-inside: $Y.cookies
+    - pattern-not-inside: $Y.headers
+  severity: WARNING

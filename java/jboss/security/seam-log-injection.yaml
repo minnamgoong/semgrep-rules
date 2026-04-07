@@ -1,35 +1,43 @@
 rules:
 - id: seam-log-injection
-  patterns:
-  - pattern: |
-      $LOG.$INFO($X + $Y,...)
-  - pattern-either:
-    - pattern-inside: |
-        import org.jboss.seam.log.Log;
-        ...
-    - pattern-inside: |
-        org.jboss.seam.log.Log $LOG = ...;
-        ...
-  - metavariable-regex:
-      metavariable: $INFO
-      regex: (debug|error|fatal|info|trace|warn)
-  languages: [java]
-  message: "Seam Logging API에 외부 데이터가 그대로 주입되었습니다. 표현식 언어(EL)를 통해 로깅 시스템이 공격받을 수 있으므로 주입 전 엄격한 검증을 통과해야 합니다."
+  languages:
+  - java
+  message: Seam Logging API에 외부 데이터가 그대로 주입되었습니다. 표현식 언어(EL)를 통해 로깅 시스템이 공격받을 수 있으므로
+    주입 전 엄격한 검증을 통과해야 합니다.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"
+    - 'CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code
+      (''Eval Injection'')'
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#SEAM_LOG_INJECTION
-    category: security
-    technology:
-    - jboss
-    confidence: LOW
     references:
     - https://owasp.org/Top10/A03_2021-Injection
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#SEAM_LOG_INJECTION
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
+    technology:
+    - jboss
+  patterns:
+  - pattern: '$LOG.$INFO($X + $Y,...)
+
+      '
+  - pattern-either:
+    - pattern-inside: 'import org.jboss.seam.log.Log;
+
+        ...
+
+        '
+    - pattern-inside: 'org.jboss.seam.log.Log $LOG = ...;
+
+        ...
+
+        '
+  - metavariable-regex:
+      metavariable: $INFO
+      regex: (debug|error|fatal|info|trace|warn)
   severity: ERROR

@@ -1,33 +1,34 @@
 rules:
-- id: template-explicit-unescape
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+- fix-regex:
+    regex: <%-(.*?)%>
+    replacement: <%=\1%>
+  id: template-explicit-unescape
+  languages:
+  - regex
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - http://www.managerjs.com/blog/2015/05/will-ejs-escape-save-me-from-xss-sorta/
-    category: security
-    technology:
-    - express
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  languages:
-  - regex
-  severity: WARNING
+    technology:
+    - express
   paths:
     include:
     - '*.ejs'
     - '*.html'
   pattern-regex: <%-((?!include).)*?%>
-  fix-regex:
-    regex: <%-(.*?)%>
-    replacement: <%=\1%>
+  severity: WARNING

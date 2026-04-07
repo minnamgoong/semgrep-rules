@@ -1,43 +1,38 @@
 rules:
 - id: java-reverse-shell
-  patterns:
-  - pattern-either:
-    - pattern: |
-        Socket $S=new Socket(...);
-        ...
-        InputStream $SI = $S.getInputStream();
-        ...
-        while(!$S.isClosed())
-        {
-          ...
-          while($SI.available()>0)$PO.write($SI.read());
-          ...
-          $SO.flush();
-          ...
-        }
-  - pattern-inside: |
-      Process $P=new ProcessBuilder(...).redirectErrorStream(true).start();
-      ...
-      $P.destroy();
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  severity: WARNING
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
-    cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
     category: security
-    technology: [java]
+    confidence: LOW
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
-  languages:
-  - java
+    technology:
+    - java
+  patterns:
+  - pattern-either:
+    - pattern: "Socket $S=new Socket(...);\n...\nInputStream $SI = $S.getInputStream();\n\
+        ...\nwhile(!$S.isClosed())\n{\n  ...\n  while($SI.available()>0)$PO.write($SI.read());\n\
+        \  ...\n  $SO.flush();\n  ...\n}\n"
+  - pattern-inside: 'Process $P=new ProcessBuilder(...).redirectErrorStream(true).start();
+
+      ...
+
+      $P.destroy();
+
+      '
+  severity: WARNING

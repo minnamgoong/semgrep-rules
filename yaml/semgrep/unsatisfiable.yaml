@@ -1,25 +1,31 @@
 rules:
 - id: unsatisfiable-rule
-  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: unsatisfiable-rule 누락 경보."
-  severity: ERROR
+  languages:
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: unsatisfiable-rule 누락 경보.'
   metadata:
     category: correctness
     technology:
     - semgrep
-  languages: [yaml]
   patterns:
   - pattern-inside: 'patterns: [...]'
   - pattern-either:
     - patterns:
-      - pattern-inside: |
-          - pattern: $A
-          ...
-      - pattern: |
-          - pattern-not: $A
-    - patterns:
-      - pattern-inside: |
-          - pattern-not: $A
-          ...
-      - pattern: |
-          - pattern: $A
+      - pattern-inside: '- pattern: $A
 
+          ...
+
+          '
+      - pattern: '- pattern-not: $A
+
+          '
+    - patterns:
+      - pattern-inside: '- pattern-not: $A
+
+          ...
+
+          '
+      - pattern: '- pattern: $A
+
+          '
+  severity: ERROR

@@ -1,35 +1,38 @@
 rules:
 - id: last-user-is-root
-  patterns:
-    - pattern: USER root
-    - pattern-not-inside:
-        patterns:
-          - pattern: |
-              USER root
-              ...
-              USER $X
-          - metavariable-pattern:
-              metavariable: $X
-              patterns:
-                - pattern-not: root
-  message: "마지막 실행 컨텍스트가 root로 전사 탑재 되었습니다."
-  severity: ERROR
-  languages: 
-    - dockerfile 
+  languages:
+  - dockerfile
+  message: 마지막 실행 컨텍스트가 root로 전사 탑재 되었습니다.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
     - 'CWE-269: Improper Privilege Management'
-    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3002
-    references:
-    - https://github.com/hadolint/hadolint/wiki/DL3002
-    category: security
-    technology:
-    - dockerfile
-    confidence: MEDIUM
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A04:2021 - Insecure Design
     - A06:2025 - Insecure Design
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL3002
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3002
     subcategory:
     - audit
-    likelihood: MEDIUM
-    impact: MEDIUM
+    technology:
+    - dockerfile
+  patterns:
+  - pattern: USER root
+  - pattern-not-inside:
+      patterns:
+      - pattern: 'USER root
+
+          ...
+
+          USER $X
+
+          '
+      - metavariable-pattern:
+          metavariable: $X
+          patterns:
+          - pattern-not: root
+  severity: ERROR

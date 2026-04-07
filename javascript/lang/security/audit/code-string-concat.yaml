@@ -1,35 +1,41 @@
 rules:
 - id: code-string-concat
-  message: "요청 데이터를 eval() 또는 Function() 실행 인자로 직접 연산 합사합니다. 원격 코드 실행(RCE) 타격을 유발하므로 동적 코드 실행을 금지하십시오."
-  options:
-    interfile: true
+  languages:
+  - javascript
+  - typescript
+  message: 요청 데이터를 eval() 또는 Function() 실행 인자로 직접 연산 합사합니다. 원격 코드 실행(RCE) 타격을 유발하므로
+    동적 코드 실행을 금지하십시오.
   metadata:
-    interfile: true
+    category: security
     confidence: HIGH
+    cwe:
+    - 'CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code
+      (''Eval Injection'')'
+    impact: MEDIUM
+    interfile: true
+    likelihood: MEDIUM
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
-    cwe:
-    - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"
     references:
     - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval
     - https://nodejs.org/api/child_process.html#child_processexeccommand-options-callback
     - https://www.stackhawk.com/blog/nodejs-command-injection-examples-and-prevention/
     - https://ckarande.gitbooks.io/owasp-nodegoat-tutorial/content/tutorial/a1_-_server_side_js_injection.html
-    category: security
+    subcategory:
+    - vuln
     technology:
     - node.js
     - Express
     - Next.js
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
   mode: taint
+  options:
+    interfile: true
+  pattern-sinks:
+  - patterns:
+    - pattern: 'eval(...)
+
+        '
   pattern-sources:
   - pattern-either:
     - patterns:
@@ -39,7 +45,8 @@ rules:
         - patterns:
           - pattern-either:
             - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES) {...})
-            - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES, $NEXT) {...})
+            - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES, $NEXT)
+                {...})
           - metavariable-regex:
               metavariable: $METHOD
               regex: ^(get|post|put|head|delete|options)$
@@ -51,37 +58,47 @@ rules:
         - pattern: $REQ.headers
     - patterns:
       - pattern-either:
-        - pattern-inside: |
-            import { ...,$IMPORT,... } from 'next/router'
+        - pattern-inside: 'import { ...,$IMPORT,... } from ''next/router''
+
             ...
-        - pattern-inside: |
-            import $IMPORT from 'next/router';
+
+            '
+        - pattern-inside: 'import $IMPORT from ''next/router'';
+
             ...
+
+            '
       - pattern-either:
         - patterns:
-          - pattern-inside: |
-              $ROUTER = $IMPORT()
+          - pattern-inside: '$ROUTER = $IMPORT()
+
               ...
+
+              '
           - pattern-either:
-            - pattern-inside: |
-                const { ...,$PROPS,... } = $ROUTER.query
+            - pattern-inside: 'const { ...,$PROPS,... } = $ROUTER.query
+
                 ...
-            - pattern-inside: |
-                var { ...,$PROPS,... } = $ROUTER.query
+
+                '
+            - pattern-inside: 'var { ...,$PROPS,... } = $ROUTER.query
+
                 ...
-            - pattern-inside: |
-                let { ...,$PROPS,... } = $ROUTER.query
+
+                '
+            - pattern-inside: 'let { ...,$PROPS,... } = $ROUTER.query
+
                 ...
+
+                '
           - focus-metavariable: $PROPS
         - patterns:
-          - pattern-inside: |
-              $ROUTER = $IMPORT()
+          - pattern-inside: '$ROUTER = $IMPORT()
+
               ...
-          - pattern: |
-              $ROUTER.query.$VALUE 
+
+              '
+          - pattern: "$ROUTER.query.$VALUE \n"
         - patterns:
           - pattern: $IMPORT().query.$VALUE
-  pattern-sinks:
-  - patterns:
-    - pattern: |
-        eval(...)
+  severity: ERROR

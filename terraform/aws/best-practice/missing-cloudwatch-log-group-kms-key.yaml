@@ -1,19 +1,16 @@
 rules:
-  - id: missing-cloudwatch-log-group-kms-key
-    patterns:
-      - patterns:
-          - pattern: resource "aws_cloudwatch_log_group" $ANYTHING {...}
-          - pattern-not-inside: |
-              resource "aws_cloudwatch_log_group" $ANYTHING {
-                ...
-                kms_key_id = ...
-                ...
-              }
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    languages: [hcl]
-    severity: WARNING
-    metadata:
-      technology:
-        - aws
-        - terraform
-      category: best-practice
+- id: missing-cloudwatch-log-group-kms-key
+  languages:
+  - hcl
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - aws
+    - terraform
+  patterns:
+  - patterns:
+    - pattern: resource "aws_cloudwatch_log_group" $ANYTHING {...}
+    - pattern-not-inside: "resource \"aws_cloudwatch_log_group\" $ANYTHING {\n  ...\n\
+        \  kms_key_id = ...\n  ...\n}\n"
+  severity: WARNING

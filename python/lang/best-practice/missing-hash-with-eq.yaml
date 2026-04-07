@@ -1,23 +1,14 @@
 rules:
-  - id: missing-hash-with-eq
-    patterns:
-      - pattern-not-inside: |
-          class A(...):
-              ...
-              def __hash__(self):
-                  ...
-              ...
-              def __eq__(self, $O):
-                  ...
-      - pattern: |
-          class A(...):
-            ...
-            def __eq__(self, $O): ...
-            ...
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: best-practice
-      technology:
-        - python
+- id: missing-hash-with-eq
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - python
+  patterns:
+  - pattern-not-inside: "class A(...):\n    ...\n    def __hash__(self):\n       \
+      \ ...\n    ...\n    def __eq__(self, $O):\n        ...\n"
+  - pattern: "class A(...):\n  ...\n  def __eq__(self, $O): ...\n  ...\n"
+  severity: WARNING

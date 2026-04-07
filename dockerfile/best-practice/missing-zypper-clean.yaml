@@ -1,16 +1,17 @@
 rules:
-  - id: missing-zypper-clean
-    severity: WARNING
-    languages: [dockerfile]
-    patterns:
-      - pattern: RUN ... zypper $COMMAND ...
-      - pattern-not-inside: RUN ... zypper clean
-      - pattern-not-inside: RUN ... zypper clean
-    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
-    metadata:
-      source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3036
-      references:
-        - https://github.com/hadolint/hadolint/wiki/DL3036
-      category: best-practice
-      technology:
-        - dockerfile
+- id: missing-zypper-clean
+  languages:
+  - dockerfile
+  message: Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검.
+  metadata:
+    category: best-practice
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL3036
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3036
+    technology:
+    - dockerfile
+  patterns:
+  - pattern: RUN ... zypper $COMMAND ...
+  - pattern-not-inside: RUN ... zypper clean
+  - pattern-not-inside: RUN ... zypper clean
+  severity: WARNING

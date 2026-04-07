@@ -1,29 +1,45 @@
 rules:
 - id: remote-property-injection
-  message: "대괄호 표기법([])에 사용자 입력이 반영되어 객체 속성에 접근하고 있습니다. 프로퍼티 인젝션 및 프로토타입 오염 위험이 있으니 입력값을 사전에 검증하세요."
+  languages:
+  - javascript
+  - typescript
+  message: 대괄호 표기법([])에 사용자 입력이 반영되어 객체 속성에 접근하고 있습니다. 프로퍼티 인젝션 및 프로토타입 오염 위험이 있으니
+    입력값을 사전에 검증하세요.
   metadata:
+    category: security
     confidence: LOW
+    cwe:
+    - 'CWE-522: Insufficiently Protected Credentials'
+    cwe2021-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A02:2017 - Broken Authentication
     - A04:2021 - Insecure Design
     - A06:2025 - Insecure Design
-    cwe:
-    - 'CWE-522: Insufficiently Protected Credentials'
-    category: security
-    technology:
-    - express
     references:
     - https://github.com/nodesecurity/eslint-plugin-security/blob/3c7522ca1be800353513282867a1034c795d9eb4/docs/the-dangers-of-square-bracket-notation.md
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
+    technology:
+    - express
   mode: taint
+  pattern-sanitizers:
+  - patterns:
+    - pattern: var $X = ...
+    - pattern-not: var $X = $REQ.$ANY
+  pattern-sinks:
+  - patterns:
+    - pattern-inside: $OBJ[...] = ...
+    - pattern-not-inside: $OBJ["..."] = ...
+    - pattern-not-inside: $OBJ[...] = "..."
+    - pattern: $INDEX
+    - pattern-not: '"..." + $INDEX
+
+        '
+    - pattern-not: '$INDEX + "..."
+
+        '
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -44,11 +60,14 @@ rules:
       - pattern: $REQ.headers
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+
           {...}
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
     - focus-metavariable: $REQ
     - pattern-either:
       - pattern: params
@@ -56,17 +75,4 @@ rules:
       - pattern: cookies
       - pattern: headers
       - pattern: body
-  pattern-sinks:
-  - patterns:
-    - pattern-inside: $OBJ[...] = ...
-    - pattern-not-inside: $OBJ["..."] = ...
-    - pattern-not-inside: $OBJ[...] = "..."
-    - pattern: $INDEX
-    - pattern-not: |
-        "..." + $INDEX
-    - pattern-not: |
-        $INDEX + "..."
-  pattern-sanitizers:
-  - patterns:
-    - pattern: var $X = ...
-    - pattern-not: var $X = $REQ.$ANY
+  severity: ERROR

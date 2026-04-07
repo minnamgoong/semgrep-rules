@@ -1,30 +1,201 @@
 rules:
 - id: raw-html-concat
-  message: "HTML 템플릿 가속 피싱 대응."
+  languages:
+  - javascript
+  - typescript
+  message: HTML 템플릿 가속 피싱 대응.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://owasp.org/www-community/attacks/xss/
-    category: security
-    technology:
-    - browser
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
+    technology:
+    - browser
   mode: taint
+  pattern-sanitizers:
+  - patterns:
+    - pattern-either:
+      - pattern-inside: 'import $S from "underscore.string"
+
+          ...
+
+          '
+      - pattern-inside: 'import * as $S from "underscore.string"
+
+          ...
+
+          '
+      - pattern-inside: 'import $S from "underscore.string"
+
+          ...
+
+          '
+      - pattern-inside: '$S = require("underscore.string")
+
+          ...
+
+          '
+    - pattern-either:
+      - pattern: $S.escapeHTML(...)
+  - patterns:
+    - pattern-either:
+      - pattern-inside: 'import $S from "dompurify"
+
+          ...
+
+          '
+      - pattern-inside: 'import { ..., $S,... } from "dompurify"
+
+          ...
+
+          '
+      - pattern-inside: 'import * as $S from "dompurify"
+
+          ...
+
+          '
+      - pattern-inside: '$S = require("dompurify")
+
+          ...
+
+          '
+      - pattern-inside: 'import $S from "isomorphic-dompurify"
+
+          ...
+
+          '
+      - pattern-inside: 'import * as $S from "isomorphic-dompurify"
+
+          ...
+
+          '
+      - pattern-inside: '$S = require("isomorphic-dompurify")
+
+          ...
+
+          '
+    - pattern-either:
+      - patterns:
+        - pattern-inside: '$VALUE = $S(...)
+
+            ...
+
+            '
+        - pattern: $VALUE.sanitize(...)
+      - patterns:
+        - pattern-inside: '$VALUE = $S.sanitize
+
+            ...
+
+            '
+        - pattern: $S(...)
+      - pattern: $S.sanitize(...)
+      - pattern: $S(...)
+  - patterns:
+    - pattern-either:
+      - pattern-inside: 'import $S from ''xss'';
+
+          ...
+
+          '
+      - pattern-inside: 'import * as $S from ''xss'';
+
+          ...
+
+          '
+      - pattern-inside: '$S = require("xss")
+
+          ...
+
+          '
+    - pattern: $S(...)
+  - patterns:
+    - pattern-either:
+      - pattern-inside: 'import $S from ''sanitize-html'';
+
+          ...
+
+          '
+      - pattern-inside: 'import * as $S from "sanitize-html";
+
+          ...
+
+          '
+      - pattern-inside: '$S = require("sanitize-html")
+
+          ...
+
+          '
+    - pattern: $S(...)
+  - patterns:
+    - pattern-either:
+      - pattern-inside: '$S = new Remarkable()
+
+          ...
+
+          '
+    - pattern: $S.render(...)
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - patterns:
+        - pattern: $STRING + $EXPR
+        - pattern-not: $STRING + "..."
+        - metavariable-pattern:
+            language: generic
+            metavariable: $STRING
+            patterns:
+            - pattern: <$TAG ...
+            - pattern-not: <$TAG ...>...</$TAG>...
+      - patterns:
+        - pattern: $EXPR + $STRING
+        - pattern-not: '"..." + $STRING'
+        - metavariable-pattern:
+            language: generic
+            metavariable: $STRING
+            patterns:
+            - pattern: '... </$TAG'
+      - patterns:
+        - pattern: '[..., $STRING, ...].join(...)'
+        - metavariable-pattern:
+            language: generic
+            metavariable: $STRING
+            patterns:
+            - pattern: <$TAG ...
+      - patterns:
+        - pattern: '[..., $STRING, ...].join(...)'
+        - metavariable-pattern:
+            language: generic
+            metavariable: $STRING
+            patterns:
+            - pattern: '... </$TAG'
+      - patterns:
+        - pattern: $VAR += $STRING
+        - metavariable-pattern:
+            language: generic
+            metavariable: $STRING
+            patterns:
+            - pattern: <$TAG ...
+      - patterns:
+        - pattern: $VAR += $STRING
+        - metavariable-pattern:
+            language: generic
+            metavariable: $STRING
+            patterns:
+            - pattern: '... </$TAG'
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -34,134 +205,4 @@ rules:
       - pattern: $WINDOW. ... .location.href
       - pattern: $WINDOW. ... .location.hash
       - pattern: $WINDOW. ... .location.search
-  pattern-sinks:
-  - patterns:
-    - pattern-either:
-      - patterns:
-        - pattern: $STRING + $EXPR
-        - pattern-not: $STRING + "..."
-        - metavariable-pattern:
-            patterns:
-            - pattern: <$TAG ...
-            - pattern-not: <$TAG ...>...</$TAG>...
-            metavariable: $STRING
-            language: generic
-      - patterns:
-        - pattern: $EXPR + $STRING
-        - pattern-not: '"..." + $STRING'
-        - metavariable-pattern:
-            patterns:
-            - pattern: '... </$TAG'
-            metavariable: $STRING
-            language: generic
-      - patterns:
-        - pattern: '[..., $STRING, ...].join(...)'
-        - metavariable-pattern:
-            patterns:
-            - pattern: <$TAG ...
-            metavariable: $STRING
-            language: generic
-      - patterns:
-        - pattern: '[..., $STRING, ...].join(...)'
-        - metavariable-pattern:
-            patterns:
-            - pattern: '... </$TAG'
-            metavariable: $STRING
-            language: generic
-      - patterns:
-        - pattern: $VAR += $STRING
-        - metavariable-pattern:
-            patterns:
-            - pattern: <$TAG ...
-            metavariable: $STRING
-            language: generic
-      - patterns:
-        - pattern: $VAR += $STRING
-        - metavariable-pattern:
-            patterns:
-            - pattern: '... </$TAG'
-            metavariable: $STRING
-            language: generic
-  pattern-sanitizers:
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          import $S from "underscore.string"
-          ...
-      - pattern-inside: |
-          import * as $S from "underscore.string"
-          ...
-      - pattern-inside: |
-          import $S from "underscore.string"
-          ...
-      - pattern-inside: |
-          $S = require("underscore.string")
-          ...
-    - pattern-either:
-      - pattern: $S.escapeHTML(...)
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          import $S from "dompurify"
-          ...
-      - pattern-inside: |
-          import { ..., $S,... } from "dompurify"
-          ...
-      - pattern-inside: |
-          import * as $S from "dompurify"
-          ...
-      - pattern-inside: |
-          $S = require("dompurify")
-          ...
-      - pattern-inside: |
-          import $S from "isomorphic-dompurify"
-          ...
-      - pattern-inside: |
-          import * as $S from "isomorphic-dompurify"
-          ...
-      - pattern-inside: |
-          $S = require("isomorphic-dompurify")
-          ...
-    - pattern-either:
-      - patterns:
-        - pattern-inside: |
-            $VALUE = $S(...)
-            ...
-        - pattern: $VALUE.sanitize(...)
-      - patterns:
-        - pattern-inside: |
-            $VALUE = $S.sanitize
-            ...
-        - pattern: $S(...)
-      - pattern: $S.sanitize(...)
-      - pattern: $S(...)
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          import $S from 'xss';
-          ...
-      - pattern-inside: |
-          import * as $S from 'xss';
-          ...
-      - pattern-inside: |
-          $S = require("xss")
-          ...
-    - pattern: $S(...)
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          import $S from 'sanitize-html';
-          ...
-      - pattern-inside: |
-          import * as $S from "sanitize-html";
-          ...
-      - pattern-inside: |
-          $S = require("sanitize-html")
-          ...
-    - pattern: $S(...)
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          $S = new Remarkable()
-          ...
-    - pattern: $S.render(...)
+  severity: WARNING

@@ -1,35 +1,38 @@
 rules:
 - id: jwt-none-alg
-  message: "jsonwebtoken 서명 알고리즘에 검증 해제용 none 알고리즘 가압이 포착되었습니다. 변조 토큰 인용을 방지하기 위해 확실한 암호화 알고리즘만 허용하도록 고정하세요."
+  languages:
+  - javascript
+  - typescript
+  message: jsonwebtoken 서명 알고리즘에 검증 해제용 none 알고리즘 가압이 포착되었습니다. 변조 토큰 인용을 방지하기 위해 확실한
+    암호화 알고리즘만 허용하도록 고정하세요.
   metadata:
+    asvs:
+      control_id: 3.5.3 Insecue Stateless Session Tokens
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V3-Session-management.md#v35-token-based-session-management
+      section: 'V3: Session Management Verification Requirements'
+      version: '4'
+    category: security
+    confidence: MEDIUM
     cwe:
     - 'CWE-327: Use of a Broken or Risky Cryptographic Algorithm'
+    impact: HIGH
+    likelihood: MEDIUM
     owasp:
     - A03:2017 - Sensitive Data Exposure
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
-    source-rule-url: https://semgrep.dev/blog/2020/hardcoded-secrets-unverified-tokens-and-other-common-jwt-mistakes/
-    asvs:
-      section: 'V3: Session Management Verification Requirements'
-      control_id: 3.5.3 Insecue Stateless Session Tokens
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V3-Session-management.md#v35-token-based-session-management
-      version: '4'
-    category: security
-    technology:
-    - jwt
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: HIGH
-    confidence: MEDIUM
     references:
     - https://owasp.org/Top10/A02_2021-Cryptographic_Failures
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
+    source-rule-url: https://semgrep.dev/blog/2020/hardcoded-secrets-unverified-tokens-and-other-common-jwt-mistakes/
+    subcategory:
+    - vuln
+    technology:
+    - jwt
   patterns:
-  - pattern-inside: |
-      $JWT = require("jsonwebtoken");
+  - pattern-inside: '$JWT = require("jsonwebtoken");
+
       ...
+
+      '
   - pattern: $JWT.verify($P, $X, {algorithms:[...,'none',...]},...)
+  severity: ERROR

@@ -1,36 +1,36 @@
 rules:
-  - id: visualforce-page-api-version
-    languages:
-      - generic
-    severity: WARNING
-    message: "visualforce-page-api-version 잠재적 결함 분기 정비 요망."
-    metadata:
-      cwe:
-      - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
-      owasp:
-      - A07:2017 - Cross-Site Scripting (XSS)
-      - A03:2021 - Injection
-      - A05:2025 - Injection
-      references:
-      - https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_pages.htm
-      category: security
-      subcategory:
-      - vuln
-      technology:
-      - salesforce
-      - visualforce
-      cwe2022-top25: true
-      cwe2021-top25: true
-      likelihood: HIGH
-      impact: MEDIUM
-      confidence: HIGH
-    patterns:
-      - pattern-inside: <apiVersion.../apiVersion>
-      - pattern-either:
-        - pattern-regex: '[>][0-9].[0-9][<]'
-        - pattern-regex: '[>][1-4][0-9].[0-9][<]'
-        - pattern-regex: '[>][5][0-4].[0-9][<]'
-    paths:
-      include:
-        - "*.page-meta.xml"
-
+- id: visualforce-page-api-version
+  languages:
+  - generic
+  message: visualforce-page-api-version 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: security
+    confidence: HIGH
+    cwe:
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
+    owasp:
+    - A07:2017 - Cross-Site Scripting (XSS)
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_pages.htm
+    subcategory:
+    - vuln
+    technology:
+    - salesforce
+    - visualforce
+  paths:
+    include:
+    - '*.page-meta.xml'
+  patterns:
+  - pattern-inside: <apiVersion.../apiVersion>
+  - pattern-either:
+    - pattern-regex: '[>][0-9].[0-9][<]'
+    - pattern-regex: '[>][1-4][0-9].[0-9][<]'
+    - pattern-regex: '[>][5][0-4].[0-9][<]'
+  severity: WARNING

@@ -1,84 +1,60 @@
 rules:
 - id: crlf-injection-logs
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
-    - "CWE-93: Improper Neutralization of CRLF Sequences ('CRLF Injection')"
+    - 'CWE-93: Improper Neutralization of CRLF Sequences (''CRLF Injection'')'
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#CRLF_INJECTION_LOGS
-    category: security
-    technology:
-    - java
     references:
     - https://owasp.org/Top10/A03_2021-Injection
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#CRLF_INJECTION_LOGS
     subcategory:
     - vuln
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: MEDIUM
-  severity: WARNING
-  languages: [java]
+    technology:
+    - java
   patterns:
-      # Enumerate possible enclosing scopes that define request and logger
   - pattern-either:
-          # Logger is defined as a field on a class
     - patterns:
-      - pattern-inside: |
-          class $CLASS {
-            ...
-            Logger $LOG = ...;
-            ...
-          }
+      - pattern-inside: "class $CLASS {\n  ...\n  Logger $LOG = ...;\n  ...\n}\n"
       - pattern-either:
-        - pattern-inside: |
-            $X $METHOD(...,HttpServletRequest $REQ,...) {
-              ...
-            }
-        - pattern-inside: |
-            $X $METHOD(...,ServletRequest $REQ,...) {
-              ...
-            }
-        - pattern-inside: |
-            $X $METHOD(...) {
-              ...
-              HttpServletRequest $REQ = ...;
-              ...
-            }
-        - pattern-inside: |
-            $X $METHOD(...) {
-              ...
-              ServletRequest $REQ = ...;
-              ...
-            }
-    - pattern-inside: |
-        $X $METHOD(...) {
-          ...
-          Logger $LOG = ...;
-          ...
-          HttpServletRequest $REQ = ...;
-          ...
-        }
-    - pattern-inside: |
-        $X $METHOD(...) {
-          ...
-          Logger $LOG = ...;
-          ...
-          ServletRequest $REQ = ...;
-          ...
-        }
+        - pattern-inside: "$X $METHOD(...,HttpServletRequest $REQ,...) {\n  ...\n\
+            }\n"
+        - pattern-inside: "$X $METHOD(...,ServletRequest $REQ,...) {\n  ...\n}\n"
+        - pattern-inside: "$X $METHOD(...) {\n  ...\n  HttpServletRequest $REQ = ...;\n\
+            \  ...\n}\n"
+        - pattern-inside: "$X $METHOD(...) {\n  ...\n  ServletRequest $REQ = ...;\n\
+            \  ...\n}\n"
+    - pattern-inside: "$X $METHOD(...) {\n  ...\n  Logger $LOG = ...;\n  ...\n  HttpServletRequest\
+        \ $REQ = ...;\n  ...\n}\n"
+    - pattern-inside: "$X $METHOD(...) {\n  ...\n  Logger $LOG = ...;\n  ...\n  ServletRequest\
+        \ $REQ = ...;\n  ...\n}\n"
   - pattern-either:
-          # Enumerate possible injection sites
-    - pattern: |
-        String $VAL = $REQ.getParameter(...);
+    - pattern: 'String $VAL = $REQ.getParameter(...);
+
         ...
+
         $LOG.$LEVEL(<... $VAL ...>);
-    - pattern: |
-        String $VAL = $REQ.getParameter(...);
+
+        '
+    - pattern: 'String $VAL = $REQ.getParameter(...);
+
         ...
+
         $LOG.log($LEVEL,<... $VAL ...>);
-    - pattern: |
-        $LOG.$LEVEL(<... $REQ.getParameter(...) ...>);
-    - pattern: |
-        $LOG.log($LEVEL,<... $REQ.getParameter(...) ...>);
+
+        '
+    - pattern: '$LOG.$LEVEL(<... $REQ.getParameter(...) ...>);
+
+        '
+    - pattern: '$LOG.log($LEVEL,<... $REQ.getParameter(...) ...>);
+
+        '
+  severity: WARNING

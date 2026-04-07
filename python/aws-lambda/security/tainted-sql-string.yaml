@@ -2,47 +2,51 @@ rules:
 - id: tainted-sql-string
   languages:
   - python
-  message: "Lambda 가동 내 동적 SQL 조립이 탐지되었습니다. Parameterized Query를 사용하여 요인을 차단하십시오."
+  message: Lambda 가동 내 동적 SQL 조립이 탐지되었습니다. Parameterized Query를 사용하여 요인을 차단하십시오.
   metadata:
-    references:
-    - https://owasp.org/www-community/attacks/SQL_Injection
     category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command
+      (''SQL Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
-    cwe:
-    - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
-    technology:
-    - aws-lambda
-    cwe2022-top25: true
-    cwe2021-top25: true
+    references:
+    - https://owasp.org/www-community/attacks/SQL_Injection
     subcategory:
     - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - aws-lambda
   mode: taint
   pattern-sinks:
   - patterns:
     - pattern-either:
-      - pattern: |
-          "$SQLSTR" + ...
-      - pattern: |
-          "$SQLSTR" % ...
-      - pattern: |
-          "$SQLSTR".format(...)
-      - pattern: |
-          f"$SQLSTR{...}..."
+      - pattern: '"$SQLSTR" + ...
+
+          '
+      - pattern: '"$SQLSTR" % ...
+
+          '
+      - pattern: '"$SQLSTR".format(...)
+
+          '
+      - pattern: 'f"$SQLSTR{...}..."
+
+          '
     - metavariable-regex:
         metavariable: $SQLSTR
         regex: \s*(?i)(select|delete|insert|create|update|alter|drop)\b.*=
-    - pattern-not-inside: |
-        print(...)
+    - pattern-not-inside: 'print(...)
+
+        '
   pattern-sources:
   - patterns:
     - pattern: event
-    - pattern-inside: |
-        def $HANDLER(event, context):
-          ...
+    - pattern-inside: "def $HANDLER(event, context):\n  ...\n"
   severity: ERROR

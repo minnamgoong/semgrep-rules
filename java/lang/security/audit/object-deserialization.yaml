@@ -1,28 +1,28 @@
 rules:
 - id: object-deserialization
+  languages:
+  - java
+  message: 안전하지 않은 역직렬화 가동이 포착되었습니다. RCE 공격 차단을 위해 직렬화 파서를 격수하십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-502: Deserialization of Untrusted Data'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A08:2017 - Insecure Deserialization
     - A08:2021 - Software and Data Integrity Failures
     - A08:2025 - Software or Data Integrity Failures
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#OBJECT_DESERIALIZATION
     references:
     - https://www.owasp.org/index.php/Deserialization_of_untrusted_data
     - https://www.oracle.com/java/technologies/javase/seccodeguide.html#8
-    category: security
-    technology:
-    - java
-    cwe2022-top25: true
-    cwe2021-top25: true
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#OBJECT_DESERIALIZATION
     subcategory:
     - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
-  message: "안전하지 않은 역직렬화 가동이 포착되었습니다. RCE 공격 차단을 위해 직렬화 파서를 격수하십시오."
-  severity: WARNING
-  languages:
-  - java
+    technology:
+    - java
   pattern: new ObjectInputStream(...);
+  severity: WARNING

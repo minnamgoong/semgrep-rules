@@ -1,32 +1,24 @@
 rules:
-  - id: azure-appservice-ftps-state
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    patterns:
-      - pattern: resource
-      - pattern-not-inside: |
-          resource "azurerm_app_service" "..." {
-          ...
-          site_config {
-            ftps_state = "FtpsOnly"
-          }
-          ...
-          }
-      - pattern-not-inside: |
-          resource "azurerm_app_service" "..." {
-          ...
-          site_config {
-            ftps_state = "Disabled"
-          }
-          ...
-          }
-      - pattern-inside: |
-          resource "azurerm_app_service" "..." {
-          ...
-          }
-    metadata:
-      category: best-practice
-      technology:
-        - terraform
-        - azure
-    languages: [hcl]
-    severity: WARNING
+- id: azure-appservice-ftps-state
+  languages:
+  - hcl
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - terraform
+    - azure
+  patterns:
+  - pattern: resource
+  - pattern-not-inside: "resource \"azurerm_app_service\" \"...\" {\n...\nsite_config\
+      \ {\n  ftps_state = \"FtpsOnly\"\n}\n...\n}\n"
+  - pattern-not-inside: "resource \"azurerm_app_service\" \"...\" {\n...\nsite_config\
+      \ {\n  ftps_state = \"Disabled\"\n}\n...\n}\n"
+  - pattern-inside: 'resource "azurerm_app_service" "..." {
+
+      ...
+
+      }
+
+      '
+  severity: WARNING

@@ -1,29 +1,32 @@
 rules:
-- id: flask-debugging-enabled
-  languages: [yaml]
-  severity: WARNING
-  message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
+- fix-regex:
+    regex: development
+    replacement: dev
+  id: flask-debugging-enabled
+  languages:
+  - yaml
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
   metadata:
-    owasp: 'A06:2017 - Security Misconfiguration'
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-489: Active Debug Code'
+    impact: MEDIUM
+    likelihood: LOW
+    owasp: A06:2017 - Security Misconfiguration
     references:
     - https://flask.palletsprojects.com/en/2.0.x/debugging/
     - https://flask.palletsprojects.com/en/2.0.x/config/#ENV
-    category: security
+    subcategory:
+    - audit
     technology:
     - kubernetes
     - flask
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
   patterns:
-  - pattern-inside: |
-      env: [...]
-  - pattern: |
-      {name: FLASK_ENV, value: "development"}
-  fix-regex:
-    regex: development
-    replacement: dev
+  - pattern-inside: 'env: [...]
+
+      '
+  - pattern: '{name: FLASK_ENV, value: "development"}
+
+      '
+  severity: WARNING

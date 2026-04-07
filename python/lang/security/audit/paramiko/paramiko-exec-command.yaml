@@ -1,33 +1,36 @@
 rules:
 - id: paramiko-exec-command
-  patterns:
-  - pattern-inside: |
-      $CLIENT = paramiko.client.SSHClient(...)
-      ...
-  - pattern: $CLIENT.exec_command(...)
-  - pattern-not: $CLIENT.exec_command("...", ...)
-  message: "인젝션 및 논리 에러 예방을 위한 paramiko-exec-command 전사 단속이 요구됩니다."
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 paramiko-exec-command 전사 단속이 요구됩니다.
   metadata:
-    source-rule-url: https://github.com/PyCQA/bandit/blob/d5f8fa0d89d7b11442fc6ec80ca42953974354c8/bandit/plugins/injection_paramiko.py
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
-    cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
     references:
     - http://docs.paramiko.org/en/stable/api/client.html#paramiko.client.SSHClient.exec_command
     - https://github.com/PyCQA/bandit/blob/d5f8fa0d89d7b11442fc6ec80ca42953974354c8/bandit/plugins/injection_paramiko.py
-    category: security
-    technology:
-    - paramiko
-    cwe2022-top25: true
-    cwe2021-top25: true
+    source-rule-url: https://github.com/PyCQA/bandit/blob/d5f8fa0d89d7b11442fc6ec80ca42953974354c8/bandit/plugins/injection_paramiko.py
     subcategory:
     - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
+    technology:
+    - paramiko
+  patterns:
+  - pattern-inside: '$CLIENT = paramiko.client.SSHClient(...)
+
+      ...
+
+      '
+  - pattern: $CLIENT.exec_command(...)
+  - pattern-not: $CLIENT.exec_command("...", ...)
   severity: ERROR
-  languages:
-  - python

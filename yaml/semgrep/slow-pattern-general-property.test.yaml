@@ -1,27 +1,25 @@
 rules:
-  - id: express-sandbox-code-injection
-    message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: express-sandbox-code-injection 누사 경보."
-    severity: ERROR
-    languages: [javascript]
-    metadata:
-      owasp: "A1: Injection"
-      cwe: "CWE-94: Improper Control of Generation of Code ('Code Injection')"
-    patterns:
-      - pattern-inside: |
-          ...
-          $SANDBOX = require('sandbox');
-          ...
-      - pattern-either:
-          # ok: slow-pattern-general-property
-          - pattern-inside: function ($REQ, $RES, ...) {...}
-          # ok: slow-pattern-general-property
-          - pattern-inside: function $FUNC($REQ, $RES, ...) {...}
-          # ok: slow-pattern-general-property
-          - pattern-inside: $X = function $FUNC($REQ, $RES, ...) {...}
-          # ok: slow-pattern-general-property
-          - pattern-inside: var $X = function $FUNC($REQ, $RES, ...) {...};
-          # ruleid: slow-pattern-general-property
-          - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES, ...) {...})
-      - pattern-either:
-          # ruleid: slow-pattern-general-property
-          - pattern: $S.run(<... $REQ.$QUERY.$FOO ...>,...);
+- id: express-sandbox-code-injection
+  languages:
+  - javascript
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: express-sandbox-code-injection 누사 경보.'
+  metadata:
+    cwe: 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    owasp: 'A1: Injection'
+  patterns:
+  - pattern-inside: '...
+
+      $SANDBOX = require(''sandbox'');
+
+      ...
+
+      '
+  - pattern-either:
+    - pattern-inside: function ($REQ, $RES, ...) {...}
+    - pattern-inside: function $FUNC($REQ, $RES, ...) {...}
+    - pattern-inside: $X = function $FUNC($REQ, $RES, ...) {...}
+    - pattern-inside: var $X = function $FUNC($REQ, $RES, ...) {...};
+    - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES, ...) {...})
+  - pattern-either:
+    - pattern: $S.run(<... $REQ.$QUERY.$FOO ...>,...);
+  severity: ERROR

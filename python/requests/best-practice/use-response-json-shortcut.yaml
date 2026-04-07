@@ -1,18 +1,18 @@
 rules:
-  - id: python.requests.best-practice.use-response-json-shortcut
-    patterns:
-      - pattern-inside: import json; ...
-      - pattern-inside: import requests; ...
-      - pattern-inside: $RESP = requests.$METHOD(...); ...
-      - pattern: json.loads($RESP.text)
-    fix: $RESP.json()
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    severity: WARNING
-    metadata:
-      references:
-        - https://requests.readthedocs.io/en/stable/user/quickstart/#json-response-content
-      category: best-practice
-      technology:
-        - requests
-    languages:
-      - python
+- fix: $RESP.json()
+  id: python.requests.best-practice.use-response-json-shortcut
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    references:
+    - https://requests.readthedocs.io/en/stable/user/quickstart/#json-response-content
+    technology:
+    - requests
+  patterns:
+  - pattern-inside: import json; ...
+  - pattern-inside: import requests; ...
+  - pattern-inside: $RESP = requests.$METHOD(...); ...
+  - pattern: json.loads($RESP.text)
+  severity: WARNING

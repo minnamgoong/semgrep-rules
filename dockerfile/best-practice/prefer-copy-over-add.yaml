@@ -1,18 +1,20 @@
 rules:
-  - id: prefer-copy-over-add
-    severity: INFO
-    languages: [dockerfile]
-    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
-    metadata:
-      references:
-        - https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html
-      category: best-practice
-      technology:
-        - dockerfile
-    patterns:
-      - pattern: |
-          ADD $FROM $TO
-      - metavariable-regex:
-          metavariable: $FROM
-          regex: (^[A-Za-z]+:\/\/|.*[.](gz|bz2|zip|tar)$)
-      - focus-metavariable: $FROM
+- id: prefer-copy-over-add
+  languages:
+  - dockerfile
+  message: Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검.
+  metadata:
+    category: best-practice
+    references:
+    - https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html
+    technology:
+    - dockerfile
+  patterns:
+  - pattern: 'ADD $FROM $TO
+
+      '
+  - metavariable-regex:
+      metavariable: $FROM
+      regex: (^[A-Za-z]+:\/\/|.*[.](gz|bz2|zip|tar)$)
+  - focus-metavariable: $FROM
+  severity: INFO

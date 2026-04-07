@@ -1,67 +1,87 @@
 rules:
-  - id: duplicate-path-assignment
-    languages:
-      - python
-    message: path for `$URL` is uselessly assigned twice
-    metadata:
-      category: maintainability
-      technology:
-        - django
-      references:
-        - https://docs.djangoproject.com/en/3.2/topics/http/urls/#naming-url-patterns
-    patterns:
-      - pattern: |
-          [..., django.urls.path('$URL', $VIEW, ...), ..., django.urls.path('$URL', $VIEW, ...), ...]
-    severity: WARNING
-  - id: conflicting-path-assignment
-    languages:
-      - python
-    message: "`$URL` 경로에 서로 다른 뷰(View)가 충돌하도록 중복 등록되어 있습니다. URL 라우팅 충돌을 방지하기 위해 동일 경로에는 하나의 뷰만 지정해 주세요."
-    metadata:
-      category: maintainability
-      technology:
-        - django
-      references:
-        - https://docs.djangoproject.com/en/3.2/topics/http/urls/#naming-url-patterns
-    patterns:
-      - pattern: |
-          [..., django.urls.path('$URL', $VIEW, ...), ..., django.urls.path('$URL', $DIFFERENT_VIEW, ...), ...]
-      - pattern-not: |
-          [..., django.urls.path('$URL', $VIEW, ...), ..., django.urls.path('$URL', $VIEW, ...), ...]
-    severity: ERROR
-  - id: duplicate-path-assignment-different-names
-    languages:
-      - python
-    message: path for `$URL` is assigned twice with different names
-    metadata:
-      category: maintainability
-      technology:
-        - django
-      references:
-        - https://docs.djangoproject.com/en/3.2/topics/http/urls/#naming-url-patterns
-    patterns:
-      - pattern: |
-          [..., django.urls.path('$URL', $VIEW, name='$NAME', ...), ..., django.urls.path('$URL', $VIEW, name='$OTHER_NAME', ...), ...]
-      - pattern-not: |
-          [..., django.urls.path('$URL', $VIEW, name='$NAME', ...), ..., django.urls.path('$URL', $VIEW, name='$NAME', ...), ...]
-    severity: WARNING
-  - id: duplicate-name-assignment
-    languages:
-      - python
-    message: "서로 다른 경로에 동일한 URL 이름(`$NAME`)이 중복 할당되어 있습니다. 이름 충돌을 방지하기 위해 각 경로에 고유한 이름을 지정해 주세요."
-    metadata:
-      category: maintainability
-      technology:
-        - django
-      references:
-        - https://docs.djangoproject.com/en/3.2/topics/http/urls/#naming-url-patterns
-    patterns:
-      - pattern: |
-          [..., django.urls.path('$URL', $VIEW, name='$NAME', ...), ..., django.urls.path('$OTHER_URL', $OTHER_VIEW, name='$NAME', ...), ...]
-      - pattern-not: |
-          [..., django.urls.path('$URL', $VIEW, name='$NAME', ...), ..., django.urls.path('$URL', $VIEW, name='$NAME', ...), ...]
-      - pattern-not: |
-          [..., django.urls.path('$URL', $VIEW, name='$NAME', ...), ..., django.urls.path('$URL', $OTHER_VIEW, name='$NAME', ...), ...]
-      - pattern-not: |
-          [..., django.urls.path('$URL', $VIEW, name='$NAME', ...), ..., django.urls.path('$OTHER_URL', $VIEW, name='$NAME', ...), ...]
-    severity: ERROR
+- id: duplicate-path-assignment
+  languages:
+  - python
+  message: '`$URL` 경로가 쓸데없이 두 번 할당되었습니다.'
+  metadata:
+    category: maintainability
+    references:
+    - https://docs.djangoproject.com/en/3.2/topics/http/urls/#naming-url-patterns
+    technology:
+    - django
+  patterns:
+  - pattern: '[..., django.urls.path(''$URL'', $VIEW, ...), ..., django.urls.path(''$URL'',
+      $VIEW, ...), ...]
+
+      '
+  severity: WARNING
+- id: conflicting-path-assignment
+  languages:
+  - python
+  message: '`$URL` 경로에 서로 다른 뷰(View)가 충돌하도록 중복 등록되어 있습니다. URL 라우팅 충돌을 방지하기 위해 동일 경로에는
+    하나의 뷰만 지정해 주세요.'
+  metadata:
+    category: maintainability
+    references:
+    - https://docs.djangoproject.com/en/3.2/topics/http/urls/#naming-url-patterns
+    technology:
+    - django
+  patterns:
+  - pattern: '[..., django.urls.path(''$URL'', $VIEW, ...), ..., django.urls.path(''$URL'',
+      $DIFFERENT_VIEW, ...), ...]
+
+      '
+  - pattern-not: '[..., django.urls.path(''$URL'', $VIEW, ...), ..., django.urls.path(''$URL'',
+      $VIEW, ...), ...]
+
+      '
+  severity: ERROR
+- id: duplicate-path-assignment-different-names
+  languages:
+  - python
+  message: '`$URL` 경로가 다른 이름으로 두 번 할당되었습니다.'
+  metadata:
+    category: maintainability
+    references:
+    - https://docs.djangoproject.com/en/3.2/topics/http/urls/#naming-url-patterns
+    technology:
+    - django
+  patterns:
+  - pattern: '[..., django.urls.path(''$URL'', $VIEW, name=''$NAME'', ...), ..., django.urls.path(''$URL'',
+      $VIEW, name=''$OTHER_NAME'', ...), ...]
+
+      '
+  - pattern-not: '[..., django.urls.path(''$URL'', $VIEW, name=''$NAME'', ...), ...,
+      django.urls.path(''$URL'', $VIEW, name=''$NAME'', ...), ...]
+
+      '
+  severity: WARNING
+- id: duplicate-name-assignment
+  languages:
+  - python
+  message: 서로 다른 경로에 동일한 URL 이름(`$NAME`)이 중복 할당되어 있습니다. 이름 충돌을 방지하기 위해 각 경로에 고유한 이름을
+    지정해 주세요.
+  metadata:
+    category: maintainability
+    references:
+    - https://docs.djangoproject.com/en/3.2/topics/http/urls/#naming-url-patterns
+    technology:
+    - django
+  patterns:
+  - pattern: '[..., django.urls.path(''$URL'', $VIEW, name=''$NAME'', ...), ..., django.urls.path(''$OTHER_URL'',
+      $OTHER_VIEW, name=''$NAME'', ...), ...]
+
+      '
+  - pattern-not: '[..., django.urls.path(''$URL'', $VIEW, name=''$NAME'', ...), ...,
+      django.urls.path(''$URL'', $VIEW, name=''$NAME'', ...), ...]
+
+      '
+  - pattern-not: '[..., django.urls.path(''$URL'', $VIEW, name=''$NAME'', ...), ...,
+      django.urls.path(''$URL'', $OTHER_VIEW, name=''$NAME'', ...), ...]
+
+      '
+  - pattern-not: '[..., django.urls.path(''$URL'', $VIEW, name=''$NAME'', ...), ...,
+      django.urls.path(''$OTHER_URL'', $VIEW, name=''$NAME'', ...), ...]
+
+      '
+  severity: ERROR

@@ -1,44 +1,50 @@
 rules:
 - id: aws-kms-key-wildcard-principal
-  patterns:
-  - pattern-inside: |
-      resource "aws_kms_key" $ANYTHING {
-        ...
-      }
-  - pattern: policy = "$STATEMENT"
-  - metavariable-pattern:
-      metavariable: $STATEMENT
-      language: json
-      patterns:
-      - pattern-not-inside: |
-          {..., "Effect": "Deny", ...}
-      - pattern-either:
-        - pattern: |
-            {..., "Principal": "*", "Action": "kms:*", "Resource": "*", ...}
-        - pattern: |
-            {..., "Principal": [..., "*", ...], "Action": "kms:*", "Resource": "*", ...}
-        - pattern: |
-            {..., "Principal": { "AWS": "*" }, "Action": "kms:*", "Resource": "*", ...}
-        - pattern: |
-            {..., "Principal": { "AWS": [..., "*", ...] }, "Action": "kms:*", "Resource": "*", ...}
-  message: "Terraform 구성 중 와일드카드(*) 권한 과잉 부여가 식별되었습니다."
+  languages:
+  - hcl
+  message: Terraform 구성 중 와일드카드(*) 권한 과잉 부여가 식별되었습니다.
   metadata:
     category: security
-    technology:
-    - aws
-    - terraform
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-732: Incorrect Permission Assignment for Critical Resource'
+    cwe2021-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A05:2021 - Security Misconfiguration
     - A02:2025 - Security Misconfiguration
-    cwe:
-    - 'CWE-732: Incorrect Permission Assignment for Critical Resource'
     references:
     - https://cwe.mitre.org/data/definitions/732.html
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages: [hcl]
+    technology:
+    - aws
+    - terraform
+  patterns:
+  - pattern-inside: "resource \"aws_kms_key\" $ANYTHING {\n  ...\n}\n"
+  - pattern: policy = "$STATEMENT"
+  - metavariable-pattern:
+      language: json
+      metavariable: $STATEMENT
+      patterns:
+      - pattern-not-inside: '{..., "Effect": "Deny", ...}
+
+          '
+      - pattern-either:
+        - pattern: '{..., "Principal": "*", "Action": "kms:*", "Resource": "*", ...}
+
+            '
+        - pattern: '{..., "Principal": [..., "*", ...], "Action": "kms:*", "Resource":
+            "*", ...}
+
+            '
+        - pattern: '{..., "Principal": { "AWS": "*" }, "Action": "kms:*", "Resource":
+            "*", ...}
+
+            '
+        - pattern: '{..., "Principal": { "AWS": [..., "*", ...] }, "Action": "kms:*",
+            "Resource": "*", ...}
+
+            '
   severity: ERROR

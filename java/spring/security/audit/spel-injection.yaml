@@ -1,99 +1,49 @@
 rules:
 - id: spel-injection
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#SPEL_INJECTION
-    category: security
-    technology:
-    - spring
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#SPEL_INJECTION
     subcategory:
     - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
-  severity: WARNING
-  languages: [java]
+    technology:
+    - spring
   patterns:
   - pattern-either:
-    - pattern-inside: |
-        class $CLASS {
-          ...
-          ExpressionParser $PARSER;
-          ...
-        }
-    - pattern-inside: |
-        class $CLASS {
-          ...
-          ExpressionParser $PARSER = ...;
-          ...
-        }
-    - pattern-inside: |
-        $X $METHOD(...) {
-          ...
-          ExpressionParser $PARSER = ...;
-          ...
-        }
-    - pattern-inside: |
-        class $CLASS {
-          ...
-          SpelExpressionParser $PARSER;
-          ...
-        }
-    - pattern-inside: |
-        class $CLASS {
-          ...
-          SpelExpressionParser $PARSER = ...;
-          ...
-        }
-    - pattern-inside: |
-        $X $METHOD(...) {
-          ...
-          SpelExpressionParser $PARSER = ...;
-          ...
-        }
-    - pattern-inside: |
-        class $CLASS {
-          ...
-          TemplateAwareExpressionParser $PARSER;
-          ...
-        }
-    - pattern-inside: |
-        class $CLASS {
-          ...
-          TemplateAwareExpressionParser $PARSER = ...;
-          ...
-        }
-    - pattern-inside: |
-        $X $METHOD(...) {
-          ...
-          TemplateAwareExpressionParser $PARSER = ...;
-          ...
-        }
-  - pattern: |
-      $X $METHOD(...) {
-        ...
-        $PARSER.parseExpression(...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $PARSER.parseExpression("...");
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $PARSER.parseExpression($S);
-        ...
-      }
+    - pattern-inside: "class $CLASS {\n  ...\n  ExpressionParser $PARSER;\n  ...\n\
+        }\n"
+    - pattern-inside: "class $CLASS {\n  ...\n  ExpressionParser $PARSER = ...;\n\
+        \  ...\n}\n"
+    - pattern-inside: "$X $METHOD(...) {\n  ...\n  ExpressionParser $PARSER = ...;\n\
+        \  ...\n}\n"
+    - pattern-inside: "class $CLASS {\n  ...\n  SpelExpressionParser $PARSER;\n  ...\n\
+        }\n"
+    - pattern-inside: "class $CLASS {\n  ...\n  SpelExpressionParser $PARSER = ...;\n\
+        \  ...\n}\n"
+    - pattern-inside: "$X $METHOD(...) {\n  ...\n  SpelExpressionParser $PARSER =\
+        \ ...;\n  ...\n}\n"
+    - pattern-inside: "class $CLASS {\n  ...\n  TemplateAwareExpressionParser $PARSER;\n\
+        \  ...\n}\n"
+    - pattern-inside: "class $CLASS {\n  ...\n  TemplateAwareExpressionParser $PARSER\
+        \ = ...;\n  ...\n}\n"
+    - pattern-inside: "$X $METHOD(...) {\n  ...\n  TemplateAwareExpressionParser $PARSER\
+        \ = ...;\n  ...\n}\n"
+  - pattern: "$X $METHOD(...) {\n  ...\n  $PARSER.parseExpression(...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $PARSER.parseExpression(\"...\");\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $PARSER.parseExpression($S);\n\
+      \  ...\n}\n"
+  severity: WARNING

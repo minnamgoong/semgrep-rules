@@ -1,9 +1,59 @@
 rules:
 - id: subprocess-injection
-  languages: [python]
+  languages:
+  - python
+  message: subprocess 가동 인자에 가변 오염 입력이 포착되었습니다. 커맨드 인젝션 격퇴를 위해 파라미터 분할 배열형을 고수하십시오.
+  metadata:
+    category: security
+    confidence: HIGH
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
+    owasp:
+    - A01:2017 - Injection
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://semgrep.dev/docs/cheat-sheets/python-command-injection/
+    subcategory:
+    - vuln
+    technology:
+    - flask
   mode: taint
   options:
     symbolic_propagation: true
+  pattern-sanitizers:
+  - patterns:
+    - pattern: $DICT[$KEY]
+    - focus-metavariable: $KEY
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - patterns:
+        - pattern: subprocess.$FUNC(...)
+        - pattern-not: subprocess.$FUNC("...", ...)
+        - pattern-not: subprocess.$FUNC(["...", ...], ...)
+        - pattern-not-inside: '$CMD = ["...", ...]
+
+            ...
+
+            subprocess.$FUNC($CMD, ...)
+
+            '
+      - patterns:
+        - pattern: subprocess.$FUNC(["$SHELL", "-c", ...], ...)
+        - metavariable-regex:
+            metavariable: $SHELL
+            regex: ^(sh|bash|ksh|csh|tcsh|zsh)$
+      - patterns:
+        - pattern: subprocess.$FUNC(["$INTERPRETER", ...], ...)
+        - metavariable-regex:
+            metavariable: $INTERPRETER
+            regex: ^(python|python\d)$
   pattern-sources:
   - pattern-either:
     - patterns:
@@ -27,54 +77,7 @@ rules:
         - pattern: flask.request.view_args.get(...)
         - pattern: flask.request.view_args[...]
     - patterns:
-      - pattern-inside: |
-          @$APP.route($ROUTE, ...)
-          def $FUNC(..., $ROUTEVAR, ...):
-            ...
+      - pattern-inside: "@$APP.route($ROUTE, ...)\ndef $FUNC(..., $ROUTEVAR, ...):\n\
+          \  ...\n"
       - focus-metavariable: $ROUTEVAR
-  pattern-sinks:
-  - patterns:
-    - pattern-either:
-      - patterns:
-        - pattern: subprocess.$FUNC(...)
-        - pattern-not: subprocess.$FUNC("...", ...)
-        - pattern-not: subprocess.$FUNC(["...", ...], ...)
-        - pattern-not-inside: |
-            $CMD = ["...", ...]
-            ...
-            subprocess.$FUNC($CMD, ...)
-      - patterns:
-        - pattern: subprocess.$FUNC(["$SHELL", "-c", ...], ...)
-        - metavariable-regex:
-            metavariable: $SHELL
-            regex: ^(sh|bash|ksh|csh|tcsh|zsh)$
-      - patterns:
-        - pattern: subprocess.$FUNC(["$INTERPRETER", ...], ...)
-        - metavariable-regex:
-            metavariable: $INTERPRETER
-            regex: ^(python|python\d)$
-  pattern-sanitizers:
-  - patterns:
-    - pattern: $DICT[$KEY]
-    - focus-metavariable: $KEY
   severity: ERROR
-  message: "subprocess 가동 인자에 가변 오염 입력이 포착되었습니다. 커맨드 인젝션 격퇴를 위해 파라미터 분할 배열형을 고수하십시오."
-  metadata:
-    category: security
-    technology:
-    - flask
-    owasp:
-    - A01:2017 - Injection
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
-    references:
-    - https://semgrep.dev/docs/cheat-sheets/python-command-injection/
-    confidence: HIGH
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    likelihood: HIGH
-    impact: MEDIUM

@@ -1,26 +1,26 @@
 rules:
 - id: gcm-detection
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
     category: security
-    functional-categories:
-      - 'crypto::search::randomness::javax.crypto'
+    confidence: LOW
     cwe:
     - 'CWE-323: Reusing a Nonce, Key Pair in Encryption'
-    references:
-    - https://cwe.mitre.org/data/definitions/323.html
-    technology:
-    - java
+    functional-categories:
+    - crypto::search::randomness::javax.crypto
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
+    references:
+    - https://cwe.mitre.org/data/definitions/323.html
     subcategory:
     - audit
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: LOW
-  languages:
-  - java
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+    technology:
+    - java
   patterns:
   - pattern-either:
     - pattern: $METHOD.getInstance("AES/GCM/NoPadding",...);

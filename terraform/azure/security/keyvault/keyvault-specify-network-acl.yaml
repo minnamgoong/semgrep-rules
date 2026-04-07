@@ -1,51 +1,39 @@
 rules:
 - id: keyvault-specify-network-acl
-  message: "IaC 보안 옵션 누락 경보: keyvault-specify-network-acl 설정율을 적용해 주십시오."
-  patterns:
-  - pattern: resource
-  - pattern-not-inside: |
-      resource "azurerm_key_vault" "..." {
-      ...
-      network_acls {
-          ...
-          default_action = "Deny"
-          ...
-      }
-      ...
-      }
-  - pattern-either:
-    - pattern-inside: |
-        resource "azurerm_key_vault" "..." {
-        ...
-        }
-    - pattern-inside: |
-        resource "azurerm_key_vault" "..." {
-        ...
-        network_acls {
-            ...
-            default_action = "Allow"
-            ...
-        }
-        ...
-        }
+  languages:
+  - hcl
+  message: 'IaC 보안 옵션 누락 경보: keyvault-specify-network-acl 설정율을 적용해 주십시오.'
   metadata:
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-1220: Insufficient Granularity of Access Control'
-    category: security
-    technology:
-    - terraform
-    - azure
-    references:
-    - https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#network_acls
-    - https://docs.microsoft.com/en-us/azure/key-vault/general/network-security
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A05:2017 - Broken Access Control
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
+    references:
+    - https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#network_acls
+    - https://docs.microsoft.com/en-us/azure/key-vault/general/network-security
     subcategory:
     - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
-  languages: [hcl]
+    technology:
+    - terraform
+    - azure
+  patterns:
+  - pattern: resource
+  - pattern-not-inside: "resource \"azurerm_key_vault\" \"...\" {\n...\nnetwork_acls\
+      \ {\n    ...\n    default_action = \"Deny\"\n    ...\n}\n...\n}\n"
+  - pattern-either:
+    - pattern-inside: 'resource "azurerm_key_vault" "..." {
+
+        ...
+
+        }
+
+        '
+    - pattern-inside: "resource \"azurerm_key_vault\" \"...\" {\n...\nnetwork_acls\
+        \ {\n    ...\n    default_action = \"Allow\"\n    ...\n}\n...\n}\n"
   severity: ERROR

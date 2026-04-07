@@ -1,124 +1,135 @@
 rules:
-  - id: express-wkhtmltoimage-injection
-    message: "wkhtmltoimage 변환 연산 스택에 동적 오염 인자가 포진했습니다. SSRF와 파괴 인자 인젝션 예방을 위해 입력 주소를 교정하세요."
-    metadata:
-      owasp:
-      - A10:2021 - Server-Side Request Forgery (SSRF)
-      - A01:2025 - Broken Access Control
-      cwe:
-      - 'CWE-918: Server-Side Request Forgery (SSRF)'
-      category: security
-      technology:
-      - express
-      references:
-      - https://www.npmjs.com/package/wkhtmltopdf
-      cwe2022-top25: true
-      cwe2021-top25: true
-      subcategory:
-      - vuln
-      likelihood: MEDIUM
-      impact: MEDIUM
-      confidence: LOW
-    severity: ERROR
-    languages: [javascript, typescript]
-    mode: taint
-    pattern-sources:
+- id: express-wkhtmltoimage-injection
+  languages:
+  - javascript
+  - typescript
+  message: wkhtmltoimage 변환 연산 스택에 동적 오염 인자가 포진했습니다. SSRF와 파괴 인자 인젝션 예방을 위해 입력 주소를
+    교정하세요.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-918: Server-Side Request Forgery (SSRF)'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
+    owasp:
+    - A10:2021 - Server-Side Request Forgery (SSRF)
+    - A01:2025 - Broken Access Control
+    references:
+    - https://www.npmjs.com/package/wkhtmltopdf
+    subcategory:
+    - vuln
+    technology:
+    - express
+  mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern: $WK.generate($SINK,...)
+    - focus-metavariable: $SINK
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - pattern-inside: function ... ($REQ, $RES) {...}
+      - pattern-inside: function ... ($REQ, $RES, $NEXT) {...}
       - patterns:
-          - pattern-either:
-              - pattern-inside: function ... ($REQ, $RES) {...}
-              - pattern-inside: function ... ($REQ, $RES, $NEXT) {...}
-              - patterns:
-                  - pattern-either:
-                      - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES) {...})
-                      - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES, $NEXT) {...})
-                  - metavariable-regex:
-                      metavariable: $METHOD
-                      regex: ^(get|post|put|head|delete|options)$
-          - pattern-either:
-              - pattern: $REQ.query
-              - pattern: $REQ.body
-              - pattern: $REQ.params
-              - pattern: $REQ.cookies
-              - pattern: $REQ.headers
+        - pattern-either:
+          - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES) {...})
+          - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES, $NEXT) {...})
+        - metavariable-regex:
+            metavariable: $METHOD
+            regex: ^(get|post|put|head|delete|options)$
+    - pattern-either:
+      - pattern: $REQ.query
+      - pattern: $REQ.body
+      - pattern: $REQ.params
+      - pattern: $REQ.cookies
+      - pattern: $REQ.headers
+  - patterns:
+    - pattern-either:
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+
+          {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+    - focus-metavariable: $REQ
+    - pattern-either:
+      - pattern: params
+      - pattern: query
+      - pattern: cookies
+      - pattern: headers
+      - pattern: body
+  severity: ERROR
+- id: express-wkhtmltopdf-injection
+  languages:
+  - javascript
+  - typescript
+  message: wkhtmltopdf 변환 연산 스택에 동적 오염 인자가 포진했습니다. SSRF와 파괴 인자 인젝션 예방을 위해 입력 주소를 필터링하십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-918: Server-Side Request Forgery (SSRF)'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
+    owasp:
+    - A10:2021 - Server-Side Request Forgery (SSRF)
+    - A01:2025 - Broken Access Control
+    references:
+    - https://www.npmjs.com/package/wkhtmltopdf
+    subcategory:
+    - vuln
+    technology:
+    - express
+  mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern-inside: '$WK = require(''wkhtmltopdf'');
+
+        ...
+
+        '
+    - pattern: $WK($SINK,...)
+    - focus-metavariable: $SINK
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - pattern-inside: function ... ($REQ, $RES) {...}
+      - pattern-inside: function ... ($REQ, $RES, $NEXT) {...}
       - patterns:
-          - pattern-either:
-              - pattern-inside: |
-                  ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
-                  {...}
-              - pattern-inside: |
-                  ({ $REQ }: Request,$RES: Response) => {...}
-          - focus-metavariable: $REQ
-          - pattern-either:
-              - pattern: params
-              - pattern: query
-              - pattern: cookies
-              - pattern: headers
-              - pattern: body
-    pattern-sinks:
-      - patterns:
-          - pattern: $WK.generate($SINK,...)
-          - focus-metavariable: $SINK
-  - id: express-wkhtmltopdf-injection
-    message: "wkhtmltopdf 변환 연산 스택에 동적 오염 인자가 포진했습니다. SSRF와 파괴 인자 인젝션 예방을 위해 입력 주소를 필터링하십시오."
-    metadata:
-      owasp:
-      - A10:2021 - Server-Side Request Forgery (SSRF)
-      - A01:2025 - Broken Access Control
-      cwe:
-      - 'CWE-918: Server-Side Request Forgery (SSRF)'
-      category: security
-      technology:
-      - express
-      references:
-      - https://www.npmjs.com/package/wkhtmltopdf
-      cwe2022-top25: true
-      cwe2021-top25: true
-      subcategory:
-      - vuln
-      likelihood: MEDIUM
-      impact: MEDIUM
-      confidence: LOW
-    languages:
-    - javascript
-    - typescript
-    severity: ERROR
-    mode: taint
-    pattern-sources:
-    - patterns:
-      - pattern-either:
-        - pattern-inside: function ... ($REQ, $RES) {...}
-        - pattern-inside: function ... ($REQ, $RES, $NEXT) {...}
-        - patterns:
-          - pattern-either:
-            - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES) {...})
-            - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES, $NEXT) {...})
-          - metavariable-regex:
-              metavariable: $METHOD
-              regex: ^(get|post|put|head|delete|options)$
-      - pattern-either:
-        - pattern: $REQ.query
-        - pattern: $REQ.body
-        - pattern: $REQ.params
-        - pattern: $REQ.cookies
-        - pattern: $REQ.headers
-    - patterns:
-      - pattern-either:
-        - pattern-inside: |
-            ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
-            {...}
-        - pattern-inside: |
-            ({ $REQ }: Request,$RES: Response) => {...}
-      - focus-metavariable: $REQ
-      - pattern-either:
-        - pattern: params
-        - pattern: query
-        - pattern: cookies
-        - pattern: headers
-        - pattern: body
-    pattern-sinks:
-    - patterns:
-      - pattern-inside: |
-          $WK = require('wkhtmltopdf');
-          ...
-      - pattern: $WK($SINK,...)
-      - focus-metavariable: $SINK
+        - pattern-either:
+          - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES) {...})
+          - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES, $NEXT) {...})
+        - metavariable-regex:
+            metavariable: $METHOD
+            regex: ^(get|post|put|head|delete|options)$
+    - pattern-either:
+      - pattern: $REQ.query
+      - pattern: $REQ.body
+      - pattern: $REQ.params
+      - pattern: $REQ.cookies
+      - pattern: $REQ.headers
+  - patterns:
+    - pattern-either:
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+
+          {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+    - focus-metavariable: $REQ
+    - pattern-either:
+      - pattern: params
+      - pattern: query
+      - pattern: cookies
+      - pattern: headers
+      - pattern: body
+  severity: ERROR

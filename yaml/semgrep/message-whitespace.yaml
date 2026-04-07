@@ -1,22 +1,20 @@
 rules:
-- id: message-whitespace-check
-  message: >-
-    It looks like you have an additional space in your rule message, this can look awkward in the finding
-    output, please remove the additional whitespace!
-  severity: WARNING
+- fix-regex:
+    regex: (?<=\S)\s(\s{1,})
+    replacement: ' '
+  id: message-whitespace-check
+  languages:
+  - yaml
+  message: 규칙 메시지에 추가 공백이 있는 것 같습니다. 이는 결과 결과에서 어색해 보일 수 있습니다. 추가 공백을 제거하십시오!
   metadata:
     category: correctness
     references:
     - https://semgrep.dev/docs/contributing/contributing-to-semgrep-rules-repository
     technology:
     - semgrep
-  languages:
-  - yaml
-  fix-regex:
-    regex: (?<=\S)\s(\s{1,})
-    replacement: ' '
   patterns:
-  - pattern-inside: |
-      rules: ...
-  - pattern: |
-      message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
+  - pattern-inside: 'rules: ...
+
+      '
+  - pattern: 'message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."'
+  severity: WARNING

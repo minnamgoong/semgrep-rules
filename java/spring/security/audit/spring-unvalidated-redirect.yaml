@@ -1,49 +1,32 @@
 rules:
 - id: spring-unvalidated-redirect
-  message: "오픈 리디렉션 피싱 가능성이 존재합니다. 도약 전 검증을 거치세요."
+  languages:
+  - java
+  message: 오픈 리디렉션 피싱 가능성이 존재합니다. 도약 전 검증을 거치세요.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
-    - "CWE-601: URL Redirection to Untrusted Site ('Open Redirect')"
+    - 'CWE-601: URL Redirection to Untrusted Site (''Open Redirect'')'
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#UNVALIDATED_REDIRECT
-    category: security
-    technology:
-    - spring
     references:
     - https://owasp.org/Top10/A01_2021-Broken_Access_Control
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#UNVALIDATED_REDIRECT
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
-  severity: WARNING
-  languages: [java]
+    technology:
+    - spring
   pattern-either:
-  - pattern: |
-      $X $METHOD(...,String $URL,...) {
-        return "redirect:" + $URL;
-      }
-  - pattern: |
-      $X $METHOD(...,String $URL,...) {
-        ...
-        String $REDIR = "redirect:" + $URL;
-        ...
-        return $REDIR;
-        ...
-      }
-  - pattern: |
-      $X $METHOD(...,String $URL,...) {
-        ...
-        new ModelAndView("redirect:" + $URL);
-        ...
-      }
-  - pattern: |-
-      $X $METHOD(...,String $URL,...) {
-        ...
-        String $REDIR = "redirect:" + $URL;
-        ...
-        new ModelAndView($REDIR);
-        ...
-      }
+  - pattern: "$X $METHOD(...,String $URL,...) {\n  return \"redirect:\" + $URL;\n\
+      }\n"
+  - pattern: "$X $METHOD(...,String $URL,...) {\n  ...\n  String $REDIR = \"redirect:\"\
+      \ + $URL;\n  ...\n  return $REDIR;\n  ...\n}\n"
+  - pattern: "$X $METHOD(...,String $URL,...) {\n  ...\n  new ModelAndView(\"redirect:\"\
+      \ + $URL);\n  ...\n}\n"
+  - pattern: "$X $METHOD(...,String $URL,...) {\n  ...\n  String $REDIR = \"redirect:\"\
+      \ + $URL;\n  ...\n  new ModelAndView($REDIR);\n  ...\n}"
+  severity: WARNING

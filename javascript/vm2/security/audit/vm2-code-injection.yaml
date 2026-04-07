@@ -1,65 +1,89 @@
 rules:
 - id: vm2-code-injection
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    owasp:
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
-    category: security
-    technology:
-    - vm2
-    cwe2022-top25: true
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
-    references:
-    - https://owasp.org/Top10/A03_2021-Injection
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    subcategory:
+    - audit
+    technology:
+    - vm2
   patterns:
-  - pattern-inside: |
-      require('vm2');
+  - pattern-inside: 'require(''vm2'');
+
       ...
-  - pattern-not-inside: |
-      $CODE = "...";
+
+      '
+  - pattern-not-inside: '$CODE = "...";
+
       ...
-  - pattern-not-inside: |
-      require('vm2');
+
+      '
+  - pattern-not-inside: 'require(''vm2'');
+
       ...
+
       $CODE = new VMScript(...);
+
       ...
+
+      '
   - pattern-either:
-    - pattern: |
-        $VM = new VM(...);
+    - pattern: '$VM = new VM(...);
+
         ...
+
         $VM.run($CODE,...);
-    - pattern: |
-        new VM(...).run($CODE,...);
-    - pattern: |
-        $VM = new NodeVM(...);
+
+        '
+    - pattern: 'new VM(...).run($CODE,...);
+
+        '
+    - pattern: '$VM = new NodeVM(...);
+
         ...
+
         $VM.run($CODE,...);
-    - pattern: |
-        new NodeVM(...).run($CODE,...);
-    - pattern: |
-        new VMScript($CODE,...);
-  - pattern-not: |
-      $VM = new VM(...);
+
+        '
+    - pattern: 'new NodeVM(...).run($CODE,...);
+
+        '
+    - pattern: 'new VMScript($CODE,...);
+
+        '
+  - pattern-not: '$VM = new VM(...);
+
       ...
+
       $VM.run("...",...);
-  - pattern-not: |
-      $VM = new NodeVM(...);
+
+      '
+  - pattern-not: '$VM = new NodeVM(...);
+
       ...
+
       $VM.run("...",...);
-  - pattern-not: |
-      (new VM(...)).run("...",...);
-  - pattern-not: |
-      (new NodeVM(...)).run("...",...);
-  - pattern-not: |-
-      new VMScript("...",...);
+
+      '
+  - pattern-not: '(new VM(...)).run("...",...);
+
+      '
+  - pattern-not: '(new NodeVM(...)).run("...",...);
+
+      '
+  - pattern-not: new VMScript("...",...);
+  severity: WARNING

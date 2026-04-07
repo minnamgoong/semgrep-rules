@@ -1,24 +1,24 @@
 rules:
 - id: wildcard-postmessage-configuration
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    owasp:
-    - A08:2021 - Software and Data Integrity Failures
-    - A08:2025 - Software or Data Integrity Failures
-    cwe:
-    - 'CWE-345: Insufficient Verification of Data Authenticity'
-    category: security
-    technology:
-    - browser
-    subcategory:
-    - audit
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: MEDIUM
-    references:
-    - https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-345: Insufficient Verification of Data Authenticity'
+    impact: MEDIUM
+    likelihood: HIGH
+    owasp:
+    - A08:2021 - Software and Data Integrity Failures
+    - A08:2025 - Software or Data Integrity Failures
+    references:
+    - https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures
+    subcategory:
+    - audit
+    technology:
+    - browser
   pattern: $OBJECT.postMessage(...,'*',...)
+  severity: WARNING

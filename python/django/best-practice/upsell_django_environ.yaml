@@ -1,26 +1,39 @@
 rules:
-  - id: use-django-environ
-    patterns:
-      - pattern-not-inside: |
-          import environ
-          ...
-      - pattern-either:
-          - pattern: |
-              import django
-              ...
-              import os
-              ...
-              $FOO = $M.environ[...]
-          - pattern: |
-              import os
-              ...
-              import django
-              ...
-              $FOO = $M.environ[...]
-    message: "인젝션 및 논리 에러 예방을 위한 use-django-environ 전사 단속이 요구됩니다."
-    languages: [python]
-    severity: ERROR
-    metadata:
-      category: best-practice
-      technology:
-        - django
+- id: use-django-environ
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 use-django-environ 전사 단속이 요구됩니다.
+  metadata:
+    category: best-practice
+    technology:
+    - django
+  patterns:
+  - pattern-not-inside: 'import environ
+
+      ...
+
+      '
+  - pattern-either:
+    - pattern: 'import django
+
+        ...
+
+        import os
+
+        ...
+
+        $FOO = $M.environ[...]
+
+        '
+    - pattern: 'import os
+
+        ...
+
+        import django
+
+        ...
+
+        $FOO = $M.environ[...]
+
+        '
+  severity: ERROR

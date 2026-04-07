@@ -1,32 +1,37 @@
 rules:
 - id: bash_reverse_shell
+  languages:
+  - generic
+  message: bash_reverse_shell 보안 인젝션 및 런타임 버그 전사 예방 점검.
   metadata:
-    cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
     category: security
-    technology:
-    - ci
     confidence: HIGH
+    cwe:
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: MEDIUM
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
     subcategory:
     - audit
-    likelihood: MEDIUM
-    impact: HIGH
-  message: "bash_reverse_shell 보안 인젝션 및 런타임 버그 전사 예방 점검."
-  severity: ERROR
-  languages:
-  - generic
+    technology:
+    - ci
   pattern-either:
-  - pattern: |
-      sh -i >& /dev/udp/.../... 0>&1
-  - pattern: |
-      <...>/dev/tcp/.../...; sh <&... >&... 2>&
-  - pattern: |
-      <...>/dev/tcp/.../...; cat <&... | while read line; do $line 2>&... >&...;done
-  - pattern: |
-      sh -i ...<...> /dev/tcp/.../... ...<&... 1>&... 2>&
+  - pattern: 'sh -i >& /dev/udp/.../... 0>&1
+
+      '
+  - pattern: '<...>/dev/tcp/.../...; sh <&... >&... 2>&
+
+      '
+  - pattern: '<...>/dev/tcp/.../...; cat <&... | while read line; do $line 2>&...
+      >&...;done
+
+      '
+  - pattern: 'sh -i ...<...> /dev/tcp/.../... ...<&... 1>&... 2>&
+
+      '
+  severity: ERROR

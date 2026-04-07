@@ -1,26 +1,23 @@
 rules:
-    - id: gcp-gke-nodepool-secure-boot-for-shielded-nodes
-      patterns:
-        - pattern: resource
-        - pattern-inside: |
-              resource "google_container_node_pool" "..." {
-              ...
-              }
-        - pattern-not-inside: |
-              resource "google_container_node_pool" "..." {
-              ...
-              shielded_instance_config {
-                ...
-                enable_secure_boot = true
-                ...
-              }
-              ...
-              }
-      message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-      metadata:
-        category: best-practice
-        technology:
-          - terraform
-          - gcp
-      languages: [hcl]
-      severity: WARNING
+- id: gcp-gke-nodepool-secure-boot-for-shielded-nodes
+  languages:
+  - hcl
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - terraform
+    - gcp
+  patterns:
+  - pattern: resource
+  - pattern-inside: 'resource "google_container_node_pool" "..." {
+
+      ...
+
+      }
+
+      '
+  - pattern-not-inside: "resource \"google_container_node_pool\" \"...\" {\n...\n\
+      shielded_instance_config {\n  ...\n  enable_secure_boot = true\n  ...\n}\n...\n\
+      }\n"
+  severity: WARNING

@@ -1,33 +1,29 @@
 rules:
 - id: insecure-deserialization
+  languages:
+  - python
+  message: 취약한 역직렬화 라이브러리가 감지되었습니다. RCE 공격 위험을 막기 위해 JSON 등 안전한 형태를 이용하세요.
   metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-502: Deserialization of Untrusted Data'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A08:2017 - Insecure Deserialization
     - A08:2021 - Software and Data Integrity Failures
     - A08:2025 - Software or Data Integrity Failures
-    cwe:
-    - 'CWE-502: Deserialization of Untrusted Data'
     references:
     - https://docs.python.org/3/library/pickle.html
-    category: security
-    technology:
-    - flask
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  message: "취약한 역직렬화 라이브러리가 감지되었습니다. RCE 공격 위험을 막기 위해 JSON 등 안전한 형태를 이용하세요."
-  languages:
-  - python
-  severity: ERROR
+    technology:
+    - flask
   patterns:
-  - pattern-inside: |
-      @app.route(...)
-      def $X(...):
-        ...
+  - pattern-inside: "@app.route(...)\ndef $X(...):\n  ...\n"
   - pattern-not: $MODULE.$FUNC("...")
   - pattern-not: $MODULE.$FUNC(open("...", ...))
   - pattern-either:
@@ -37,3 +33,4 @@ rules:
     - pattern: dill.$FUNC(...)
     - pattern: shelve.$FUNC(...)
     - pattern: yaml.load(...)
+  severity: ERROR

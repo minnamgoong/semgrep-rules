@@ -1,26 +1,22 @@
 rules:
-  - id: azure-appservice-python-version
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    patterns:
-      - pattern: resource
-      - pattern-not-inside: |
-          resource "azurerm_app_service" "..." {
-          ...
-          site_config {
-            ...
-            python_version = "3.10"
-            ...
-          }
-          ...
-          }
-      - pattern-inside: |
-          resource "azurerm_app_service" "..." {
-          ...
-          }
-    metadata:
-      category: best-practice
-      technology:
-        - terraform
-        - azure
-    languages: [hcl]
-    severity: INFO
+- id: azure-appservice-python-version
+  languages:
+  - hcl
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - terraform
+    - azure
+  patterns:
+  - pattern: resource
+  - pattern-not-inside: "resource \"azurerm_app_service\" \"...\" {\n...\nsite_config\
+      \ {\n  ...\n  python_version = \"3.10\"\n  ...\n}\n...\n}\n"
+  - pattern-inside: 'resource "azurerm_app_service" "..." {
+
+      ...
+
+      }
+
+      '
+  severity: INFO

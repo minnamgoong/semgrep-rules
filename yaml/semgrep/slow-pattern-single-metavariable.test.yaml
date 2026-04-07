@@ -1,44 +1,28 @@
 rules:
-  - id: typescript.react.best-practice.react-props-in-state.react-props-in-state
-    pattern-either:
-      - patterns:
-          # ok: slow-pattern-single-metavariable
-          - pattern-inside: |
-              class $CN extends React.Component {
-                ...
-              }
-          - pattern-either:
-              # ok: slow-pattern-single-metavariable
-              - pattern: |
-                  state = {$NAME: <... this.props.$PROP ...>}
-              # ok: slow-pattern-single-metavariable
-              - pattern: |
-                  this.state = {$NAME: <... this.props.$PROP ...>}
-      - patterns:
-          # ok: slow-pattern-single-metavariable
-          - pattern-inside: |
-              function $FN({$PROP},...) {
-                ...
-              }
-          # ok: slow-pattern-single-metavariable
-          - pattern-inside: useState(...)
-          # ruleid: slow-pattern-single-metavariable
-          - pattern: $PROP
-      - patterns:
-          # ok: slow-pattern-single-metavariable
-          - pattern-inside: |
-              function $FN($PROP,...) {
-                ...
-              }
-          # ok: slow-pattern-single-metavariable
-          - pattern-inside: useState(...)
-          # ruleid: slow-pattern-single-metavariable
-          - pattern-not: $PROP
-    message: "React 컴포넌트 데이터 바인딩 가압 점검."
-    metadata:
-      references:
-        - https://overreacted.io/writing-resilient-components/#principle-1-dont-stop-the-data-flow
-    languages:
-      - typescript
-      - javascript
-    severity: WARNING
+- id: typescript.react.best-practice.react-props-in-state.react-props-in-state
+  languages:
+  - typescript
+  - javascript
+  message: React 컴포넌트 데이터 바인딩 가압 점검.
+  metadata:
+    references:
+    - https://overreacted.io/writing-resilient-components/#principle-1-dont-stop-the-data-flow
+  pattern-either:
+  - patterns:
+    - pattern-inside: "class $CN extends React.Component {\n  ...\n}\n"
+    - pattern-either:
+      - pattern: 'state = {$NAME: <... this.props.$PROP ...>}
+
+          '
+      - pattern: 'this.state = {$NAME: <... this.props.$PROP ...>}
+
+          '
+  - patterns:
+    - pattern-inside: "function $FN({$PROP},...) {\n  ...\n}\n"
+    - pattern-inside: useState(...)
+    - pattern: $PROP
+  - patterns:
+    - pattern-inside: "function $FN($PROP,...) {\n  ...\n}\n"
+    - pattern-inside: useState(...)
+    - pattern-not: $PROP
+  severity: WARNING

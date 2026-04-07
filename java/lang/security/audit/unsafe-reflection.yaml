@@ -1,31 +1,36 @@
 rules:
 - id: unsafe-reflection
-  patterns:
-  - pattern: |
-      Class.forName($CLASS,...)
-  - pattern-not: |
-      Class.forName("...",...)
-  - pattern-not-inside: |
-      $CLASS = "...";
-      ...
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-470: Use of Externally-Controlled Input to Select Classes or Code ('Unsafe Reflection')"
+    - 'CWE-470: Use of Externally-Controlled Input to Select Classes or Code (''Unsafe
+      Reflection'')'
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
-    source-rule-url: https://owasp.org/www-community/vulnerabilities/Unsafe_use_of_Reflection
-    category: security
-    technology:
-    - java
     references:
     - https://owasp.org/Top10/A03_2021-Injection
+    source-rule-url: https://owasp.org/www-community/vulnerabilities/Unsafe_use_of_Reflection
     subcategory:
     - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
+    technology:
+    - java
+  patterns:
+  - pattern: 'Class.forName($CLASS,...)
+
+      '
+  - pattern-not: 'Class.forName("...",...)
+
+      '
+  - pattern-not-inside: '$CLASS = "...";
+
+      ...
+
+      '
   severity: WARNING
-  languages:
-  - java

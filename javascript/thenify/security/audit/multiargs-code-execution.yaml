@@ -1,45 +1,57 @@
 rules:
 - id: multiargs-code-execution
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
-    owasp:
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    category: security
-    technology:
-    - thenify
-    cwe2022-top25: true
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
-    references:
-    - https://owasp.org/Top10/A03_2021-Injection
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    subcategory:
+    - audit
+    technology:
+    - thenify
   patterns:
   - pattern-either:
-    - pattern: |
-        $THENIFY($FN, {multiArgs: ...},...)
-    - pattern: |
-        $OPTS = {multiArgs: ...};
+    - pattern: '$THENIFY($FN, {multiArgs: ...},...)
+
+        '
+    - pattern: '$OPTS = {multiArgs: ...};
+
         ...
+
         $THENIFY($FN,$OPTS,...);
-  - pattern-not: |
-      $THENIFY($FN, {multiArgs: false},...)
-  - pattern-not: |
-      $OPTS = {multiArgs: false};
+
+        '
+  - pattern-not: '$THENIFY($FN, {multiArgs: false},...)
+
+      '
+  - pattern-not: '$OPTS = {multiArgs: false};
+
       ...
+
       $THENIFY($FN,$OPTS,...)
+
+      '
   - pattern-either:
-    - pattern-inside: |
-        $THENIFY = require('thenify');
+    - pattern-inside: '$THENIFY = require(''thenify'');
+
         ...
-    - pattern-inside: |
-        import 'thenify';
+
+        '
+    - pattern-inside: 'import ''thenify'';
+
         ...
+
+        '
+  severity: WARNING

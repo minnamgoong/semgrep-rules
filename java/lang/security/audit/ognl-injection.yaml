@@ -1,837 +1,252 @@
 rules:
 - id: ognl-injection
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#OGNL_INJECTION
-    category: security
-    technology:
-    - ognl
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#OGNL_INJECTION
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  severity: WARNING
-  languages: [java]
+    technology:
+    - ognl
   patterns:
   - pattern-either:
-    - pattern: |
-        $X $METHOD(...,OgnlReflectionProvider $P,...) {
-          ...
-          $P.getGetMethod($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlReflectionProvider $P,...) {
-          ...
-          $P.getSetMethod($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlReflectionProvider $P,...) {
-          ...
-          $P.getField($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlReflectionProvider $P,...) {
-          ...
-          $P.setProperties($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlReflectionProvider $P,...) {
-          ...
-          $P.setProperty($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlReflectionProvider $P,...) {
-          ...
-          $P.getValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlReflectionProvider $P,...) {
-          ...
-          $P.setValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ReflectionProvider $P,...) {
-          ...
-          $P.getGetMethod($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ReflectionProvider $P,...) {
-          ...
-          $P.getSetMethod($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ReflectionProvider $P,...) {
-          ...
-          $P.getField($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ReflectionProvider $P,...) {
-          ...
-          $P.setProperties($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ReflectionProvider $P,...) {
-          ...
-          $P.setProperty($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ReflectionProvider $P,...) {
-          ...
-          $P.getValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ReflectionProvider $P,...) {
-          ...
-          $P.setValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,TextParseUtil $P,...) {
-          ...
-          $P.translateVariables($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,TextParseUtil $P,...) {
-          ...
-          $P.translateVariablesCollection($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,TextParseUtil $P,...) {
-          ...
-          $P.shallBeIncluded($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,TextParseUtil $P,...) {
-          ...
-          $P.commaDelimitedStringToSet($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,TextParser $P,...) {
-          ...
-          $P.evaluate($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlTextParser $P,...) {
-          ...
-          $P.evaluate($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlUtil $P,...) {
-          ...
-          $P.setProperties($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlUtil $P,...) {
-          ...
-          $P.setProperty($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlUtil $P,...) {
-          ...
-          $P.getValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlUtil $P,...) {
-          ...
-          $P.setValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlUtil $P,...) {
-          ...
-          $P.callMethod($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlUtil $P,...) {
-          ...
-          $P.compile($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,VelocityStrutsUtil $P,...) {
-          ...
-          $P.evaluate($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,StrutsUtil $P,...) {
-          ...
-          $P.isTrue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,StrutsUtil $P,...) {
-          ...
-          $P.findString($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,StrutsUtil $P,...) {
-          ...
-          $P.findValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,StrutsUtil $P,...) {
-          ...
-          $P.getText($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,StrutsUtil $P,...) {
-          ...
-          $P.translateVariables($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,StrutsUtil $P,...) {
-          ...
-          $P.makeSelectList($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,OgnlTool $P,...) {
-          ...
-          $P.findValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ValueStack $P,...) {
-          ...
-          $P.findString($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ValueStack $P,...) {
-          ...
-          $P.findValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ValueStack $P,...) {
-          ...
-          $P.setValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ValueStack $P,...) {
-          ...
-          $P.setParameter($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlReflectionProvider $P = ...;
-          ...
-          $P.getGetMethod($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlReflectionProvider $P = ...;
-          ...
-          $P.getSetMethod($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlReflectionProvider $P = ...;
-          ...
-          $P.getField($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlReflectionProvider $P = ...;
-          ...
-          $P.setProperties($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlReflectionProvider $P = ...;
-          ...
-          $P.setProperty($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlReflectionProvider $P = ...;
-          ...
-          $P.getValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlReflectionProvider $P = ...;
-          ...
-          $P.setValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ReflectionProvider $P = ...;
-          ...
-          $P.getGetMethod($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ReflectionProvider $P = ...;
-          ...
-          $P.getSetMethod($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ReflectionProvider $P = ...;
-          ...
-          $P.getField($T, $INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ReflectionProvider $P = ...;
-          ...
-          $P.setProperties($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ReflectionProvider $P = ...;
-          ...
-          $P.setProperty($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ReflectionProvider $P = ...;
-          ...
-          $P.getValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ReflectionProvider $P = ...;
-          ...
-          $P.setValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          TextParseUtil $P = ...;
-          ...
-          $P.translateVariables($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          TextParseUtil $P = ...;
-          ...
-          $P.translateVariablesCollection($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          TextParseUtil $P = ...;
-          ...
-          $P.shallBeIncluded($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          TextParseUtil $P = ...;
-          ...
-          $P.commaDelimitedStringToSet($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          TextParser $P = ...;
-          ...
-          $P.evaluate($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlTextParser $P = ...;
-          ...
-          $P.evaluate($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlUtil $P = ...;
-          ...
-          $P.setProperties($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlUtil $P = ...;
-          ...
-          $P.setProperty($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlUtil $P = ...;
-          ...
-          $P.getValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlUtil $P = ...;
-          ...
-          $P.setValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlUtil $P = ...;
-          ...
-          $P.callMethod($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlUtil $P = ...;
-          ...
-          $P.compile($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          VelocityStrutsUtil $P = ...;
-          ...
-          $P.evaluate($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          StrutsUtil $P = ...;
-          ...
-          $P.isTrue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          StrutsUtil $P = ...;
-          ...
-          $P.findString($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          StrutsUtil $P = ...;
-          ...
-          $P.findValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          StrutsUtil $P = ...;
-          ...
-          $P.getText($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          StrutsUtil $P = ...;
-          ...
-          $P.translateVariables($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          StrutsUtil $P = ...;
-          ...
-          $P.makeSelectList($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          OgnlTool $P = ...;
-          ...
-          $P.findValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ValueStack $P = ...;
-          ...
-          $P.findString($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ValueStack $P = ...;
-          ...
-          $P.findValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ValueStack $P = ...;
-          ...
-          $P.setValue($INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ValueStack $P = ...;
-          ...
-          $P.setParameter($INPUT,...);
-          ...
-        }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.getGetMethod($T,"...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.getSetMethod($T,"...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.getField($T,"...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.setProperties("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.setProperty("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.getValue("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.setValue("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.translateVariables("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.translateVariablesCollection("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.shallBeIncluded("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.commaDelimitedStringToSet("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.evaluate("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.callMethod("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.compile("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.isTrue("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.findString("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.findValue("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.getText("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.makeSelectList("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $P.setParameter("...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.getGetMethod($T,$S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.getSetMethod($T,$S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.getField($T,$S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.setProperties($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.setProperty($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.getValue($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.setValue($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.translateVariables($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.translateVariablesCollection($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.shallBeIncluded($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.commaDelimitedStringToSet($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.evaluate($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.callMethod($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.compile($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.isTrue($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.findString($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.findValue($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.getText($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.makeSelectList($S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $P.setParameter($S,...);
-        ...
-      }
+    - pattern: "$X $METHOD(...,OgnlReflectionProvider $P,...) {\n  ...\n  $P.getGetMethod($T,\
+        \ $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlReflectionProvider $P,...) {\n  ...\n  $P.getSetMethod($T,\
+        \ $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlReflectionProvider $P,...) {\n  ...\n  $P.getField($T,\
+        \ $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlReflectionProvider $P,...) {\n  ...\n  $P.setProperties($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlReflectionProvider $P,...) {\n  ...\n  $P.setProperty($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlReflectionProvider $P,...) {\n  ...\n  $P.getValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlReflectionProvider $P,...) {\n  ...\n  $P.setValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,ReflectionProvider $P,...) {\n  ...\n  $P.getGetMethod($T,\
+        \ $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...,ReflectionProvider $P,...) {\n  ...\n  $P.getSetMethod($T,\
+        \ $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...,ReflectionProvider $P,...) {\n  ...\n  $P.getField($T,\
+        \ $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...,ReflectionProvider $P,...) {\n  ...\n  $P.setProperties($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,ReflectionProvider $P,...) {\n  ...\n  $P.setProperty($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,ReflectionProvider $P,...) {\n  ...\n  $P.getValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,ReflectionProvider $P,...) {\n  ...\n  $P.setValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,TextParseUtil $P,...) {\n  ...\n  $P.translateVariables($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,TextParseUtil $P,...) {\n  ...\n  $P.translateVariablesCollection($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,TextParseUtil $P,...) {\n  ...\n  $P.shallBeIncluded($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,TextParseUtil $P,...) {\n  ...\n  $P.commaDelimitedStringToSet($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,TextParser $P,...) {\n  ...\n  $P.evaluate($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlTextParser $P,...) {\n  ...\n  $P.evaluate($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlUtil $P,...) {\n  ...\n  $P.setProperties($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlUtil $P,...) {\n  ...\n  $P.setProperty($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlUtil $P,...) {\n  ...\n  $P.getValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlUtil $P,...) {\n  ...\n  $P.setValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlUtil $P,...) {\n  ...\n  $P.callMethod($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlUtil $P,...) {\n  ...\n  $P.compile($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,VelocityStrutsUtil $P,...) {\n  ...\n  $P.evaluate($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,StrutsUtil $P,...) {\n  ...\n  $P.isTrue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,StrutsUtil $P,...) {\n  ...\n  $P.findString($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,StrutsUtil $P,...) {\n  ...\n  $P.findValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,StrutsUtil $P,...) {\n  ...\n  $P.getText($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,StrutsUtil $P,...) {\n  ...\n  $P.translateVariables($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,StrutsUtil $P,...) {\n  ...\n  $P.makeSelectList($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,OgnlTool $P,...) {\n  ...\n  $P.findValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,ValueStack $P,...) {\n  ...\n  $P.findString($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,ValueStack $P,...) {\n  ...\n  $P.findValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,ValueStack $P,...) {\n  ...\n  $P.setValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...,ValueStack $P,...) {\n  ...\n  $P.setParameter($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlReflectionProvider $P = ...;\n  ...\n\
+        \  $P.getGetMethod($T, $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlReflectionProvider $P = ...;\n  ...\n\
+        \  $P.getSetMethod($T, $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlReflectionProvider $P = ...;\n  ...\n\
+        \  $P.getField($T, $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlReflectionProvider $P = ...;\n  ...\n\
+        \  $P.setProperties($INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlReflectionProvider $P = ...;\n  ...\n\
+        \  $P.setProperty($INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlReflectionProvider $P = ...;\n  ...\n\
+        \  $P.getValue($INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlReflectionProvider $P = ...;\n  ...\n\
+        \  $P.setValue($INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ReflectionProvider $P = ...;\n  ...\n\
+        \  $P.getGetMethod($T, $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ReflectionProvider $P = ...;\n  ...\n\
+        \  $P.getSetMethod($T, $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ReflectionProvider $P = ...;\n  ...\n\
+        \  $P.getField($T, $INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ReflectionProvider $P = ...;\n  ...\n\
+        \  $P.setProperties($INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ReflectionProvider $P = ...;\n  ...\n\
+        \  $P.setProperty($INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ReflectionProvider $P = ...;\n  ...\n\
+        \  $P.getValue($INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ReflectionProvider $P = ...;\n  ...\n\
+        \  $P.setValue($INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  TextParseUtil $P = ...;\n  ...\n  $P.translateVariables($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  TextParseUtil $P = ...;\n  ...\n  $P.translateVariablesCollection($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  TextParseUtil $P = ...;\n  ...\n  $P.shallBeIncluded($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  TextParseUtil $P = ...;\n  ...\n  $P.commaDelimitedStringToSet($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  TextParser $P = ...;\n  ...\n  $P.evaluate($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlTextParser $P = ...;\n  ...\n  $P.evaluate($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlUtil $P = ...;\n  ...\n  $P.setProperties($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlUtil $P = ...;\n  ...\n  $P.setProperty($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlUtil $P = ...;\n  ...\n  $P.getValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlUtil $P = ...;\n  ...\n  $P.setValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlUtil $P = ...;\n  ...\n  $P.callMethod($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlUtil $P = ...;\n  ...\n  $P.compile($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  VelocityStrutsUtil $P = ...;\n  ...\n\
+        \  $P.evaluate($INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  StrutsUtil $P = ...;\n  ...\n  $P.isTrue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  StrutsUtil $P = ...;\n  ...\n  $P.findString($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  StrutsUtil $P = ...;\n  ...\n  $P.findValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  StrutsUtil $P = ...;\n  ...\n  $P.getText($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  StrutsUtil $P = ...;\n  ...\n  $P.translateVariables($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  StrutsUtil $P = ...;\n  ...\n  $P.makeSelectList($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  OgnlTool $P = ...;\n  ...\n  $P.findValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ValueStack $P = ...;\n  ...\n  $P.findString($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ValueStack $P = ...;\n  ...\n  $P.findValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ValueStack $P = ...;\n  ...\n  $P.setValue($INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ValueStack $P = ...;\n  ...\n  $P.setParameter($INPUT,...);\n\
+        \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.getGetMethod($T,\"...\",...);\n \
+      \ ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.getSetMethod($T,\"...\",...);\n \
+      \ ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.getField($T,\"...\",...);\n  ...\n\
+      }\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.setProperties(\"...\",...);\n  ...\n\
+      }\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.setProperty(\"...\",...);\n  ...\n\
+      }\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.getValue(\"...\",...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.setValue(\"...\",...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.translateVariables(\"...\",...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.translateVariablesCollection(\"...\"\
+      ,...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.shallBeIncluded(\"...\",...);\n \
+      \ ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.commaDelimitedStringToSet(\"...\"\
+      ,...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.evaluate(\"...\",...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.callMethod(\"...\",...);\n  ...\n\
+      }\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.compile(\"...\",...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.isTrue(\"...\",...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.findString(\"...\",...);\n  ...\n\
+      }\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.findValue(\"...\",...);\n  ...\n\
+      }\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.getText(\"...\",...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.makeSelectList(\"...\",...);\n  ...\n\
+      }\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $P.setParameter(\"...\",...);\n  ...\n\
+      }\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.getGetMethod($T,$S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.getSetMethod($T,$S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.getField($T,$S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.setProperties($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.setProperty($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.getValue($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.setValue($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.translateVariables($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.translateVariablesCollection($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.shallBeIncluded($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.commaDelimitedStringToSet($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.evaluate($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.callMethod($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.compile($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.isTrue($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.findString($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.findValue($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.getText($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.makeSelectList($S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $P.setParameter($S,...);\n\
+      \  ...\n}\n"
+  severity: WARNING

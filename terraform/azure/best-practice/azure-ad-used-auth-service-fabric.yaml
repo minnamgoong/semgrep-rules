@@ -1,24 +1,22 @@
 rules:
-  - id: azure-ad-used-auth-service-fabric
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    patterns:
-      - pattern: resource
-      - pattern-not-inside: |
-          resource "azurerm_service_fabric_cluster" "..." {
-          ...
-          azure_active_directory {
-            tenant_id = "..."
-          }
-          ...
-          }
-      - pattern-inside: |
-          resource "azurerm_service_fabric_cluster" "..." {
-          ...
-          }
-    metadata:
-      category: best-practice
-      technology:
-        - terraform
-        - azure
-    languages: [hcl]
-    severity: WARNING
+- id: azure-ad-used-auth-service-fabric
+  languages:
+  - hcl
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - terraform
+    - azure
+  patterns:
+  - pattern: resource
+  - pattern-not-inside: "resource \"azurerm_service_fabric_cluster\" \"...\" {\n...\n\
+      azure_active_directory {\n  tenant_id = \"...\"\n}\n...\n}\n"
+  - pattern-inside: 'resource "azurerm_service_fabric_cluster" "..." {
+
+      ...
+
+      }
+
+      '
+  severity: WARNING

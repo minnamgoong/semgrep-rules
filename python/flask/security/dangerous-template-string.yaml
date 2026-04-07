@@ -1,59 +1,89 @@
 rules:
 - id: dangerous-template-string
-  message: "가변 스트링 합사를 통한 동적 템플릿 생산이 잡혔습니다. SSTI 예방을 위해 객체 렌더링 양식을 쓰세요."
+  languages:
+  - python
+  message: 가변 스트링 합사를 통한 동적 템플릿 생산이 잡혔습니다. SSTI 예방을 위해 객체 렌더링 양식을 쓰세요.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-96: Improper Neutralization of Directives in Statically Saved Code ('Static Code Injection')"
+    - 'CWE-96: Improper Neutralization of Directives in Statically Saved Code (''Static
+      Code Injection'')'
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://nvisium.com/blog/2016/03/09/exploring-ssti-in-flask-jinja2.html
     - https://pequalsnp-team.github.io/cheatsheet/flask-jinja2-ssti
-    category: security
-    technology:
-    - flask
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  languages: [python]
-  severity: ERROR
+    technology:
+    - flask
   pattern-either:
-  - pattern: |
-      $V = "...".format(...)
+  - pattern: '$V = "...".format(...)
+
       ...
+
       flask.render_template_string($V, ...)
-  - pattern: |
-      $V = "...".format(...)
+
+      '
+  - pattern: '$V = "...".format(...)
+
       ...
+
       return flask.render_template_string($V, ...), $MORE
-  - pattern: |
-      $V = "..." % $S
+
+      '
+  - pattern: '$V = "..." % $S
+
       ...
+
       flask.render_template_string($V, ...)
-  - pattern: |
-      $V = "..." % $S
+
+      '
+  - pattern: '$V = "..." % $S
+
       ...
+
       return flask.render_template_string($V, ...), $MORE
-  - pattern: |
-      $V = "..."
+
+      '
+  - pattern: '$V = "..."
+
       ...
+
       $V += $O
+
       ...
+
       flask.render_template_string($V, ...)
-  - pattern: |
-      $V = "..."
+
+      '
+  - pattern: '$V = "..."
+
       ...
+
       $V += $O
+
       ...
+
       return flask.render_template_string($V, ...), $MORE
-  - pattern: |
-      $V = f"...{$X}..."
+
+      '
+  - pattern: '$V = f"...{$X}..."
+
       ...
+
       flask.render_template_string($V, ...)
-  - pattern: |
-      $V = f"...{$X}..."
+
+      '
+  - pattern: '$V = f"...{$X}..."
+
       ...
+
       return flask.render_template_string($V, ...), $CODE
+
+      '
+  severity: ERROR

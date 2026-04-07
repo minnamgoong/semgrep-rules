@@ -1,25 +1,25 @@
 rules:
-  - id: writing-to-file-in-read-mode
-    message: "읽기 전용으로 가동 중인 서술자에 쓰기(.write)를 가압하는 런타임 에러를 경보합니다."
-    patterns:
-      - pattern-either:
-          - pattern-inside: |
-              $FD = open($NAME, "r", ...)
-              ...
-          - pattern-inside: |
-              $FD = open($NAME, "rb", ...)
-              ...
-          - pattern-inside: |
-              with open($NAME, "r", ...) as $FD:
-                ...
-          - pattern-inside: |
-              with open($NAME, "rb", ...) as $FD:
-                ...
-      - pattern: $FD.write(...)
-    severity: ERROR
-    languages:
-      - python
-    metadata:
-      category: correctness
-      technology:
-        - python
+- id: writing-to-file-in-read-mode
+  languages:
+  - python
+  message: 읽기 전용으로 가동 중인 서술자에 쓰기(.write)를 가압하는 런타임 에러를 경보합니다.
+  metadata:
+    category: correctness
+    technology:
+    - python
+  patterns:
+  - pattern-either:
+    - pattern-inside: '$FD = open($NAME, "r", ...)
+
+        ...
+
+        '
+    - pattern-inside: '$FD = open($NAME, "rb", ...)
+
+        ...
+
+        '
+    - pattern-inside: "with open($NAME, \"r\", ...) as $FD:\n  ...\n"
+    - pattern-inside: "with open($NAME, \"rb\", ...) as $FD:\n  ...\n"
+  - pattern: $FD.write(...)
+  severity: ERROR

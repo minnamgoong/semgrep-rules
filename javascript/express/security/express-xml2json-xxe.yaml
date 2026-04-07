@@ -1,35 +1,50 @@
 rules:
 - id: express-xml2json-xxe
-  message: "XML Parser로 입력되는 데이터 가공 시 외부 사용자 입력이 유출됩니다. XXE(XML External Entity) 공격 취약점을 유발하므로 파서에 DTD 로딩 및 외부 엔티티 호출을 차단하세요."
+  languages:
+  - javascript
+  - typescript
+  message: XML Parser로 입력되는 데이터 가공 시 외부 사용자 입력이 유출됩니다. XXE(XML External Entity) 공격
+    취약점을 유발하므로 파서에 DTD 로딩 및 외부 엔티티 호출을 차단하세요.
   metadata:
+    asvs:
+      control_id: 5.5.2 Insecue XML Deserialization
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v55-deserialization-prevention
+      section: V5 Validation, Sanitization and Encoding
+      version: '4'
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-611: Improper Restriction of XML External Entity Reference'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A04:2017 - XML External Entities (XXE)
     - A05:2021 - Security Misconfiguration
     - A02:2025 - Security Misconfiguration
-    cwe:
-    - 'CWE-611: Improper Restriction of XML External Entity Reference'
-    asvs:
-      section: V5 Validation, Sanitization and Encoding
-      control_id: 5.5.2 Insecue XML Deserialization
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v55-deserialization-prevention
-      version: '4'
-    category: security
-    technology:
-    - express
     references:
     - https://www.npmjs.com/package/xml2json
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
+    technology:
+    - express
   mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - pattern-inside: 'require(''xml2json'');
+
+          ...
+
+          '
+      - pattern-inside: 'import ''xml2json'';
+
+          ...
+
+          '
+    - pattern: $EXPAT.toJson($SINK,...)
+    - focus-metavariable: $SINK
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -52,11 +67,14 @@ rules:
       - pattern: $REQ.files.$ANYTHING['data'].toString('utf8')
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+
           {...}
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
     - focus-metavariable: $REQ
     - pattern-either:
       - pattern: params
@@ -66,14 +84,4 @@ rules:
       - pattern: body
       - pattern: files.$ANYTHING.data.toString('utf8')
       - pattern: files.$ANYTHING['data'].toString('utf8')
-  pattern-sinks:
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          require('xml2json');
-          ...
-      - pattern-inside: |
-          import 'xml2json';
-          ...
-    - pattern: $EXPAT.toJson($SINK,...)
-    - focus-metavariable: $SINK
+  severity: ERROR

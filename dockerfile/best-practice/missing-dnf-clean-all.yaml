@@ -1,16 +1,17 @@
 rules:
-  - id: missing-dnf-clean-all
-    severity: WARNING
-    languages: [dockerfile]
-    patterns:
-      - pattern: RUN ... dnf ...
-      - pattern-not-inside: RUN ... && dnf clean all
-      - pattern-not-inside: RUN ... && \ dnf clean all
-    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
-    metadata:
-      source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3038
-      references:
-        - https://github.com/hadolint/hadolint/wiki/DL3038
-      category: best-practice
-      technology:
-        - dockerfile
+- id: missing-dnf-clean-all
+  languages:
+  - dockerfile
+  message: Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검.
+  metadata:
+    category: best-practice
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL3038
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3038
+    technology:
+    - dockerfile
+  patterns:
+  - pattern: RUN ... dnf ...
+  - pattern-not-inside: RUN ... && dnf clean all
+  - pattern-not-inside: RUN ... && \ dnf clean all
+  severity: WARNING

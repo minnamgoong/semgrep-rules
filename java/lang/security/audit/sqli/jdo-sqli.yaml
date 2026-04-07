@@ -1,38 +1,66 @@
 rules:
 - id: jdo-sqli
+  languages:
+  - java
+  message: 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command
+      (''SQL Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
+    owasp:
+    - A01:2017 - Injection
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    subcategory:
+    - audit
+    technology:
+    - java
   pattern-either:
   - patterns:
     - pattern-either:
       - patterns:
         - pattern-either:
-          - pattern-inside: |
-              String $SQL = $X + $Y;
+          - pattern-inside: 'String $SQL = $X + $Y;
+
               ...
-          - pattern-inside: |
-              String $SQL = String.format(...);
+
+              '
+          - pattern-inside: 'String $SQL = String.format(...);
+
               ...
-          - pattern-inside: |
-              $TYPE $FUNC(...,String $SQL,...) {
-                ...
-              }
-        - pattern-not-inside: |
-            String $SQL = "..." + "...";
+
+              '
+          - pattern-inside: "$TYPE $FUNC(...,String $SQL,...) {\n  ...\n}\n"
+        - pattern-not-inside: 'String $SQL = "..." + "...";
+
             ...
+
+            '
         - pattern: $Q.$METHOD($SQL,...)
-      - pattern: |
-          $Q.$METHOD(String.format(...),...);
-      - pattern: |
-          $Q.$METHOD($X + $Y,...);
+      - pattern: '$Q.$METHOD(String.format(...),...);
+
+          '
+      - pattern: '$Q.$METHOD($X + $Y,...);
+
+          '
     - pattern-either:
-      - pattern-inside: |
-          javax.jdo.Query $Q = ...;
+      - pattern-inside: 'javax.jdo.Query $Q = ...;
+
           ...
-      - pattern-inside: |
-          $TYPE $FUNC(...,javax.jdo.Query $Q,...) {
-            ...
-          }
-    - pattern-not: |
-        $Q.$METHOD("..." + "...",...);
+
+          '
+      - pattern-inside: "$TYPE $FUNC(...,javax.jdo.Query $Q,...) {\n  ...\n}\n"
+    - pattern-not: '$Q.$METHOD("..." + "...",...);
+
+        '
     - metavariable-regex:
         metavariable: $METHOD
         regex: ^(setFilter|setGrouping)$
@@ -40,53 +68,38 @@ rules:
     - pattern-either:
       - patterns:
         - pattern-either:
-          - pattern-inside: |
-              String $SQL = $X + $Y;
+          - pattern-inside: 'String $SQL = $X + $Y;
+
               ...
-          - pattern-inside: |
-              String $SQL = String.format(...);
+
+              '
+          - pattern-inside: 'String $SQL = String.format(...);
+
               ...
-          - pattern-inside: |
-              $VAL $FUNC(...,String $SQL,...) {
-                ...
-              }
-        - pattern-not-inside: |
-            String $SQL = "..." + "...";
+
+              '
+          - pattern-inside: "$VAL $FUNC(...,String $SQL,...) {\n  ...\n}\n"
+        - pattern-not-inside: 'String $SQL = "..." + "...";
+
             ...
+
+            '
         - pattern: $PM.newQuery(...,$SQL,...)
-      - pattern: |
-          $PM.newQuery(...,String.format(...),...);
-      - pattern: |
-          $PM.newQuery(...,$X + $Y,...);
+      - pattern: '$PM.newQuery(...,String.format(...),...);
+
+          '
+      - pattern: '$PM.newQuery(...,$X + $Y,...);
+
+          '
     - pattern-either:
-      - pattern-inside: |
-          javax.jdo.PersistenceManager $PM = ...;
+      - pattern-inside: 'javax.jdo.PersistenceManager $PM = ...;
+
           ...
-      - pattern-inside: |
-          $TYPE $FUNC(...,javax.jdo.PersistenceManager $PM,...) {
-            ...
-          }
-    - pattern-not: |
-        $PM.newQuery(...,"..." + "...",...);
-  message: "잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요."
-  languages: [java]
+
+          '
+      - pattern-inside: "$TYPE $FUNC(...,javax.jdo.PersistenceManager $PM,...) {\n\
+          \  ...\n}\n"
+    - pattern-not: '$PM.newQuery(...,"..." + "...",...);
+
+        '
   severity: WARNING
-  metadata:
-    cwe:
-    - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
-    category: security
-    technology:
-    - java
-    owasp:
-    - A01:2017 - Injection
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    references:
-    - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW

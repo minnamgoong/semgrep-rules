@@ -1,32 +1,18 @@
 rules:
-  - id: list-modify-while-iterate
-    message: "for 루프 순회 중 원본 리스트를 가변 삭제/수정하여 오동작을 격발시키는 리스크 누출입니다."
-    languages: [python]
-    severity: ERROR
-    pattern-either:
-      - pattern: |
-          for $ELEMENT in $LIST:
-            ...
-            $LIST.pop(...)
-      - pattern: |
-          for $ELEMENT in $LIST:
-            ...
-            $LIST.push(...)
-      - pattern: |
-          for $ELEMENT in $LIST:
-            ...
-            $LIST.append(...)
-      - pattern: |
-          for $ELEMENT in $LIST:
-            ...
-            $LIST.extend(...)
-      - pattern: |
-          for $ELEMENT in $LIST:
-            ...
-            $LIST.remove(...)
-    metadata:
-      category: correctness
-      technology:
-        - python
-      references:
-        - https://unspecified.wordpress.com/2009/02/12/thou-shalt-not-modify-a-list-during-iteration/
+- id: list-modify-while-iterate
+  languages:
+  - python
+  message: for 루프 순회 중 원본 리스트를 가변 삭제/수정하여 오동작을 격발시키는 리스크 누출입니다.
+  metadata:
+    category: correctness
+    references:
+    - https://unspecified.wordpress.com/2009/02/12/thou-shalt-not-modify-a-list-during-iteration/
+    technology:
+    - python
+  pattern-either:
+  - pattern: "for $ELEMENT in $LIST:\n  ...\n  $LIST.pop(...)\n"
+  - pattern: "for $ELEMENT in $LIST:\n  ...\n  $LIST.push(...)\n"
+  - pattern: "for $ELEMENT in $LIST:\n  ...\n  $LIST.append(...)\n"
+  - pattern: "for $ELEMENT in $LIST:\n  ...\n  $LIST.extend(...)\n"
+  - pattern: "for $ELEMENT in $LIST:\n  ...\n  $LIST.remove(...)\n"
+  severity: ERROR

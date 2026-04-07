@@ -1,63 +1,69 @@
 rules:
 - id: tainted-sql-string
-  languages: [java]
-  severity: ERROR
-  message: "AWS Lambda 핸들러 등의 외부 사용자 입력이 직접 SQL 문자열 조립에 사용되었습니다. Parameterized Query를 사용하여 SQL 인젝션을 예방하세요."
-  options:
-    interfile: true
+  languages:
+  - java
+  message: AWS Lambda 핸들러 등의 외부 사용자 입력이 직접 SQL 문자열 조립에 사용되었습니다. Parameterized Query를
+    사용하여 SQL 인젝션을 예방하세요.
   metadata:
-    references:
-    - https://owasp.org/www-community/attacks/SQL_Injection
     category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command
+      (''SQL Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    interfile: true
+    likelihood: MEDIUM
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
-    cwe:
-    - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
-    technology:
-    - aws-lambda
-    cwe2022-top25: true
-    cwe2021-top25: true
+    references:
+    - https://owasp.org/www-community/attacks/SQL_Injection
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: HIGH
-    confidence: MEDIUM
-    interfile: true
+    technology:
+    - aws-lambda
   mode: taint
-  pattern-sources:
-  - patterns:
-    - focus-metavariable: $EVENT
-    - pattern-either:
-      - pattern: |
-          $HANDLERTYPE $HANDLER($TYPE $EVENT, com.amazonaws.services.lambda.runtime.Context $CONTEXT) {
-            ...
-          }
-      - pattern: |
-          $HANDLERTYPE $HANDLER(InputStream $EVENT, OutputStream $OUT, com.amazonaws.services.lambda.runtime.Context $CONTEXT) {
-            ...
-          }
+  options:
+    interfile: true
   pattern-sinks:
   - patterns:
     - pattern-either:
-      - pattern: |
-          "$SQLSTR" + ...
-      - pattern: |
-          "$SQLSTR".concat(...)
+      - pattern: '"$SQLSTR" + ...
+
+          '
+      - pattern: '"$SQLSTR".concat(...)
+
+          '
       - patterns:
-        - pattern-inside: |
-            StringBuilder $SB = new StringBuilder("$SQLSTR");
+        - pattern-inside: 'StringBuilder $SB = new StringBuilder("$SQLSTR");
+
             ...
+
+            '
         - pattern: $SB.append(...)
       - patterns:
-        - pattern-inside: |
-            $VAR = "$SQLSTR";
+        - pattern-inside: '$VAR = "$SQLSTR";
+
             ...
+
+            '
         - pattern: $VAR += ...
       - pattern: String.format("$SQLSTR", ...)
     - metavariable-regex:
         metavariable: $SQLSTR
         regex: (?i)(select|delete|insert|create|update|alter|drop)\b
-    - pattern-not-inside: |
-        System.out.$PRINTLN(...)
+    - pattern-not-inside: 'System.out.$PRINTLN(...)
+
+        '
+  pattern-sources:
+  - patterns:
+    - focus-metavariable: $EVENT
+    - pattern-either:
+      - pattern: "$HANDLERTYPE $HANDLER($TYPE $EVENT, com.amazonaws.services.lambda.runtime.Context\
+          \ $CONTEXT) {\n  ...\n}\n"
+      - pattern: "$HANDLERTYPE $HANDLER(InputStream $EVENT, OutputStream $OUT, com.amazonaws.services.lambda.runtime.Context\
+          \ $CONTEXT) {\n  ...\n}\n"
+  severity: ERROR

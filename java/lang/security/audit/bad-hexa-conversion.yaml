@@ -1,29 +1,23 @@
 rules:
 - id: bad-hexa-conversion
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-704: Incorrect Type Conversion or Cast'
-    owasp: 'A03:2017 - Sensitive Data Exposure'
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#BAD_HEXA_CONVERSION
-    category: security
-    technology:
-    - java
+    impact: LOW
+    likelihood: LOW
+    owasp: A03:2017 - Sensitive Data Exposure
     references:
     - https://cwe.mitre.org/data/definitions/704.html
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#BAD_HEXA_CONVERSION
     subcategory:
     - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+    technology:
+    - java
+  pattern: "$X $METHOD(...) {\n  ...\n  MessageDigest $MD = ...;\n  ...\n  $MD.digest(...);\n\
+    \  ...\n  Integer.toHexString(...);\n}"
   severity: WARNING
-  languages: [java]
-  pattern: |-
-    $X $METHOD(...) {
-      ...
-      MessageDigest $MD = ...;
-      ...
-      $MD.digest(...);
-      ...
-      Integer.toHexString(...);
-    }

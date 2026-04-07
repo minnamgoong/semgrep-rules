@@ -1,58 +1,64 @@
 rules:
 - id: httpservlet-path-traversal
+  languages:
+  - java
+  message: 외부 입력값으로 직접 파일 시스템 경로를 구성해 처리. Relative path 제어 유출을 막기 위해 입력값에 대한 검증을 수행하세요.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
-    - "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+    - 'CWE-22: Improper Limitation of a Pathname to a Restricted Directory (''Path
+      Traversal'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A05:2017 - Broken Access Control
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#PATH_TRAVERSAL_IN
     references:
     - https://www.owasp.org/index.php/Path_Traversal
-    category: security
-    technology:
-    - java
-    cwe2022-top25: true
-    cwe2021-top25: true
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#PATH_TRAVERSAL_IN
     subcategory:
     - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: MEDIUM
-  message: "외부 입력값으로 직접 파일 시스템 경로를 구성해 처리. Relative path 제어 유출을 막기 위해 입력값에 대한 검증을 수행하세요."
+    technology:
+    - java
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-either:
-      - pattern: |
-          (HttpServletRequest $REQ)
-      - patterns:   # this pattern is a hack to get the rule to recognize `map` as tainted source when `map = cookie.getValue(user_input)` is used.
-        - pattern-inside: |
-            (javax.servlet.http.Cookie[] $COOKIES) = (HttpServletRequest $REQ).getCookies(...);
-            ...
-            for (javax.servlet.http.Cookie $COOKIE: $COOKIES) {
-              ...
-            }
-        - pattern: |
-            $COOKIE.getValue(...)
-      - patterns:   # use this pattern to catch cases where tainted array values are assigned to a variable (not caught by taint)
-        - pattern-inside: |
-            $TYPE[] $VALS = (HttpServletRequest $REQ).$GETFUNC(...);
-            ...
-        - pattern: |
-            $PARAM = $VALS[$INDEX];
   pattern-sanitizers:
   - pattern: org.apache.commons.io.FilenameUtils.getName(...)
   pattern-sinks:
   - patterns:
     - pattern-either:
-      - pattern: |
-          (java.io.File $FILE) = ...
-      - pattern: |
-          (java.io.FileOutputStream $FOS) = ...
-      - pattern: |
-          new java.io.FileInputStream(...)
+      - pattern: '(java.io.File $FILE) = ...
+
+          '
+      - pattern: '(java.io.FileOutputStream $FOS) = ...
+
+          '
+      - pattern: 'new java.io.FileInputStream(...)
+
+          '
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - pattern: '(HttpServletRequest $REQ)
+
+          '
+      - patterns:
+        - pattern-inside: "(javax.servlet.http.Cookie[] $COOKIES) = (HttpServletRequest\
+            \ $REQ).getCookies(...);\n...\nfor (javax.servlet.http.Cookie $COOKIE:\
+            \ $COOKIES) {\n  ...\n}\n"
+        - pattern: '$COOKIE.getValue(...)
+
+            '
+      - patterns:
+        - pattern-inside: '$TYPE[] $VALS = (HttpServletRequest $REQ).$GETFUNC(...);
+
+            ...
+
+            '
+        - pattern: '$PARAM = $VALS[$INDEX];
+
+            '
   severity: ERROR
-  languages:
-  - java

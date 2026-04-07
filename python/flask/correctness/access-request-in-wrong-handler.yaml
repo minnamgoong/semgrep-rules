@@ -1,21 +1,22 @@
 rules:
-  - id: avoid-accessing-request-in-wrong-handler
-    patterns:
-      - pattern-inside: |
-          @app.route(..., method="GET")
-          def $X(...):
-            ...
-      - pattern-either:
-          - pattern: |
-              $Y = flask.request.json
-          - pattern: |
-              $Y = flask.request.form
-          - pattern: |
-              $Y = flask.request.data
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: correctness
-      technology:
-        - flask
+- id: avoid-accessing-request-in-wrong-handler
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: correctness
+    technology:
+    - flask
+  patterns:
+  - pattern-inside: "@app.route(..., method=\"GET\")\ndef $X(...):\n  ...\n"
+  - pattern-either:
+    - pattern: '$Y = flask.request.json
+
+        '
+    - pattern: '$Y = flask.request.form
+
+        '
+    - pattern: '$Y = flask.request.data
+
+        '
+  severity: WARNING

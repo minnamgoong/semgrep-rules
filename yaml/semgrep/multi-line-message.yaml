@@ -1,18 +1,18 @@
 rules:
 - id: multi-line-message
-  message: >-
-    This rule has a multi-line message field, which may display poorly in a terminal. Consider ensuring
-    it is on one line. For example, use `message: >-`, not `message: |`.
-  severity: WARNING
+  languages:
+  - yaml
+  message: '이 규칙에는 터미널에 제대로 표시되지 않을 수 있는 여러 줄의 메시지 필드가 있습니다. 한 줄에 있는지 확인하십시오. 예를 들어
+    `메시지: |`가 아닌 `메시지: >-`를 사용하세요.'
   metadata:
     category: correctness
     references:
     - https://github.com/semgrep/semgrep-rules/issues/1431
     technology:
     - semgrep
-  languages: [yaml]
   patterns:
   - pattern-inside: 'rules: [..., $RULE, ...]'
-  - pattern: |
-      message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
+  - pattern: 'message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
 
+      '
+  severity: WARNING

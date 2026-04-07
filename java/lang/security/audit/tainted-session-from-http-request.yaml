@@ -1,55 +1,16 @@
 rules:
 - id: tainted-session-from-http-request
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  languages: [java]
-  severity: WARNING
-  mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-either:
-      - patterns:
-        - pattern: |
-            (HttpServletRequest $REQ).$FUNC(...)
-        - pattern-not: |
-            (HttpServletRequest $REQ).getSession()
-      - patterns:   # this pattern is a hack to get the rule to      recognize `map` as tainted source when `cookie. getValue(user_input)` is used.
-        - pattern-inside: |
-            (javax.servlet.http.Cookie[] $COOKIES) = (HttpServletRequest $REQ).getCookies(...);
-            ...
-            for (javax.servlet.http.Cookie $COOKIE: $COOKIES) {
-              ...
-            }
-        - pattern: |
-            $COOKIE.getValue(...)
-      - patterns:   # use this pattern to catch cases where tainted  array values are assigned to a variable (not caught by taint)
-        - pattern-inside: |
-            $TYPE[] $VALS = (HttpServletRequest $REQ).$GETFUNC(... );
-            ...
-        - pattern: |
-            $PARAM = $VALS[$INDEX];
-      - patterns:   # use this pattern to catch cases where request headers are later decoded
-        - pattern-inside: |
-            $HEADERS = (HttpServletRequest $REQ).getHeaders(...);
-            ...
-            $PARAM = $HEADERS.$FUNC(...);
-            ...
-        - pattern: |
-            java.net.URLDecoder.decode($PARAM, ...)
-  pattern-sinks:
-    - patterns:
-        - pattern: (HttpServletRequest $REQ).getSession().$FUNC($NAME, $VALUE);
-        - metavariable-regex:
-            metavariable: $FUNC
-            regex: ^(putValue|setAttribute)$
-        - focus-metavariable: $VALUE
-  options:
-    interfile: true
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
     category: security
-    technology:
-    - java
+    confidence: MEDIUM
     cwe:
     - 'CWE-501: Trust Boundary Violation'
+    impact: MEDIUM
+    interfile: true
+    likelihood: MEDIUM
     owasp:
     - A04:2021 - Insecure Design
     - A06:2025 - Insecure Design
@@ -57,7 +18,56 @@ rules:
     - https://owasp.org/Top10/A04_2021-Insecure_Design
     subcategory:
     - vuln
-    impact: MEDIUM
-    likelihood: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - java
+  mode: taint
+  options:
     interfile: true
+  pattern-sinks:
+  - patterns:
+    - pattern: (HttpServletRequest $REQ).getSession().$FUNC($NAME, $VALUE);
+    - metavariable-regex:
+        metavariable: $FUNC
+        regex: ^(putValue|setAttribute)$
+    - focus-metavariable: $VALUE
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - patterns:
+        - pattern: '(HttpServletRequest $REQ).$FUNC(...)
+
+            '
+        - pattern-not: '(HttpServletRequest $REQ).getSession()
+
+            '
+      - patterns:
+        - pattern-inside: "(javax.servlet.http.Cookie[] $COOKIES) = (HttpServletRequest\
+            \ $REQ).getCookies(...);\n...\nfor (javax.servlet.http.Cookie $COOKIE:\
+            \ $COOKIES) {\n  ...\n}\n"
+        - pattern: '$COOKIE.getValue(...)
+
+            '
+      - patterns:
+        - pattern-inside: '$TYPE[] $VALS = (HttpServletRequest $REQ).$GETFUNC(...
+            );
+
+            ...
+
+            '
+        - pattern: '$PARAM = $VALS[$INDEX];
+
+            '
+      - patterns:
+        - pattern-inside: '$HEADERS = (HttpServletRequest $REQ).getHeaders(...);
+
+            ...
+
+            $PARAM = $HEADERS.$FUNC(...);
+
+            ...
+
+            '
+        - pattern: 'java.net.URLDecoder.decode($PARAM, ...)
+
+            '
+  severity: WARNING

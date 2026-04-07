@@ -1,26 +1,28 @@
 rules:
-  - id: multiple-entrypoint-instructions
-    severity: ERROR
-    languages: [dockerfile]
-    patterns:
-      - pattern: |
-          ENTRYPOINT ...
-          ...
-          $ENTRYPOINT_INSTR
-      # Restrict the match to just the second ENTRYPOINT instruction.
-      # This avoids producing unstable findings due to capturing
-      # many lines of irrelevant code with the ellipsis.
-      - metavariable-pattern:
-          metavariable: $ENTRYPOINT_INSTR
-          pattern: |
-            ENTRYPOINT ...
-      - focus-metavariable: $ENTRYPOINT_INSTR
-    message: "ENTRYPOINT 명령어 다수 사용 시 충돌 국면 점검."
-    metadata:
-      source-rule-url: https://github.com/hadolint/hadolint/wiki/DL4004
-      references:
-        - https://github.com/hadolint/hadolint/wiki/DL4004
-        - https://kapeli.com/cheat_sheets/Dockerfile.docset/Contents/Resources/Documents/index#//dash_ref_Instructions/Entry/ENTRYPOINT/0
-      category: correctness
-      technology:
-        - dockerfile
+- id: multiple-entrypoint-instructions
+  languages:
+  - dockerfile
+  message: ENTRYPOINT 명령어 다수 사용 시 충돌 국면 점검.
+  metadata:
+    category: correctness
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL4004
+    - https://kapeli.com/cheat_sheets/Dockerfile.docset/Contents/Resources/Documents/index#//dash_ref_Instructions/Entry/ENTRYPOINT/0
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL4004
+    technology:
+    - dockerfile
+  patterns:
+  - pattern: 'ENTRYPOINT ...
+
+      ...
+
+      $ENTRYPOINT_INSTR
+
+      '
+  - metavariable-pattern:
+      metavariable: $ENTRYPOINT_INSTR
+      pattern: 'ENTRYPOINT ...
+
+        '
+  - focus-metavariable: $ENTRYPOINT_INSTR
+  severity: ERROR

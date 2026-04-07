@@ -1,31 +1,35 @@
 rules:
 - id: require-request
-  message: "require() 인자 위치에 동적 외부 입력이 발견되었습니다. 예상치 못한 스크립트/모듈 로딩 예방을 위해 정적 모듈 경로로 고정하십시오."
-  options:
-    interfile: true
-  metadata:
-    interfile: true
-    owasp:
-    - A01:2021 - Broken Access Control
-    - A01:2025 - Broken Access Control
-    cwe:
-    - 'CWE-706: Use of Incorrectly-Resolved Name or Reference'
-    source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
-    category: security
-    technology:
-    - express
-    references:
-    - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
   languages:
   - javascript
   - typescript
-  severity: ERROR
+  message: require() 인자 위치에 동적 외부 입력이 발견되었습니다. 예상치 못한 스크립트/모듈 로딩 예방을 위해 정적 모듈 경로로
+    고정하십시오.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-706: Use of Incorrectly-Resolved Name or Reference'
+    impact: MEDIUM
+    interfile: true
+    likelihood: MEDIUM
+    owasp:
+    - A01:2021 - Broken Access Control
+    - A01:2025 - Broken Access Control
+    references:
+    - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
+    source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
+    subcategory:
+    - vuln
+    technology:
+    - express
   mode: taint
+  options:
+    interfile: true
+  pattern-sinks:
+  - patterns:
+    - pattern: require($SINK)
+    - focus-metavariable: $SINK
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -46,11 +50,14 @@ rules:
       - pattern: $REQ.headers
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+
           {...}
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
     - focus-metavariable: $REQ
     - pattern-either:
       - pattern: params
@@ -58,7 +65,4 @@ rules:
       - pattern: cookies
       - pattern: headers
       - pattern: body
-  pattern-sinks:
-  - patterns:
-    - pattern: require($SINK)
-    - focus-metavariable: $SINK
+  severity: ERROR

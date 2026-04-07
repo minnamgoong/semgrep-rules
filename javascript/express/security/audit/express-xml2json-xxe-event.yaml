@@ -1,30 +1,44 @@
 rules:
 - id: express-xml2json-xxe-event
-  message: "Express 프레임워크 라우팅 및 리디렉션 보안 수사."
+  languages:
+  - javascript
+  - typescript
+  message: Express 프레임워크 라우팅 및 리디렉션 보안 수사.
   metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-611: Improper Restriction of XML External Entity Reference'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: MEDIUM
     owasp:
     - A04:2017 - XML External Entities (XXE)
     - A05:2021 - Security Misconfiguration
     - A02:2025 - Security Misconfiguration
-    cwe:
-    - 'CWE-611: Improper Restriction of XML External Entity Reference'
-    category: security
-    technology:
-    - express
     references:
     - https://www.npmjs.com/package/xml2json
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: HIGH
-    confidence: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
+    technology:
+    - express
   mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - pattern-inside: 'require(''xml2json'');
+
+          ...
+
+          '
+      - pattern-inside: 'import ''xml2json'';
+
+          ...
+
+          '
+    - pattern: $REQ.on('...', function(...) { ... $EXPAT.toJson($INPUT,...); ... })
+    - focus-metavariable: $INPUT
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -45,11 +59,13 @@ rules:
       - pattern: $REQ.headers
   - patterns:
     - pattern-either:
-      - pattern-inside: >
-          ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
           {...}
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
     - focus-metavariable: $REQ
     - pattern-either:
       - pattern: params
@@ -57,14 +73,4 @@ rules:
       - pattern: cookies
       - pattern: headers
       - pattern: body
-  pattern-sinks:
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          require('xml2json');
-          ...
-      - pattern-inside: |
-          import 'xml2json';
-          ...
-    - pattern: $REQ.on('...', function(...) { ... $EXPAT.toJson($INPUT,...); ... })
-    - focus-metavariable: $INPUT
+  severity: WARNING

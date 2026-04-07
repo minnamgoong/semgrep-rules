@@ -1,54 +1,83 @@
 rules:
 - id: multiple-cmd-instructions
-  patterns:
-  - pattern-either:
-    - pattern: |
-        CMD ...
-        ...
-        CMD ...
-    - pattern: |
-        CMD [...]
-        ...
-        CMD [...]
-    - pattern: |
-        CMD [...]
-        ...
-        CMD ...
-    - pattern: |
-        CMD ...
-        ...
-        CMD [...]
-  - pattern-not-inside: |
-      CMD ...
-      ...
-      FROM $IMAGE
-      ...
-      CMD ...
-  - pattern-not: |
-      HEALTHCHECK $CMD
-      ...
-      CMD ...
-  - pattern-not: |
-      HEALTHCHECK $CMD
-      ...
-      CMD [...]
-  - pattern-not: |
-      CMD ...
-      ...
-      HEALTHCHECK $CMD
-  - pattern-not: |
-      CMD [...]
-      ...
-      HEALTHCHECK $CMD
-  message: "Dockerfile 내 `CMD` 절 중복 가압 금지. 마지막 절만 효력을 발휘합니다."
-  languages: [dockerfile]
-  severity: ERROR
+  languages:
+  - dockerfile
+  message: Dockerfile 내 `CMD` 절 중복 가압 금지. 마지막 절만 효력을 발휘합니다.
   metadata:
-    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL4003
+    category: correctness
     references:
     - https://github.com/hadolint/hadolint/wiki/DL4003
     - https://kapeli.com/cheat_sheets/Dockerfile.docset/Contents/Resources/Documents/index#//dash_ref_Instructions/Entry/CMD/0
-    category: correctness
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL4003
     technology:
     - dockerfile
+  patterns:
+  - pattern-either:
+    - pattern: 'CMD ...
 
+        ...
+
+        CMD ...
+
+        '
+    - pattern: 'CMD [...]
+
+        ...
+
+        CMD [...]
+
+        '
+    - pattern: 'CMD [...]
+
+        ...
+
+        CMD ...
+
+        '
+    - pattern: 'CMD ...
+
+        ...
+
+        CMD [...]
+
+        '
+  - pattern-not-inside: 'CMD ...
+
+      ...
+
+      FROM $IMAGE
+
+      ...
+
+      CMD ...
+
+      '
+  - pattern-not: 'HEALTHCHECK $CMD
+
+      ...
+
+      CMD ...
+
+      '
+  - pattern-not: 'HEALTHCHECK $CMD
+
+      ...
+
+      CMD [...]
+
+      '
+  - pattern-not: 'CMD ...
+
+      ...
+
+      HEALTHCHECK $CMD
+
+      '
+  - pattern-not: 'CMD [...]
+
+      ...
+
+      HEALTHCHECK $CMD
+
+      '
+  severity: ERROR

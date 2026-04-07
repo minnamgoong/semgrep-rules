@@ -1,52 +1,73 @@
 rules:
 - id: go-ssti
-  patterns:
-  - pattern-inside: |
-      import ("html/template")
-      ...
-  - pattern: $TEMPLATE = fmt.Sprintf("...", $ARG, ...)
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          func $FN(..., $REQ *http.Request, ...){
-          ...
-          }
-      - pattern-inside: |
-          func $FN(..., $REQ http.Request, ...){
-          ...
-          }
-      - pattern-inside: |
-          func(..., $REQ *http.Request, ...){
-          ...
-          }
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          $ARG := $REQ.URL.Query().Get(...)
-          ...
-          $T, $ERR := $TMPL.Parse($TEMPLATE)
-      - pattern-inside: |
-          $ARG := $REQ.Form.Get(...)
-          ...
-          $T, $ERR := $TMPL.Parse($TEMPLATE)
-      - pattern-inside: |
-          $ARG := $REQ.PostForm.Get(...)
-          ...
-          $T, $ERR := $TMPL.Parse($TEMPLATE)
-  message: "Go 보안 및 무결성 관리: go-ssti 점검 처리 하세요."
-  languages: [go]
-  severity: ERROR
+  languages:
+  - go
+  message: 'Go 보안 및 무결성 관리: go-ssti 점검 처리 하세요.'
   metadata:
     category: security
+    confidence: MEDIUM
     cwe:
     - 'CWE-1336: Improper Neutralization of Special Elements Used in a Template Engine'
+    impact: HIGH
+    likelihood: LOW
     references:
     - https://www.onsecurity.io/blog/go-ssti-method-research/
     - http://blog.takemyhand.xyz/2020/05/ssti-breaking-gos-template-engine-to.html
-    technology:
-    - go
-    confidence: MEDIUM
     subcategory:
     - vuln
-    likelihood: LOW
-    impact: HIGH
+    technology:
+    - go
+  patterns:
+  - pattern-inside: 'import ("html/template")
+
+      ...
+
+      '
+  - pattern: $TEMPLATE = fmt.Sprintf("...", $ARG, ...)
+  - patterns:
+    - pattern-either:
+      - pattern-inside: 'func $FN(..., $REQ *http.Request, ...){
+
+          ...
+
+          }
+
+          '
+      - pattern-inside: 'func $FN(..., $REQ http.Request, ...){
+
+          ...
+
+          }
+
+          '
+      - pattern-inside: 'func(..., $REQ *http.Request, ...){
+
+          ...
+
+          }
+
+          '
+  - patterns:
+    - pattern-either:
+      - pattern-inside: '$ARG := $REQ.URL.Query().Get(...)
+
+          ...
+
+          $T, $ERR := $TMPL.Parse($TEMPLATE)
+
+          '
+      - pattern-inside: '$ARG := $REQ.Form.Get(...)
+
+          ...
+
+          $T, $ERR := $TMPL.Parse($TEMPLATE)
+
+          '
+      - pattern-inside: '$ARG := $REQ.PostForm.Get(...)
+
+          ...
+
+          $T, $ERR := $TMPL.Parse($TEMPLATE)
+
+          '
+  severity: ERROR

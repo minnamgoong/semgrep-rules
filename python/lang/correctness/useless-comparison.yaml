@@ -1,23 +1,16 @@
 rules:
-  - id: no-strings-as-booleans
-    message: "문자열 결합 시 연산 논리 혼선 국면을 저지합니다."
-    languages: [python]
-    severity: ERROR
-    pattern-either:
-      - pattern: |
-          if <... "..." and ... ...>:
-              ...
-      - pattern: |
-          if <... "..." or ... ...>:
-              ...
-      - patterns:
-          - pattern-not: |
-              if $X in "...":
-                ...
-          - pattern: |
-              if "...":
-                  ...
-    metadata:
-      category: correctness
-      technology:
-        - python
+- id: no-strings-as-booleans
+  languages:
+  - python
+  message: 문자열 결합 시 연산 논리 혼선 국면을 저지합니다.
+  metadata:
+    category: correctness
+    technology:
+    - python
+  pattern-either:
+  - pattern: "if <... \"...\" and ... ...>:\n    ...\n"
+  - pattern: "if <... \"...\" or ... ...>:\n    ...\n"
+  - patterns:
+    - pattern-not: "if $X in \"...\":\n  ...\n"
+    - pattern: "if \"...\":\n    ...\n"
+  severity: ERROR

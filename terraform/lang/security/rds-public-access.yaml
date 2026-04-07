@@ -1,31 +1,28 @@
 rules:
 - id: rds-public-access
-  patterns:
-  - pattern: publicly_accessible = true
-  - pattern-inside: |
-      resource "aws_db_instance" "..." {
-        ...
-      }
   languages:
   - hcl
-  severity: WARNING
-  message: "rds-public-access IaC 보안 설정 정비 및 예방 조치 요망."
+  message: rds-public-access IaC 보안 설정 정비 및 예방 조치 요망.
   metadata:
-    references:
-    - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#publicly_accessible
-    - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Hiding
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-1220: Insufficient Granularity of Access Control'
-    category: security
-    technology:
-    - terraform
-    - aws
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A05:2017 - Broken Access Control
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
+    references:
+    - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#publicly_accessible
+    - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Hiding
     subcategory:
     - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
+    technology:
+    - terraform
+    - aws
+  patterns:
+  - pattern: publicly_accessible = true
+  - pattern-inside: "resource \"aws_db_instance\" \"...\" {\n  ...\n}\n"
+  severity: WARNING

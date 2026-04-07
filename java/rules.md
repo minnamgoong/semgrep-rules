@@ -27,7 +27,7 @@
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
 | `default-resteasy-provider-abuse` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `jax-rs/security/insecure-resteasy.yaml` |
-| `insecure-resteasy-deserialization` | `WARNING` | 안전하지 않은 역직렬화 가동이 포착되었습니다. RCE 공격 차단을 위해 직렬화 파서를 격수하십시오. | `jax-rs/security/insecure-resteasy.yaml` |
+| `insecure-resteasy-deserialization` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `jax-rs/security/insecure-resteasy.yaml` |
 | `jax-rs-path-traversal` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `jax-rs/security/jax-rs-path-traversal.yaml` |
 
 ## JBOSS

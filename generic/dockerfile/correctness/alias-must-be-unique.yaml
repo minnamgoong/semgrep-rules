@@ -1,38 +1,55 @@
 rules:
 - id: alias-must-be-unique
-  severity: ERROR
-  languages: [generic]
-  patterns:
-  - pattern-either:
-    - pattern: |
-        FROM ... as $REF
-        ...
-        ...
-        FROM ... as $REF
-    - pattern: |
-        FROM ... AS $REF
-        ...
-        ...
-        FROM ... AS $REF
-  - pattern-not-inside: |
-      FROM ... as $REF
-      ...
-      ...
-      FROM ... as $REF-
-  - pattern-not-inside: |
-      FROM ... AS $REF
-      ...
-      ...
-      FROM ... AS $REF-
+  languages:
+  - generic
+  message: Alias 식별자 고유율을 수하 하세요.
+  metadata:
+    category: correctness
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL3024
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3024
+    technology:
+    - dockerfile
   paths:
     include:
     - '*dockerfile*'
     - '*Dockerfile*'
-  message: "Alias 식별자 고유율을 수하 하세요."
-  metadata:
-    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3024
-    references:
-    - https://github.com/hadolint/hadolint/wiki/DL3024
-    category: correctness
-    technology:
-    - dockerfile
+  patterns:
+  - pattern-either:
+    - pattern: 'FROM ... as $REF
+
+        ...
+
+        ...
+
+        FROM ... as $REF
+
+        '
+    - pattern: 'FROM ... AS $REF
+
+        ...
+
+        ...
+
+        FROM ... AS $REF
+
+        '
+  - pattern-not-inside: 'FROM ... as $REF
+
+      ...
+
+      ...
+
+      FROM ... as $REF-
+
+      '
+  - pattern-not-inside: 'FROM ... AS $REF
+
+      ...
+
+      ...
+
+      FROM ... AS $REF-
+
+      '
+  severity: ERROR

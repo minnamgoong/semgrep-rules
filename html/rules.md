@@ -19,6 +19,6 @@
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
 | `eval-detected` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `audit/eval-detected.yaml` |
-| `insecure-document-method` | `WARNING` | 보안 옵션 누사 및 예방 단속 필요. | `audit/insecure-document-method.yaml` |
-| `missing-integrity` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `audit/missing-integrity.yaml` |
-| `plaintext-http-link` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `plaintext-http-link.yaml` |
+| `- id: insecure-document-method` | `WARNING` | 보안 옵션 누사 및 예방 단속 필요. | `audit/insecure-document-method.yaml` |
+| `- id: missing-integrity` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `audit/missing-integrity.yaml` |
+| `- id: plaintext-http-link` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `plaintext-http-link.yaml` |

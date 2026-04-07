@@ -1,17 +1,23 @@
 rules:
 - id: exported_activity
-  patterns:
-  - pattern-not-inside: <activity ... android:exported="false" ... />
-  - pattern-inside: "<activity  ... /> \n"
-  - pattern-either:
-    - pattern: |
-        <activity ... android:exported="true" ... />
-    - pattern: |
-        <activity ... <intent-filter> ... />
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
   languages:
   - generic
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-926: Improper Export of Android Application Components'
+    impact: MEDIUM
+    likelihood: MEDIUM
+    owasp:
+    - A5:2021 Security Misconfiguration
+    references:
+    - https://cwe.mitre.org/data/definitions/926.html
+    subcategory:
+    - vuln
+    technology:
+    - Android
   paths:
     exclude:
     - sources/
@@ -19,18 +25,14 @@ rules:
     - '*.so'
     include:
     - '*AndroidManifest.xml'
-  metadata:
-    category: security
-    subcategory:
-    - vuln
-    cwe:
-    - 'CWE-926: Improper Export of Android Application Components'
-    confidence: MEDIUM
-    likelihood: MEDIUM
-    impact: MEDIUM
-    owasp:
-    - A5:2021 Security Misconfiguration
-    technology:
-    - Android
-    references:
-    - https://cwe.mitre.org/data/definitions/926.html
+  patterns:
+  - pattern-not-inside: <activity ... android:exported="false" ... />
+  - pattern-inside: "<activity  ... /> \n"
+  - pattern-either:
+    - pattern: '<activity ... android:exported="true" ... />
+
+        '
+    - pattern: '<activity ... <intent-filter> ... />
+
+        '
+  severity: WARNING

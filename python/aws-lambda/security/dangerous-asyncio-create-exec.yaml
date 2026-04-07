@@ -1,12 +1,35 @@
 rules:
 - id: dangerous-asyncio-create-exec
+  languages:
+  - python
+  message: create_subprocess_exec 버퍼에 외부 데이터 합치기가 발견되었습니다. 인젝션 예방을 위해 필터링 하세요.
+  metadata:
+    asvs:
+      control_id: 5.3.8 OS Command Injection
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
+      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
+      version: '4'
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
+    owasp:
+    - A01:2017 - Injection
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://docs.python.org/3/library/asyncio-subprocess.html#asyncio.create_subprocess_exec
+    - https://docs.python.org/3/library/shlex.html
+    subcategory:
+    - vuln
+    technology:
+    - python
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern: event
-    - pattern-inside: |
-        def $HANDLER(event, context):
-          ...
   pattern-sinks:
   - patterns:
     - focus-metavariable: $CMD
@@ -15,40 +38,16 @@ rules:
       - pattern: asyncio.create_subprocess_exec($PROG, [$CMD, ...], ...)
       - pattern: asyncio.subprocess.create_subprocess_exec($PROG, $CMD, ...)
       - pattern: asyncio.subprocess.create_subprocess_exec($PROG, [$CMD, ...], ...)
-      - pattern: asyncio.create_subprocess_exec($PROG, "=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c",
-          $CMD, ...)
-      - pattern: asyncio.create_subprocess_exec($PROG, ["=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c",
-          $CMD, ...], ...)
+      - pattern: asyncio.create_subprocess_exec($PROG, "=~/(sh|bash|ksh|csh|tcsh|zsh)/",
+          "-c", $CMD, ...)
+      - pattern: asyncio.create_subprocess_exec($PROG, ["=~/(sh|bash|ksh|csh|tcsh|zsh)/",
+          "-c", $CMD, ...], ...)
       - pattern: asyncio.subprocess.create_subprocess_exec($PROG, "=~/(sh|bash|ksh|csh|tcsh|zsh)/",
           "-c", $CMD, ...)
       - pattern: asyncio.subprocess.create_subprocess_exec($PROG, ["=~/(sh|bash|ksh|csh|tcsh|zsh)/",
           "-c", $CMD, ...], ...)
-  message: "create_subprocess_exec 버퍼에 외부 데이터 합치기가 발견되었습니다. 인젝션 예방을 위해 필터링 하세요."
-  metadata:
-    owasp:
-    - A01:2017 - Injection
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
-    asvs:
-      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
-      control_id: 5.3.8 OS Command Injection
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
-      version: '4'
-    references:
-    - https://docs.python.org/3/library/asyncio-subprocess.html#asyncio.create_subprocess_exec
-    - https://docs.python.org/3/library/shlex.html
-    category: security
-    technology:
-    - python
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages:
-  - python
+  pattern-sources:
+  - patterns:
+    - pattern: event
+    - pattern-inside: "def $HANDLER(event, context):\n  ...\n"
   severity: ERROR

@@ -1,50 +1,50 @@
 rules:
-  - id: javascript-alert
-    message: found alert() call; should this be in production code?
-    languages:
-      - javascript
-      - typescript
-    severity: WARNING
-    pattern-either:
-      - pattern: alert()
-      - pattern: alert($X)
-    metadata:
-      category: best-practice
-      technology:
-        - javascript
-  - id: javascript-debugger
-    pattern: debugger;
-    message: "프로덕션 코드에 `debugger` 구문이 남아있습니다. 배포 전 반드시 제거해 주세요."
-    languages:
-      - javascript
-      - typescript
-    severity: WARNING
-    metadata:
-      category: best-practice
-      technology:
-        - javascript
-  - id: javascript-confirm
-    pattern: confirm(...)
-    message: "프로덕션 코드에 `confirm()` 호출이 남아있습니다. 배포 전 반드시 제거해 주세요."
-    languages:
-      - javascript
-      - typescript
-    severity: WARNING
-    metadata:
-      category: best-practice
-      technology:
-        - javascript
-  - id: javascript-prompt
-    message: "프로덕션 코드에 `prompt()` 호출이 남아있습니다. 배포 전 반드시 제거해 주세요."
-    languages:
-      - javascript
-      - typescript
-    severity: WARNING
-    pattern-either:
-      - pattern: prompt()
-      - pattern: prompt($X)
-      - pattern: prompt($X, $Y)
-    metadata:
-      category: best-practice
-      technology:
-        - javascript
+- id: javascript-alert
+  languages:
+  - javascript
+  - typescript
+  message: 경고() 호출을 찾았습니다. 이것이 프로덕션 코드에 있어야 합니까?
+  metadata:
+    category: best-practice
+    technology:
+    - javascript
+  pattern-either:
+  - pattern: alert()
+  - pattern: alert($X)
+  severity: WARNING
+- id: javascript-debugger
+  languages:
+  - javascript
+  - typescript
+  message: 프로덕션 코드에 `debugger` 구문이 남아있습니다. 배포 전 반드시 제거해 주세요.
+  metadata:
+    category: best-practice
+    technology:
+    - javascript
+  pattern: debugger;
+  severity: WARNING
+- id: javascript-confirm
+  languages:
+  - javascript
+  - typescript
+  message: 프로덕션 코드에 `confirm()` 호출이 남아있습니다. 배포 전 반드시 제거해 주세요.
+  metadata:
+    category: best-practice
+    technology:
+    - javascript
+  pattern: confirm(...)
+  severity: WARNING
+- id: javascript-prompt
+  languages:
+  - javascript
+  - typescript
+  message: 프로덕션 코드에 `prompt()` 호출이 남아있습니다. 배포 전 반드시 제거해 주세요.
+  metadata:
+    category: best-practice
+    technology:
+    - javascript
+  pattern-either:
+  - pattern: prompt()
+  - pattern: prompt($X)
+  - pattern: prompt($X, $Y)
+  severity: WARNING

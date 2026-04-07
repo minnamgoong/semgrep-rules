@@ -1,17 +1,16 @@
 rules:
-  - id: use-decimalfield-for-money
-    patterns:
-      - pattern-inside: |
-          class $M(...):
-            ...
-      - pattern: $F = django.db.models.FloatField(...)
-      - metavariable-regex:
-          metavariable: $F
-          regex: .*([pP][rR][iI][cC][eE]|[aA][mM][oO][uU][nN][tT]|[sS][uU][bB][tT][oO][tT][aA][lL]|[dD][oO][nN][aA][tT][iI][oO][nN]|[fF][eE][eE]|[sS][aA][lL][aA][rR][yY]|[pP][rR][eE][cC][iI][oO]).*
-    message: "금액 필드에 부동 소수점 오차를 막기 위해 DecimalField를 사수 하십시오."
-    languages: [python]
-    severity: ERROR
-    metadata:
-      category: correctness
-      technology:
-        - django
+- id: use-decimalfield-for-money
+  languages:
+  - python
+  message: 금액 필드에 부동 소수점 오차를 막기 위해 DecimalField를 사수 하십시오.
+  metadata:
+    category: correctness
+    technology:
+    - django
+  patterns:
+  - pattern-inside: "class $M(...):\n  ...\n"
+  - pattern: $F = django.db.models.FloatField(...)
+  - metavariable-regex:
+      metavariable: $F
+      regex: .*([pP][rR][iI][cC][eE]|[aA][mM][oO][uU][nN][tT]|[sS][uU][bB][tT][oO][tT][aA][lL]|[dD][oO][nN][aA][tT][iI][oO][nN]|[fF][eE][eE]|[sS][aA][lL][aA][rR][yY]|[pP][rR][eE][cC][iI][oO]).*
+  severity: ERROR

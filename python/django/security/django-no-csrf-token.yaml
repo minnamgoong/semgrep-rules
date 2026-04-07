@@ -1,34 +1,38 @@
 rules:
-  - id: django-no-csrf-token
-    patterns:
-      - pattern: "<form...>...</form>"
-      - pattern-either:
-          - pattern: |
-              <form ... method="$METHOD" ...>...</form>
-          - pattern: |
-              <form ... method='$METHOD' ...>...</form>
-          - pattern: |
-              <form ... method=$METHOD ...>...</form>
-      - metavariable-regex:
-          metavariable: $METHOD
-          regex: (?i)(post|put|delete|patch)
-      - pattern-not-inside: "<form...>...{% csrf_token %}...</form>"
-      - pattern-not-inside: "<form...>...{{ $VAR.csrf_token }}...</form>"
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    languages: [generic]
-    severity: WARNING
-    metadata:
-      category: security
-      cwe: "CWE-352: Cross-Site Request Forgery (CSRF)"
-      references:
-      - https://docs.djangoproject.com/en/4.2/howto/csrf/
-      confidence: MEDIUM
-      likelihood: MEDIUM
-      impact: MEDIUM
-      subcategory:
-        - audit
-      technology:
-        - django
-    paths:
-      include:
-        - "*.html"
+- id: django-no-csrf-token
+  languages:
+  - generic
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe: 'CWE-352: Cross-Site Request Forgery (CSRF)'
+    impact: MEDIUM
+    likelihood: MEDIUM
+    references:
+    - https://docs.djangoproject.com/en/4.2/howto/csrf/
+    subcategory:
+    - audit
+    technology:
+    - django
+  paths:
+    include:
+    - '*.html'
+  patterns:
+  - pattern: <form...>...</form>
+  - pattern-either:
+    - pattern: '<form ... method="$METHOD" ...>...</form>
+
+        '
+    - pattern: '<form ... method=''$METHOD'' ...>...</form>
+
+        '
+    - pattern: '<form ... method=$METHOD ...>...</form>
+
+        '
+  - metavariable-regex:
+      metavariable: $METHOD
+      regex: (?i)(post|put|delete|patch)
+  - pattern-not-inside: <form...>...{% csrf_token %}...</form>
+  - pattern-not-inside: <form...>...{{ $VAR.csrf_token }}...</form>
+  severity: WARNING

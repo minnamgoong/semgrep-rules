@@ -1,31 +1,31 @@
 rules:
 - id: insecure-object-assign
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - javascript
+  - typescript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-601: URL Redirection to Untrusted Site ('Open Redirect')"
+    - 'CWE-601: URL Redirection to Untrusted Site (''Open Redirect'')'
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
     references:
     - https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html
     - https://en.wikipedia.org/wiki/Mass_assignment_vulnerability
-    category: security
-    technology:
-    - javascript
     subcategory:
     - vuln
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
+    technology:
+    - javascript
   mode: taint
+  pattern-sinks:
+  - pattern: Object.assign(...)
   pattern-sources:
   - patterns:
     - pattern: JSON.parse(...)
     - pattern-not: JSON.parse("...",...)
-  pattern-sinks:
-  - pattern: Object.assign(...)
+  severity: WARNING

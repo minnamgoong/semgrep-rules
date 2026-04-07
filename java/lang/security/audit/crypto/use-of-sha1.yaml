@@ -1,39 +1,42 @@
 rules:
 - id: use-of-sha1
-  message: "취약한 해시 알고리즘(SHA-1)이 포획되었습니다. 대체 보상 처리가 요구됩니다."
-  languages: [java]
-  severity: WARNING
+  languages:
+  - java
+  message: 취약한 해시 알고리즘(SHA-1)이 포획되었습니다. 대체 보상 처리가 요구됩니다.
   metadata:
+    asvs:
+      control_id: 6.2.5 Insecure Algorithm
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x14-V6-Cryptography.md#v62-algorithms
+      section: V6 Stored Cryptography Verification Requirements
+      version: '4'
+    category: security
+    confidence: HIGH
+    cwe:
+    - 'CWE-328: Use of Weak Hash'
     functional-categories:
-      - 'crypto::search::hash-algorithm::javax.crypto'
+    - crypto::search::hash-algorithm::javax.crypto
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A03:2017 - Sensitive Data Exposure
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
-    cwe:
-    - 'CWE-328: Use of Weak Hash'
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#WEAK_MESSAGE_DIGEST_SHA1
-    asvs:
-      section: V6 Stored Cryptography Verification Requirements
-      control_id: 6.2.5 Insecure Algorithm
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x14-V6-Cryptography.md#v62-algorithms
-      version: '4'
-    category: security
-    technology:
-    - java
     references:
     - https://owasp.org/Top10/A02_2021-Cryptographic_Failures
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#WEAK_MESSAGE_DIGEST_SHA1
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: HIGH
+    technology:
+    - java
   pattern-either:
   - patterns:
-    - pattern: |
-        java.security.MessageDigest.getInstance("$ALGO", ...);
+    - pattern: 'java.security.MessageDigest.getInstance("$ALGO", ...);
+
+        '
     - metavariable-regex:
         metavariable: $ALGO
         regex: (SHA1|SHA-1)
-  - pattern: |
-      $DU.getSha1Digest().digest(...)
+  - pattern: '$DU.getSha1Digest().digest(...)
+
+      '
+  severity: WARNING

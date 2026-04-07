@@ -1,38 +1,44 @@
 rules:
 - id: insecure-document-method
-  message: "document.write 또는 innerHTML 에 외부 오염 데이터가 탑재되어 DOM-XSS 위험이 보입니다. 안전한 DOM 트리 생성 메서드로 변경하세요."
+  languages:
+  - javascript
+  - typescript
+  message: document.write 또는 innerHTML 에 외부 오염 데이터가 탑재되어 DOM-XSS 위험이 보입니다. 안전한 DOM
+    트리 생성 메서드로 변경하세요.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
     - A05:2025 - Injection
-    category: security
-    technology:
-    - browser
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
+    subcategory:
+    - audit
+    technology:
+    - browser
   patterns:
   - pattern-either:
-    - pattern: |
-        $EL.innerHTML = $HTML;
-    - pattern: |
-        $EL.outerHTML = $HTML;
+    - pattern: '$EL.innerHTML = $HTML;
+
+        '
+    - pattern: '$EL.outerHTML = $HTML;
+
+        '
     - pattern: document.write(...)
-  - pattern-not: |
-      $EL.innerHTML = "...";
-  - pattern-not: |
-      $EL.outerHTML = "...";
+  - pattern-not: '$EL.innerHTML = "...";
+
+      '
+  - pattern-not: '$EL.outerHTML = "...";
+
+      '
   - pattern-not: document.write("...")
+  severity: ERROR

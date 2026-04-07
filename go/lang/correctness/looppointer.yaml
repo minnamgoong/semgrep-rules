@@ -1,25 +1,18 @@
 rules:
-  - id: exported_loop_pointer
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    metadata:
-      references:
-        - https://github.com/kyoh86/looppointer
-      category: correctness
-      technology:
-        - go
-    severity: WARNING
-    languages:
-      - go
-    pattern-either:
-      - pattern: |
-          for _, $VALUE := range $SOURCE {
-            <... &($VALUE) ...>
-          }
-      - pattern: |
-          for _, $VALUE := range $SOURCE {
-            <... func() { <... &$VALUE ...> } ...>
-          }
-      - pattern: |
-          for _, $VALUE := range $SOURCE {
-            <... $ANYTHING(..., <... &$VALUE ...>, ...) ...>
-          }
+- id: exported_loop_pointer
+  languages:
+  - go
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: correctness
+    references:
+    - https://github.com/kyoh86/looppointer
+    technology:
+    - go
+  pattern-either:
+  - pattern: "for _, $VALUE := range $SOURCE {\n  <... &($VALUE) ...>\n}\n"
+  - pattern: "for _, $VALUE := range $SOURCE {\n  <... func() { <... &$VALUE ...>\
+      \ } ...>\n}\n"
+  - pattern: "for _, $VALUE := range $SOURCE {\n  <... $ANYTHING(..., <... &$VALUE\
+      \ ...>, ...) ...>\n}\n"
+  severity: WARNING

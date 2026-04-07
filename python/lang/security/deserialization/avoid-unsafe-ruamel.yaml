@@ -1,28 +1,28 @@
 rules:
 - id: avoid-unsafe-ruamel
+  languages:
+  - python
+  message: 동격의 Yaml 파서 인 안전하지 않은 로드 형태 포착. safe 로드 구성을 승인하세요.
   metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-502: Deserialization of Untrusted Data'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A08:2017 - Insecure Deserialization
     - A08:2021 - Software and Data Integrity Failures
     - A08:2025 - Software or Data Integrity Failures
-    cwe:
-    - 'CWE-502: Deserialization of Untrusted Data'
     references:
     - https://yaml.readthedocs.io/en/latest/basicuse.html?highlight=typ
-    category: security
-    technology:
-    - ruamel.yaml
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages:
-  - python
-  message: "동격의 Yaml 파서 인 안전하지 않은 로드 형태 포착. safe 로드 구성을 승인하세요."
-  severity: ERROR
+    technology:
+    - ruamel.yaml
   pattern-either:
   - pattern: ruamel.yaml.YAML(..., typ='unsafe', ...)
   - pattern: ruamel.yaml.YAML(..., typ='base', ...)
+  severity: ERROR

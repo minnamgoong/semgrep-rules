@@ -1,22 +1,15 @@
 rules:
-  - id: azure-frontdoor-use-wafmode
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    patterns:
-      - pattern: resource
-      - pattern-inside: |
-          resource "azurerm_frontdoor_firewall_policy" "..." {
-          ...
-          policy_settings {
-            ...
-            enabled = false
-            ...
-          }
-          ...
-          }
-    metadata:
-      category: best-practice
-      technology:
-        - terraform
-        - azure
-    languages: [hcl]
-    severity: WARNING
+- id: azure-frontdoor-use-wafmode
+  languages:
+  - hcl
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - terraform
+    - azure
+  patterns:
+  - pattern: resource
+  - pattern-inside: "resource \"azurerm_frontdoor_firewall_policy\" \"...\" {\n...\n\
+      policy_settings {\n  ...\n  enabled = false\n  ...\n}\n...\n}\n"
+  severity: WARNING

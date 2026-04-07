@@ -1,31 +1,33 @@
 rules:
 - id: command-injection-formatted-runtime-call
-  message: "java.lang.Runtime 호출 인자에 가변 포맷 또는 동적 합산 문자열이 감지되었습니다. 외부 입력 탑재 시 명령어 주입(Command Injection) 위협이 가중되므로 정적 분할 전달이나 세척을 거치십시오."
+  languages:
+  - kt
+  message: java.lang.Runtime 호출 인자에 가변 포맷 또는 동적 합산 문자열이 감지되었습니다. 외부 입력 탑재 시 명령어 주입(Command
+    Injection) 위협이 가중되므로 정적 분할 전달이나 세척을 거치십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#COMMAND_INJECTION.
-    category: security
-    technology:
-    - kt
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#COMMAND_INJECTION.
     subcategory:
     - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
-  severity: ERROR
-  languages:
-  - kt
+    technology:
+    - kt
   pattern-either:
   - pattern: $RUNTIME.exec($X + $Y)
   - pattern: $RUNTIME.exec(String.format(...))
   - pattern: $RUNTIME.loadLibrary($X + $Y)
   - pattern: $RUNTIME.loadLibrary(String.format(...))
+  severity: ERROR

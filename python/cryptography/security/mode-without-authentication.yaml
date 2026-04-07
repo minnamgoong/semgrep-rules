@@ -1,15 +1,15 @@
 rules:
 - id: crypto-mode-without-authentication
-  message: "무결성 검증 없는 암호화 운영 모드가 사용되었습니다. GCM 등 AEAD 모드로 교정하세요."
   languages:
   - python
-  severity: ERROR
+  message: 무결성 검증 없는 암호화 운영 모드가 사용되었습니다. GCM 등 AEAD 모드로 교정하세요.
   metadata:
     category: security
-    technology:
-    - cryptography
+    confidence: MEDIUM
     cwe:
     - 'CWE-327: Use of a Broken or Risky Cryptographic Algorithm'
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A03:2017 - Sensitive Data Exposure
     - A02:2021 - Cryptographic Failures
@@ -18,22 +18,28 @@ rules:
     - https://owasp.org/Top10/A02_2021-Cryptographic_Failures
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - cryptography
   patterns:
   - pattern-either:
     - patterns:
-      - pattern: |
-          Cipher(..., $HAZMAT_MODE(...),...)
-      - pattern-not-inside: |
-          Cipher(..., $HAZMAT_MODE(...),...)
+      - pattern: 'Cipher(..., $HAZMAT_MODE(...),...)
+
+          '
+      - pattern-not-inside: 'Cipher(..., $HAZMAT_MODE(...),...)
+
           ...
+
           HMAC(...)
-      - pattern-not-inside: |
-          Cipher(..., $HAZMAT_MODE(...),...)
+
+          '
+      - pattern-not-inside: 'Cipher(..., $HAZMAT_MODE(...),...)
+
           ...
+
           hmac.HMAC(...)
+
+          '
   - metavariable-pattern:
       metavariable: $HAZMAT_MODE
       patterns:
@@ -42,3 +48,4 @@ rules:
         - pattern: modes.CBC
         - pattern: modes.CFB
         - pattern: modes.OFB
+  severity: ERROR

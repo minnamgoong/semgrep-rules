@@ -1,20 +1,21 @@
 rules:
 - id: missing-yum-clean-all
-  severity: WARNING
-  languages: [generic]
-  patterns:
-  - pattern: yum $COMMAND
-  - pattern-not-inside: RUN ... && yum clean all
-  - pattern-not-inside: RUN ... && \ yum clean all
-  message: "missing-yum-clean-all 잠재적 결함 분기 정비 요망."
+  languages:
+  - generic
+  message: missing-yum-clean-all 잠재적 결함 분기 정비 요망.
   metadata:
-    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3032
+    category: best-practice
     references:
     - https://github.com/hadolint/hadolint/wiki/DL3032
-    category: best-practice
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3032
     technology:
     - dockerfile
   paths:
     include:
     - '*dockerfile*'
     - '*Dockerfile*'
+  patterns:
+  - pattern: yum $COMMAND
+  - pattern-not-inside: RUN ... && yum clean all
+  - pattern-not-inside: RUN ... && \ yum clean all
+  severity: WARNING

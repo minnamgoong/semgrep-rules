@@ -1,66 +1,51 @@
 rules:
-  - id: jackson-unsafe-deserialization
-    patterns:
-      - pattern-either:
-          - patterns:
-              - pattern-inside: |
-                  ObjectMapper $OM = new ObjectMapper(...);
-                  ...
-              - pattern-inside: |
-                  $OM.enableDefaultTyping();
-                  ...
-              - pattern: $OM.readValue($JSON, ...);
-          - patterns:
-              - pattern-inside: |
-                  class $CLASS {
-                    ...
-                    @JsonTypeInfo(use = Id.CLASS,...)
-                    $TYPE $VAR;
-                    ...
-                  }
-              - metavariable-regex:
-                  metavariable: $TYPE
-                  regex: (Object|Serializable|Comparable)
-              - pattern: $OM.readValue($JSON, $CLASS.class);
-          - patterns:
-              - pattern-inside: |
-                  class $CLASS {
-                    ...
-                    ObjectMapper $OM;
-                    ...
-                    $INITMETHODTYPE $INITMETHOD(...) {
-                      ...
-                      $OM = new ObjectMapper();
-                      ...
-                      $OM.enableDefaultTyping();
-                      ...
-                    }
-                    ...
-                  }
-              - pattern-inside: |
-                  $METHODTYPE $METHOD(...) {
-                    ...  
-                  }
-              - pattern: $OM.readValue($JSON, ...);
-    message: "안전하지 않은 역직렬화 가동이 포착되었습니다. RCE 공격 차단을 위해 직렬화 파서를 격수하십시오."
-    languages:
-      - java
-    severity: WARNING
-    metadata:
-      category: security
-      subcategory:
-        - audit
-      cwe:
-        - "CWE-502: Deserialization of Untrusted Data"
-      confidence: MEDIUM
-      likelihood: LOW
-      impact: HIGH
-      owasp:
-        - A8:2017 Insecure Deserialization
-        - A8:2021 Software and Data Integrity Failures
-      references:
-        - https://swapneildash.medium.com/understanding-insecure-implementation-of-jackson-deserialization-7b3d409d2038
-        - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
-        - https://adamcaudill.com/2017/10/04/exploiting-jackson-rce-cve-2017-7525/
-      technology:
-        - jackson
+- id: jackson-unsafe-deserialization
+  languages:
+  - java
+  message: 안전하지 않은 역직렬화 가동이 포착되었습니다. RCE 공격 차단을 위해 직렬화 파서를 격수하십시오.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-502: Deserialization of Untrusted Data'
+    impact: HIGH
+    likelihood: LOW
+    owasp:
+    - A8:2017 Insecure Deserialization
+    - A8:2021 Software and Data Integrity Failures
+    references:
+    - https://swapneildash.medium.com/understanding-insecure-implementation-of-jackson-deserialization-7b3d409d2038
+    - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    - https://adamcaudill.com/2017/10/04/exploiting-jackson-rce-cve-2017-7525/
+    subcategory:
+    - audit
+    technology:
+    - jackson
+  patterns:
+  - pattern-either:
+    - patterns:
+      - pattern-inside: 'ObjectMapper $OM = new ObjectMapper(...);
+
+          ...
+
+          '
+      - pattern-inside: '$OM.enableDefaultTyping();
+
+          ...
+
+          '
+      - pattern: $OM.readValue($JSON, ...);
+    - patterns:
+      - pattern-inside: "class $CLASS {\n  ...\n  @JsonTypeInfo(use = Id.CLASS,...)\n\
+          \  $TYPE $VAR;\n  ...\n}\n"
+      - metavariable-regex:
+          metavariable: $TYPE
+          regex: (Object|Serializable|Comparable)
+      - pattern: $OM.readValue($JSON, $CLASS.class);
+    - patterns:
+      - pattern-inside: "class $CLASS {\n  ...\n  ObjectMapper $OM;\n  ...\n  $INITMETHODTYPE\
+          \ $INITMETHOD(...) {\n    ...\n    $OM = new ObjectMapper();\n    ...\n\
+          \    $OM.enableDefaultTyping();\n    ...\n  }\n  ...\n}\n"
+      - pattern-inside: "$METHODTYPE $METHOD(...) {\n  ...  \n}\n"
+      - pattern: $OM.readValue($JSON, ...);
+  severity: WARNING

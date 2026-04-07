@@ -1,40 +1,43 @@
 rules:
-- id: avoid-pyyaml-load
+- fix-regex:
+    count: 1
+    regex: unsafe_load
+    replacement: safe_load
+  id: avoid-pyyaml-load
+  languages:
+  - python
+  message: 취약한 PyYAML load() 가동이 식별되었습니다. RCE 예방을 위해 safe_load()로 대두 전개 처리 하십시오.
   metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-502: Deserialization of Untrusted Data'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A08:2017 - Insecure Deserialization
     - A08:2021 - Software and Data Integrity Failures
     - A08:2025 - Software or Data Integrity Failures
-    cwe:
-    - 'CWE-502: Deserialization of Untrusted Data'
     references:
     - https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
     - https://nvd.nist.gov/vuln/detail/CVE-2017-18342
-    category: security
-    technology:
-    - pyyaml
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages:
-  - python
-  message: "취약한 PyYAML load() 가동이 식별되었습니다. RCE 예방을 위해 safe_load()로 대두 전개 처리 하십시오."
-  fix-regex:
-    regex: unsafe_load
-    replacement: safe_load
-    count: 1
-  severity: ERROR
+    technology:
+    - pyyaml
   patterns:
-  - pattern-inside: |
-      import yaml
+  - pattern-inside: 'import yaml
+
       ...
-  - pattern-not-inside: |
-      $YAML = ruamel.yaml.YAML(...)
+
+      '
+  - pattern-not-inside: '$YAML = ruamel.yaml.YAML(...)
+
       ...
+
+      '
   - pattern-either:
     - pattern: yaml.unsafe_load(...)
     - pattern: yaml.load(..., Loader=yaml.Loader, ...)
@@ -43,3 +46,4 @@ rules:
     - pattern: yaml.load_all(..., Loader=yaml.Loader, ...)
     - pattern: yaml.load_all(..., Loader=yaml.UnsafeLoader, ...)
     - pattern: yaml.load_all(..., Loader=yaml.CLoader, ...)
+  severity: ERROR

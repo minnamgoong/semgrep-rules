@@ -1,61 +1,76 @@
 rules:
 - id: react-insecure-request
-  message: "React 애플리케이션에서 암호화되지 않은 HTTP 요청이 감지되었습니다. 스니핑 공격에 노출되므로 https:// 사용을 권장합니다."
+  languages:
+  - typescript
+  - javascript
+  message: React 애플리케이션에서 암호화되지 않은 HTTP 요청이 감지되었습니다. 스니핑 공격에 노출되므로 https:// 사용을 권장합니다.
   metadata:
-    vulnerability: Insecure Transport
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-319: Cleartext Transmission of Sensitive Information'
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A03:2017 - Sensitive Data Exposure
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
-    cwe:
-    - 'CWE-319: Cleartext Transmission of Sensitive Information'
     references:
     - https://www.npmjs.com/package/axios
-    category: security
-    technology:
-    - react
     subcategory:
     - vuln
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages:
-  - typescript
-  - javascript
-  severity: ERROR
+    technology:
+    - react
+    vulnerability: Insecure Transport
   patterns:
-    - pattern-either:
-        - patterns:
-          - pattern-either:
-              - pattern-inside: |
-                  import $AXIOS from 'axios';
-                  ...
-                  $AXIOS.$METHOD(...)
-              - pattern-inside: |
-                  $AXIOS = require('axios');
-                  ...
-                  $AXIOS.$METHOD(...)
-          - pattern: $AXIOS.$VERB("$URL",...)
-          - metavariable-regex:
-              metavariable: $VERB
-              regex: ^(get|post|delete|head|patch|put|options)
-        - patterns:
-          - pattern-either:
-              - pattern-inside: |
-                  import $AXIOS from 'axios';
-                  ...
-                  $AXIOS(...)
-              - pattern-inside: |
-                  $AXIOS = require('axios');
-                  ...
-                  $AXIOS(...)
-          - pattern-either:
-              - pattern: '$AXIOS({url: "$URL"}, ...)'
-              - pattern: |
-                  $OPTS = {url: "$URL"}
-                  ...
-                  $AXIOS($OPTS, ...)
-        - pattern: fetch("$URL", ...)
-    - metavariable-regex:
-          metavariable: $URL
-          regex: ^([Hh][Tt][Tt][Pp]:\/\/(?!localhost).*)
+  - pattern-either:
+    - patterns:
+      - pattern-either:
+        - pattern-inside: 'import $AXIOS from ''axios'';
+
+            ...
+
+            $AXIOS.$METHOD(...)
+
+            '
+        - pattern-inside: '$AXIOS = require(''axios'');
+
+            ...
+
+            $AXIOS.$METHOD(...)
+
+            '
+      - pattern: $AXIOS.$VERB("$URL",...)
+      - metavariable-regex:
+          metavariable: $VERB
+          regex: ^(get|post|delete|head|patch|put|options)
+    - patterns:
+      - pattern-either:
+        - pattern-inside: 'import $AXIOS from ''axios'';
+
+            ...
+
+            $AXIOS(...)
+
+            '
+        - pattern-inside: '$AXIOS = require(''axios'');
+
+            ...
+
+            $AXIOS(...)
+
+            '
+      - pattern-either:
+        - pattern: '$AXIOS({url: "$URL"}, ...)'
+        - pattern: '$OPTS = {url: "$URL"}
+
+            ...
+
+            $AXIOS($OPTS, ...)
+
+            '
+    - pattern: fetch("$URL", ...)
+  - metavariable-regex:
+      metavariable: $URL
+      regex: ^([Hh][Tt][Tt][Pp]:\/\/(?!localhost).*)
+  severity: ERROR

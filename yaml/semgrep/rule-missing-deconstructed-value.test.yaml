@@ -1,34 +1,44 @@
 rules:
-  - id: half-written-crypto-example
-    message: "half-written-crypto-example 잠재적 결함 및 보안 이격율 정비 요망."
-    languages:
-      - js
-    severity: WARNING
-    patterns:
-      - pattern-inside: |
-          # ruleid: missing-deconstructed-value
-          const {...,createCipheriv,...} = require('node:crypto');
-          ...
-      - pattern: |
-          createCipheriv($ALGO, $KEY, $IV);
-      - pattern-either: 
-       # ok: missing-deconstructed-value
-        - pattern-inside: |
-            const {...,createCipheriv,...} = require('node:crypto');
-            ...
-        - pattern-inside: |
-            let {...,createCipheriv,...} = require('node:crypto');
-            ...
-        - pattern-inside: |
-            var {...,createCipheriv,...} = require('node:crypto');
-            ...
-      - pattern-either: 
-        # ruleid: missing-deconstructed-value
-        - pattern-inside: |
-            const {...,createCipheriv,...} = require('node:crypto');
-            ...
-        # ruleid: missing-deconstructed-value
-        - pattern-inside: |
-            let {...,createCipheriv,...} = require('node:crypto');
-            ...
- 
+- id: half-written-crypto-example
+  languages:
+  - js
+  message: half-written-crypto-example 잠재적 결함 및 보안 이격율 정비 요망.
+  patterns:
+  - pattern-inside: '# ruleid: missing-deconstructed-value
+
+      const {...,createCipheriv,...} = require(''node:crypto'');
+
+      ...
+
+      '
+  - pattern: 'createCipheriv($ALGO, $KEY, $IV);
+
+      '
+  - pattern-either:
+    - pattern-inside: 'const {...,createCipheriv,...} = require(''node:crypto'');
+
+        ...
+
+        '
+    - pattern-inside: 'let {...,createCipheriv,...} = require(''node:crypto'');
+
+        ...
+
+        '
+    - pattern-inside: 'var {...,createCipheriv,...} = require(''node:crypto'');
+
+        ...
+
+        '
+  - pattern-either:
+    - pattern-inside: 'const {...,createCipheriv,...} = require(''node:crypto'');
+
+        ...
+
+        '
+    - pattern-inside: 'let {...,createCipheriv,...} = require(''node:crypto'');
+
+        ...
+
+        '
+  severity: WARNING

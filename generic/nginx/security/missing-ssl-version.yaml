@@ -1,33 +1,33 @@
 rules:
 - id: missing-ssl-version
-  patterns:
-  - pattern: server { ... listen $PORT ssl; ... }
-  - pattern-not-inside: server { ... ssl_protocols ... }
+  languages:
+  - generic
+  message: missing-ssl-version 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-326: Inadequate Encryption Strength'
+    impact: MEDIUM
+    likelihood: LOW
+    owasp:
+    - A03:2017 - Sensitive Data Exposure
+    - A02:2021 - Cryptographic Failures
+    - A04:2025 - Cryptographic Failures
+    references:
+    - https://www.acunetix.com/blog/web-security-zone/hardening-nginx/
+    - https://nginx.org/en/docs/http/configuring_https_servers.html
+    subcategory:
+    - audit
+    technology:
+    - nginx
   paths:
     include:
     - '*.conf'
     - '*.vhost'
     - '**/sites-available/*'
     - '**/sites-enabled/*'
-  languages:
-  - generic
+  patterns:
+  - pattern: server { ... listen $PORT ssl; ... }
+  - pattern-not-inside: server { ... ssl_protocols ... }
   severity: WARNING
-  message: "missing-ssl-version 잠재적 결함 분기 정비 요망."
-  metadata:
-    cwe:
-    - 'CWE-326: Inadequate Encryption Strength'
-    references:
-    - https://www.acunetix.com/blog/web-security-zone/hardening-nginx/
-    - https://nginx.org/en/docs/http/configuring_https_servers.html
-    category: security
-    technology:
-    - nginx
-    confidence: MEDIUM
-    owasp:
-    - A03:2017 - Sensitive Data Exposure
-    - A02:2021 - Cryptographic Failures
-    - A04:2025 - Cryptographic Failures
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: MEDIUM

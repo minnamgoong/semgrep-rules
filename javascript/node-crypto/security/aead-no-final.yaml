@@ -1,36 +1,43 @@
 rules:
 - id: aead-no-final
-  message: "AEAD 암호 해독 객체의 final() 호출이 빠졌습니다. 인증 태그(Tag) 검증이 스킵되어 위조 데이터 분별이 안되므로 필수 호출하세요."
+  languages:
+  - javascript
+  - typescript
+  message: AEAD 암호 해독 객체의 final() 호출이 빠졌습니다. 인증 태그(Tag) 검증이 스킵되어 위조 데이터 분별이 안되므로 필수
+    호출하세요.
   metadata:
+    category: security
+    confidence: HIGH
     cwe:
     - 'CWE-310: CWE CATEGORY: Cryptographic Issues'
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
-    category: security
+    references:
+    - https://nodejs.org/api/crypto.html#deciphersetauthtagbuffer-encoding
+    - https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
     subcategory:
     - vuln
     technology:
     - node-crypto
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: HIGH
-    references:
-    - https://nodejs.org/api/crypto.html#deciphersetauthtagbuffer-encoding
-    - https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
   patterns:
-  - pattern: |
-      $DECIPHER = $CRYPTO.createDecipheriv('$ALGO', ...)
+  - pattern: '$DECIPHER = $CRYPTO.createDecipheriv(''$ALGO'', ...)
+
       ...
+
       $DECIPHER.update(...)
-  - pattern-not-inside: |
-        $DECIPHER = $CRYPTO.createDecipheriv('$ALGO', ...)
-        ...
-        $DECIPHER.final(...)
+
+      '
+  - pattern-not-inside: '$DECIPHER = $CRYPTO.createDecipheriv(''$ALGO'', ...)
+
+      ...
+
+      $DECIPHER.final(...)
+
+      '
   - metavariable-regex:
       metavariable: $ALGO
-      regex: ".*(-gcm|-ccm|-ocb|chacha20-poly1305)$"
+      regex: .*(-gcm|-ccm|-ocb|chacha20-poly1305)$
+  severity: ERROR

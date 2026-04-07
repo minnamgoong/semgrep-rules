@@ -1,43 +1,43 @@
 rules:
 - id: tainted-env-from-http-request
-  message: "HTTP 요청이 시스템 커맨드(`exec`)의 환경 변수로 직주입됩니다. 임의 명령 실행 공격을 예방하기 위해 조치하세요."
-  languages: [java]
-  severity: ERROR
-  mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-either:
-      - pattern: |
-          (HttpServletRequest $REQ)
-      - patterns:   # this pattern is a hack to get the rule to recognize `map` as tainted source when `cookie.getValue(user_input)` is used.
-        - pattern-inside: |
-            (javax.servlet.http.Cookie[] $COOKIES) = (HttpServletRequest $REQ).getCookies(...);
-            ...
-            for (javax.servlet.http.Cookie $COOKIE: $COOKIES) {
-              ...
-            }
-        - pattern: |
-            $COOKIE.getValue(...)
-  pattern-sinks:
-       - patterns:
-           - pattern: (java.lang.Runtime $R).exec($CMD, $ENV_ARGS, ...);
-           - focus-metavariable: $ENV_ARGS
+  languages:
+  - java
+  message: HTTP 요청이 시스템 커맨드(`exec`)의 환경 변수로 직주입됩니다. 임의 명령 실행 공격을 예방하기 위해 조치하세요.
   metadata:
     category: security
-    technology:
-    - java
+    confidence: MEDIUM
     cwe:
-    - "CWE-454: External Initialization of Trusted Variables or Data Stores"
+    - 'CWE-454: External Initialization of Trusted Variables or Data Stores'
+    cwe2021-top25: false
+    cwe2022-top25: false
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: false
-    cwe2021-top25: false
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - java
+  mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern: (java.lang.Runtime $R).exec($CMD, $ENV_ARGS, ...);
+    - focus-metavariable: $ENV_ARGS
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - pattern: '(HttpServletRequest $REQ)
+
+          '
+      - patterns:
+        - pattern-inside: "(javax.servlet.http.Cookie[] $COOKIES) = (HttpServletRequest\
+            \ $REQ).getCookies(...);\n...\nfor (javax.servlet.http.Cookie $COOKIE:\
+            \ $COOKIES) {\n  ...\n}\n"
+        - pattern: '$COOKIE.getValue(...)
+
+            '
+  severity: ERROR

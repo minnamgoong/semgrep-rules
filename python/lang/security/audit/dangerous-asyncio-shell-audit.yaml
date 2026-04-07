@@ -1,43 +1,46 @@
 rules:
 - id: dangerous-asyncio-shell-audit
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 dangerous-asyncio-shell-audit 전사 단속이 요구됩니다.
+  metadata:
+    asvs:
+      control_id: 5.3.8 OS Command Injection
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
+      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
+      version: '4'
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
+    owasp:
+    - A01:2017 - Injection
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://docs.python.org/3/library/asyncio-subprocess.html
+    - https://docs.python.org/3/library/shlex.html
+    - https://semgrep.dev/docs/cheat-sheets/python-command-injection/
+    subcategory:
+    - audit
+    technology:
+    - python
   patterns:
   - pattern-either:
     - pattern: $LOOP.subprocess_shell($PROTOCOL, $CMD)
     - pattern: asyncio.subprocess.create_subprocess_shell($CMD, ...)
     - pattern: asyncio.create_subprocess_shell($CMD, ...)
-  - pattern-not-inside: |
-      $CMD = "..."
+  - pattern-not-inside: '$CMD = "..."
+
       ...
+
+      '
   - pattern-not: $LOOP.subprocess_shell($PROTOCOL, "...")
   - pattern-not: asyncio.subprocess.create_subprocess_shell("...", ...)
   - pattern-not: asyncio.create_subprocess_shell("...", ...)
-  message: "인젝션 및 논리 에러 예방을 위한 dangerous-asyncio-shell-audit 전사 단속이 요구됩니다."
-  metadata:
-    owasp:
-    - A01:2017 - Injection
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
-    asvs:
-      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
-      control_id: 5.3.8 OS Command Injection
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
-      version: '4'
-    references:
-    - https://docs.python.org/3/library/asyncio-subprocess.html
-    - https://docs.python.org/3/library/shlex.html
-    - https://semgrep.dev/docs/cheat-sheets/python-command-injection/
-    category: security
-    technology:
-    - python
-    confidence: LOW
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: HIGH
-  languages:
-  - python
   severity: ERROR

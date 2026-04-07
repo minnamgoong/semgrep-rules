@@ -1,25 +1,31 @@
 rules:
-  - id: pytest-assert_match-after-path-patch
-    patterns:
-      - pattern-inside: |
-          import pytest
-          ...
-      - pattern-either:
-        - pattern-inside: |
-            mocker.patch("pathlib.Path", $MOCKED_VALUE)
-            ...
-        - pattern-inside: |
-            mocker.patch.object(pathlib.Path, $METHOD, $MOCKED_VALUE)
-            ...
-      - pattern:
-          snapshot.assert_match(...)
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: correctness
-      technology:
-        - python
-      references:
-        - https://github.com/returntocorp/semgrep/pull/5459
-        - https://pypi.org/project/pytest-snapshot/
+- id: pytest-assert_match-after-path-patch
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: correctness
+    references:
+    - https://github.com/returntocorp/semgrep/pull/5459
+    - https://pypi.org/project/pytest-snapshot/
+    technology:
+    - python
+  patterns:
+  - pattern-inside: 'import pytest
+
+      ...
+
+      '
+  - pattern-either:
+    - pattern-inside: 'mocker.patch("pathlib.Path", $MOCKED_VALUE)
+
+        ...
+
+        '
+    - pattern-inside: 'mocker.patch.object(pathlib.Path, $METHOD, $MOCKED_VALUE)
+
+        ...
+
+        '
+  - pattern: snapshot.assert_match(...)
+  severity: WARNING

@@ -1,12 +1,13 @@
 rules:
-  - id: assignment-comparison
-    message: "조건식 내부에서 대입 연산자(=)가 사용되고 있습니다. 의도치 않게 할당이 일어나 비교가 고장날 우려가 있습니다."
-    languages: [java]
-    severity: ERROR
-    pattern-either:
-      - pattern: if ($X=true) { ... }
-      - pattern: if ($X=false) { ... }
-    metadata:
-      category: correctness
-      technology:
-        - java
+- id: assignment-comparison
+  languages:
+  - java
+  message: 조건식 내부에서 대입 연산자(=)가 사용되고 있습니다. 의도치 않게 할당이 일어나 비교가 고장날 우려가 있습니다.
+  metadata:
+    category: correctness
+    technology:
+    - java
+  pattern-either:
+  - pattern: if ($X=true) { ... }
+  - pattern: if ($X=false) { ... }
+  severity: ERROR

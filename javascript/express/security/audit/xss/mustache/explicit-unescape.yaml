@@ -1,9 +1,18 @@
 rules:
 - id: template-explicit-unescape
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - regex
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
@@ -11,19 +20,10 @@ rules:
     references:
     - https://github.com/janl/mustache.js/#variables
     - https://ractive.js.org/v0.x/0.7/mustaches#variables
-    category: security
-    technology:
-    - express
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  languages:
-  - regex
-  severity: WARNING
+    technology:
+    - express
   paths:
     include:
     - '*.mustache'
@@ -32,3 +32,4 @@ rules:
   pattern-either:
   - pattern-regex: '{{{((?!include).)*?}}}'
   - pattern-regex: '{{[\\s]*&.*}}'
+  severity: WARNING

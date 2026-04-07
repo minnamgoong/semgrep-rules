@@ -1,48 +1,47 @@
 rules:
-  - id: twiml-injection
-    languages: [python]
-    severity: WARNING
-    message: "twiml-injection 잠재적 결함 분기 정비 요망."
-    metadata:
-      cwe:
-      - "CWE-91: XML Injection"
-      owasp:
-      - "A03:2021 - Injection"
-      - A05:2025 - Injection
-      category: security
-      technology:
-      - python
-      - twilio
-      - twiml
-      confidence: MEDIUM
-      likelihood: HIGH
-      impact: MEDIUM
-      subcategory: 
-        - vuln
-      references:
-      - https://codeberg.org/fennix/funjection
-    mode: taint
-    pattern-sources:
-    - pattern: |
-        f"..."
-    - pattern: |
-        "..." % ...
-    - pattern: |
-        "...".format(...)
+- id: twiml-injection
+  languages:
+  - python
+  message: twiml-injection 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-91: XML Injection'
+    impact: MEDIUM
+    likelihood: HIGH
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://codeberg.org/fennix/funjection
+    subcategory:
+    - vuln
+    technology:
+    - python
+    - twilio
+    - twiml
+  mode: taint
+  pattern-sanitizers:
+  - pattern: xml.sax.saxutils.escape(...)
+  - pattern: html.escape(...)
+  pattern-sinks:
+  - patterns:
+    - pattern: '$CLIENT.calls.create(..., twiml=$SINK, ...)
 
-    - patterns:
-        - pattern: $ARG
-        - pattern-inside: |
-            def $F(..., $ARG, ...):
-                ...
+        '
+    - focus-metavariable: $SINK
+  pattern-sources:
+  - pattern: 'f"..."
 
-    pattern-sanitizers:
-    - pattern: xml.sax.saxutils.escape(...)
-    - pattern: html.escape(...)
+      '
+  - pattern: '"..." % ...
 
-    pattern-sinks:
-    - patterns:
-      - pattern: |
-          $CLIENT.calls.create(..., twiml=$SINK, ...)
+      '
+  - pattern: '"...".format(...)
 
-      - focus-metavariable: $SINK
+      '
+  - patterns:
+    - pattern: $ARG
+    - pattern-inside: "def $F(..., $ARG, ...):\n    ...\n"
+  severity: WARNING

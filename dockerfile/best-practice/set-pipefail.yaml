@@ -1,24 +1,31 @@
 rules:
-  - id: set-pipefail
-    languages: [dockerfile]
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    metadata:
-      references:
-        - https://github.com/hadolint/hadolint/wiki/DL4006
-      source-rule-url: https://github.com/hadolint/hadolint/wiki/DL4006
-      category: best-practice
-      technology:
-        - dockerfile
-    patterns:
-      - pattern-either:
-          - pattern: RUN ... | ...
-          - pattern: RUN ... || ...
-      - pattern-not-inside: |
-          SHELL [..., "pipefail", ...]
-          ...
-          RUN ... | ...
-      - pattern-not-inside: |
-          SHELL ["/bin/ash", ...]
-          ...
-          RUN ... | ...
-    severity: WARNING
+- id: set-pipefail
+  languages:
+  - dockerfile
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL4006
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL4006
+    technology:
+    - dockerfile
+  patterns:
+  - pattern-either:
+    - pattern: RUN ... | ...
+    - pattern: RUN ... || ...
+  - pattern-not-inside: 'SHELL [..., "pipefail", ...]
+
+      ...
+
+      RUN ... | ...
+
+      '
+  - pattern-not-inside: 'SHELL ["/bin/ash", ...]
+
+      ...
+
+      RUN ... | ...
+
+      '
+  severity: WARNING

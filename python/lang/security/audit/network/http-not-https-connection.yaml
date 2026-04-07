@@ -1,25 +1,26 @@
 rules:
 - id: http-not-https-connection
-  message: "인젝션 및 논리 에러 예방을 위한 http-not-https-connection 전사 단속이 요구됩니다."
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 http-not-https-connection 전사 단속이 요구됩니다.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
     - 'CWE-319: Cleartext Transmission of Sensitive Information'
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A03:2017 - Sensitive Data Exposure
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
     references:
     - https://urllib3.readthedocs.io/en/1.2.1/pools.html#urllib3.connectionpool.HTTPSConnectionPool
-    category: security
-    technology:
-    - python
     subcategory:
     - audit
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages: [python]
-  severity: ERROR
+    technology:
+    - python
   pattern-either:
   - pattern: urllib3.HTTPConnectionPool(...)
   - pattern: urllib3.connectionpool.HTTPConnectionPool(...)
+  severity: ERROR

@@ -1,31 +1,31 @@
 rules:
-- id: unverified-ssl-context
-  patterns:
-  - pattern-either:
-    - pattern: ssl._create_unverified_context(...)
-    - pattern: ssl._create_default_https_context = ssl._create_unverified_context
-  fix-regex:
+- fix-regex:
     regex: _create_unverified_context
     replacement: create_default_context
-  message: "인젝션 및 논리 에러 예방을 위한 unverified-ssl-context 전사 단속이 요구됩니다."
+  id: unverified-ssl-context
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 unverified-ssl-context 전사 단속이 요구됩니다.
   metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-295: Improper Certificate Validation'
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A03:2017 - Sensitive Data Exposure
     - A07:2021 - Identification and Authentication Failures
     - A07:2025 - Authentication Failures
-    cwe:
-    - 'CWE-295: Improper Certificate Validation'
     references:
     - https://docs.python.org/3/library/ssl.html#ssl-security
     - https://docs.python.org/3/library/http.client.html#http.client.HTTPSConnection
-    category: security
-    technology:
-    - python
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - python
+  patterns:
+  - pattern-either:
+    - pattern: ssl._create_unverified_context(...)
+    - pattern: ssl._create_default_https_context = ssl._create_unverified_context
   severity: ERROR
-  languages:
-  - python

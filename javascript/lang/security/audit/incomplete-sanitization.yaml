@@ -1,29 +1,30 @@
 rules:
 - id: incomplete-sanitization
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    cwe:
-    - 'CWE-116: Improper Encoding or Escaping of Output'
-    category: security
-    technology:
-    - javascript
-    owasp:
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
-    references:
-    - https://owasp.org/Top10/A03_2021-Injection
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-116: Improper Encoding or Escaping of Output'
+    impact: LOW
+    likelihood: LOW
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    subcategory:
+    - audit
+    technology:
+    - javascript
   patterns:
-  - pattern: |
-      $STR.replace(($CHAR: string), ...)
+  - pattern: '$STR.replace(($CHAR: string), ...)
+
+      '
   - metavariable-regex:
       metavariable: $CHAR
       regex: ^[\"\']([\'\"\<\>\*\|\{\}\[\]\%\$]{1}|\\n|\\r|\\t|\\&)[\"\']$
+  severity: WARNING

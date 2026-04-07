@@ -1,49 +1,45 @@
 rules:
 - id: java-jwt-hardcoded-secret
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: HIGH
     cwe:
     - 'CWE-798: Use of Hard-coded Credentials'
-    references:
-    - https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A07:2021 - Identification and Authentication Failures
     - A07:2025 - Authentication Failures
+    references:
+    - https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+    subcategory:
+    - vuln
     technology:
     - java
     - secrets
     - jwt
-    category: security
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: HIGH
-  languages: [java]
-  severity: WARNING
   patterns:
   - pattern-either:
-    - pattern: |
-        (Algorithm $ALG) = $ALGO.$HMAC("$Y");
-    - pattern: |
-        $SECRET = "$Y";
+    - pattern: '(Algorithm $ALG) = $ALGO.$HMAC("$Y");
+
+        '
+    - pattern: '$SECRET = "$Y";
+
         ...
+
         (Algorithm $ALG) = $ALGO.$HMAC($SECRET);
-    - pattern: |
-        class $CLASS {
-          ...
-          $TYPE $SECRET = "$Y";
-          ...
-          $RETURNTYPE $FUNC (...) {
-            ...
-            (Algorithm $ALG) = $ALGO.$HMAC($SECRET);
-            ...
-          }
-          ...
-        }
+
+        '
+    - pattern: "class $CLASS {\n  ...\n  $TYPE $SECRET = \"$Y\";\n  ...\n  $RETURNTYPE\
+        \ $FUNC (...) {\n    ...\n    (Algorithm $ALG) = $ALGO.$HMAC($SECRET);\n \
+        \   ...\n  }\n  ...\n}\n"
   - focus-metavariable: $Y
   - metavariable-regex:
       metavariable: $HMAC
       regex: (HMAC384|HMAC256|HMAC512)
+  severity: WARNING

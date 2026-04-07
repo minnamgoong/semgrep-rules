@@ -1,37 +1,44 @@
 rules:
 - id: tainted-ldapi-from-http-request
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
-    - "CWE-90: Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection')"
+    - 'CWE-90: Improper Neutralization of Special Elements used in an LDAP Query (''LDAP
+      Injection'')'
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://sensei.securecodewarrior.com/recipes/scw%3Ajava%3ALDAP-injection
-    category: security
-    technology:
-    - java
     subcategory:
     - vuln
-    impact: MEDIUM
-    likelihood: MEDIUM
-    confidence: MEDIUM
-  severity: WARNING
-  languages: [java]
+    technology:
+    - java
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern: (HttpServletRequest $REQ)
   pattern-sinks:
   - patterns:
     - pattern-either:
-      - pattern: |
-          (javax.naming.directory.InitialDirContext $IDC).search(...)
-      - pattern: |
-          (javax.naming.directory.DirContext $CTX).search(...)
-    - pattern-not: |
-        (javax.naming.directory.InitialDirContext $IDC).search($Y, "...", ...)
-    - pattern-not: |
-        (javax.naming.directory.DirContext $CTX).search($Y, "...", ...)
+      - pattern: '(javax.naming.directory.InitialDirContext $IDC).search(...)
+
+          '
+      - pattern: '(javax.naming.directory.DirContext $CTX).search(...)
+
+          '
+    - pattern-not: '(javax.naming.directory.InitialDirContext $IDC).search($Y, "...",
+        ...)
+
+        '
+    - pattern-not: '(javax.naming.directory.DirContext $CTX).search($Y, "...", ...)
+
+        '
+  pattern-sources:
+  - patterns:
+    - pattern: (HttpServletRequest $REQ)
+  severity: WARNING

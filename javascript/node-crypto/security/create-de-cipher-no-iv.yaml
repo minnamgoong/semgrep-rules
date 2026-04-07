@@ -1,27 +1,30 @@
 rules:
 - id: create-de-cipher-no-iv
-  message: "지원 중단된 createCipher 기용이 잡혔습니다. 암호화 해독 위험이 크므로 createCipheriv 로 고유 IV를 주입하여 보강하세요."
+  languages:
+  - javascript
+  - typescript
+  message: 지원 중단된 createCipher 기용이 잡혔습니다. 암호화 해독 위험이 크므로 createCipheriv 로 고유 IV를 주입하여
+    보강하세요.
   metadata:
+    category: security
+    confidence: HIGH
     cwe:
     - 'CWE-1204: Generation of Weak Initialization Vector (IV)'
-    category: security
+    impact: MEDIUM
+    likelihood: HIGH
+    references:
+    - https://nodejs.org/api/crypto.html#cryptocreatecipheralgorithm-password-options
+    - https://nodejs.org/api/crypto.html#cryptocreatedecipheralgorithm-password-options
     subcategory:
     - vuln
     technology:
     - node-crypto
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: HIGH
-    references:
-    - https://nodejs.org/api/crypto.html#cryptocreatecipheralgorithm-password-options
-    - https://nodejs.org/api/crypto.html#cryptocreatedecipheralgorithm-password-options
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
   patterns:
-    - pattern-either:
-      - pattern: |
-          $CRYPTO.createCipher(...)
-      - pattern: |
-          $CRYPTO.createDecipher(...)
+  - pattern-either:
+    - pattern: '$CRYPTO.createCipher(...)
+
+        '
+    - pattern: '$CRYPTO.createDecipher(...)
+
+        '
+  severity: ERROR

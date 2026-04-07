@@ -1,27 +1,24 @@
 rules:
-  - id: django-using-request-post-after-is-valid
-    patterns:
-      - pattern-inside: |
-          def $FUNC(request, ...):
-            ...
-      - pattern-inside: |
-          if $FORM.is_valid():
-            ...
-      - pattern-either:
-        - pattern: request.POST[...]
-        - pattern: request.POST.get(...)
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: security
-      cwe: "CWE-20: Improper Input Validation"
-      references:
-      - https://docs.djangoproject.com/en/4.2/ref/forms/api/#accessing-clean-data
-      confidence: MEDIUM
-      likelihood: MEDIUM
-      impact: MEDIUM
-      subcategory:
-        - audit
-      technology:
-        - django
+- id: django-using-request-post-after-is-valid
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe: 'CWE-20: Improper Input Validation'
+    impact: MEDIUM
+    likelihood: MEDIUM
+    references:
+    - https://docs.djangoproject.com/en/4.2/ref/forms/api/#accessing-clean-data
+    subcategory:
+    - audit
+    technology:
+    - django
+  patterns:
+  - pattern-inside: "def $FUNC(request, ...):\n  ...\n"
+  - pattern-inside: "if $FORM.is_valid():\n  ...\n"
+  - pattern-either:
+    - pattern: request.POST[...]
+    - pattern: request.POST.get(...)
+  severity: WARNING

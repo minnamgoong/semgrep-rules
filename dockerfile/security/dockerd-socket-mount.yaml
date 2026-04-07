@@ -1,34 +1,32 @@
 rules:
-  - id: dockerfile-dockerd-socket-mount
-    message: "Dockerfile 연쇄 점검: dockerfile-dockerd-socket-mount 준행 오류 국면 감지."
-    languages:
-      - dockerfile
-      - yaml
-    severity: ERROR
-    metadata:
-      cwe:
-        - "CWE-862: Missing Authorization"
-        - "CWE-269: Improper Privilege Management"
-      confidence: HIGH
-      likelihood: MEDIUM
-      impact: HIGH
-      subcategory:
-        - audit
-      technology:
-        - dockerfile
-      category: security
-      references:
-        - https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html
-        - https://redfoxsec.com/blog/insecure-volume-mounts-in-docker/
-        - https://blog.quarkslab.com/why-is-exposing-the-docker-socket-a-really-bad-idea.html
-    pattern-either:
-      - patterns:
-        - pattern: VOLUME $X
-        - metavariable-regex:
-            metavariable: $X
-            regex: "/var/run/docker.sock"
-      - patterns:
-        - pattern-regex: '- "/var/run/docker.sock:.*"'
-        - pattern-inside: |
-            volumes:
-              ...
+- id: dockerfile-dockerd-socket-mount
+  languages:
+  - dockerfile
+  - yaml
+  message: 'Dockerfile 연쇄 점검: dockerfile-dockerd-socket-mount 준행 오류 국면 감지.'
+  metadata:
+    category: security
+    confidence: HIGH
+    cwe:
+    - 'CWE-862: Missing Authorization'
+    - 'CWE-269: Improper Privilege Management'
+    impact: HIGH
+    likelihood: MEDIUM
+    references:
+    - https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html
+    - https://redfoxsec.com/blog/insecure-volume-mounts-in-docker/
+    - https://blog.quarkslab.com/why-is-exposing-the-docker-socket-a-really-bad-idea.html
+    subcategory:
+    - audit
+    technology:
+    - dockerfile
+  pattern-either:
+  - patterns:
+    - pattern: VOLUME $X
+    - metavariable-regex:
+        metavariable: $X
+        regex: /var/run/docker.sock
+  - patterns:
+    - pattern-regex: '- "/var/run/docker.sock:.*"'
+    - pattern-inside: "volumes:\n  ...\n"
+  severity: ERROR

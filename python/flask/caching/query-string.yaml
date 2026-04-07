@@ -1,44 +1,24 @@
 rules:
-  - id: flask-cache-query-string
-    patterns:
-      - pattern-either:
-          - pattern: |
-              @app.route("...")
-              @cache.cached(...)
-              def $HANDLER(...):
-                ...
-                request.args.get(...)
-          - pattern: |
-              @app.route("...", methods=[..., "POST", ...])
-              @cache.cached(...)
-              def $HANDLER(...):
-                ...
-          - pattern: |
-              @app.route("...", methods=[..., "PUT", ...])
-              @cache.cached(...)
-              def $HANDLER(...):
-                ...
-          - pattern: |
-              @app.route("...", methods=[..., "DELETE", ...])
-              @cache.cached(...)
-              def $HANDLER(...):
-                ...
-          - pattern: |
-              @app.route("...", methods=[..., "PATCH", ...])
-              @cache.cached(...)
-              def $HANDLER(...):
-                ...
-      - pattern-not: |
-          @app.route("...")
-          @cache.cached(..., query_string=True)
-          def $HANDLER(...):
-            ...
-            request.args.get(...)
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    severity: WARNING
-    languages:
-      - python
-    metadata:
-      category: caching
-      technology:
-        - flask
+- id: flask-cache-query-string
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: caching
+    technology:
+    - flask
+  patterns:
+  - pattern-either:
+    - pattern: "@app.route(\"...\")\n@cache.cached(...)\ndef $HANDLER(...):\n  ...\n\
+        \  request.args.get(...)\n"
+    - pattern: "@app.route(\"...\", methods=[..., \"POST\", ...])\n@cache.cached(...)\n\
+        def $HANDLER(...):\n  ...\n"
+    - pattern: "@app.route(\"...\", methods=[..., \"PUT\", ...])\n@cache.cached(...)\n\
+        def $HANDLER(...):\n  ...\n"
+    - pattern: "@app.route(\"...\", methods=[..., \"DELETE\", ...])\n@cache.cached(...)\n\
+        def $HANDLER(...):\n  ...\n"
+    - pattern: "@app.route(\"...\", methods=[..., \"PATCH\", ...])\n@cache.cached(...)\n\
+        def $HANDLER(...):\n  ...\n"
+  - pattern-not: "@app.route(\"...\")\n@cache.cached(..., query_string=True)\ndef\
+      \ $HANDLER(...):\n  ...\n  request.args.get(...)\n"
+  severity: WARNING

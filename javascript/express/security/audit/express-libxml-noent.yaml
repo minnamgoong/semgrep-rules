@@ -1,33 +1,56 @@
 rules:
 - id: express-libxml-noent
-  message: "libxml 라이브러리 처리 시 noent(Entity expansion) 속성이 true 로 인가되었습니다. XXE 취약점에 전방 노출되므로 이를 비활성화 처리하세요."
-  options:
-    interfile: true
+  languages:
+  - javascript
+  - typescript
+  message: libxml 라이브러리 처리 시 noent(Entity expansion) 속성이 true 로 인가되었습니다. XXE 취약점에
+    전방 노출되므로 이를 비활성화 처리하세요.
   metadata:
-    interfile: true
-    references:
-    - https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html
-    technology:
-    - express
     category: security
+    confidence: HIGH
     cwe:
     - 'CWE-611: Improper Restriction of XML External Entity Reference'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    interfile: true
+    likelihood: HIGH
     owasp:
     - A04:2017 - XML External Entities (XXE)
     - A05:2021 - Security Misconfiguration
     - A02:2025 - Security Misconfiguration
-    cwe2022-top25: true
-    cwe2021-top25: true
+    references:
+    - https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html
     subcategory:
     - vuln
-    likelihood: HIGH
-    impact: HIGH
-    confidence: HIGH
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
+    technology:
+    - express
   mode: taint
+  options:
+    interfile: true
+  pattern-sinks:
+  - pattern-either:
+    - patterns:
+      - pattern-either:
+        - pattern-inside: '$XML = require(''$IMPORT'')
+
+            ...
+
+            '
+        - pattern-inside: "import $XML from '$IMPORT'\n  ...\n"
+        - pattern-inside: 'import * as $XML from ''$IMPORT''
+
+            ...
+
+            '
+      - metavariable-regex:
+          metavariable: $IMPORT
+          regex: ^(libxmljs|libxmljs2)$
+      - pattern-inside: $XML.$FUNC($QUERY, {...,noent:true,...})
+      - metavariable-regex:
+          metavariable: $FUNC
+          regex: ^(parseXmlString|parseXml)$
+      - focus-metavariable: $QUERY
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -50,11 +73,14 @@ rules:
       - pattern: $REQ.files.$ANYTHING['data'].toString('utf8')
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+
           {...}
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
     - focus-metavariable: $REQ
     - pattern-either:
       - pattern: params
@@ -64,24 +90,4 @@ rules:
       - pattern: body
       - pattern: files.$ANYTHING.data.toString('utf8')
       - pattern: files.$ANYTHING['data'].toString('utf8')
-  pattern-sinks:
-  - pattern-either:
-    - patterns:
-      - pattern-either:
-        - pattern-inside: |
-            $XML = require('$IMPORT')
-            ...
-        - pattern-inside: |
-            import $XML from '$IMPORT'
-              ...
-        - pattern-inside: |
-            import * as $XML from '$IMPORT'
-            ...
-      - metavariable-regex:
-          metavariable: $IMPORT
-          regex: ^(libxmljs|libxmljs2)$
-      - pattern-inside: $XML.$FUNC($QUERY, {...,noent:true,...})
-      - metavariable-regex:
-          metavariable: $FUNC
-          regex: ^(parseXmlString|parseXml)$
-      - focus-metavariable: $QUERY
+  severity: ERROR

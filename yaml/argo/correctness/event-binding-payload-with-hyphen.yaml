@@ -1,33 +1,30 @@
 rules:
 - id: event-binding-payload-with-hyphen
-  languages: [yaml]
-  severity: WARNING
-  message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
+  languages:
+  - yaml
+  match:
+    all:
+    - inside: 'apiVersion: argoproj.io/v1alpha1
+
+        kind: WorkflowEventBinding
+
+        ...
+
+        '
+    - inside: "spec:\n  ...\n  submit:\n    ...\n    arguments:\n      ...\n     \
+        \ parameters:\n        ...\n"
+    - 'event: $VALUE
+
+      '
+    where:
+    - metavariable: $VALUE
+      regex: payload\..*-.*
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
   metadata:
     category: correctness
     references:
-      - https://argoproj.github.io/argo-workflows/variables/#expression
+    - https://argoproj.github.io/argo-workflows/variables/#expression
     technology:
     - argo
     - argo-workflows
-  match:
-    all:
-    - inside: |
-        apiVersion: argoproj.io/v1alpha1
-        kind: WorkflowEventBinding
-        ...
-    - inside: |
-        spec:
-          ...
-          submit:
-            ...
-            arguments:
-              ...
-              parameters:
-                ...
-    - |
-      event: $VALUE
-    where:
-    - metavariable: $VALUE
-      regex: >-
-        payload\..*-.*
+  severity: WARNING

@@ -1,31 +1,33 @@
 rules:
 - id: gcm-no-tag-length
-  message: "GCM 모드 구동 시 createDecipheriv 에 인증 태그(Tag) 탑재 확인 옵션이 누락되었습니다. 데이터 무결성 검증을 위해 반드시 활성화하세요."
+  languages:
+  - javascript
+  - typescript
+  message: GCM 모드 구동 시 createDecipheriv 에 인증 태그(Tag) 탑재 확인 옵션이 누락되었습니다. 데이터 무결성 검증을
+    위해 반드시 활성화하세요.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
     - 'CWE-310: CWE CATEGORY: Cryptographic Issues'
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
-    category: security
-    subcategory:
-    - vuln
-    technology:
-    - node-crypto
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
     references:
     - https://www.securesystems.de/blog/forging_ciphertexts_under_Galois_Counter_Mode_for_the_Node_js_crypto_module/
     - https://nodejs.org/api/crypto.html#cryptocreatedecipherivalgorithm-key-iv-options
     - https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
+    subcategory:
+    - vuln
+    technology:
+    - node-crypto
   patterns:
-  - pattern: |
-      $CRYPTO.createDecipheriv('$ALGO', $KEY, $IV)
+  - pattern: '$CRYPTO.createDecipheriv(''$ALGO'', $KEY, $IV)
+
+      '
   - metavariable-regex:
       metavariable: $ALGO
-      regex: ".*(-gcm)$"
+      regex: .*(-gcm)$
+  severity: ERROR

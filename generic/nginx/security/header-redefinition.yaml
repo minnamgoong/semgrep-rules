@@ -1,43 +1,33 @@
 rules:
 - id: header-redefinition
-  patterns:
-  - pattern-inside: |
-      server {
-        ...
-        add_header ...;
-        ...
-        ...
-      }
-  - pattern-inside: |
-      location ... {
-        ...
-        ...
-      }
-  - pattern: add_header ...;
+  languages:
+  - generic
+  message: header-redefinition 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-16: CWE CATEGORY: Configuration'
+    impact: LOW
+    likelihood: LOW
+    owasp:
+    - A06:2017 - Security Misconfiguration
+    - A05:2021 - Security Misconfiguration
+    - A02:2025 - Security Misconfiguration
+    references:
+    - https://github.com/yandex/gixy/blob/master/docs/en/plugins/addheaderredefinition.md
+    subcategory:
+    - audit
+    technology:
+    - nginx
   paths:
     include:
     - '*.conf'
     - '*.vhost'
     - '**/sites-available/*'
     - '**/sites-enabled/*'
-  languages:
-  - generic
+  patterns:
+  - pattern-inside: "server {\n  ...\n  add_header ...;\n  ...\n  ...\n}\n"
+  - pattern-inside: "location ... {\n  ...\n  ...\n}\n"
+  - pattern: add_header ...;
   severity: WARNING
-  message: "header-redefinition 잠재적 결함 분기 정비 요망."
-  metadata:
-    cwe:
-    - 'CWE-16: CWE CATEGORY: Configuration'
-    references:
-    - https://github.com/yandex/gixy/blob/master/docs/en/plugins/addheaderredefinition.md
-    category: security
-    technology:
-    - nginx
-    confidence: LOW
-    owasp:
-    - A06:2017 - Security Misconfiguration
-    - A05:2021 - Security Misconfiguration
-    - A02:2025 - Security Misconfiguration
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: LOW

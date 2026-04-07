@@ -1,26 +1,26 @@
 rules:
 - id: s3-public-rw-bucket
-  pattern: acl = "public-read-write"
   languages:
   - hcl
-  severity: ERROR
-  message: "IaC 보안 옵션 누락 경보: s3-public-rw-bucket 설정율을 적용해 주십시오."
+  message: 'IaC 보안 옵션 누락 경보: s3-public-rw-bucket 설정율을 적용해 주십시오.'
   metadata:
-    references:
-    - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#acl
-    - https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
+    category: security
+    confidence: MEDIUM
     cwe:
     - 'CWE-200: Exposure of Sensitive Information to an Unauthorized Actor'
-    category: security
-    technology:
-    - terraform
-    - aws
+    cwe2021-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
-    cwe2021-top25: true
+    references:
+    - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#acl
+    - https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
     subcategory:
     - vuln
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - terraform
+    - aws
+  pattern: acl = "public-read-write"
+  severity: ERROR

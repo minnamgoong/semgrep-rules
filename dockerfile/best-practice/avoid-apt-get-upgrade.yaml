@@ -1,15 +1,16 @@
 rules:
-  - id: avoid-apt-get-upgrade
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    languages: [dockerfile]
-    severity: WARNING
-    metadata:
-      source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3005
-      references:
-        - https://github.com/hadolint/hadolint/wiki/DL3005
-      category: best-practice
-      technology:
-        - dockerfile
-    pattern-either:
-      - pattern: RUN ... apt-get upgrade ...
-      - pattern: RUN ... apt-get dist-upgrade ...
+- id: avoid-apt-get-upgrade
+  languages:
+  - dockerfile
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL3005
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3005
+    technology:
+    - dockerfile
+  pattern-either:
+  - pattern: RUN ... apt-get upgrade ...
+  - pattern: RUN ... apt-get dist-upgrade ...
+  severity: WARNING

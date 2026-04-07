@@ -1,143 +1,204 @@
 rules:
 - id: command-injection-process-builder
-  pattern-either:
-  - patterns:
-    - pattern: |
-        new ProcessBuilder($CMD,...)
-    - pattern-not-inside: |
-        $CMD = "...";
-        ...
-    - pattern-not-inside: |
-        $CMD = Arrays.asList("...",...);
-        ...
-    - pattern-not-inside: |
-        $CMD = new String[]{"...",...};
-        ...
-    - pattern-not: |
-        new ProcessBuilder("...",...)
-    - pattern-not: |
-        new ProcessBuilder(new String[]{"...",...},...)
-    - pattern-not: |
-        new ProcessBuilder(Arrays.asList("...",...),...)
-  - patterns:
-    - pattern: |
-        $PB.command($CMD,...)
-    - pattern-inside: |
-        $TYPE $PB = new ProcessBuilder(...);
-        ...
-    - pattern-not-inside: |
-        $CMD = "...";
-        ...
-    - pattern-not-inside: |
-        $CMD = Arrays.asList("...",...);
-        ...
-    - pattern-not-inside: |
-        $CMD = new String[]{"...",...};
-        ...
-    - pattern-not: |
-        $PB.command("...",...)
-    - pattern-not: |
-        $PB.command(new String[]{"...",...},...)
-    - pattern-not: |
-        $PB.command(Arrays.asList("...",...),...)
-  - patterns:
-    - pattern-either:
-      - pattern: |
-          new ProcessBuilder("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...)
-      - pattern: |
-          new ProcessBuilder("cmd","/c",$ARG,...)
-      - pattern: |
-          new ProcessBuilder(Arrays.asList("cmd","/c",$ARG,...),...)
-      - pattern: |
-          new ProcessBuilder(new String[]{"cmd","/c",$ARG,...},...)
-      - patterns:
-        - pattern-either:
-          - pattern: |
-              new ProcessBuilder($CMD,"/c",$ARG,...)
-          - pattern: |
-              new ProcessBuilder(Arrays.asList($CMD,"/c",$ARG,...),...)
-          - pattern: |
-              new ProcessBuilder(new String[]{$CMD,"/c",$ARG,...},...)
-        - pattern-inside: |
-            $CMD = "cmd";
-            ...
-    - pattern-not-inside: |
-        $ARG = "...";
-        ...
-    - pattern-not: |
-        new ProcessBuilder("...","...","...",...)
-    - pattern-not: |
-        new ProcessBuilder(new String[]{"...","...","...",...},...)
-    - pattern-not: |
-        new ProcessBuilder(Arrays.asList("...","...","...",...),...)
-  - patterns:
-    - pattern-either:
-      - pattern: |
-          $PB.command("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...)
-      - pattern: |
-          $PB.command("cmd","/c",$ARG,...)
-      - pattern: |
-          $PB.command(Arrays.asList("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...),...)
-      - pattern: |
-          $PB.command(Arrays.asList("cmd","/c",$ARG,...),...)
-      - pattern: |
-          $PB.command(new String[]{"=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...},...)
-      - pattern: |
-          $PB.command(new String[]{"cmd","/c",$ARG,...},...)
-      - patterns:
-        - pattern-either:
-          - pattern: |
-              $PB.command($CMD,"-c",$ARG,...)
-          - pattern: |
-              $PB.command(Arrays.asList($CMD,"-c",$ARG,...),...)
-          - pattern: |
-              $PB.command(new String[]{$CMD,"-c",$ARG,...},...)
-        - pattern-inside: |
-            $CMD = "=~/(sh|bash|ksh|csh|tcsh|zsh)/";
-            ...
-      - patterns:
-        - pattern-either:
-          - pattern: |
-              $PB.command($CMD,"/c",$ARG,...)
-          - pattern: |
-              $PB.command(Arrays.asList($CMD,"/c",$ARG,...),...)
-          - pattern: |
-              $PB.command(new String[]{$CMD,"/c",$ARG,...},...)
-        - pattern-inside: |
-            $CMD = "cmd";
-            ...
-    - pattern-inside: |
-        $TYPE $PB = new ProcessBuilder(...);
-        ...
-    - pattern-not-inside: |
-        $ARG = "...";
-        ...
-    - pattern-not: |
-        $PB.command("...","...","...",...)
-    - pattern-not: |
-        $PB.command(new String[]{"...","...","...",...},...)
-    - pattern-not: |
-        $PB.command(Arrays.asList("...","...","...",...),...)
-  message: "ProcessBuilder를 이용한 명령어 가동 시 가변 포매터 및 동적 조립 문자열이 사용되었습니다. 리스트형 인자 전달 스타일로 변경하세요."
+  languages:
+  - java
+  message: ProcessBuilder를 이용한 명령어 가동 시 가변 포매터 및 동적 조립 문자열이 사용되었습니다. 리스트형 인자 전달 스타일로
+    변경하세요.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
-    category: security
-    technology:
-    - java
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
+    technology:
+    - java
+  pattern-either:
+  - patterns:
+    - pattern: 'new ProcessBuilder($CMD,...)
+
+        '
+    - pattern-not-inside: '$CMD = "...";
+
+        ...
+
+        '
+    - pattern-not-inside: '$CMD = Arrays.asList("...",...);
+
+        ...
+
+        '
+    - pattern-not-inside: '$CMD = new String[]{"...",...};
+
+        ...
+
+        '
+    - pattern-not: 'new ProcessBuilder("...",...)
+
+        '
+    - pattern-not: 'new ProcessBuilder(new String[]{"...",...},...)
+
+        '
+    - pattern-not: 'new ProcessBuilder(Arrays.asList("...",...),...)
+
+        '
+  - patterns:
+    - pattern: '$PB.command($CMD,...)
+
+        '
+    - pattern-inside: '$TYPE $PB = new ProcessBuilder(...);
+
+        ...
+
+        '
+    - pattern-not-inside: '$CMD = "...";
+
+        ...
+
+        '
+    - pattern-not-inside: '$CMD = Arrays.asList("...",...);
+
+        ...
+
+        '
+    - pattern-not-inside: '$CMD = new String[]{"...",...};
+
+        ...
+
+        '
+    - pattern-not: '$PB.command("...",...)
+
+        '
+    - pattern-not: '$PB.command(new String[]{"...",...},...)
+
+        '
+    - pattern-not: '$PB.command(Arrays.asList("...",...),...)
+
+        '
+  - patterns:
+    - pattern-either:
+      - pattern: 'new ProcessBuilder("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...)
+
+          '
+      - pattern: 'new ProcessBuilder("cmd","/c",$ARG,...)
+
+          '
+      - pattern: 'new ProcessBuilder(Arrays.asList("cmd","/c",$ARG,...),...)
+
+          '
+      - pattern: 'new ProcessBuilder(new String[]{"cmd","/c",$ARG,...},...)
+
+          '
+      - patterns:
+        - pattern-either:
+          - pattern: 'new ProcessBuilder($CMD,"/c",$ARG,...)
+
+              '
+          - pattern: 'new ProcessBuilder(Arrays.asList($CMD,"/c",$ARG,...),...)
+
+              '
+          - pattern: 'new ProcessBuilder(new String[]{$CMD,"/c",$ARG,...},...)
+
+              '
+        - pattern-inside: '$CMD = "cmd";
+
+            ...
+
+            '
+    - pattern-not-inside: '$ARG = "...";
+
+        ...
+
+        '
+    - pattern-not: 'new ProcessBuilder("...","...","...",...)
+
+        '
+    - pattern-not: 'new ProcessBuilder(new String[]{"...","...","...",...},...)
+
+        '
+    - pattern-not: 'new ProcessBuilder(Arrays.asList("...","...","...",...),...)
+
+        '
+  - patterns:
+    - pattern-either:
+      - pattern: '$PB.command("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...)
+
+          '
+      - pattern: '$PB.command("cmd","/c",$ARG,...)
+
+          '
+      - pattern: '$PB.command(Arrays.asList("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...),...)
+
+          '
+      - pattern: '$PB.command(Arrays.asList("cmd","/c",$ARG,...),...)
+
+          '
+      - pattern: '$PB.command(new String[]{"=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...},...)
+
+          '
+      - pattern: '$PB.command(new String[]{"cmd","/c",$ARG,...},...)
+
+          '
+      - patterns:
+        - pattern-either:
+          - pattern: '$PB.command($CMD,"-c",$ARG,...)
+
+              '
+          - pattern: '$PB.command(Arrays.asList($CMD,"-c",$ARG,...),...)
+
+              '
+          - pattern: '$PB.command(new String[]{$CMD,"-c",$ARG,...},...)
+
+              '
+        - pattern-inside: '$CMD = "=~/(sh|bash|ksh|csh|tcsh|zsh)/";
+
+            ...
+
+            '
+      - patterns:
+        - pattern-either:
+          - pattern: '$PB.command($CMD,"/c",$ARG,...)
+
+              '
+          - pattern: '$PB.command(Arrays.asList($CMD,"/c",$ARG,...),...)
+
+              '
+          - pattern: '$PB.command(new String[]{$CMD,"/c",$ARG,...},...)
+
+              '
+        - pattern-inside: '$CMD = "cmd";
+
+            ...
+
+            '
+    - pattern-inside: '$TYPE $PB = new ProcessBuilder(...);
+
+        ...
+
+        '
+    - pattern-not-inside: '$ARG = "...";
+
+        ...
+
+        '
+    - pattern-not: '$PB.command("...","...","...",...)
+
+        '
+    - pattern-not: '$PB.command(new String[]{"...","...","...",...},...)
+
+        '
+    - pattern-not: '$PB.command(Arrays.asList("...","...","...",...),...)
+
+        '
   severity: ERROR
-  languages:
-  - java

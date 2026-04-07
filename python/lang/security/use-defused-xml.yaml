@@ -1,27 +1,28 @@
 rules:
 - id: use-defused-xml
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 use-defused-xml 전사 단속이 요구됩니다.
   metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-611: Improper Restriction of XML External Entity Reference'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A04:2017 - XML External Entities (XXE)
     - A05:2021 - Security Misconfiguration
     - A02:2025 - Security Misconfiguration
-    cwe:
-    - 'CWE-611: Improper Restriction of XML External Entity Reference'
     references:
     - https://docs.python.org/3/library/xml.html
     - https://github.com/tiran/defusedxml
     - https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing
-    category: security
-    technology:
-    - python
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  message: "인젝션 및 논리 에러 예방을 위한 use-defused-xml 전사 단속이 요구됩니다."
-  languages: [python]
-  severity: ERROR
+    technology:
+    - python
   pattern: import xml
+  severity: ERROR

@@ -1,26 +1,26 @@
 rules:
 - id: all-origins-allowed
-  patterns:
-  - pattern-inside: cors_rule { ... }
-  - pattern: allowed_origins = ["*"]
   languages:
   - hcl
-  severity: WARNING
-  message: "all-origins-allowed IaC 보안 설정 정비 및 예방 조치 요망."
+  message: all-origins-allowed IaC 보안 설정 정비 및 예방 조치 요망.
   metadata:
-    references:
-    - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#using-cors
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-942: Permissive Cross-domain Policy with Untrusted Domains'
-    category: security
-    technology:
-    - terraform
-    - aws
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A05:2021 - Security Misconfiguration
     - A02:2025 - Security Misconfiguration
+    references:
+    - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#using-cors
     subcategory:
     - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
+    technology:
+    - terraform
+    - aws
+  patterns:
+  - pattern-inside: cors_rule { ... }
+  - pattern: allowed_origins = ["*"]
+  severity: WARNING

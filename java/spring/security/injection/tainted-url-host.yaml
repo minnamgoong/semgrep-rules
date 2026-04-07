@@ -2,42 +2,75 @@ rules:
 - id: tainted-url-host
   languages:
   - java
-  severity: ERROR
-  message: "URL 동적 문자열 조립 시 외부 오염 테두리 호스트 값이 주입됩니다. Open Redirect나 SSRF 위험이 있으니 주소를 정적 고정하거나 검증하세요."
-  options:
-    interfile: true
+  message: URL 동적 문자열 조립 시 외부 오염 테두리 호스트 값이 주입됩니다. Open Redirect나 SSRF 위험이 있으니 주소를
+    정적 고정하거나 검증하세요.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
     - 'CWE-918: Server-Side Request Forgery (SSRF)'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    interfile: true
+    likelihood: MEDIUM
     owasp:
     - A10:2021 - Server-Side Request Forgery (SSRF)
     - A01:2025 - Broken Access Control
     references:
     - https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
-    category: security
+    subcategory:
+    - vuln
     technology:
     - java
     - spring
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    impact: MEDIUM
-    likelihood: MEDIUM
-    confidence: MEDIUM
-    interfile: true
   mode: taint
+  options:
+    interfile: true
+  pattern-sinks:
+  - pattern-either:
+    - pattern: new URL($ONEARG)
+    - patterns:
+      - pattern-either:
+        - pattern: '"$URLSTR" + ...
+
+            '
+        - pattern: '"$URLSTR".concat(...)
+
+            '
+        - patterns:
+          - pattern-inside: 'StringBuilder $SB = new StringBuilder("$URLSTR");
+
+              ...
+
+              '
+          - pattern: $SB.append(...)
+        - patterns:
+          - pattern-inside: '$VAR = "$URLSTR";
+
+              ...
+
+              '
+          - pattern: $VAR += ...
+        - patterns:
+          - pattern: String.format("$URLSTR", ...)
+          - pattern-not: String.format("$URLSTR", "...", ...)
+        - patterns:
+          - pattern-inside: 'String $VAR = "$URLSTR";
+
+              ...
+
+              '
+          - pattern: String.format($VAR, ...)
+      - metavariable-regex:
+          metavariable: $URLSTR
+          regex: http(s?)://%(v|s|q).*
   pattern-sources:
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          $METHODNAME(..., @$REQ(...) $TYPE $SOURCE,...) {
-            ...
-          }
-      - pattern-inside: |
-          $METHODNAME(..., @$REQ $TYPE $SOURCE,...) {
-            ...
-          }
+      - pattern-inside: "$METHODNAME(..., @$REQ(...) $TYPE $SOURCE,...) {\n  ...\n\
+          }\n"
+      - pattern-inside: "$METHODNAME(..., @$REQ $TYPE $SOURCE,...) {\n  ...\n}\n"
     - metavariable-regex:
         metavariable: $TYPE
         regex: ^(?!(Integer|Long|Float|Double|Char|Boolean|int|long|float|double|char|boolean))
@@ -45,33 +78,4 @@ rules:
         metavariable: $REQ
         regex: (RequestBody|PathVariable|RequestParam|RequestHeader|CookieValue|ModelAttribute)
     - focus-metavariable: $SOURCE
-  pattern-sinks:
-  - pattern-either:
-    - pattern: new URL($ONEARG)
-    - patterns:
-      - pattern-either:
-        - pattern: |
-            "$URLSTR" + ...
-        - pattern: |
-            "$URLSTR".concat(...)
-        - patterns:
-          - pattern-inside: |
-              StringBuilder $SB = new StringBuilder("$URLSTR");
-              ...
-          - pattern: $SB.append(...)
-        - patterns:
-          - pattern-inside: |
-              $VAR = "$URLSTR";
-              ...
-          - pattern: $VAR += ...
-        - patterns:
-          - pattern: String.format("$URLSTR", ...)
-          - pattern-not: String.format("$URLSTR", "...", ...)
-        - patterns:
-          - pattern-inside: |
-              String $VAR = "$URLSTR";
-              ...
-          - pattern: String.format($VAR, ...)
-      - metavariable-regex:
-          metavariable: $URLSTR
-          regex: http(s?)://%(v|s|q).*
+  severity: ERROR

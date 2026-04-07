@@ -1,54 +1,37 @@
 rules:
 - id: dangerous-spawn-process-tainted-env-args
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 dangerous-spawn-process-tainted-env-args 전사 단속이 요구됩니다.
+  metadata:
+    asvs:
+      control_id: 5.3.8 OS Command Injection
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
+      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
+      version: '4'
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: MEDIUM
+    owasp:
+    - A01:2017 - Injection
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://semgrep.dev/docs/cheat-sheets/python-command-injection/
+    source-rule-url: https://bandit.readthedocs.io/en/latest/plugins/b605_start_process_with_a_shell.html
+    subcategory:
+    - vuln
+    technology:
+    - python
   mode: taint
   options:
     symbolic_propagation: true
-  pattern-sources:
-  - patterns:
-    - pattern-either:
-      - patterns:
-        - pattern-either:
-          - pattern: os.environ
-          - pattern: os.environ.get('$FOO', ...)
-          - pattern: os.environb
-          - pattern: os.environb.get('$FOO', ...)
-          - pattern: os.getenv('$ANYTHING', ...)
-          - pattern: os.getenvb('$ANYTHING', ...)
-      - patterns:
-        - pattern-either:
-          - patterns:
-            - pattern-either:
-              - pattern: sys.argv
-              - pattern: sys.orig_argv
-          - patterns:
-            - pattern-inside: |
-                $PARSER = argparse.ArgumentParser(...)
-                ...
-            - pattern-inside: |
-                $ARGS = $PARSER.parse_args()
-            - pattern: <... $ARGS ...>
-          - patterns:
-            - pattern-inside: |
-                $PARSER = optparse.OptionParser(...)
-                ...
-            - pattern-inside: |
-                $ARGS = $PARSER.parse_args()
-            - pattern: <... $ARGS ...>
-          - patterns:
-            - pattern-either:
-              - pattern-inside: |
-                  $OPTS, $ARGS = getopt.getopt(...)
-                  ...
-              - pattern-inside: |
-                  $OPTS, $ARGS = getopt.gnu_getopt(...)
-                  ...
-            - pattern-either:
-              - patterns:
-                - pattern-inside: |
-                    for $O, $A in $OPTS:
-                      ...
-                - pattern: $A
-              - pattern: $ARGS
   pattern-sinks:
   - patterns:
     - pattern-either:
@@ -79,31 +62,58 @@ rules:
         - metavariable-regex:
             metavariable: $BASH
             regex: (.*)(sh|bash|ksh|csh|tcsh|zsh)
-  message: "인젝션 및 논리 에러 예방을 위한 dangerous-spawn-process-tainted-env-args 전사 단속이 요구됩니다."
-  metadata:
-    source-rule-url: https://bandit.readthedocs.io/en/latest/plugins/b605_start_process_with_a_shell.html
-    cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
-    owasp:
-    - A01:2017 - Injection
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    references:
-    - https://semgrep.dev/docs/cheat-sheets/python-command-injection/
-    asvs:
-      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
-      control_id: 5.3.8 OS Command Injection
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
-      version: '4'
-    category: security
-    technology:
-    - python
-    confidence: MEDIUM
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: HIGH
-  languages: [python]
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - patterns:
+        - pattern-either:
+          - pattern: os.environ
+          - pattern: os.environ.get('$FOO', ...)
+          - pattern: os.environb
+          - pattern: os.environb.get('$FOO', ...)
+          - pattern: os.getenv('$ANYTHING', ...)
+          - pattern: os.getenvb('$ANYTHING', ...)
+      - patterns:
+        - pattern-either:
+          - patterns:
+            - pattern-either:
+              - pattern: sys.argv
+              - pattern: sys.orig_argv
+          - patterns:
+            - pattern-inside: '$PARSER = argparse.ArgumentParser(...)
+
+                ...
+
+                '
+            - pattern-inside: '$ARGS = $PARSER.parse_args()
+
+                '
+            - pattern: <... $ARGS ...>
+          - patterns:
+            - pattern-inside: '$PARSER = optparse.OptionParser(...)
+
+                ...
+
+                '
+            - pattern-inside: '$ARGS = $PARSER.parse_args()
+
+                '
+            - pattern: <... $ARGS ...>
+          - patterns:
+            - pattern-either:
+              - pattern-inside: '$OPTS, $ARGS = getopt.getopt(...)
+
+                  ...
+
+                  '
+              - pattern-inside: '$OPTS, $ARGS = getopt.gnu_getopt(...)
+
+                  ...
+
+                  '
+            - pattern-either:
+              - patterns:
+                - pattern-inside: "for $O, $A in $OPTS:\n  ...\n"
+                - pattern: $A
+              - pattern: $ARGS
   severity: ERROR

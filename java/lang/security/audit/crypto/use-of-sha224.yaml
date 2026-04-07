@@ -1,33 +1,33 @@
 rules:
 - id: use-of-sha224
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  languages: [java]
-  severity: WARNING
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    asvs:
+      control_id: 6.2.5 Insecure Algorithm
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x14-V6-Cryptography.md#v62-algorithms
+      section: V6 Stored Cryptography Verification Requirements
+      version: '4'
+    category: security
+    confidence: HIGH
+    cwe:
+    - 'CWE-328: Use of Weak Hash'
     functional-categories:
-      - 'crypto::search::hash-algorithm::javax.crypto'
+    - crypto::search::hash-algorithm::javax.crypto
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A03:2017 - Sensitive Data Exposure
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
-    cwe:
-    - 'CWE-328: Use of Weak Hash'
-    asvs:
-      section: V6 Stored Cryptography Verification Requirements
-      control_id: 6.2.5 Insecure Algorithm
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x14-V6-Cryptography.md#v62-algorithms
-      version: '4'
-    category: security
-    technology:
-    - java
     references:
     - https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar3.ipd.pdf
     - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism/cyber-security-guidelines/guidelines-cryptography
     subcategory:
     - vuln
-    likelihood: LOW
-    impact: LOW
-    confidence: HIGH
+    technology:
+    - java
   pattern-either:
   - pattern: org.apache.commons.codec.digest.DigestUtils.getSha3_224Digest()
   - pattern: org.apache.commons.codec.digest.DigestUtils.getSha512_224Digest()
@@ -42,4 +42,5 @@ rules:
     - pattern: java.security.MessageDigest.getInstance("$ALGO", ...);
     - metavariable-regex:
         metavariable: $ALGO
-        regex: '.*224'
+        regex: .*224
+  severity: WARNING

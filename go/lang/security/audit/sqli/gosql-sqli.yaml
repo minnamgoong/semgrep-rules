@@ -1,59 +1,69 @@
 rules:
 - id: gosql-sqli
+  languages:
+  - go
+  message: Go Lang 다이렉트 SQL 쿼리 가압 단의 인젝션 우려 탑승.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command
+      (''SQL Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
+    owasp:
+    - A01:2017 - Injection
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://golang.org/pkg/database/sql/
+    subcategory:
+    - vuln
+    technology:
+    - go
   patterns:
   - pattern-either:
     - patterns:
       - pattern: $DB.$METHOD(...,$QUERY,...)
       - pattern-either:
-        - pattern-inside: |
-            $QUERY = $X + $Y
+        - pattern-inside: '$QUERY = $X + $Y
+
             ...
-        - pattern-inside: |
-            $QUERY += $X
+
+            '
+        - pattern-inside: '$QUERY += $X
+
             ...
-        - pattern-inside: |
-            $QUERY = fmt.Sprintf("...", $PARAM1, ...)
+
+            '
+        - pattern-inside: '$QUERY = fmt.Sprintf("...", $PARAM1, ...)
+
             ...
-      - pattern-not-inside: |
-          $QUERY += "..."
+
+            '
+      - pattern-not-inside: '$QUERY += "..."
+
           ...
-      - pattern-not-inside: |
-          $QUERY = "..." + "..."
+
+          '
+      - pattern-not-inside: '$QUERY = "..." + "..."
+
           ...
+
+          '
     - pattern: $DB.$METHOD(..., $X + $Y, ...)
     - pattern: $DB.$METHOD(..., fmt.Sprintf("...", $PARAM1, ...), ...)
   - pattern-either:
-    - pattern-inside: |
-        $DB, ... = sql.Open(...)
+    - pattern-inside: '$DB, ... = sql.Open(...)
+
         ...
-    - pattern-inside: |
-        func $FUNCNAME(..., $DB *sql.DB, ...) {
-          ...
-        }
+
+        '
+    - pattern-inside: "func $FUNCNAME(..., $DB *sql.DB, ...) {\n  ...\n}\n"
   - pattern-not: $DB.$METHOD(..., "..." + "...", ...)
   - metavariable-regex:
       metavariable: $METHOD
       regex: ^(Exec|ExecContent|Query|QueryContext|QueryRow|QueryRowContext)$
-  languages:
-  - go
-  message: "Go Lang 다이렉트 SQL 쿼리 가압 단의 인젝션 우려 탑승."
-  metadata:
-    cwe:
-    - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
-    references:
-    - https://golang.org/pkg/database/sql/
-    category: security
-    technology:
-    - go
-    confidence: LOW
-    owasp:
-    - A01:2017 - Injection
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    likelihood: LOW
-    impact: HIGH
   severity: ERROR

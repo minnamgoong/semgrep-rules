@@ -1,19 +1,19 @@
 rules:
-  - id: invalid-port
-    message: "Dockerfile 연쇄 점검: invalid-port 준행 오류 국면 감지."
-    severity: ERROR
-    languages:
-      - dockerfile
-    metadata:
-      source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3011
-      references:
-        - https://github.com/hadolint/hadolint/wiki/DL3011
-      category: correctness
-      technology:
-        - dockerfile
-    pattern-either:
-      - patterns:
-          - pattern: EXPOSE $PORT
-          - metavariable-comparison:
-              metavariable: $PORT
-              comparison: int($PORT) > 65535
+- id: invalid-port
+  languages:
+  - dockerfile
+  message: 'Dockerfile 연쇄 점검: invalid-port 준행 오류 국면 감지.'
+  metadata:
+    category: correctness
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL3011
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3011
+    technology:
+    - dockerfile
+  pattern-either:
+  - patterns:
+    - pattern: EXPOSE $PORT
+    - metavariable-comparison:
+        comparison: int($PORT) > 65535
+        metavariable: $PORT
+  severity: ERROR

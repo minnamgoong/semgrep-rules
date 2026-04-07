@@ -1,13 +1,14 @@
 rules:
-  - id: avoid-zypper-update
-    severity: INFO
-    languages: [dockerfile]
-    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
-    metadata:
-      source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3035
-      references:
-        - https://github.com/hadolint/hadolint/wiki/DL3035
-      category: best-practice
-      technology:
-        - dockerfile
-    pattern: zypper update ...
+- id: avoid-zypper-update
+  languages:
+  - dockerfile
+  message: Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검.
+  metadata:
+    category: best-practice
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL3035
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3035
+    technology:
+    - dockerfile
+  pattern: zypper update ...
+  severity: INFO

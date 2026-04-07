@@ -132,11 +132,11 @@
 | `command-injection-os-system` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 command-injection-os-system 전사 단속이 요구됩니다. | `security/injection/command/command-injection-os-system.yaml` |
 | `csv-writer-injection` | `ERROR` | CSV 가동 인자 인젝션 방어를 조율 하십시오. | `security/injection/csv-writer-injection.yaml` |
 | `debug-template-tag` | `WARNING` | debug-template-tag 잠재적 결함 분기 정비 요망. | `security/audit/templates/debug-template-tag.yaml` |
-| `django-compat-2_0-assert-redirects-helper` | `WARNING` | Django 프레임워크 ORM 및 템플릿 보안 검증. | `compatibility/django-2_0-compat.yaml` |
+| `django-compat-2_0-signals-weak` | `WARNING` | Django 프레임워크 ORM 및 템플릿 보안 검증. | `compatibility/django-2_0-compat.yaml` |
 | `django-db-model-save-super` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `correctness/model-save.yaml` |
 | `django-no-csrf-token` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/django-no-csrf-token.yaml` |
 | `django-using-request-post-after-is-valid` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/django-using-request-post-after-is-valid.yaml` |
-| `duplicate-name-assignment` | `ERROR` | 서로 다른 경로에 동일한 URL 이름(`$NAME`)이 중복 할당되어 있습니다. 이름 충돌을 방지하기 위해 각 경로에 고유한 이름을 지정해 주세... | `maintainability/duplicate-path-assignment.yaml` |
+| `duplicate-path-assignment` | `ERROR` | 서로 다른 경로에 동일한 URL 이름(`$NAME`)이 중복 할당되어 있습니다. 이름 충돌을 방지하기 위해 각 경로에 고유한 이름을 지정해 주세요. | `maintainability/duplicate-path-assignment.yaml` |
 | `globals-as-template-context` | `ERROR` | globals() 전역 인출 피칭 국면을 경보합니다. | `security/globals-as-template-context.yaml` |
 | `hashids-with-django-secret` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 hashids-with-django-secret 전사 단속이 요구됩니다. | `security/hashids-with-django-secret.yaml` |
 | `locals-as-template-context` | `ERROR` | locals() 직접 전사로 내부 탑재 변수가 외부에 탈주 폭주하는 위험 레이어를 점검합니다. | `security/locals-as-template-context.yaml` |
@@ -147,7 +147,7 @@
 | `raw-html-format` | `WARNING` | raw-html-format 잠재적 결함 분기 정비 요망. | `security/injection/raw-html-format.yaml` |
 | `ssrf-injection-requests` | `ERROR` | 서버 측 요청 위조(SSRF) 누출 피싱 주소 교정. | `security/injection/ssrf/ssrf-injection-requests.yaml` |
 | `ssrf-injection-urllib` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 ssrf-injection-urllib 전사 단속이 요구됩니다. | `security/injection/ssrf/ssrf-injection-urllib.yaml` |
-| `string-field-must-set-null-true` | `ERROR` | 규칙에 대한 상세 설명이 제공되지 않았습니다. | `correctness/string-field-null-checks.yaml` |
+| `no-null-string-field` | `ERROR` | unique=True와 blank=True를 함께 선언하는 문자열 필드는 null=True도 반드시 설정해야 합니다. 그렇지 않으면 빈 값으로 여러 레코드를 저장할 때 고유 제약 조건 위반이 발생할 수 있습니다. | `correctness/string-field-null-checks.yaml` |
 | `subprocess-injection` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 subprocess-injection 전사 단속이 요구됩니다. | `security/injection/command/subprocess-injection.yaml` |
 | `tainted-sql-string` | `ERROR` | 동적 SQL 문자열 결합 유출이 포착되어 Parameterized 쿼리를 독촉합니다. | `security/injection/tainted-sql-string.yaml` |
 | `template-blocktranslate-no-escape` | `INFO` | template-blocktranslate-no-escape 잠재적 결함 분기 정비 요망. | `security/audit/xss/template-blocktranslate-no-escape.yaml` |
@@ -308,7 +308,7 @@
 | `dangerous-asyncio-exec-audit` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 dangerous-asyncio-exec-audit 전사 단속이 요구됩니다. | `security/audit/dangerous-asyncio-exec-audit.yaml` |
 | `dangerous-asyncio-exec-tainted-env-args` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 dangerous-asyncio-exec-tainted-env-args 전사 단속이 요구됩니다. | `security/audit/dangerous-asyncio-exec-tainted-env-args.yaml` |
 | `dangerous-asyncio-shell-audit` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 dangerous-asyncio-shell-audit 전사 단속이 요구됩니다. | `security/audit/dangerous-asyncio-shell-audit.yaml` |
-| `dangerous-asyncio-shell-tainted-env-args` | `ERROR` | 환경 변수 또는 외부 입력이 비동기 쉘 명령 실행에 직접 사용되고 있습니다. 커맨드 인젝션 취약점을 예방하려면 입력값을 엄격히 검증하거나 쉘을 ... | `security/audit/dangerous-asyncio-shell-tainted-env-args.yaml` |
+| `dangerous-asyncio-shell-tainted-env-args` | `ERROR` | 환경 변수 또는 외부 입력이 비동기 쉘 명령 실행에 직접 사용되고 있습니다. 커맨드 인젝션 취약점을 예방하려면 입력값을 엄격히 검증하거나 쉘을 사용하지 않는 방식으로 전환하세요. | `security/audit/dangerous-asyncio-shell-tainted-env-args.yaml` |
 | `dangerous-os-exec` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 dangerous-os-exec 전사 단속이 요구됩니다. | `security/dangerous-os-exec.yaml` |
 | `dangerous-os-exec-audit` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 dangerous-os-exec-audit 전사 단속이 요구됩니다. | `security/audit/dangerous-os-exec-audit.yaml` |
 | `dangerous-os-exec-tainted-env-args` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 dangerous-os-exec-tainted-env-args 전사 단속이 요구됩니다. | `security/audit/dangerous-os-exec-tainted-env-args.yaml` |
@@ -335,23 +335,23 @@
 | `is-not-is-not` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 is-not-is-not 전사 단속이 요구됩니다. | `correctness/common-mistakes/is-not-is-not.yaml` |
 | `list-modify-while-iterate` | `ERROR` | for 루프 순회 중 원본 리스트를 가변 삭제/수정하여 오동작을 격발시키는 리스크 누출입니다. | `correctness/list-modify-iterating.yaml` |
 | `logging-error-without-handling` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `best-practice/logging-error-without-handling.yaml` |
-| `manual-counter-create` | `WARNING` | manual-counter-create 잠재적 결함 분기 정비 요망. | `best-practice/manual-collections-create.yaml` |
+| `manual-defaultdict-dict-create` | `WARNING` | manual-counter-create 잠재적 결함 분기 정비 요망. | `best-practice/manual-collections-create.yaml` |
 | `md5-used-as-password` | `WARNING` | md5-used-as-password 잠재적 결함 분기 정비 요망. | `security/audit/md5-used-as-password.yaml` |
 | `missing-hash-with-eq` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `best-practice/missing-hash-with-eq.yaml` |
 | `no-strings-as-booleans` | `ERROR` | 문자열 결합 시 연산 논리 혼선 국면을 저지합니다. | `correctness/useless-comparison.yaml` |
 | `open-never-closed` | `ERROR` | 디스크 서술자 닫기 연쇄가 빠졌습니다. | `best-practice/open-never-closed.yaml` |
 | `paramiko-exec-command` | `ERROR` | 인젝션 및 논리 에러 예방을 위한 paramiko-exec-command 전사 단속이 요구됩니다. | `security/audit/paramiko/paramiko-exec-command.yaml` |
-| `pass-body-range` | `WARNING` | pass-body-range 잠재적 결함 분기 정비 요망. | `best-practice/pass-body.yaml` |
+| `pass-body-fn` | `WARNING` | pass-body-range 잠재적 결함 분기 정비 요망. | `best-practice/pass-body.yaml` |
 | `pdb-remove` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `correctness/pdb.yaml` |
 | `pytest-assert_match-after-path-patch` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `correctness/pytest-assert_match-after-path-patch.yaml` |
 | `python-debugger-found` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `best-practice/pdb.yaml` |
-| `python36-compatibility-Popen2` | `ERROR` | 해당 함수 및 문법은 해당 파이썬 버전 연산 지원 사양입니다. | `compatibility/python36.yaml` |
-| `python37-compatibility-pdb` | `ERROR` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `compatibility/python37.yaml` |
+| `python36-compatibility-ssl` | `ERROR` | 해당 함수 및 문법은 해당 파이썬 버전 연산 지원 사양입니다. | `compatibility/python36.yaml` |
+| `python37-compatibility-importlib` | `ERROR` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `compatibility/python37.yaml` |
 | `raise-not-base-exception` | `ERROR` | raise-not-base-exception 보안 인젝션 및 런타임 버그 전사 예방 점검. | `correctness/exceptions/exceptions.yaml` |
 | `request-session-with-http` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/insecure-transport/requests/request-session-with-http.yaml` |
-| `return-not-in-function` | `WARNING` | return-not-in-function 잠재적 결함 분기 정비 요망. | `maintainability/return.yaml` |
+| `code-after-unconditional-return` | `WARNING` | return-not-in-function 잠재적 결함 분기 정비 요망. | `maintainability/return.yaml` |
 | `string-concat-in-list` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `correctness/common-mistakes/string-concat-in-list.yaml` |
-| `string-is-comparison` | `ERROR` | 문자열 동등 비교는 is가 아닌 == 연산자를 구동하여 안정성을 가두어야 합니다. | `correctness/common-mistakes/is-comparison-string.yaml` |
+| `identical-is-comparison` | `ERROR` | 문자열 동등 비교는 is가 아닌 == 연산자를 구동하여 안정성을 가두어야 합니다. | `correctness/common-mistakes/is-comparison-string.yaml` |
 | `subprocess-list-passed-as-string` | `WARNING` | 하위 프로세스 생성 드라이버 인젝션 피로도 점검. | `security/audit/subprocess-list-passed-as-string.yaml` |
 | `subprocess-shell-true` | `ERROR` | shell=True 위험 옵션을 우회 처리하십시오. | `security/audit/subprocess-shell-true.yaml` |
 | `sync-sleep-in-async-code` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `correctness/sync-sleep-in-async-code.yaml` |
@@ -368,12 +368,12 @@
 | `use-sys-exit` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `correctness/exit.yaml` |
 | `useless-assignment-keyed` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `maintainability/useless-assign-keyed.yaml` |
 | `useless-eqeq` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `correctness/useless-eqeq.yaml` |
-| `useless-if-body` | `WARNING` | useless-if-body 잠재적 결함 분기 정비 요망. | `maintainability/useless-ifelse.yaml` |
+| `useless-if-conditional` | `WARNING` | useless-if-body 잠재적 결함 분기 정비 요망. | `maintainability/useless-ifelse.yaml` |
 | `useless-inner-function` | `ERROR` | 내부 함수가 정의되었으나 사용 연동이 누락되었습니다. 코드 가독성을 위해 말소 대상 점검 하십시오. | `maintainability/useless-innerfunction.yaml` |
 | `useless-literal` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `maintainability/useless-literal.yaml` |
 | `useless-literal-set` | `ERROR` | set 조립 단에 중복 할당 조각이 보입니다. | `maintainability/useless-literal-set.yaml` |
 | `writing-to-file-in-read-mode` | `ERROR` | 읽기 전용으로 가동 중인 서술자에 쓰기(.write)를 가압하는 런타임 에러를 경보합니다. | `correctness/writing-to-file-in-read-mode.yaml` |
-| `yield-in-init` | `ERROR` | __init__ 내부 yield 전사 금기 양식. | `correctness/return-in-init.yaml` |
+| `return-in-init` | `ERROR` | __init__ 내부 yield 전사 금기 양식. | `correctness/return-in-init.yaml` |
 
 ## PYCRYPTODOME
 
@@ -444,7 +444,7 @@
 | `-` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/sqlalchemy-sql-injection.yaml` |
 | `avoid-sqlalchemy-text` | `ERROR` | sqlalchemy.text() 구동 시 동적 스트링 합사 버그가 우려됩니다. ORM 규격 모델을 준행 하세요. | `security/audit/avoid-sqlalchemy-text.yaml` |
 | `bad-operator-in-filter` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `correctness/bad-operator-in-filter.yaml` |
-| `batch-import` | `WARNING` | batch-import 잠재적 결함 분기 정비 요망. | `performance/performance-improvements.yaml` |
+| `len-all-count` | `WARNING` | batch-import 잠재적 결함 분기 정비 요망. | `performance/performance-improvements.yaml` |
 | `delete-where-no-execute` | `ERROR` | SQLAlchemy .delete() 연산 시 .where() 스킵 국면이 감지되었습니다. 전사 데이터 유실에 대비하십시오. | `correctness/delete-where.yaml` |
 | `sqlalchemy-execute-raw-query` | `ERROR` | SQLAlchemy 원시 쿼리 동적 결합 감지. 인젝션 투하를 막으려면 Parameterized 선언을 장착 하십시오. | `security/sqlalchemy-execute-raw-query.yaml` |
 

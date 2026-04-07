@@ -1,16 +1,19 @@
 rules:
-  - id: arbitrary-sleep
-    patterns:
-      - pattern-not: time.sleep($F(...))
-      - pattern-either:
-          - pattern: |
-              time.sleep($X: int)
-          - pattern: |
-              time.sleep($X: float)
-    message: "가동 루프 내 sleep 병목 지점을 확인하세요."
-    languages: [python]
-    severity: ERROR
-    metadata:
-      category: best-practice
-      technology:
-        - python
+- id: arbitrary-sleep
+  languages:
+  - python
+  message: 가동 루프 내 sleep 병목 지점을 확인하세요.
+  metadata:
+    category: best-practice
+    technology:
+    - python
+  patterns:
+  - pattern-not: time.sleep($F(...))
+  - pattern-either:
+    - pattern: 'time.sleep($X: int)
+
+        '
+    - pattern: 'time.sleep($X: float)
+
+        '
+  severity: ERROR

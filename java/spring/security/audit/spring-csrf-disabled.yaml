@@ -1,30 +1,31 @@
 rules:
 - id: spring-csrf-disabled
-  message: "Spring Security에서 CSRF 보안이 해제되었습니다."
+  languages:
+  - java
+  message: Spring Security에서 CSRF 보안이 해제되었습니다.
   metadata:
+    asvs:
+      control_id: 4.2.2 CSRF
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V4-Access-Control.md#v42-operation-level-access-control
+      section: V4 Access Control
+      version: '4'
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-352: Cross-Site Request Forgery (CSRF)'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#SPRING_CSRF_PROTECTION_DISABLED
-    asvs:
-      section: V4 Access Control
-      control_id: 4.2.2 CSRF
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V4-Access-Control.md#v42-operation-level-access-control
-      version: '4'
-    category: security
-    technology:
-    - spring
     references:
     - https://owasp.org/Top10/A01_2021-Broken_Access_Control
-    cwe2022-top25: true
-    cwe2021-top25: true
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#SPRING_CSRF_PROTECTION_DISABLED
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  severity: WARNING
-  languages: [java]
+    technology:
+    - spring
   pattern: $OBJ.csrf(...).disable(...)
+  severity: WARNING

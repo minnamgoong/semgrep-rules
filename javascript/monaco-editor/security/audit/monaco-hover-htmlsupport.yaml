@@ -1,44 +1,53 @@
 rules:
 - id: monaco-hover-htmlsupport
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - typescript
+  - javascript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://github.com/microsoft/monaco-editor/issues/801
-    category: security
+    subcategory:
+    - audit
     technology:
     - monaco
     - monaco-editor
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
-  languages:
-  - typescript
-  - javascript
-  severity: WARNING
   patterns:
   - pattern-either:
-    - pattern-inside: |
-        import "monaco-editor"
+    - pattern-inside: 'import "monaco-editor"
+
         ...
-    - pattern-inside: |
-        require("monaco-editor")
+
+        '
+    - pattern-inside: 'require("monaco-editor")
+
         ...
+
+        '
   - pattern-either:
-    - pattern: |
-        {value: $VAL, supportHtml: true}
-    - pattern: |
-        {value: $VAL, isTrusted: true}
-  - pattern-inside: |
-      {range: $R, contents: [...]}
-  - pattern-not: |
-      {..., value: "...", ...}
+    - pattern: '{value: $VAL, supportHtml: true}
+
+        '
+    - pattern: '{value: $VAL, isTrusted: true}
+
+        '
+  - pattern-inside: '{range: $R, contents: [...]}
+
+      '
+  - pattern-not: '{..., value: "...", ...}
+
+      '
+  severity: WARNING

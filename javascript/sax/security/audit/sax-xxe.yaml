@@ -1,36 +1,40 @@
 rules:
 - id: sax-xxe
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - javascript
+  - typescript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-611: Improper Restriction of XML External Entity Reference'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A04:2017 - XML External Entities (XXE)
     - A05:2021 - Security Misconfiguration
     - A02:2025 - Security Misconfiguration
-    cwe:
-    - 'CWE-611: Improper Restriction of XML External Entity Reference'
     references:
     - https://github.com/Leonidas-from-XIV/node-xml2js/issues/415
     - https://github.com/isaacs/sax-js
-    category: security
-    technology:
-    - sax
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
+    technology:
+    - sax
   pattern-either:
-  - pattern: |
-      require('sax');
+  - pattern: 'require(''sax'');
+
       ...
+
       $PARSER.ondoctype = ...;
-  - pattern: |-
-      require('sax');
+
+      '
+  - pattern: 'require(''sax'');
+
       ...
-      $PARSER.on('doctype',...);
+
+      $PARSER.on(''doctype'',...);'
+  severity: WARNING

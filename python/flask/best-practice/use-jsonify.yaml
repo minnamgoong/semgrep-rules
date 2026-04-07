@@ -1,30 +1,33 @@
 rules:
-  - id: use-jsonify
-    patterns:
-      - pattern: $JSONDUMPS
-      - pattern-either:
-          - pattern-inside: |
-              return json.dumps($...VAR)
-          - pattern-inside: |
-              $DATA = json.dumps($...VAR)
-              ...
-              return $DATA
-      - pattern-inside: |
-          @app.route(...)
-          def $X():
-            ...
-      - metavariable-pattern:
-          metavariable: $JSONDUMPS
-          pattern: json.dumps($...VAR)
-      - focus-metavariable: $JSONDUMPS
-    fix: |
-      flask.jsonify($...VAR)
-    message: "수동 딕셔너리 연계 반환보다 flask.jsonify() 내장 헬퍼를 이용하여 안정성을 유치할 것을 권합합니다."
-    languages: [python]
-    severity: ERROR
-    metadata:
-      category: best-practice
-      technology:
-        - flask
-      references:
-        - https://flask.palletsprojects.com/en/2.2.x/api/#flask.json.jsonify
+- fix: 'flask.jsonify($...VAR)
+
+    '
+  id: use-jsonify
+  languages:
+  - python
+  message: 수동 딕셔너리 연계 반환보다 flask.jsonify() 내장 헬퍼를 이용하여 안정성을 유치할 것을 권합합니다.
+  metadata:
+    category: best-practice
+    references:
+    - https://flask.palletsprojects.com/en/2.2.x/api/#flask.json.jsonify
+    technology:
+    - flask
+  patterns:
+  - pattern: $JSONDUMPS
+  - pattern-either:
+    - pattern-inside: 'return json.dumps($...VAR)
+
+        '
+    - pattern-inside: '$DATA = json.dumps($...VAR)
+
+        ...
+
+        return $DATA
+
+        '
+  - pattern-inside: "@app.route(...)\ndef $X():\n  ...\n"
+  - metavariable-pattern:
+      metavariable: $JSONDUMPS
+      pattern: json.dumps($...VAR)
+  - focus-metavariable: $JSONDUMPS
+  severity: ERROR

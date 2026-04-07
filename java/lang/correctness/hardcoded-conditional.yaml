@@ -1,19 +1,20 @@
 rules:
-  - id: hardcoded-conditional
-    patterns:
-      - pattern-either:
-          - pattern: if (true) { ... }
-          - pattern: if (false) { ... }
-          - pattern: if ($VAR = true) { ... }
-          - pattern: if ($VAR = false) { ... }
-          - pattern: if ($EXPR && false) { ... }
-          - pattern: if (false && $EXPR) { ... }
-          - pattern: if ($EXPR || true) { ... }
-          - pattern: if (true || $EXPR) { ... }
-    message: "조건문(if 등)의 조건식이 항상 true 또는 false로 고정되어 의미 없는 연산을 하거나 로직 버그일 가능성이 높습니다."
-    languages: [java]
-    severity: ERROR
-    metadata:
-      category: correctness
-      technology:
-        - java
+- id: hardcoded-conditional
+  languages:
+  - java
+  message: 조건문(if 등)의 조건식이 항상 true 또는 false로 고정되어 의미 없는 연산을 하거나 로직 버그일 가능성이 높습니다.
+  metadata:
+    category: correctness
+    technology:
+    - java
+  patterns:
+  - pattern-either:
+    - pattern: if (true) { ... }
+    - pattern: if (false) { ... }
+    - pattern: if ($VAR = true) { ... }
+    - pattern: if ($VAR = false) { ... }
+    - pattern: if ($EXPR && false) { ... }
+    - pattern: if (false && $EXPR) { ... }
+    - pattern: if ($EXPR || true) { ... }
+    - pattern: if (true || $EXPR) { ... }
+  severity: ERROR

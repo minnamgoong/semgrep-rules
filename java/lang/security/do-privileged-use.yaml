@@ -1,31 +1,33 @@
 rules:
 - id: do-privileged-use
-  severity: WARNING
   languages:
   - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-269: Improper Privilege Management'
+    impact: MEDIUM
+    likelihood: LOW
+    owasp:
+    - A04:2021 - Insecure Design
+    - A06:2025 - Insecure Design
     references:
     - https://docs.oracle.com/javase/8/docs/technotes/guides/security/doprivileged.html
     - https://wiki.sei.cmu.edu/confluence/display/java/Privilege+Escalation
     - http://phrack.org/papers/escaping_the_java_sandbox.html
-    category: security
-    technology:
-    - java
-    owasp:
-    - A04:2021 - Insecure Design
-    - A06:2025 - Insecure Design
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+    technology:
+    - java
   patterns:
-  - pattern-inside: |
-      import java.security.*;
+  - pattern-inside: 'import java.security.*;
+
       ...
+
+      '
   - pattern-either:
     - pattern: AccessController.doPrivileged(...);
     - pattern: class $ACTION implements PrivilegedAction<Void> { ... }
+  severity: WARNING

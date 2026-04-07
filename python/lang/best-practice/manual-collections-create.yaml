@@ -1,94 +1,58 @@
 rules:
-  - id: manual-defaultdict-dict-create
-    message: manually creating a defaultdict - use collections.defaultdict(dict)
-    languages: [python]
-    severity: WARNING
-    pattern-either:
-      - pattern: |
-          $DICT = {}
-          ...
-          for $KEY, $VALUE in $OTHERDICT.items():
-              ...
-              if $KEY not in $DICT:
-                  ...
-                  $DICT[$KEY] = {}
-                  ...
-              $DICT[$KEY].update(...)
-      - pattern: |
-          $DICT = {}
-          ...
-          for $KEY, $VALUE in $OTHERDICT.items():
-              ...
-              $DICT.setdefault($KEY, {}).update(...)
-    metadata:
-      category: best-practice
-      technology:
-        - python
-  - id: manual-defaultdict-set-create
-    message: "manual-defaultdict-set-create 잠재적 결함 분기 정비 요망."
-    languages: [python]
-    severity: WARNING
-    pattern-either:
-      - pattern: |
-          $DICT = {}
-          ...
-          for $KEY, $VALUE in $OTHERDICT.items():
-              ...
-              if $KEY not in $DICT:
-                  ...
-                  $DICT[$KEY] = set()
-                  ...
-              $DICT[$KEY].add(...)
-      - pattern: |
-          $DICT = {}
-          ...
-          for $KEY, $VALUE in $OTHERDICT.items():
-              ...
-              $DICT.setdefault($KEY, set()).add(...)
-    metadata:
-      category: best-practice
-      technology:
-        - python
-  - id: manual-defaultdict-list-create
-    message: "manual-defaultdict-list-create 잠재적 결함 분기 정비 요망."
-    languages: [python]
-    severity: WARNING
-    pattern-either:
-      - pattern: |
-          $DICT = {}
-          ...
-          for $KEY, $VALUE in $OTHERDICT.items():
-              ...
-              if $KEY not in $DICT:
-                  ...
-                  $DICT[$KEY] = []
-                  ...
-              $DICT[$KEY].append(...)
-      - pattern: |
-          $DICT = {}
-          ...
-          for $KEY, $VALUE in $OTHERDICT.items():
-              ...
-              $DICT.setdefault($KEY, []).append(...)
-    metadata:
-      category: best-practice
-      technology:
-        - python
-  - id: manual-counter-create
-    pattern: |
-      $DICT = {}
-      ...
-      for $KEY, $VALUE in $OTHERDICT.items():
-          ...
-          if $KEY not in $DICT:
-              ...
-              $DICT[$KEY] = 0
-              ...
-          $DICT[$KEY] += 1
-    message: "manual-counter-create 잠재적 결함 분기 정비 요망."
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: best-practice
-      technology:
-        - python
+- id: manual-defaultdict-dict-create
+  languages:
+  - python
+  message: 수동으로 defaultdict 생성 - collections.defaultdict(dict) 사용
+  metadata:
+    category: best-practice
+    technology:
+    - python
+  pattern-either:
+  - pattern: "$DICT = {}\n...\nfor $KEY, $VALUE in $OTHERDICT.items():\n    ...\n\
+      \    if $KEY not in $DICT:\n        ...\n        $DICT[$KEY] = {}\n        ...\n\
+      \    $DICT[$KEY].update(...)\n"
+  - pattern: "$DICT = {}\n...\nfor $KEY, $VALUE in $OTHERDICT.items():\n    ...\n\
+      \    $DICT.setdefault($KEY, {}).update(...)\n"
+  severity: WARNING
+- id: manual-defaultdict-set-create
+  languages:
+  - python
+  message: manual-defaultdict-set-create 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: best-practice
+    technology:
+    - python
+  pattern-either:
+  - pattern: "$DICT = {}\n...\nfor $KEY, $VALUE in $OTHERDICT.items():\n    ...\n\
+      \    if $KEY not in $DICT:\n        ...\n        $DICT[$KEY] = set()\n     \
+      \   ...\n    $DICT[$KEY].add(...)\n"
+  - pattern: "$DICT = {}\n...\nfor $KEY, $VALUE in $OTHERDICT.items():\n    ...\n\
+      \    $DICT.setdefault($KEY, set()).add(...)\n"
+  severity: WARNING
+- id: manual-defaultdict-list-create
+  languages:
+  - python
+  message: manual-defaultdict-list-create 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: best-practice
+    technology:
+    - python
+  pattern-either:
+  - pattern: "$DICT = {}\n...\nfor $KEY, $VALUE in $OTHERDICT.items():\n    ...\n\
+      \    if $KEY not in $DICT:\n        ...\n        $DICT[$KEY] = []\n        ...\n\
+      \    $DICT[$KEY].append(...)\n"
+  - pattern: "$DICT = {}\n...\nfor $KEY, $VALUE in $OTHERDICT.items():\n    ...\n\
+      \    $DICT.setdefault($KEY, []).append(...)\n"
+  severity: WARNING
+- id: manual-counter-create
+  languages:
+  - python
+  message: manual-counter-create 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: best-practice
+    technology:
+    - python
+  pattern: "$DICT = {}\n...\nfor $KEY, $VALUE in $OTHERDICT.items():\n    ...\n  \
+    \  if $KEY not in $DICT:\n        ...\n        $DICT[$KEY] = 0\n        ...\n\
+    \    $DICT[$KEY] += 1\n"
+  severity: WARNING

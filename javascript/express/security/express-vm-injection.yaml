@@ -1,28 +1,49 @@
 rules:
 - id: express-vm-injection
-  message: "Node.js vm 모듈 스크립트 실행 스택 등에 동적 사용자 오염 테두리가 가압되는 피로도를 잡습니다. 샌드박스 우회를 우려해 사전에 분리 차단하세요."
+  languages:
+  - javascript
+  - typescript
+  message: Node.js vm 모듈 스크립트 실행 스택 등에 동적 사용자 오염 테두리가 가압되는 피로도를 잡습니다. 샌드박스 우회를 우려해
+    사전에 분리 차단하세요.
   metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://cheatsheetseries.owasp.org/cheatsheets/Injection_Prevention_Cheat_Sheet.html
-    cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
-    category: security
-    technology:
-    - express
-    cwe2022-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
+    technology:
+    - express
   mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern-inside: '$VM = require(''vm'');
+
+        ...
+
+        '
+    - pattern-either:
+      - pattern: '$VM.runInContext(...)
+
+          '
+      - pattern: '$VM.runInNewContext(...)
+
+          '
+      - pattern: '$VM.compileFunction(...)
+
+          '
+      - pattern: '$VM.runInThisContext(...)
+
+          '
+      - pattern: new $VM.Script(...)
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -43,11 +64,14 @@ rules:
       - pattern: $REQ.headers
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+
           {...}
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
     - focus-metavariable: $REQ
     - pattern-either:
       - pattern: params
@@ -55,19 +79,4 @@ rules:
       - pattern: cookies
       - pattern: headers
       - pattern: body
-  pattern-sinks:
-  - patterns:
-    - pattern-inside: |
-        $VM = require('vm');
-        ...
-    - pattern-either:
-      - pattern: |
-          $VM.runInContext(...)
-      - pattern: |
-          $VM.runInNewContext(...)
-      - pattern: |
-          $VM.compileFunction(...)
-      - pattern: |
-          $VM.runInThisContext(...)
-      - pattern: |-
-          new $VM.Script(...)
+  severity: ERROR

@@ -1,135 +1,56 @@
 rules:
 - id: el-injection
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#EL_INJECTION
-    category: security
-    technology:
-    - java
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#EL_INJECTION
     subcategory:
     - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  severity: WARNING
-  languages: [java]
+    technology:
+    - java
   patterns:
   - pattern-either:
-    - pattern: |
-        class $CLASS {
-          ...
-          ExpressionFactory $EF;
-          ...
-          $X $METHOD(...) {
-            ...
-            $EF.createValueExpression($CTX,$INPUT,...);
-            ...
-          }
-          ...
-        }
-    - pattern: |
-        class $CLASS {
-          ...
-          ExpressionFactory $EF = ...;
-          ...
-          $X $METHOD(...) {
-            ...
-            $EF.createValueExpression($CTX,$INPUT,...);
-            ...
-          }
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ExpressionFactory $EF = ...;
-          ...
-          $EF.createValueExpression($CTX,$INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ExpressionFactory $EF,...) {
-          ...
-          $EF.createValueExpression($CTX,$INPUT,...);
-          ...
-        }
-    - pattern: |
-        class $CLASS {
-          ...
-          ExpressionFactory $EF;
-          ...
-          $X $METHOD(...) {
-            ...
-            $EF.createMethodExpression($CTX,$INPUT,...);
-            ...
-          }
-          ...
-        }
-    - pattern: |
-        class $CLASS {
-          ...
-          ExpressionFactory $EF = ...;
-          ...
-          $X $METHOD(...) {
-            ...
-            $EF.createMethodExpression($CTX,$INPUT,...);
-            ...
-          }
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...) {
-          ...
-          ExpressionFactory $EF = ...;
-          ...
-          $EF.createMethodExpression($CTX,$INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(...,ExpressionFactory $EF,...) {
-          ...
-          $EF.createMethodExpression($CTX,$INPUT,...);
-          ...
-        }
-    - pattern: |
-        $X $METHOD(String $INPUT, ...) {
-          ...
-          $OBJECT.buildConstraintViolationWithTemplate($INPUT, ...);
-          ...
-        }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $EF.createValueExpression($CTX,"...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $EF.createValueExpression($CTX,$S,...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        $EF.createMethodExpression($CTX,"...",...);
-        ...
-      }
-  - pattern-not: |
-      $X $METHOD(...) {
-        ...
-        String $S = "...";
-        ...
-        $EF.createMethodExpression($CTX,$S,...);
-        ...
-      }
+    - pattern: "class $CLASS {\n  ...\n  ExpressionFactory $EF;\n  ...\n  $X $METHOD(...)\
+        \ {\n    ...\n    $EF.createValueExpression($CTX,$INPUT,...);\n    ...\n \
+        \ }\n  ...\n}\n"
+    - pattern: "class $CLASS {\n  ...\n  ExpressionFactory $EF = ...;\n  ...\n  $X\
+        \ $METHOD(...) {\n    ...\n    $EF.createValueExpression($CTX,$INPUT,...);\n\
+        \    ...\n  }\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ExpressionFactory $EF = ...;\n  ...\n\
+        \  $EF.createValueExpression($CTX,$INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...,ExpressionFactory $EF,...) {\n  ...\n  $EF.createValueExpression($CTX,$INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "class $CLASS {\n  ...\n  ExpressionFactory $EF;\n  ...\n  $X $METHOD(...)\
+        \ {\n    ...\n    $EF.createMethodExpression($CTX,$INPUT,...);\n    ...\n\
+        \  }\n  ...\n}\n"
+    - pattern: "class $CLASS {\n  ...\n  ExpressionFactory $EF = ...;\n  ...\n  $X\
+        \ $METHOD(...) {\n    ...\n    $EF.createMethodExpression($CTX,$INPUT,...);\n\
+        \    ...\n  }\n  ...\n}\n"
+    - pattern: "$X $METHOD(...) {\n  ...\n  ExpressionFactory $EF = ...;\n  ...\n\
+        \  $EF.createMethodExpression($CTX,$INPUT,...);\n  ...\n}\n"
+    - pattern: "$X $METHOD(...,ExpressionFactory $EF,...) {\n  ...\n  $EF.createMethodExpression($CTX,$INPUT,...);\n\
+        \  ...\n}\n"
+    - pattern: "$X $METHOD(String $INPUT, ...) {\n  ...\n  $OBJECT.buildConstraintViolationWithTemplate($INPUT,\
+        \ ...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $EF.createValueExpression($CTX,\"...\"\
+      ,...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $EF.createValueExpression($CTX,$S,...);\n\
+      \  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  $EF.createMethodExpression($CTX,\"...\"\
+      ,...);\n  ...\n}\n"
+  - pattern-not: "$X $METHOD(...) {\n  ...\n  String $S = \"...\";\n  ...\n  $EF.createMethodExpression($CTX,$S,...);\n\
+      \  ...\n}\n"
+  severity: WARNING

@@ -1,30 +1,50 @@
 rules:
 - id: tainted-sql-string
-  message: "동적 SQL 문자열 결합이 탐지되었습니다. SQL Injection 예방을 위해 객체 모델 바인딩 및 Parameterized Query 기법을 사용하세요."
+  languages:
+  - javascript
+  - typescript
+  message: 동적 SQL 문자열 결합이 탐지되었습니다. SQL Injection 예방을 위해 객체 모델 바인딩 및 Parameterized
+    Query 기법을 사용하세요.
   metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command
+      (''SQL Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
-    cwe:
-    - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
     references:
     - https://owasp.org/www-community/attacks/SQL_Injection
-    category: security
-    technology:
-    - express
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: LOW
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
+    technology:
+    - express
   mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - patterns:
+        - pattern-either:
+          - pattern-inside: '"$SQLSTR" + $EXPR
+
+              '
+          - pattern-inside: '"$SQLSTR".concat($EXPR)
+
+              '
+          - pattern: util.format($SQLSTR, $EXPR)
+          - pattern: '`$SQLSTR${$EXPR}...`
+
+              '
+        - metavariable-regex:
+            metavariable: $SQLSTR
+            regex: .*\b(?i)(select|delete|insert|create|update\s+.+\sset|alter|drop)\b.*
+    - focus-metavariable: $EXPR
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -37,11 +57,12 @@ rules:
       - pattern: $REQ.headers
   - patterns:
     - pattern-either:
-      - pattern-inside: >
-          (...,{ $REQ }: Request,...) =>
-          {...}
-      - pattern-inside: |
-          (...,{ $REQ }: $EXPRESS.Request,...) => {...}
+      - pattern-inside: '(...,{ $REQ }: Request,...) => {...}
+
+          '
+      - pattern-inside: '(...,{ $REQ }: $EXPRESS.Request,...) => {...}
+
+          '
     - focus-metavariable: $REQ
     - pattern-either:
       - pattern: params
@@ -49,19 +70,4 @@ rules:
       - pattern: cookies
       - pattern: headers
       - pattern: body
-  pattern-sinks:
-  - patterns:
-    - pattern-either:
-      - patterns:
-        - pattern-either:
-          - pattern-inside: |
-              "$SQLSTR" + $EXPR
-          - pattern-inside: |
-              "$SQLSTR".concat($EXPR)
-          - pattern: util.format($SQLSTR, $EXPR)
-          - pattern: |
-              `$SQLSTR${$EXPR}...`
-        - metavariable-regex:
-            metavariable: $SQLSTR
-            regex: .*\b(?i)(select|delete|insert|create|update\s+.+\sset|alter|drop)\b.*
-    - focus-metavariable: $EXPR
+  severity: ERROR

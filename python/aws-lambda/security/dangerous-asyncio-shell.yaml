@@ -1,12 +1,36 @@
 rules:
 - id: dangerous-asyncio-shell
+  languages:
+  - python
+  message: asyncio 쉘 연산에 가변 인자가 합사되었습니다. 명령어 주입 우려가 있으니 shlex 세척을 권장합니다.
+  metadata:
+    asvs:
+      control_id: 5.3.8 OS Command Injection
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
+      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
+      version: '4'
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
+    owasp:
+    - A01:2017 - Injection
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://docs.python.org/3/library/asyncio-subprocess.html
+    - https://docs.python.org/3/library/shlex.html
+    subcategory:
+    - vuln
+    technology:
+    - python
+    - aws-lambda
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern: event
-    - pattern-inside: |
-        def $HANDLER(event, context):
-          ...
   pattern-sinks:
   - patterns:
     - focus-metavariable: $CMD
@@ -14,33 +38,8 @@ rules:
       - pattern: $LOOP.subprocess_shell($PROTOCOL, $CMD)
       - pattern: asyncio.subprocess.create_subprocess_shell($CMD, ...)
       - pattern: asyncio.create_subprocess_shell($CMD, ...)
-  message: "asyncio 쉘 연산에 가변 인자가 합사되었습니다. 명령어 주입 우려가 있으니 shlex 세척을 권장합니다."
-  metadata:
-    owasp:
-    - A01:2017 - Injection
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
-    asvs:
-      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
-      control_id: 5.3.8 OS Command Injection
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
-      version: '4'
-    references:
-    - https://docs.python.org/3/library/asyncio-subprocess.html
-    - https://docs.python.org/3/library/shlex.html
-    category: security
-    technology:
-    - python
-    - aws-lambda
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages:
-  - python
+  pattern-sources:
+  - patterns:
+    - pattern: event
+    - pattern-inside: "def $HANDLER(event, context):\n  ...\n"
   severity: ERROR

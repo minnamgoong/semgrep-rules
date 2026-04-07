@@ -1,31 +1,18 @@
 rules:
-    - id: gcp-postgresql-log-min-duration
-      patterns:
-        - pattern: resource
-        - pattern-inside: |
-              resource "google_sql_database_instance" "..." {
-                ...
-                database_flags {
-                  ...
-                }
-                ...
-              }
-        - pattern-not-inside: |
-              resource "google_sql_database_instance" "..." {
-                ...
-                database_flags {
-                  ...
-                  name  = "log_min_duration_statement"
-                  value = "-1"
-                  ...
-                }
-                ...
-              }
-      message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-      metadata:
-        category: best-practice
-        technology:
-          - terraform
-          - gcp
-      languages: [hcl]
-      severity: WARNING
+- id: gcp-postgresql-log-min-duration
+  languages:
+  - hcl
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - terraform
+    - gcp
+  patterns:
+  - pattern: resource
+  - pattern-inside: "resource \"google_sql_database_instance\" \"...\" {\n  ...\n\
+      \  database_flags {\n    ...\n  }\n  ...\n}\n"
+  - pattern-not-inside: "resource \"google_sql_database_instance\" \"...\" {\n  ...\n\
+      \  database_flags {\n    ...\n    name  = \"log_min_duration_statement\"\n \
+      \   value = \"-1\"\n    ...\n  }\n  ...\n}\n"
+  severity: WARNING

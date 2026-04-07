@@ -1,28 +1,30 @@
 rules:
 - id: string-concat
-  languages: [python]
-  severity: ERROR
-  message: "인젝션 및 논리 에러 예방을 위한 string-concat 전사 단속이 요구됩니다."
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 string-concat 전사 단속이 요구됩니다.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
-    category: security
-    technology:
-    - sh
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
+    technology:
+    - sh
   pattern-either:
   - pattern: sh.$BIN($X + $Y)
   - pattern: sh.$BIN($X.format(...))
   - pattern: sh.$BIN(f"...{...}...")
+  severity: ERROR

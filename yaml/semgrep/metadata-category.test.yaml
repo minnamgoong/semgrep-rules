@@ -1,33 +1,33 @@
 rules:
-  # ruleid: metadata-category
-  - id: unchecked-subprocess-call
-    patterns:
-      - pattern-either:
-          - pattern: |
-              subprocess.call(...)
-          - pattern: |
-              subprocess.call(...)
-      - pattern-not-inside: |
-          $S = subprocess.call(...)
-      - pattern-not-inside: |
-          subprocess.call(...) == $X
-    message: >-
-      bad stuff
-    severity: WARNING
-    fix: subprocess.check_call(...)
-  # ok: metadata-category
-  - id: subprocess-run
-    patterns: subprocess.run(...)
-    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
-    severity: WARNING
-    fix: subprocess.check_call(...)
-    metadata:
-      category: python
-  - metadata:
-      category: python
-    # ok: metadata-category
-    id: subprocess-run-2
-    patterns: subprocess.run(...)
-    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
-    severity: WARNING
-    fix: subprocess.check_call(...)
+- fix: subprocess.check_call(...)
+  id: unchecked-subprocess-call
+  message: 나쁜 것들
+  patterns:
+  - pattern-either:
+    - pattern: 'subprocess.call(...)
+
+        '
+    - pattern: 'subprocess.call(...)
+
+        '
+  - pattern-not-inside: '$S = subprocess.call(...)
+
+      '
+  - pattern-not-inside: 'subprocess.call(...) == $X
+
+      '
+  severity: WARNING
+- fix: subprocess.check_call(...)
+  id: subprocess-run
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
+  metadata:
+    category: python
+  patterns: subprocess.run(...)
+  severity: WARNING
+- fix: subprocess.check_call(...)
+  id: subprocess-run-2
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
+  metadata:
+    category: python
+  patterns: subprocess.run(...)
+  severity: WARNING

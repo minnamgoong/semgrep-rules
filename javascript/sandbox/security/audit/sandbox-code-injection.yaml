@@ -1,45 +1,54 @@
 rules:
 - id: sandbox-code-injection
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    owasp:
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
-    category: security
-    technology:
-    - sandbox
-    cwe2022-top25: true
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
-    references:
-    - https://owasp.org/Top10/A03_2021-Injection
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: LOW
+    likelihood: LOW
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    subcategory:
+    - audit
+    technology:
+    - sandbox
   patterns:
-  - pattern-inside: |
-      $SANDBOX = require('sandbox');
+  - pattern-inside: '$SANDBOX = require(''sandbox'');
+
       ...
-  - pattern-not-inside: |
-      $CODE = "...";
+
+      '
+  - pattern-not-inside: '$CODE = "...";
+
       ...
+
+      '
   - pattern-either:
     - patterns:
-      - pattern-inside: |
-          $S = new $SANDBOX(...);
+      - pattern-inside: '$S = new $SANDBOX(...);
+
           ...
+
+          '
       - pattern: $S.run($CODE,...);
-    - pattern: |
-        new $SANDBOX(...).run($CODE,...);
-  - pattern-not-inside: |
-      $S = new $SANDBOX(...);
+    - pattern: 'new $SANDBOX(...).run($CODE,...);
+
+        '
+  - pattern-not-inside: '$S = new $SANDBOX(...);
+
       ...
+
       $S.run("...",...);
-  - pattern-not-inside: |-
-      new $SANDBOX(...).run("...",...);
+
+      '
+  - pattern-not-inside: new $SANDBOX(...).run("...",...);
+  severity: WARNING

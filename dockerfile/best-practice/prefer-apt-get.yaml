@@ -1,15 +1,16 @@
 rules:
-  - id: prefer-apt-get
-    severity: INFO
-    languages: [dockerfile]
-    patterns:
-      - pattern: RUN apt ...
-      - pattern-not: RUN apt-get ...
-    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
-    metadata:
-      source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3027
-      references:
-        - https://github.com/hadolint/hadolint/wiki/DL3027
-      category: best-practice
-      technology:
-        - dockerfile
+- id: prefer-apt-get
+  languages:
+  - dockerfile
+  message: Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검.
+  metadata:
+    category: best-practice
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL3027
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3027
+    technology:
+    - dockerfile
+  patterns:
+  - pattern: RUN apt ...
+  - pattern-not: RUN apt-get ...
+  severity: INFO

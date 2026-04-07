@@ -1,38 +1,31 @@
 rules:
 - id: storage-default-action-deny
-  message: "IaC 보안 옵션 누락 경보: storage-default-action-deny 설정율을 적용해 주십시오."
-  patterns:
-  - pattern: resource
-  - pattern-not-inside: |
-      resource "azurerm_storage_account_network_rules" "..." {
-      ...
-        default_action = "Deny"
-      ...
-      }
-  - pattern-inside: |
-      resource "azurerm_storage_account_network_rules" "..." {
-      ...
-        default_action = "Allow"
-      ...
-      }
+  languages:
+  - hcl
+  message: 'IaC 보안 옵션 누락 경보: storage-default-action-deny 설정율을 적용해 주십시오.'
   metadata:
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-16: CWE CATEGORY: Configuration'
-    category: security
-    technology:
-    - terraform
-    - azure
-    references:
-    - https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#default_action
-    - https://docs.microsoft.com/en-us/azure/firewall/rule-processing
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A06:2017 - Security Misconfiguration
     - A05:2021 - Security Misconfiguration
     - A02:2025 - Security Misconfiguration
+    references:
+    - https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#default_action
+    - https://docs.microsoft.com/en-us/azure/firewall/rule-processing
     subcategory:
     - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
-  languages: [hcl]
+    technology:
+    - terraform
+    - azure
+  patterns:
+  - pattern: resource
+  - pattern-not-inside: "resource \"azurerm_storage_account_network_rules\" \"...\"\
+      \ {\n...\n  default_action = \"Deny\"\n...\n}\n"
+  - pattern-inside: "resource \"azurerm_storage_account_network_rules\" \"...\" {\n\
+      ...\n  default_action = \"Allow\"\n...\n}\n"
   severity: ERROR

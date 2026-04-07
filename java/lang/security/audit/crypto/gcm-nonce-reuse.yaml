@@ -1,29 +1,31 @@
 rules:
 - id: gcm-nonce-reuse
+  languages:
+  - java
+  message: GCM 모드 암호화 시 IV(Nonce) 값이 고정으로 재사용되고 있습니다. 암호화 보완성이 즉시 상실되므로 매번 랜덤하고 중복되지
+    않는 Nonce를 생성하여 주입하십시오.
   metadata:
-    functional-categories:
-      - 'crypto::search::randomness::javax.crypto'
+    category: security
+    confidence: HIGH
     cwe:
     - 'CWE-323: Reusing a Nonce, Key Pair in Encryption'
-    category: security
-    source-rule-url: https://www.youtube.com/watch?v=r1awgAl90wM
-    technology:
-    - java
+    functional-categories:
+    - crypto::search::randomness::javax.crypto
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
     references:
     - https://owasp.org/Top10/A02_2021-Cryptographic_Failures
+    source-rule-url: https://www.youtube.com/watch?v=r1awgAl90wM
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: HIGH
-  languages:
-  - java
-  message: "GCM 모드 암호화 시 IV(Nonce) 값이 고정으로 재사용되고 있습니다. 암호화 보완성이 즉시 상실되므로 매번 랜덤하고 중복되지 않는 Nonce를 생성하여 주입하십시오."
+    technology:
+    - java
   patterns:
   - pattern-either:
     - pattern: new GCMParameterSpec(..., "...".getBytes(...), ...);
-    - pattern: byte[] $NONCE = "...".getBytes(...); ... new GCMParameterSpec(..., $NONCE, ...);
+    - pattern: byte[] $NONCE = "...".getBytes(...); ... new GCMParameterSpec(...,
+        $NONCE, ...);
   severity: ERROR

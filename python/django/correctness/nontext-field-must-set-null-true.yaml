@@ -1,31 +1,29 @@
 rules:
-  - id: nontext-field-must-set-null-true
-    patterns:
-      - pattern-inside: |
-          class $M(...):
-            ...
-      - pattern-not: $F = django.db.models.CharField(...)
-      - pattern-not: $F = django.db.models.TextField(...)
-      - pattern-not: $F = django.db.models.SlugField(...)
-      - pattern-not: $F = django.db.models.EmailField(...)
-      - pattern-not: $F = django.db.models.FileField(...)
-      - pattern-not: $F = django.db.models.ImageField(...)
-      - pattern-not: $F = django.db.models.URLField(...)
-      - pattern-not: $F = django.db.models.UUIDField(...)
-      - pattern-not: $F = django.db.models.ManyToManyField(...)
-      - pattern-not: $F = django.db.models.NullBooleanField(...)
-      - pattern-not: $F = django.contrib.gis.db.models.$MODEL(...)
-      - pattern-not: $F = phonenumber_field.modelfields.PhoneNumberField(...)
-      - pattern-not: $F = ckeditor.fields.RichTextField(...)
-      - pattern-not: $F = $X(..., null=True, blank=True, ...)
-      - pattern: $F = $X(..., blank=True, ...)
-    message: "인젝션 및 논리 에러 예방을 위한 nontext-field-must-set-null-true 전사 단속이 요구됩니다."
-    languages:
-      - python
-    severity: ERROR
-    metadata:
-      category: correctness
-      references:
-        - https://docs.djangoproject.com/en/4.0/ref/models/fields/#null
-      technology:
-        - django
+- id: nontext-field-must-set-null-true
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 nontext-field-must-set-null-true 전사 단속이 요구됩니다.
+  metadata:
+    category: correctness
+    references:
+    - https://docs.djangoproject.com/en/4.0/ref/models/fields/#null
+    technology:
+    - django
+  patterns:
+  - pattern-inside: "class $M(...):\n  ...\n"
+  - pattern-not: $F = django.db.models.CharField(...)
+  - pattern-not: $F = django.db.models.TextField(...)
+  - pattern-not: $F = django.db.models.SlugField(...)
+  - pattern-not: $F = django.db.models.EmailField(...)
+  - pattern-not: $F = django.db.models.FileField(...)
+  - pattern-not: $F = django.db.models.ImageField(...)
+  - pattern-not: $F = django.db.models.URLField(...)
+  - pattern-not: $F = django.db.models.UUIDField(...)
+  - pattern-not: $F = django.db.models.ManyToManyField(...)
+  - pattern-not: $F = django.db.models.NullBooleanField(...)
+  - pattern-not: $F = django.contrib.gis.db.models.$MODEL(...)
+  - pattern-not: $F = phonenumber_field.modelfields.PhoneNumberField(...)
+  - pattern-not: $F = ckeditor.fields.RichTextField(...)
+  - pattern-not: $F = $X(..., null=True, blank=True, ...)
+  - pattern: $F = $X(..., blank=True, ...)
+  severity: ERROR

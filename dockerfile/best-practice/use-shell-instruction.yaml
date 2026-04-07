@@ -1,15 +1,17 @@
 rules:
-  - id: use-shell-instruction
-    severity: WARNING
-    languages: [dockerfile]
-    pattern: |
-      RUN ln ... $SHELL /bin/sh
-    message: "Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검."
-    metadata:
-      source-rule-url: https://github.com/hadolint/hadolint/wiki/DL4005
-      references:
-        - https://github.com/hadolint/hadolint/wiki/DL4005
-      category: best-practice
-      technology:
-        - dockerfile
-    fix: SHELL ["$SHELL", "-c"]
+- fix: SHELL ["$SHELL", "-c"]
+  id: use-shell-instruction
+  languages:
+  - dockerfile
+  message: Dockerfile 가동 중 베스트 프랙티스(Best Practice) 점검.
+  metadata:
+    category: best-practice
+    references:
+    - https://github.com/hadolint/hadolint/wiki/DL4005
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL4005
+    technology:
+    - dockerfile
+  pattern: 'RUN ln ... $SHELL /bin/sh
+
+    '
+  severity: WARNING

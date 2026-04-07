@@ -1,28 +1,48 @@
 rules:
 - id: express-sandbox-code-injection
-  message: "sandbox 관련 호출에 사용자 입력 데이터가 도달했습니다. 샌드박스 내부에서 임의 코드가 실행될 수 있으므로 동적 조립을 배제하세요."
+  languages:
+  - javascript
+  - typescript
+  message: sandbox 관련 호출에 사용자 입력 데이터가 도달했습니다. 샌드박스 내부에서 임의 코드가 실행될 수 있으므로 동적 조립을 배제하세요.
   metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://cheatsheetseries.owasp.org/cheatsheets/Injection_Prevention_Cheat_Sheet.html
-    cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
-    category: security
-    technology:
-    - express
-    cwe2022-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
+    technology:
+    - express
   mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern-inside: '$SANDBOX = require(''sandbox'');
+
+        ...
+
+        '
+    - pattern-either:
+      - patterns:
+        - pattern-inside: '$S = new $SANDBOX(...);
+
+            ...
+
+            '
+        - pattern: '$S.run(...)
+
+            '
+      - pattern: 'new $SANDBOX($OPTS).run(...)
+
+          '
+      - pattern: new $SANDBOX().run(...)
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -43,11 +63,14 @@ rules:
       - pattern: $REQ.headers
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+
           {...}
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
     - focus-metavariable: $REQ
     - pattern-either:
       - pattern: params
@@ -55,19 +78,4 @@ rules:
       - pattern: cookies
       - pattern: headers
       - pattern: body
-  pattern-sinks:
-  - patterns:
-    - pattern-inside: |
-        $SANDBOX = require('sandbox');
-        ...
-    - pattern-either:
-      - patterns:
-        - pattern-inside: |
-            $S = new $SANDBOX(...);
-            ...
-        - pattern: |
-            $S.run(...)
-      - pattern: |
-          new $SANDBOX($OPTS).run(...)
-      - pattern: |-
-          new $SANDBOX().run(...)
+  severity: ERROR

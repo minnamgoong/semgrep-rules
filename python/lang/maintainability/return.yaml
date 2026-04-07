@@ -1,29 +1,29 @@
 rules:
-  - id: code-after-unconditional-return
-    pattern: |
-      return ...
-      $S
-    message: code after return statement will not be executed
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: maintainability
-      technology:
-        - python
-  - id: return-not-in-function
-    patterns:
-      - pattern-not-inside: |
-          def $F(...):
-              ...
-          # TODO: first pattern should just automatically include this one
-      - pattern-not-inside: |
-          def $F(...) ->  $Y:
-              ...
-      - pattern: return ...
-    message: "return-not-in-function 잠재적 결함 분기 정비 요망."
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: maintainability
-      technology:
-        - python
+- id: code-after-unconditional-return
+  languages:
+  - python
+  message: return 문 뒤의 코드는 실행되지 않습니다.
+  metadata:
+    category: maintainability
+    technology:
+    - python
+  pattern: 'return ...
+
+    $S
+
+    '
+  severity: WARNING
+- id: return-not-in-function
+  languages:
+  - python
+  message: return-not-in-function 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: maintainability
+    technology:
+    - python
+  patterns:
+  - pattern-not-inside: "def $F(...):\n    ...\n# TODO: first pattern should just\
+      \ automatically include this one\n"
+  - pattern-not-inside: "def $F(...) ->  $Y:\n    ...\n"
+  - pattern: return ...
+  severity: WARNING

@@ -1,93 +1,61 @@
 rules:
-  - id: aws-ec2-security-group-rule-missing-description
-    patterns:
-    - pattern-either:
-      - patterns:
-          - pattern-either:
-            - patterns:
-              - pattern-inside: |
-                  resource "aws_security_group" $ANYTHING {
-                    ...
-                    $INGRESS {
-                      ...
-                      description = $DESCR
-                      ...
-                    }
-                    ...
-                  }
-              - metavariable-regex:
-                  metavariable: $INGRESS
-                  regex: ^(ingress|egress)$
-            - patterns:
-              - pattern-inside: |
-                  resource "$SECGROUP" $ANYTHING {
-                    ...
-                    description = $DESCR
-                    ...
-                  }
-              - metavariable-regex:
-                  metavariable: $SECGROUP
-                  regex: ^(aws_security_group_rule|aws_security_group)$
+- id: aws-ec2-security-group-rule-missing-description
+  languages:
+  - hcl
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-223: Omission of Security-relevant Information'
+    impact: LOW
+    likelihood: LOW
+    owasp:
+    - A09:2021 - Security Logging and Monitoring Failures
+    - A09:2025 - Security Logging & Alerting Failures
+    references:
+    - https://shisho.dev/dojo/providers/aws/Amazon_EC2/aws-security-group/#:~:text=Ensure%20to%20keep%20the%20description%20of%20your%20security%20group%20up%2Dto%2Ddate
+    - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#description
+    - https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/
+    subcategory:
+    - audit
+    technology:
+    - terraform
+    - aws
+  patterns:
+  - pattern-either:
+    - patterns:
+      - pattern-either:
+        - patterns:
+          - pattern-inside: "resource \"aws_security_group\" $ANYTHING {\n  ...\n\
+              \  $INGRESS {\n    ...\n    description = $DESCR\n    ...\n  }\n  ...\n\
+              }\n"
           - metavariable-regex:
-              metavariable: $DESCR
-              regex: ^(['\"]['\"]|['\"]Managed by Terraform['\"])$
-          - focus-metavariable: $DESCR
-      - patterns:
-              - metavariable-regex:
-                  metavariable: $INGRESS
-                  regex: ^(ingress|egress)$
-              - pattern: |
-                  resource "aws_security_group" $ANYTHING {
-                    ...
-                    $INGRESS {
-                      ...
-                    }
-                    ...
-                  }
-              - pattern-not: |
-                  resource "aws_security_group" $ANYTHING {
-                    ...
-                    $INGRESS {
-                      ...
-                      description = ...
-                      ...
-                    }
-                    ...
-                  }
-      - patterns:
-              - metavariable-regex:
-                  metavariable: $SECGROUP
-                  regex: ^(aws_security_group_rule|aws_security_group)$
-              - pattern: |
-                  resource "$SECGROUP" $ANYTHING {
-                    ...
-                  }
-              - pattern-not: |
-                  resource "$SECGROUP" $ANYTHING {
-                    ...
-                    description = ...
-                    ...
-                  }
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    languages:
-      - hcl
-    severity: INFO
-    metadata:
-      category: security
-      technology:
-        - terraform
-        - aws
-      owasp:
-        - A09:2021 - Security Logging and Monitoring Failures
-        - A09:2025 - Security Logging & Alerting Failures
-      cwe:
-        - "CWE-223: Omission of Security-relevant Information"
-      references:
-        - https://shisho.dev/dojo/providers/aws/Amazon_EC2/aws-security-group/#:~:text=Ensure%20to%20keep%20the%20description%20of%20your%20security%20group%20up%2Dto%2Ddate
-        - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#description
-        - https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/
-      subcategory:
-        - audit
-      likelihood: LOW
-      impact: LOW
-      confidence: LOW
+              metavariable: $INGRESS
+              regex: ^(ingress|egress)$
+        - patterns:
+          - pattern-inside: "resource \"$SECGROUP\" $ANYTHING {\n  ...\n  description\
+              \ = $DESCR\n  ...\n}\n"
+          - metavariable-regex:
+              metavariable: $SECGROUP
+              regex: ^(aws_security_group_rule|aws_security_group)$
+      - metavariable-regex:
+          metavariable: $DESCR
+          regex: ^(['\"]['\"]|['\"]Managed by Terraform['\"])$
+      - focus-metavariable: $DESCR
+    - patterns:
+      - metavariable-regex:
+          metavariable: $INGRESS
+          regex: ^(ingress|egress)$
+      - pattern: "resource \"aws_security_group\" $ANYTHING {\n  ...\n  $INGRESS {\n\
+          \    ...\n  }\n  ...\n}\n"
+      - pattern-not: "resource \"aws_security_group\" $ANYTHING {\n  ...\n  $INGRESS\
+          \ {\n    ...\n    description = ...\n    ...\n  }\n  ...\n}\n"
+    - patterns:
+      - metavariable-regex:
+          metavariable: $SECGROUP
+          regex: ^(aws_security_group_rule|aws_security_group)$
+      - pattern: "resource \"$SECGROUP\" $ANYTHING {\n  ...\n}\n"
+      - pattern-not: "resource \"$SECGROUP\" $ANYTHING {\n  ...\n  description = ...\n\
+          \  ...\n}\n"
+  severity: INFO

@@ -1,19 +1,19 @@
 rules:
-  - id: no-fractional-cpu-limits
-    patterns:
-      - pattern-inside: |
-          limits:
-            ...
-      - pattern: |
-          cpu: $CPU_LIMIT
-      - metavariable-regex:
-          metavariable: $CPU_LIMIT
-          regex: \d{0,3}m
-    fix: "cpu: 1000m"
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    severity: WARNING
-    languages: [yaml]
-    metadata:
-      category: best-practice
-      technology:
-        - kubernetes
+- fix: 'cpu: 1000m'
+  id: no-fractional-cpu-limits
+  languages:
+  - yaml
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - kubernetes
+  patterns:
+  - pattern-inside: "limits:\n  ...\n"
+  - pattern: 'cpu: $CPU_LIMIT
+
+      '
+  - metavariable-regex:
+      metavariable: $CPU_LIMIT
+      regex: \d{0,3}m
+  severity: WARNING

@@ -1,31 +1,32 @@
 rules:
 - id: eval-detected
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    cwe:
-    - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"
-    owasp:
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    asvs:
-      section: V5 Validation, Sanitization and Encoding
-      control_id: 5.2.4 Dynamic Code Execution Features
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v52-sanitization-and-sandboxing
-      version: '4'
-    category: security
-    technology:
-    - browser
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-    references:
-    - https://owasp.org/Top10/A03_2021-Injection
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    asvs:
+      control_id: 5.2.4 Dynamic Code Execution Features
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v52-sanitization-and-sandboxing
+      section: V5 Validation, Sanitization and Encoding
+      version: '4'
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code
+      (''Eval Injection'')'
+    impact: MEDIUM
+    likelihood: LOW
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    subcategory:
+    - audit
+    technology:
+    - browser
   patterns:
   - pattern-not: eval("...")
   - pattern: eval(...)
+  severity: WARNING

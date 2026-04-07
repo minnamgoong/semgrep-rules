@@ -1,39 +1,40 @@
 rules:
 - id: jose-exposed-data
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - javascript
+  - typescript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    asvs:
+      control_id: 3.5.2 Static API keys or secret
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V3-Session-management.md#v35-token-based-session-management
+      section: 'V3: Session Management Verification Requirements'
+      version: '4'
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-522: Insufficiently Protected Credentials'
+    cwe2021-top25: true
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A02:2017 - Broken Authentication
     - A04:2021 - Insecure Design
     - A06:2025 - Insecure Design
-    cwe:
-    - 'CWE-522: Insufficiently Protected Credentials'
+    references:
+    - https://owasp.org/Top10/A04_2021-Insecure_Design
     source-rule-url: https://semgrep.dev/blog/2020/hardcoded-secrets-unverified-tokens-and-other-common-jwt-mistakes/
-    asvs:
-      section: 'V3: Session Management Verification Requirements'
-      control_id: 3.5.2 Static API keys or secret
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V3-Session-management.md#v35-token-based-session-management
-      version: '4'
-    category: security
+    subcategory:
+    - audit
     technology:
     - jose
     - jwt
-    cwe2021-top25: true
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
-    references:
-    - https://owasp.org/Top10/A04_2021-Insecure_Design
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
   patterns:
-  - pattern-inside: |
-      require('jose');
+  - pattern-inside: 'require(''jose'');
+
       ...
+
+      '
   - pattern-either:
     - patterns:
       - pattern-inside: function (...,$INPUT,...) {...}
@@ -45,3 +46,4 @@ rules:
       - pattern-either:
         - pattern: $JOSE.JWT.sign($INPUT,...)
         - pattern: $JWT.sign($INPUT,...)
+  severity: WARNING

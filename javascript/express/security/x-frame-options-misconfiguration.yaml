@@ -1,27 +1,41 @@
 rules:
 - id: x-frame-options-misconfiguration
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    references:
-    - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
-    owasp:
-    - A04:2021 - Insecure Design
-    - A06:2025 - Insecure Design
-    cwe:
-    - 'CWE-451: User Interface (UI) Misrepresentation of Critical Information'
-    category: security
-    technology:
-    - express
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-451: User Interface (UI) Misrepresentation of Critical Information'
+    impact: MEDIUM
+    likelihood: MEDIUM
+    owasp:
+    - A04:2021 - Insecure Design
+    - A06:2025 - Insecure Design
+    references:
+    - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+    subcategory:
+    - vuln
+    technology:
+    - express
   mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - pattern: $RES.set($HEADER, ...)
+      - pattern: $RES.header($HEADER, ...)
+      - pattern: $RES.setHeader($HEADER, ...)
+      - pattern: '$RES.set({$HEADER: ...}, ...)
+
+          '
+      - pattern: '$RES.writeHead($STATUS, {$HEADER: ...}, ...)
+
+          '
+    - metavariable-regex:
+        metavariable: $HEADER
+        regex: .*(X-Frame-Options|x-frame-options).*
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -42,11 +56,14 @@ rules:
       - pattern: $REQ.headers
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+
           {...}
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
     - focus-metavariable: $REQ
     - pattern-either:
       - pattern: params
@@ -54,16 +71,4 @@ rules:
       - pattern: cookies
       - pattern: headers
       - pattern: body
-  pattern-sinks:
-  - patterns:
-    - pattern-either:
-      - pattern: $RES.set($HEADER, ...)
-      - pattern: $RES.header($HEADER, ...)
-      - pattern: $RES.setHeader($HEADER, ...)
-      - pattern: |
-          $RES.set({$HEADER: ...}, ...)
-      - pattern: |
-          $RES.writeHead($STATUS, {$HEADER: ...}, ...)
-    - metavariable-regex:
-        metavariable: $HEADER
-        regex: .*(X-Frame-Options|x-frame-options).*
+  severity: WARNING

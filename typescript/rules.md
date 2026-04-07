@@ -6,7 +6,7 @@
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `angular-bypasssecuritytrust` | `WARNING` | Angular 프론트엔드 결함 주사 점검. | `security/audit/angular-domsanitizer.yaml` |
+| `- id: angular-bypasssecuritytrust` | `WARNING` | Angular 프론트엔드 결함 주사 점검. | `security/audit/angular-domsanitizer.yaml` |
 
 ## AWS-CDK
 
@@ -14,45 +14,45 @@
 | :--- | :---: | :--- | :--- |
 | `aws-cdk-bucket-enforcessl` | `ERROR` | S3 버킷에 전송 중 암호화(SSL/TLS) 강제화 옵션이 누락되었습니다. 데이터 전송 기밀성을 위해 해당 옵션을 활성화하십시오. | `security/audit/awscdk-bucket-enforcessl.yml` |
 | `awscdk-bucket-encryption` | `ERROR` | AWS CDK S3 버킷 생성 시 기본 암호화(KMS_MANAGED 등) 설정이 누락되었습니다. 데이터 보안을 위해 암호화 모드를 지정하세요. | `security/audit/awscdk-bucket-encryption.yml` |
-| `awscdk-bucket-grantpublicaccessmethod` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/awscdk-bucket-grantpublicaccessmethod.yml` |
-| `awscdk-codebuild-project-public` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/awscdk-codebuild-project-public.yml` |
-| `awscdk-sqs-unencryptedqueue` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/awscdk-sqs-unencryptedqueue.yml` |
+| `- id: awscdk-bucket-grantpublicaccessmethod` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/awscdk-bucket-grantpublicaccessmethod.yml` |
+| `- id: awscdk-codebuild-project-public` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/awscdk-codebuild-project-public.yml` |
+| `- id: awscdk-sqs-unencryptedqueue` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/awscdk-sqs-unencryptedqueue.yml` |
 
 ## LANG
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `cors-regex-wildcard` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/cors-regex-wildcard.yaml` |
-| `moment-deprecated` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `best-practice/moment-deprecated.yaml` |
+| `- id: cors-regex-wildcard` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/cors-regex-wildcard.yaml` |
+| `- id: moment-deprecated` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `best-practice/moment-deprecated.yaml` |
 | `useless-ternary` | `ERROR` | 불필요한 삼항 연산자(a ? true : false 등) 사용이 감지되었습니다. 논리 직관성을 위해 단순 불리언 캐스팅 등으로 대체하세요. | `correctness/useless-ternary.yaml` |
 
 ## NESTJS
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
-| `14.4.8` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/nestjs-header-cors-any.yaml` |
-| `nestjs-header-xss-disabled` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/nestjs-header-xss-disabled.yaml` |
-| `nestjs-open-redirect` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/nestjs-open-redirect.yaml` |
+| `- id: nestjs-header-cors-any` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/nestjs-header-cors-any.yaml` |
+| `- id: nestjs-header-xss-disabled` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/nestjs-header-xss-disabled.yaml` |
+| `- id: nestjs-open-redirect` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `security/audit/nestjs-open-redirect.yaml` |
 
 ## REACT
 
 | Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
 | `define-styled-components-on-module-level` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `best-practice/define-styled-components-on-module-level.yaml` |
-| `i18next-key-format` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `portability/i18next/i18next-key-format.yaml` |
-| `jsx-label-not-i18n` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `portability/i18next/jsx-label-not-i18n.yaml` |
-| `jsx-not-internationalized` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `portability/i18next/jsx-not-internationalized.yaml` |
-| `mui-snackbar-message` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `portability/i18next/mui-snackbar-message.yaml` |
-| `react-dangerouslysetinnerhtml` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `security/audit/react-dangerouslysetinnerhtml.yaml` |
+| `- id: i18next-key-format` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `portability/i18next/i18next-key-format.yaml` |
+| `- id: jsx-label-not-i18n` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `portability/i18next/jsx-label-not-i18n.yaml` |
+| `- id: jsx-not-internationalized` | `INFO` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `portability/i18next/jsx-not-internationalized.yaml` |
+| `- id: mui-snackbar-message` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `portability/i18next/mui-snackbar-message.yaml` |
+| `- id: react-dangerouslysetinnerhtml` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `security/audit/react-dangerouslysetinnerhtml.yaml` |
 | `react-find-dom` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `best-practice/react-find-dom.yaml` |
 | `react-href-var` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `security/audit/react-href-var.yaml` |
 | `react-insecure-request` | `ERROR` | React 애플리케이션에서 암호화되지 않은 HTTP 요청이 감지되었습니다. 스니핑 공격에 노출되므로 https:// 사용을 권장합니다. | `security/react-insecure-request.yaml` |
-| `react-jwt-decoded-property` | `INFO` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/audit/react-jwt-decoded-property.yaml` |
-| `react-jwt-in-localstorage` | `INFO` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/audit/react-jwt-in-localstorage.yaml` |
+| `- id: react-jwt-decoded-property` | `INFO` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/audit/react-jwt-decoded-property.yaml` |
+| `- id: react-jwt-in-localstorage` | `INFO` | JWT 토큰 서명 및 디코드 검증 누락 여부 점검. | `security/audit/react-jwt-in-localstorage.yaml` |
 | `react-legacy-component` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `best-practice/react-legacy-component.yaml` |
-| `react-markdown-insecure-html` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `security/react-markdown-insecure-html.yaml` |
+| `- id: react-markdown-insecure-html` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `security/react-markdown-insecure-html.yaml` |
 | `react-props-in-state` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `best-practice/react-props-in-state.yaml` |
-| `react-props-spreading` | `INFO` | React 컴포넌트 데이터 바인딩 가압 점검. | `best-practice/react-props-spreading.yaml` |
-| `react-unsanitized-method` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `security/audit/react-unsanitized-method.yaml` |
-| `react-unsanitized-property` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `security/audit/react-unsanitized-property.yaml` |
-| `useselect-label-not-i18n` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `portability/i18next/useselect-label-not-i18n.yaml` |
+| `- id: react-props-spreading` | `INFO` | React 컴포넌트 데이터 바인딩 가압 점검. | `best-practice/react-props-spreading.yaml` |
+| `- id: react-unsanitized-method` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `security/audit/react-unsanitized-method.yaml` |
+| `- id: react-unsanitized-property` | `WARNING` | React 컴포넌트 데이터 바인딩 가압 점검. | `security/audit/react-unsanitized-property.yaml` |
+| `- id: useselect-label-not-i18n` | `WARNING` | 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오. | `portability/i18next/useselect-label-not-i18n.yaml` |

@@ -1,36 +1,38 @@
 rules:
-  - id: require-request
-    message: "require-request 잠재적 결함 및 보안 이격율 정비 요망."
-    severity: LOW
-    languages: [javascript, typescript]
-    # ok: metadata-subcategory
-    metadata:
-      owasp: "A03:2021 - Injection"
-      cwe: "CWE-706: Use of Incorrectly-Resolved Name or Reference"
-      source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
-      category: security
-      likelihood: LOW
-      impact: LOW
-      confidence: LOW
-      subcategory: 
-        - audit
-      technology:
-        - express
-      references:
-        - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
-    patterns: 
-  - id: require-request
-    message: "require-request 잠재적 결함 및 보안 이격율 정비 요망."
-    severity: LOW
-    languages: [javascript, typescript]
-    # ruleid: metadata-subcategory
-    metadata:
-      owasp: "A03:2021 - Injection"
-      cwe: "CWE-706: Use of Incorrectly-Resolved Name or Reference"
-      source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
-      category: security
-      technology:
-        - express
-      references:
-        - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
-    patterns: 
+- id: require-request
+  languages:
+  - javascript
+  - typescript
+  message: require-request 잠재적 결함 및 보안 이격율 정비 요망.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe: 'CWE-706: Use of Incorrectly-Resolved Name or Reference'
+    impact: LOW
+    likelihood: LOW
+    owasp: A03:2021 - Injection
+    references:
+    - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
+    source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
+    subcategory:
+    - audit
+    technology:
+    - express
+  patterns: null
+  severity: LOW
+- id: require-request
+  languages:
+  - javascript
+  - typescript
+  message: require-request 잠재적 결함 및 보안 이격율 정비 요망.
+  metadata:
+    category: security
+    cwe: 'CWE-706: Use of Incorrectly-Resolved Name or Reference'
+    owasp: A03:2021 - Injection
+    references:
+    - https://github.com/google/node-sec-roadmap/blob/master/chapter-2/dynamism.md#dynamism-when-you-need-it
+    source-rule-url: https://nodesecroadmap.fyi/chapter-1/threat-UIR.html
+    technology:
+    - express
+  patterns: null
+  severity: LOW

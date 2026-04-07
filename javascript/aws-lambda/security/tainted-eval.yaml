@@ -1,44 +1,28 @@
 rules:
 - id: tainted-eval
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    cwe:
-    - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"
-    owasp:
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    category: security
-    technology:
-    - javascript
-    - aws-lambda
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: HIGH
-    confidence: LOW
-    references:
-    - https://owasp.org/Top10/A03_2021-Injection
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code
+      (''Eval Injection'')'
+    impact: HIGH
+    likelihood: MEDIUM
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    subcategory:
+    - vuln
+    technology:
+    - javascript
+    - aws-lambda
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern: $EVENT
-    - pattern-either:
-      - pattern-inside: |
-          exports.handler = function ($EVENT, ...) {
-            ...
-          }
-      - pattern-inside: |
-          function $FUNC ($EVENT, ...) {...}
-          ...
-          exports.handler = $FUNC
-      - pattern-inside: |
-          $FUNC = function ($EVENT, ...) {...}
-          ...
-          exports.handler = $FUNC
   pattern-sinks:
   - patterns:
     - focus-metavariable: $CODE
@@ -46,3 +30,23 @@ rules:
       - pattern: eval($CODE)
       - pattern: Function(...,$CODE)
       - pattern: new Function(...,$CODE)
+  pattern-sources:
+  - patterns:
+    - pattern: $EVENT
+    - pattern-either:
+      - pattern-inside: "exports.handler = function ($EVENT, ...) {\n  ...\n}\n"
+      - pattern-inside: 'function $FUNC ($EVENT, ...) {...}
+
+          ...
+
+          exports.handler = $FUNC
+
+          '
+      - pattern-inside: '$FUNC = function ($EVENT, ...) {...}
+
+          ...
+
+          exports.handler = $FUNC
+
+          '
+  severity: WARNING

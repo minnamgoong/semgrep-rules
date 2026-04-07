@@ -1,37 +1,34 @@
 rules:
-  - id: zlib-async-loop
-    patterns:
-      - pattern-either:
-          - pattern-inside: |
-              for (...) {
-                  ...
-              }
-          - pattern-inside: |
-              while (...) {
-                  ...
-              }
-          - pattern-inside: |
-              do {
-                  ...
-              } while (...)
-          - pattern-inside: |
-              $SMTH.forEach(...)
-          - pattern-inside: |
-              $SMTH.map(...)
-          - pattern-inside: |
-              $SMTH.reduce(...)
-          - pattern-inside: |
-              $SMTH.reduceRight(...)
-      - pattern: zlib.$METHOD(...);
-      - metavariable-regex:
-          metavariable: $METHOD
-          regex: ^.+$(?<!Sync)
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    metadata:
-      references:
-        - https://nodejs.org/api/zlib.html#zlib_threadpool_usage_and_performance_considerations
-      category: best-practice
-      technology:
-        - javascript
-    severity: WARNING
-    languages: [javascript, typescript]
+- id: zlib-async-loop
+  languages:
+  - javascript
+  - typescript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    references:
+    - https://nodejs.org/api/zlib.html#zlib_threadpool_usage_and_performance_considerations
+    technology:
+    - javascript
+  patterns:
+  - pattern-either:
+    - pattern-inside: "for (...) {\n    ...\n}\n"
+    - pattern-inside: "while (...) {\n    ...\n}\n"
+    - pattern-inside: "do {\n    ...\n} while (...)\n"
+    - pattern-inside: '$SMTH.forEach(...)
+
+        '
+    - pattern-inside: '$SMTH.map(...)
+
+        '
+    - pattern-inside: '$SMTH.reduce(...)
+
+        '
+    - pattern-inside: '$SMTH.reduceRight(...)
+
+        '
+  - pattern: zlib.$METHOD(...);
+  - metavariable-regex:
+      metavariable: $METHOD
+      regex: ^.+$(?<!Sync)
+  severity: WARNING

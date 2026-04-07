@@ -1,26 +1,29 @@
 rules:
 - id: no-stringify-keys
-  mode: taint
-  pattern-sources:
-  - pattern: JSON.stringify(...)
-  - patterns:
-    - pattern-inside: |
-        $STRINGIFY = JSON.stringify
-        ...
-        $STRINGIFY(...)
-    - pattern: $STRINGIFY(...)
-  pattern-sinks:
-  - pattern: $OBJECT[...]
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
     category: correctness
     references:
-      - https://www.npmjs.com/package/json-stable-stringify
-      - https://stackoverflow.com/a/16168003
+    - https://www.npmjs.com/package/json-stable-stringify
+    - https://stackoverflow.com/a/16168003
     technology:
-      - javascript
-      - typescript
+    - javascript
+    - typescript
+  mode: taint
+  pattern-sinks:
+  - pattern: $OBJECT[...]
+  pattern-sources:
+  - pattern: JSON.stringify(...)
+  - patterns:
+    - pattern-inside: '$STRINGIFY = JSON.stringify
+
+        ...
+
+        $STRINGIFY(...)
+
+        '
+    - pattern: $STRINGIFY(...)
+  severity: WARNING

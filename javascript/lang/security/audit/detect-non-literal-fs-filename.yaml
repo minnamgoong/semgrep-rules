@@ -1,56 +1,64 @@
 rules:
 - id: detect-non-literal-fs-filename
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - typescript
+  - javascript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
-    references:
-    - https://owasp.org/www-community/attacks/Path_Traversal
+    - 'CWE-22: Improper Limitation of a Pathname to a Restricted Directory (''Path
+      Traversal'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A05:2017 - Broken Access Control
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
+    references:
+    - https://owasp.org/www-community/attacks/Path_Traversal
     source-rule-url: https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-non-literal-fs-filename.js
-    category: security
-    technology:
-    - typescript
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: LOW
-  languages:
-  - typescript
-  - javascript
-  severity: WARNING
+    technology:
+    - typescript
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-inside: function ... (..., $ARG,...) {...}
-    - focus-metavariable: $ARG
   pattern-sinks:
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          $FS = require('fs')
+      - pattern-inside: '$FS = require(''fs'')
+
           ...
-      - pattern-inside: |
-          $FS = require('fs/promises')
+
+          '
+      - pattern-inside: '$FS = require(''fs/promises'')
+
           ...
-      - pattern-inside: |
-          import * as $FS from 'fs'
+
+          '
+      - pattern-inside: 'import * as $FS from ''fs''
+
           ...
-      - pattern-inside: |
-          import $FS from 'fs'
+
+          '
+      - pattern-inside: 'import $FS from ''fs''
+
           ...
-      - pattern-inside: |
-          import * as $FS from 'fs/promises'
+
+          '
+      - pattern-inside: 'import * as $FS from ''fs/promises''
+
           ...
-      - pattern-inside: |
-          import $FS from 'fs/promises'
+
+          '
+      - pattern-inside: 'import $FS from ''fs/promises''
+
           ...
+
+          '
     - pattern-not: $FS. ... .$METHOD("...", ...)
     - pattern-either:
       - pattern: $FS. ... .access($FILE,...)
@@ -157,12 +165,16 @@ rules:
     - focus-metavariable: $FILE
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          import 'fs'
+      - pattern-inside: 'import ''fs''
+
           ...
-      - pattern-inside: |
-          import 'fs/promises'
+
+          '
+      - pattern-inside: 'import ''fs/promises''
+
           ...
+
+          '
     - pattern-not: $METHOD("...", ...)
     - pattern-either:
       - pattern: access($FILE,...)
@@ -267,3 +279,8 @@ rules:
       - pattern: writeSync($FILE, ...)
       - pattern: writevSync($FILE, ...)
     - focus-metavariable: $FILE
+  pattern-sources:
+  - patterns:
+    - pattern-inside: function ... (..., $ARG,...) {...}
+    - focus-metavariable: $ARG
+  severity: WARNING

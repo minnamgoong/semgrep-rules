@@ -1,31 +1,29 @@
 rules:
-  - id: define-styled-components-on-module-level
-    patterns:
-      - pattern-inside: |
-          import styled from 'styled-components';
-          ...
-      - pattern-either:
-          - pattern-inside: |
-              function $FUNC(...) {
-                ...
-              }
-          - pattern-inside: |
-              class $CLASS {
-                ...
-              }
-      - pattern-either:
-          - pattern: |
-              styled.$EL`...`;
-          - pattern: |
-              styled($EL)`...`;
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    metadata:
-      references:
-        - https://styled-components.com/docs/faqs#why-should-i-avoid-declaring-styled-components-in-the-render-method
-      category: best-practice
-      technology:
-        - react
-    languages:
-      - typescript
-      - javascript
-    severity: WARNING
+- id: define-styled-components-on-module-level
+  languages:
+  - typescript
+  - javascript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    references:
+    - https://styled-components.com/docs/faqs#why-should-i-avoid-declaring-styled-components-in-the-render-method
+    technology:
+    - react
+  patterns:
+  - pattern-inside: 'import styled from ''styled-components'';
+
+      ...
+
+      '
+  - pattern-either:
+    - pattern-inside: "function $FUNC(...) {\n  ...\n}\n"
+    - pattern-inside: "class $CLASS {\n  ...\n}\n"
+  - pattern-either:
+    - pattern: 'styled.$EL`...`;
+
+        '
+    - pattern: 'styled($EL)`...`;
+
+        '
+  severity: WARNING

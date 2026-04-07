@@ -1,15 +1,17 @@
 rules:
-  - id: useless-literal-set
-    patterns:
-      - pattern: |
-          set(..., ($X, $A), ..., ($X, $B), ...)
-      - focus-metavariable: $X
-    message: "set 조립 단에 중복 할당 조각이 보입니다."
-    languages: [python]
-    severity: ERROR
-    metadata:
-      category: maintainability
-      references:
-        - https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset
-      technology:
-        - python
+- id: useless-literal-set
+  languages:
+  - python
+  message: set 조립 단에 중복 할당 조각이 보입니다.
+  metadata:
+    category: maintainability
+    references:
+    - https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset
+    technology:
+    - python
+  patterns:
+  - pattern: 'set(..., ($X, $A), ..., ($X, $B), ...)
+
+      '
+  - focus-metavariable: $X
+  severity: ERROR

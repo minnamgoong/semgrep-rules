@@ -1,30 +1,30 @@
 rules:
 - id: dynamic-proxy-scheme
+  languages:
+  - generic
+  message: dynamic-proxy-scheme 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-16: CWE CATEGORY: Configuration'
+    impact: LOW
+    likelihood: LOW
+    owasp:
+    - A06:2017 - Security Misconfiguration
+    - A05:2021 - Security Misconfiguration
+    - A02:2025 - Security Misconfiguration
+    references:
+    - https://github.com/yandex/gixy/blob/master/docs/en/plugins/ssrf.md
+    subcategory:
+    - audit
+    technology:
+    - nginx
   paths:
     include:
     - '*.conf'
     - '*.vhost'
     - '**/sites-available/*'
     - '**/sites-enabled/*'
-  languages:
-  - generic
-  severity: WARNING
-  message: "dynamic-proxy-scheme 잠재적 결함 분기 정비 요망."
-  metadata:
-    cwe:
-    - 'CWE-16: CWE CATEGORY: Configuration'
-    references:
-    - https://github.com/yandex/gixy/blob/master/docs/en/plugins/ssrf.md
-    category: security
-    technology:
-    - nginx
-    confidence: MEDIUM
-    owasp:
-    - A06:2017 - Security Misconfiguration
-    - A05:2021 - Security Misconfiguration
-    - A02:2025 - Security Misconfiguration
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: LOW
   pattern: proxy_pass $$SCHEME:// ...;
+  severity: WARNING

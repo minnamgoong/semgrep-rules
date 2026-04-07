@@ -1,42 +1,62 @@
 rules:
 - id: tainted-sqli
-  message: "잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요."
-  languages: [java]
-  severity: WARNING
+  languages:
+  - java
+  message: 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command
+      (''SQL Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    interfile: true
+    likelihood: MEDIUM
+    owasp:
+    - A01:2017 - Injection
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    subcategory:
+    - vuln
+    technology:
+    - sql
+    - java
+    - aws-lambda
   mode: taint
-  pattern-sources:
-  - patterns:
-    - focus-metavariable: $EVENT
-    - pattern-either:
-      - pattern: |
-          $HANDLERTYPE $HANDLER($TYPE $EVENT, com.amazonaws.services.lambda.runtime.Context $CONTEXT) {
-            ...
-          }
-      - pattern: |
-          $HANDLERTYPE $HANDLER(InputStream $EVENT, OutputStream $OUT, com.amazonaws.services.lambda.runtime.Context $CONTEXT) {
-            ...
-          }
+  options:
+    interfile: true
   pattern-sinks:
   - patterns:
     - pattern-either:
-      - pattern: |
-          (java.sql.CallableStatement $STMT) = ...; 
-      - pattern: |
-          (java.sql.Statement $STMT) = ...;
-      - pattern: |
-          (java.sql.PreparedStatement $STMT) = ...;
-      - pattern: |
-          $VAR = $CONN.prepareStatement(...)
-      - pattern: |
-          $PATH.queryForObject(...);
-      - pattern: |
-          (java.util.Map<String, Object> $STMT) = $PATH.queryForMap(...);
-      - pattern: |
-          (org.springframework.jdbc.support.rowset.SqlRowSet $STMT) = ...;
+      - pattern: "(java.sql.CallableStatement $STMT) = ...; \n"
+      - pattern: '(java.sql.Statement $STMT) = ...;
+
+          '
+      - pattern: '(java.sql.PreparedStatement $STMT) = ...;
+
+          '
+      - pattern: '$VAR = $CONN.prepareStatement(...)
+
+          '
+      - pattern: '$PATH.queryForObject(...);
+
+          '
+      - pattern: '(java.util.Map<String, Object> $STMT) = $PATH.queryForMap(...);
+
+          '
+      - pattern: '(org.springframework.jdbc.support.rowset.SqlRowSet $STMT) = ...;
+
+          '
       - patterns:
-        - pattern-inside: |
-            (String $SQL) = "$SQLSTR" + ...;
+        - pattern-inside: '(String $SQL) = "$SQLSTR" + ...;
+
             ...
+
+            '
         - pattern: $PATH.$SQLCMD(..., $SQL, ...);
         - metavariable-regex:
             metavariable: $SQLSTR
@@ -44,27 +64,12 @@ rules:
         - metavariable-regex:
             metavariable: $SQLCMD
             regex: (execute|query|executeUpdate|batchUpdate)
-  options:
-    interfile: true
-  metadata:
-    category: security
-    technology:
-    - sql
-    - java
-    - aws-lambda
-    cwe:
-    - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
-    owasp:
-    - A01:2017 - Injection
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    references:
-    - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: HIGH
-    confidence: MEDIUM
-    interfile: true
+  pattern-sources:
+  - patterns:
+    - focus-metavariable: $EVENT
+    - pattern-either:
+      - pattern: "$HANDLERTYPE $HANDLER($TYPE $EVENT, com.amazonaws.services.lambda.runtime.Context\
+          \ $CONTEXT) {\n  ...\n}\n"
+      - pattern: "$HANDLERTYPE $HANDLER(InputStream $EVENT, OutputStream $OUT, com.amazonaws.services.lambda.runtime.Context\
+          \ $CONTEXT) {\n  ...\n}\n"
+  severity: WARNING

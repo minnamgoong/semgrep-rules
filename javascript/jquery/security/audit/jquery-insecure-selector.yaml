@@ -1,9 +1,19 @@
 rules:
 - id: jquery-insecure-selector
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - javascript
+  - typescript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
@@ -11,75 +21,63 @@ rules:
     references:
     - https://owasp.org/www-community/attacks/xss/
     - https://bugs.jquery.com/ticket/9521
-    category: security
-    technology:
-    - jquery
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
+    technology:
+    - jquery
   patterns:
   - pattern-either:
-    - pattern: |
-        $(<... window ...>)
-    - pattern: |
-        $(<... location ...>)
+    - pattern: '$(<... window ...>)
+
+        '
+    - pattern: '$(<... location ...>)
+
+        '
     - patterns:
-      - pattern: |
-          $X = <... window ...>;
+      - pattern: '$X = <... window ...>;
+
           ...
+
           $(<... $X ...>);
+
+          '
       - focus-metavariable: $X
     - patterns:
-      - pattern: |
-          $X = <... location ...>;
+      - pattern: '$X = <... location ...>;
+
           ...
+
           $(<... $X ...>);
+
+          '
       - focus-metavariable: $X
     - patterns:
       - pattern-either:
-        - pattern-inside: |
-            function $FUNC(..., $Y, ...) {
-              ...
-            }
-        - pattern-inside: |
-            function (..., $Y, ...) {
-              ...
-            }
-        - pattern-inside: |
-            function $FUNC(...,$Z,...) {
-              ...
-              $Y = <... $Z ...>;
-              ...
-            }
-        - pattern-inside: |
-            function (...,$Z,...) {
-              ...
-              $Y = <... $Z ...>;
-              ...
-            }
+        - pattern-inside: "function $FUNC(..., $Y, ...) {\n  ...\n}\n"
+        - pattern-inside: "function (..., $Y, ...) {\n  ...\n}\n"
+        - pattern-inside: "function $FUNC(...,$Z,...) {\n  ...\n  $Y = <... $Z ...>;\n\
+            \  ...\n}\n"
+        - pattern-inside: "function (...,$Z,...) {\n  ...\n  $Y = <... $Z ...>;\n\
+            \  ...\n}\n"
       - pattern-either:
-        - pattern: |
-            $(<... $Y ...>)
-        - pattern: |
-            $("..." + (<... $Y ...>))
-        - pattern: |
-            $((<... $Y ...>) + "...")
-      - pattern-not-inside: |
-          $JQUERY.each(function($INDEX, $Y) {
-            ...
-          })
+        - pattern: '$(<... $Y ...>)
+
+            '
+        - pattern: '$("..." + (<... $Y ...>))
+
+            '
+        - pattern: '$((<... $Y ...>) + "...")
+
+            '
+      - pattern-not-inside: "$JQUERY.each(function($INDEX, $Y) {\n  ...\n})\n"
       - focus-metavariable: $Y
-  - pattern-not: |
-      $(window)
-  - pattern-not: |
-      $(document)
-  - pattern-not: |
-      $(this)
+  - pattern-not: '$(window)
+
+      '
+  - pattern-not: '$(document)
+
+      '
+  - pattern-not: '$(this)
+
+      '
+  severity: WARNING

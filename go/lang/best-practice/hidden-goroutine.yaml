@@ -1,23 +1,13 @@
 rules:
-  - id: hidden-goroutine
-    patterns:
-      - pattern-not: |
-          func $FUNC(...) {
-            go func() {
-              ...
-            }(...)
-            $MORE
-          }
-      - pattern: |
-          func $FUNC(...) {
-            go func() {
-              ...
-            }(...)
-          }
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    languages: [go]
-    severity: WARNING
-    metadata:
-      category: best-practice
-      technology:
-        - go
+- id: hidden-goroutine
+  languages:
+  - go
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - go
+  patterns:
+  - pattern-not: "func $FUNC(...) {\n  go func() {\n    ...\n  }(...)\n  $MORE\n}\n"
+  - pattern: "func $FUNC(...) {\n  go func() {\n    ...\n  }(...)\n}\n"
+  severity: WARNING

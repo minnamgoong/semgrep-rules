@@ -3,8 +3,7 @@ rules:
   id: lang-consistency-csharp
   languages:
   - yaml
-  message: Found '$X' in language config which diverges from semgrep.dev normalization.
-    Please use 'csharp' instead.
+  message: semgrep.dev 정규화와 다른 언어 구성에서 '$X'를 발견했습니다. 대신 'csharp'를 사용하세요.
   metadata:
     category: correctness
     technology:

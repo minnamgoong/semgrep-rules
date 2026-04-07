@@ -1,14 +1,13 @@
 rules:
-  - id: use-onetoonefield
-    patterns:
-      - pattern-inside: |
-          class $M(...):
-            ...
-      - pattern: $F = django.db.models.ForeignKey(..., unique=True, ...)
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: best-practice
-      technology:
-        - django
+- id: use-onetoonefield
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - django
+  patterns:
+  - pattern-inside: "class $M(...):\n  ...\n"
+  - pattern: $F = django.db.models.ForeignKey(..., unique=True, ...)
+  severity: WARNING

@@ -1,36 +1,17 @@
 rules:
-  - id: useless-inner-function
-    patterns:
-      - pattern-not-inside: |
-          def $F(...):
-              ...
-              def $FF(...):
-                 ...
-              ...
-              <... $FF ...>
-      - pattern-not-inside: |
-          def $F(...):
-              ...
-              class $CLAZZ(...):
-                ...
-      - pattern-inside: |
-          def $F(...):
-            ...
-            def $FF(...):
-               ...
-            ...
-      - pattern: |
-          def $FF(...):
-            ...
-      - pattern-not: |
-          @$DECORATOR
-          def $FF(...):
-            ...
-    message: "내부 함수가 정의되었으나 사용 연동이 누락되었습니다. 코드 가독성을 위해 말소 대상 점검 하십시오."
-    languages:
-      - python
-    severity: ERROR
-    metadata:
-      category: maintainability
-      technology:
-        - python
+- id: useless-inner-function
+  languages:
+  - python
+  message: 내부 함수가 정의되었으나 사용 연동이 누락되었습니다. 코드 가독성을 위해 말소 대상 점검 하십시오.
+  metadata:
+    category: maintainability
+    technology:
+    - python
+  patterns:
+  - pattern-not-inside: "def $F(...):\n    ...\n    def $FF(...):\n       ...\n  \
+      \  ...\n    <... $FF ...>\n"
+  - pattern-not-inside: "def $F(...):\n    ...\n    class $CLAZZ(...):\n      ...\n"
+  - pattern-inside: "def $F(...):\n  ...\n  def $FF(...):\n     ...\n  ...\n"
+  - pattern: "def $FF(...):\n  ...\n"
+  - pattern-not: "@$DECORATOR\ndef $FF(...):\n  ...\n"
+  severity: ERROR

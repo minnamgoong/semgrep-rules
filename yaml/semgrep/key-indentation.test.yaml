@@ -1,14 +1,12 @@
 rules:
-  - id: yaml-key-indentation-check-example 
-    message: "yaml-key-indentation-check-example 잠재적 결함 및 보안 이격율 정비 요망."
-    languages:
-      - js
-    severity: WARNING
-    patterns:
-      # ruleid: yaml-key-indentation-check 
-      -pattern: |
-        bar
-    patterns-again:
-      # ok: yaml-key-indentation-check 
-      - pattern: |
-            bar
+- id: yaml-key-indentation-check-example
+  languages:
+  - js
+  message: yaml-key-indentation-check-example 잠재적 결함 및 보안 이격율 정비 요망.
+  patterns:
+    -pattern: 'bar
+
+      '
+  patterns-again:
+  - pattern: bar
+  severity: WARNING

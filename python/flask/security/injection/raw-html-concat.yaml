@@ -2,27 +2,27 @@ rules:
 - id: raw-html-format
   languages:
   - python
-  severity: WARNING
-  message: "raw-html-format 잠재적 결함 분기 정비 요망."
+  message: raw-html-format 잠재적 결함 분기 정비 요망.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
     - A05:2025 - Injection
-    category: security
-    technology:
-    - flask
     references:
     - https://flask.palletsprojects.com/en/2.0.x/security/#cross-site-scripting-xss
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - flask
   mode: taint
   pattern-sanitizers:
   - pattern: jinja2.escape(...)
@@ -32,16 +32,6 @@ rules:
     - metavariable-regex:
         metavariable: $TPL
         regex: .*\.html
-  pattern-sources:
-  - patterns:
-    - pattern-either:
-      - pattern: flask.request.$ANYTHING
-      - patterns:
-        - pattern-inside: |
-            @$APP.route(...)
-            def $FUNC(..., $ROUTEVAR, ...):
-              ...
-        - pattern: $ROUTEVAR
   pattern-sinks:
   - patterns:
     - pattern-either:
@@ -52,14 +42,24 @@ rules:
           - pattern: '"$HTMLSTR" + ...'
           - pattern: f"$HTMLSTR{...}..."
       - patterns:
-        - pattern-inside: |
-            $HTML = "$HTMLSTR"
+        - pattern-inside: '$HTML = "$HTMLSTR"
+
             ...
+
+            '
         - pattern-either:
           - pattern: $HTML % ...
           - pattern: $HTML.format(...)
           - pattern: $HTML + ...
     - metavariable-pattern:
-        metavariable: $HTMLSTR
         language: generic
+        metavariable: $HTMLSTR
         pattern: <$TAG ...
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - pattern: flask.request.$ANYTHING
+      - patterns:
+        - pattern-inside: "@$APP.route(...)\ndef $FUNC(..., $ROUTEVAR, ...):\n  ...\n"
+        - pattern: $ROUTEVAR
+  severity: WARNING

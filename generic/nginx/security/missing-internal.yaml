@@ -1,49 +1,40 @@
 rules:
 - id: missing-internal
+  languages:
+  - generic
+  message: missing-internal 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-16: CWE CATEGORY: Configuration'
+    impact: LOW
+    likelihood: LOW
+    owasp:
+    - A06:2017 - Security Misconfiguration
+    - A05:2021 - Security Misconfiguration
+    - A02:2025 - Security Misconfiguration
+    references:
+    - https://github.com/yandex/gixy/blob/master/docs/en/plugins/ssrf.md
+    - https://nginx.org/en/docs/http/ngx_http_core_module.html#internal
+    subcategory:
+    - audit
+    technology:
+    - nginx
   options:
     generic_ellipsis_max_span: 0
     generic_engine: aliengrep
-  patterns:
-    - pattern-inside: |
-        location ... {
-          ....
-          ....
-        }
-    - pattern-not-inside: |
-        location ... {
-          ....
-          internal;
-          ....
-        }
-    - pattern: proxy_pass $...URL;
-    - metavariable-regex:
-        metavariable: $...URL
-        regex: (.*\$.*)
   paths:
     include:
     - '*.conf'
     - '*.vhost'
     - '**/sites-available/*'
     - '**/sites-enabled/*'
-  languages:
-  - generic
+  patterns:
+  - pattern-inside: "location ... {\n  ....\n  ....\n}\n"
+  - pattern-not-inside: "location ... {\n  ....\n  internal;\n  ....\n}\n"
+  - pattern: proxy_pass $...URL;
+  - metavariable-regex:
+      metavariable: $...URL
+      regex: (.*\$.*)
   severity: WARNING
-  message: "missing-internal 잠재적 결함 분기 정비 요망."
-  metadata:
-    cwe:
-    - 'CWE-16: CWE CATEGORY: Configuration'
-    references:
-    - https://github.com/yandex/gixy/blob/master/docs/en/plugins/ssrf.md
-    - https://nginx.org/en/docs/http/ngx_http_core_module.html#internal
-    category: security
-    technology:
-    - nginx
-    confidence: LOW
-    owasp:
-    - A06:2017 - Security Misconfiguration
-    - A05:2021 - Security Misconfiguration
-    - A02:2025 - Security Misconfiguration
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: LOW

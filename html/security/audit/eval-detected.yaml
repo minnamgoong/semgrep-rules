@@ -1,40 +1,42 @@
 rules:
-  - id: eval-detected
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    metadata:
-      cwe:
-      - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
-      owasp:
-      - A07:2017 - Cross-Site Scripting (XSS)
-      - A03:2021 - Injection
-      - A05:2025 - Injection
-      category: security
-      technology:
-      - browser
-      cwe2022-top25: true
-      cwe2021-top25: true
-      subcategory:
-      - audit
-      likelihood: LOW
-      impact: MEDIUM
-      confidence: LOW
-      references:
-      - https://owasp.org/Top10/A03_2021-Injection
-      - https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
-    languages: 
-        - html
-    severity: WARNING
-    patterns:
-      - pattern-inside: |
-          <script ...>$...A</script>
-      - metavariable-pattern:
-          metavariable: $...A
-          language: javascript
-          patterns:
-            - pattern-either:
-                - pattern: $X(...)
-            - pattern-not: $X("...")
-            - metavariable-regex:
-                metavariable: $X
-                regex: ^(eval)$
-            - focus-metavariable: $X
+- id: eval-detected
+  languages:
+  - html
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
+    owasp:
+    - A07:2017 - Cross-Site Scripting (XSS)
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    - https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    subcategory:
+    - audit
+    technology:
+    - browser
+  patterns:
+  - pattern-inside: '<script ...>$...A</script>
+
+      '
+  - metavariable-pattern:
+      language: javascript
+      metavariable: $...A
+      patterns:
+      - pattern-either:
+        - pattern: $X(...)
+      - pattern-not: $X("...")
+      - metavariable-regex:
+          metavariable: $X
+          regex: ^(eval)$
+      - focus-metavariable: $X
+  severity: WARNING

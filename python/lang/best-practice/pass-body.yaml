@@ -1,30 +1,25 @@
 rules:
-  - id: pass-body-fn
-    patterns:
-      - pattern-not-inside: |
-          def __init__(self, ...):
-              ...
-      - pattern-not-inside: |
-          class $A:
-               ...
-      - pattern: |
-          def $X(...):
-              pass
-    message: "`pass` is the body of function $X. Consider removing this or raise NotImplementedError() if this is a TODO"
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: best-practice
-      technology:
-        - python
-  - id: pass-body-range
-    pattern: |
-      for $X in $Y:
-          pass
-    message: "pass-body-range 잠재적 결함 분기 정비 요망."
-    languages: [python]
-    severity: WARNING
-    metadata:
-      category: best-practice
-      technology:
-        - python
+- id: pass-body-fn
+  languages:
+  - python
+  message: '`pass`는 $X 함수의 본문입니다. 이를 제거하거나 이것이 TODO인 경우 NotImplementedError()를 발생시키는
+    것을 고려하십시오.'
+  metadata:
+    category: best-practice
+    technology:
+    - python
+  patterns:
+  - pattern-not-inside: "def __init__(self, ...):\n    ...\n"
+  - pattern-not-inside: "class $A:\n     ...\n"
+  - pattern: "def $X(...):\n    pass\n"
+  severity: WARNING
+- id: pass-body-range
+  languages:
+  - python
+  message: pass-body-range 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: best-practice
+    technology:
+    - python
+  pattern: "for $X in $Y:\n    pass\n"
+  severity: WARNING

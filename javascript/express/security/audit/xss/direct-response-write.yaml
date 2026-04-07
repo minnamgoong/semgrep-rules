@@ -1,109 +1,205 @@
 rules:
 - id: direct-response-write
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  options:
-    interfile: true
+  languages:
+  - javascript
+  - typescript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
     interfile: true
-    references:
-    - https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    likelihood: MEDIUM
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
     - A05:2025 - Injection
-    cwe:
-    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
-      Scripting'')'
-    category: security
-    technology:
-    - express
-    cwe2022-top25: true
-    cwe2021-top25: true
+    references:
+    - https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - express
     vulnerability_class:
     - Cross-Site-Scripting (XSS)
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
   mode: taint
-  pattern-sources:
+  options:
+    interfile: true
+  pattern-sanitizers:
   - patterns:
     - pattern-either:
-      - pattern-inside: function ... ($REQ, $RES) {...}
-      - pattern-inside: function ... ($REQ, $RES, $NEXT) {...}
+      - pattern-inside: 'import $S from "underscore.string"
+
+          ...
+
+          '
+      - pattern-inside: 'import * as $S from "underscore.string"
+
+          ...
+
+          '
+      - pattern-inside: 'import $S from "underscore.string"
+
+          ...
+
+          '
+      - pattern-inside: '$S = require("underscore.string")
+
+          ...
+
+          '
+    - pattern-either:
+      - pattern: $S.escapeHTML(...)
+  - patterns:
+    - pattern-either:
+      - pattern-inside: 'import $S from "dompurify"
+
+          ...
+
+          '
+      - pattern-inside: 'import { ..., $S,... } from "dompurify"
+
+          ...
+
+          '
+      - pattern-inside: 'import * as $S from "dompurify"
+
+          ...
+
+          '
+      - pattern-inside: '$S = require("dompurify")
+
+          ...
+
+          '
+      - pattern-inside: 'import $S from "isomorphic-dompurify"
+
+          ...
+
+          '
+      - pattern-inside: 'import * as $S from "isomorphic-dompurify"
+
+          ...
+
+          '
+      - pattern-inside: '$S = require("isomorphic-dompurify")
+
+          ...
+
+          '
+    - pattern-either:
       - patterns:
-        - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES) {...})
-        - metavariable-regex:
-            metavariable: $METHOD
-            regex: ^(get|post|put|head|delete|options)
-    - pattern-not-inside: |
-        function ... ($REQ, $RES) {
+        - pattern-inside: '$VALUE = $S(...)
+
             ...
-            $RES.$SET('Content-Type', '$TYPE')
-        }
-    - pattern-not-inside: |
-        $APP.$METHOD(..., function $FUNC($REQ, $RES) {
+
+            '
+        - pattern: $VALUE.sanitize(...)
+      - patterns:
+        - pattern-inside: '$VALUE = $S.sanitize
+
             ...
-            $RES.$SET('Content-Type', '$TYPE')
-        })
-    - pattern-not-inside: |
-        function ... ($REQ, $RES, $NEXT) {
-            ...
-            $RES.$SET('Content-Type', '$TYPE')
-        }
-    - pattern-not-inside: |
-        function ... ($REQ, $RES) {
-            ...
-            $RES.set('$TYPE')
-        }
-    - pattern-not-inside: |
-        $APP.$METHOD(..., function $FUNC($REQ, $RES) {
-            ...
-            $RES.set('$TYPE')
-        })
-    - pattern-not-inside: |
-        function ... ($REQ, $RES, $NEXT) {
-            ...
-            $RES.set('$TYPE')
-        }
-    - pattern-either:
-      - pattern: $REQ.query
-      - pattern: $REQ.body
-      - pattern: $REQ.params
+
+            '
+        - pattern: $S(...)
+      - pattern: $S.sanitize(...)
+      - pattern: $S(...)
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
-          {...}
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response) => {...}
-    - pattern-not-inside: |
-        ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
-        {
-            ...
-            $RES.$SET('Content-Type', '$TYPE')
-        }
-    - pattern-not-inside: |
-        ({ $REQ }: Request,$RES: Response) => {
-            ...
-            $RES.$SET('Content-Type', '$TYPE')
-        }
-    - pattern-not-inside: |
-        ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
-        {
-            ...
-            $RES.set('$TYPE')
-        }
-    - focus-metavariable: $REQ
+      - pattern-inside: 'import $S from ''xss'';
+
+          ...
+
+          '
+      - pattern-inside: 'import * as $S from ''xss'';
+
+          ...
+
+          '
+      - pattern-inside: '$S = require("xss")
+
+          ...
+
+          '
+    - pattern: $S(...)
+  - patterns:
     - pattern-either:
-      - pattern: params
-      - pattern: query
-      - pattern: body
+      - pattern-inside: 'import $S from ''sanitize-html'';
+
+          ...
+
+          '
+      - pattern-inside: 'import * as $S from "sanitize-html";
+
+          ...
+
+          '
+      - pattern-inside: '$S = require("sanitize-html")
+
+          ...
+
+          '
+    - pattern: $S(...)
+  - patterns:
+    - pattern-either:
+      - pattern-inside: '$S = new Remarkable()
+
+          ...
+
+          '
+    - pattern: $S.render(...)
+  - patterns:
+    - pattern-either:
+      - pattern-inside: 'import $S from ''express-xss-sanitizer'';
+
+          ...
+
+          '
+      - pattern-inside: 'import * as $S from "express-xss-sanitizer";
+
+          ...
+
+          '
+      - pattern-inside: 'const { ..., $S, ... } = require(''express-xss-sanitizer'');
+
+          ...
+
+          '
+      - pattern-inside: 'var { ..., $S, ... } = require(''express-xss-sanitizer'');
+
+          ...
+
+          '
+      - pattern-inside: 'let { ...,$S,... } = require(''express-xss-sanitizer'');
+
+          ...
+
+          '
+      - pattern-inside: '$S = require("express-xss-sanitizer")
+
+          ...
+
+          '
+    - pattern: $S(...)
+  - patterns:
+    - pattern: $RES. ... .type('$F'). ... .send(...)
+    - metavariable-regex:
+        metavariable: $F
+        regex: (?!.*text/html)
+  - patterns:
+    - pattern-inside: '$X = [...];
+
+        ...
+
+        '
+    - pattern: "if(<... !$X.includes($SOURCE)...>) {\n    ...\n    return ...\n}\n\
+        ...\n"
+    - pattern: $SOURCE
   pattern-sinks:
   - patterns:
     - pattern-inside: function ... (..., $RES,...) {...}
@@ -114,123 +210,51 @@ rules:
     - pattern-not: $RES. ... .type('...'). ... .send($ARG)
     - pattern-not-inside: $RES.$METHOD({ ... })
     - focus-metavariable: $ARG
-  pattern-sanitizers:
+  pattern-sources:
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          import $S from "underscore.string"
-          ...
-      - pattern-inside: |
-          import * as $S from "underscore.string"
-          ...
-      - pattern-inside: |
-          import $S from "underscore.string"
-          ...
-      - pattern-inside: |
-          $S = require("underscore.string")
-          ...
-    - pattern-either:
-      - pattern: $S.escapeHTML(...)
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          import $S from "dompurify"
-          ...
-      - pattern-inside: |
-          import { ..., $S,... } from "dompurify"
-          ...
-      - pattern-inside: |
-          import * as $S from "dompurify"
-          ...
-      - pattern-inside: |
-          $S = require("dompurify")
-          ...
-      - pattern-inside: |
-          import $S from "isomorphic-dompurify"
-          ...
-      - pattern-inside: |
-          import * as $S from "isomorphic-dompurify"
-          ...
-      - pattern-inside: |
-          $S = require("isomorphic-dompurify")
-          ...
-    - pattern-either:
+      - pattern-inside: function ... ($REQ, $RES) {...}
+      - pattern-inside: function ... ($REQ, $RES, $NEXT) {...}
       - patterns:
-        - pattern-inside: |
-            $VALUE = $S(...)
-            ...
-        - pattern: $VALUE.sanitize(...)
-      - patterns:
-        - pattern-inside: |
-            $VALUE = $S.sanitize
-            ...
-        - pattern: $S(...)
-      - pattern: $S.sanitize(...)
-      - pattern: $S(...)
+        - pattern-inside: $APP.$METHOD(..., function $FUNC($REQ, $RES) {...})
+        - metavariable-regex:
+            metavariable: $METHOD
+            regex: ^(get|post|put|head|delete|options)
+    - pattern-not-inside: "function ... ($REQ, $RES) {\n    ...\n    $RES.$SET('Content-Type',\
+        \ '$TYPE')\n}\n"
+    - pattern-not-inside: "$APP.$METHOD(..., function $FUNC($REQ, $RES) {\n    ...\n\
+        \    $RES.$SET('Content-Type', '$TYPE')\n})\n"
+    - pattern-not-inside: "function ... ($REQ, $RES, $NEXT) {\n    ...\n    $RES.$SET('Content-Type',\
+        \ '$TYPE')\n}\n"
+    - pattern-not-inside: "function ... ($REQ, $RES) {\n    ...\n    $RES.set('$TYPE')\n\
+        }\n"
+    - pattern-not-inside: "$APP.$METHOD(..., function $FUNC($REQ, $RES) {\n    ...\n\
+        \    $RES.set('$TYPE')\n})\n"
+    - pattern-not-inside: "function ... ($REQ, $RES, $NEXT) {\n    ...\n    $RES.set('$TYPE')\n\
+        }\n"
+    - pattern-either:
+      - pattern: $REQ.query
+      - pattern: $REQ.body
+      - pattern: $REQ.params
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          import $S from 'xss';
-          ...
-      - pattern-inside: |
-          import * as $S from 'xss';
-          ...
-      - pattern-inside: |
-          $S = require("xss")
-          ...
-    - pattern: $S(...)
-  - patterns:
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+
+          {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+    - pattern-not-inside: "({ $REQ }: Request,$RES: Response, $NEXT: NextFunction)\
+        \ =>\n{\n    ...\n    $RES.$SET('Content-Type', '$TYPE')\n}\n"
+    - pattern-not-inside: "({ $REQ }: Request,$RES: Response) => {\n    ...\n    $RES.$SET('Content-Type',\
+        \ '$TYPE')\n}\n"
+    - pattern-not-inside: "({ $REQ }: Request,$RES: Response, $NEXT: NextFunction)\
+        \ =>\n{\n    ...\n    $RES.set('$TYPE')\n}\n"
+    - focus-metavariable: $REQ
     - pattern-either:
-      - pattern-inside: |
-          import $S from 'sanitize-html';
-          ...
-      - pattern-inside: |
-          import * as $S from "sanitize-html";
-          ...
-      - pattern-inside: |
-          $S = require("sanitize-html")
-          ...
-    - pattern: $S(...)
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          $S = new Remarkable()
-          ...
-    - pattern: $S.render(...)
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          import $S from 'express-xss-sanitizer';
-          ...
-      - pattern-inside: |
-          import * as $S from "express-xss-sanitizer";
-          ...
-      - pattern-inside: |
-          const { ..., $S, ... } = require('express-xss-sanitizer');
-          ...
-      - pattern-inside: |
-          var { ..., $S, ... } = require('express-xss-sanitizer');
-          ...
-      - pattern-inside: |
-          let { ...,$S,... } = require('express-xss-sanitizer');
-          ...
-      - pattern-inside: |
-          $S = require("express-xss-sanitizer")
-          ...
-    - pattern: $S(...)
-  - patterns:
-    - pattern: $RES. ... .type('$F'). ... .send(...)
-    - metavariable-regex:
-        metavariable: $F
-        regex: (?!.*text/html)
-  - patterns:
-    - pattern-inside: |
-        $X = [...];
-        ...
-    - pattern: |
-        if(<... !$X.includes($SOURCE)...>) {
-            ...
-            return ...
-        }
-        ...
-    - pattern: $SOURCE
+      - pattern: params
+      - pattern: query
+      - pattern: body
+  severity: WARNING

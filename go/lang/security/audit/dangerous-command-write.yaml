@@ -1,45 +1,59 @@
 rules:
 - id: dangerous-command-write
-  patterns:
-  - pattern: |
-      $CW.Write($BYTE)
-  - pattern-inside: |
-      $CW,$ERR := $CMD.StdinPipe()
-      ...
-  - pattern-not: |
-      $CW.Write("...")
-  - pattern-not: |
-      $CW.Write([]byte("..."))
-  - pattern-not: |
-      $CW.Write([]byte("..."+"..."))
-  - pattern-not-inside: |
-      $BYTE = []byte("...");
-      ...
-  - pattern-not-inside: |
-      $BYTE = []byte("..."+"...");
-      ...
-  - pattern-inside: |
-      import "os/exec"
-      ...
-  message: "Go 보안 및 무결성 관리: dangerous-command-write 점검 처리 하세요."
-  severity: ERROR
-  languages: [go]
+  languages:
+  - go
+  message: 'Go 보안 및 무결성 관리: dangerous-command-write 점검 처리 하세요.'
   metadata:
-    cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
     category: security
-    technology:
-    - go
     confidence: LOW
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: HIGH
+    technology:
+    - go
+  patterns:
+  - pattern: '$CW.Write($BYTE)
+
+      '
+  - pattern-inside: '$CW,$ERR := $CMD.StdinPipe()
+
+      ...
+
+      '
+  - pattern-not: '$CW.Write("...")
+
+      '
+  - pattern-not: '$CW.Write([]byte("..."))
+
+      '
+  - pattern-not: '$CW.Write([]byte("..."+"..."))
+
+      '
+  - pattern-not-inside: '$BYTE = []byte("...");
+
+      ...
+
+      '
+  - pattern-not-inside: '$BYTE = []byte("..."+"...");
+
+      ...
+
+      '
+  - pattern-inside: 'import "os/exec"
+
+      ...
+
+      '
+  severity: ERROR

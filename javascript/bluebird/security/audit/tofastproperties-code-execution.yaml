@@ -1,42 +1,46 @@
 rules:
 - id: tofastproperties-code-execution
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
-    owasp:
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    category: security
-    technology:
-    - bluebird
-    references:
-    - http://bluebirdjs.com/docs/getting-started.html
-    cwe2022-top25: true
-    subcategory:
-    - vuln
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - http://bluebirdjs.com/docs/getting-started.html
+    subcategory:
+    - vuln
+    technology:
+    - bluebird
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-inside: function ... (..., $ARG,...) {...}
-    - focus-metavariable: $ARG
   pattern-sinks:
   - patterns:
     - pattern-either:
       - pattern: $UTIL.toFastProperties($SINK,...)
       - pattern: toFastProperties($SINK,...)
     - pattern-either:
-      - pattern-inside: |
-          $BB = require('bluebird');
+      - pattern-inside: '$BB = require(''bluebird'');
+
           ...
-      - pattern-inside: |
-          import 'bluebird';
+
+          '
+      - pattern-inside: 'import ''bluebird'';
+
           ...
+
+          '
     - focus-metavariable: $SINK
+  pattern-sources:
+  - patterns:
+    - pattern-inside: function ... (..., $ARG,...) {...}
+    - focus-metavariable: $ARG
+  severity: WARNING

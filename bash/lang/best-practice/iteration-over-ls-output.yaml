@@ -1,19 +1,17 @@
 rules:
-  - id: iteration-over-ls-output
-    patterns:
-      - pattern: |
-          for $VAR in $LIST; do
-            ...
-          done
-      - pattern: |
-          $(ls ...)
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    metadata:
-      references:
-        - https://github.com/koalaman/shellcheck/wiki/SC2045
-      category: best-practice
-      technology:
-        - bash
-    severity: WARNING
-    languages:
-      - bash
+- id: iteration-over-ls-output
+  languages:
+  - bash
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    references:
+    - https://github.com/koalaman/shellcheck/wiki/SC2045
+    technology:
+    - bash
+  patterns:
+  - pattern: "for $VAR in $LIST; do\n  ...\ndone\n"
+  - pattern: '$(ls ...)
+
+      '
+  severity: WARNING

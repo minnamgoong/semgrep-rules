@@ -1,31 +1,54 @@
 rules:
 - id: detect-angular-element-taint
-  message: "Angular 프론트엔드 결함 주사 점검."
+  languages:
+  - javascript
+  - typescript
+  message: Angular 프론트엔드 결함 주사 점검.
   metadata:
+    category: security
     confidence: MEDIUM
     cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
-    references:
-    - https://docs.angularjs.org/api/ng/function/angular.element
-    - https://owasp.org/www-chapter-london/assets/slides/OWASPLondon20170727_AngularJS.pdf
-    category: security
-    technology:
-    - angularjs
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
     - A05:2025 - Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
+    references:
+    - https://docs.angularjs.org/api/ng/function/angular.element
+    - https://owasp.org/www-chapter-london/assets/slides/OWASPLondon20170727_AngularJS.pdf
     subcategory:
     - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
+    technology:
+    - angularjs
   mode: taint
+  pattern-sanitizers:
+  - patterns:
+    - pattern-either:
+      - pattern: $sce.getTrustedHtml(...)
+      - pattern: $sanitize(...)
+      - pattern: DOMPurify.sanitize(...)
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - pattern-inside: 'angular.element(...). ... .$SINK($QUERY)
+
+          '
+      - pattern-inside: '$ANGULAR = angular.element(...)
+
+          ...
+
+          $ANGULAR. ... .$SINK($QUERY)
+
+          '
+    - metavariable-regex:
+        metavariable: $SINK
+        regex: ^(after|append|html|prepend|replaceWith|wrap)$
+    - focus-metavariable: $QUERY
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -58,22 +81,4 @@ rules:
         metavariable: $METHOD
         regex: ^(get|delete|head|jsonp|post|put|patch)
     - pattern: $RES.data
-  pattern-sinks:
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          angular.element(...). ... .$SINK($QUERY)
-      - pattern-inside: |
-          $ANGULAR = angular.element(...)
-          ...
-          $ANGULAR. ... .$SINK($QUERY)
-    - metavariable-regex:
-        metavariable: $SINK
-        regex: ^(after|append|html|prepend|replaceWith|wrap)$
-    - focus-metavariable: $QUERY
-  pattern-sanitizers:
-  - patterns:
-    - pattern-either:
-      - pattern: $sce.getTrustedHtml(...)
-      - pattern: $sanitize(...)
-      - pattern: DOMPurify.sanitize(...)
+  severity: WARNING

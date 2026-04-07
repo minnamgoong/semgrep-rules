@@ -1,25 +1,25 @@
 rules:
-  - id: detect-langchain
-    languages:
-      - python
-    severity: INFO
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    pattern-either:
-      - pattern: import langchain_openai
-      - pattern: ChatOpenAI(...)
-      - pattern: import langchain_community
-      - pattern: Ollama(...)
-      - pattern: import langchain_anthropic
-      - pattern: ChatAnthropic(...)
-      - pattern: import langchain_cohere
-      - pattern: ChatCohere(...)
-      - pattern: import langchain_core
-      - pattern: import langchain
-    metadata:
-      references:
-        - https://semgrep.dev/blog/2024/detecting-shadow-ai
-      category: maintainability
-      technology:
-        - genAI
-        - LLMs
-      confidence: LOW
+- id: detect-langchain
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: maintainability
+    confidence: LOW
+    references:
+    - https://semgrep.dev/blog/2024/detecting-shadow-ai
+    technology:
+    - genAI
+    - LLMs
+  pattern-either:
+  - pattern: import langchain_openai
+  - pattern: ChatOpenAI(...)
+  - pattern: import langchain_community
+  - pattern: Ollama(...)
+  - pattern: import langchain_anthropic
+  - pattern: ChatAnthropic(...)
+  - pattern: import langchain_cohere
+  - pattern: ChatCohere(...)
+  - pattern: import langchain_core
+  - pattern: import langchain
+  severity: INFO

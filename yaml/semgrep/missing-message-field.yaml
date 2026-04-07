@@ -1,19 +1,15 @@
 rules:
 - id: missing-message-field
-  message: >-
-    This rule does not have a message. Semgrep requires that rules have a message. Include a message to
-    explain what the rule does. Consider writing a message that explains why this is an issue and how
-    to fix it.
-  severity: WARNING
+  languages:
+  - yaml
+  message: 이 규칙에는 메시지가 없습니다. Semgrep에는 규칙에 메시지가 있어야 합니다. 규칙의 기능을 설명하는 메시지를 포함합니다.
+    이것이 문제인 이유와 해결 방법을 설명하는 메시지를 작성해 보세요.
   metadata:
     category: correctness
     technology:
     - semgrep
-  languages: [yaml]
   patterns:
   - pattern-inside: 'rules: [..., $RULE, ...]'
   - pattern: 'id: $RULEID'
-  - pattern-not-inside: |
-      - ...
-        message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
-
+  - pattern-not-inside: "- ...\n  message: \"설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.\"\n"
+  severity: WARNING

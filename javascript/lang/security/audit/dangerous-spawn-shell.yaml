@@ -1,65 +1,74 @@
 rules:
 - id: dangerous-spawn-shell
-  message: "비 리터럴 문자열을 실행 명령 매개체로 탑재하는 위험 spawn 구조를 감지했습니다. 명령 실행의 안정성을 위해 정적 리스트를 적용하세요."
+  languages:
+  - javascript
+  - typescript
+  message: 비 리터럴 문자열을 실행 명령 매개체로 탑재하는 위험 spawn 구조를 감지했습니다. 명령 실행의 안정성을 위해 정적 리스트를
+    적용하세요.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
-    source-rule-url: https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-child-process.js
-    category: security
-    technology:
-    - javascript
     references:
     - https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html#do-not-use-dangerous-functions
-    cwe2022-top25: true
-    cwe2021-top25: true
+    source-rule-url: https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-child-process.js
     subcategory:
     - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: LOW
-  languages:
-  - javascript
-  - typescript
-  severity: ERROR
+    technology:
+    - javascript
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-inside: |
-        function ... (...,$FUNC,...) {
-          ...
-        }
-    - focus-metavariable: $FUNC
   pattern-sinks:
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          require('child_process')
+      - pattern-inside: 'require(''child_process'')
+
           ...
-      - pattern-inside: |
-          import 'child_process'
+
+          '
+      - pattern-inside: 'import ''child_process''
+
           ...
+
+          '
     - pattern-either:
       - pattern: spawn(...)
       - pattern: spawnSync(...)
       - pattern: $CP.spawn(...)
       - pattern: $CP.spawnSync(...)
     - pattern-either:
-      - pattern: |
-          $EXEC("=~/(sh|bash|ksh|csh|tcsh|zsh)/",["-c", $ARG, ...],...)
+      - pattern: '$EXEC("=~/(sh|bash|ksh|csh|tcsh|zsh)/",["-c", $ARG, ...],...)
+
+          '
       - patterns:
         - pattern: $EXEC($CMD,["-c", $ARG, ...],...)
-        - pattern-inside: |
-            $CMD = "=~/(sh|bash|ksh|csh|tcsh|zsh)/"
+        - pattern-inside: '$CMD = "=~/(sh|bash|ksh|csh|tcsh|zsh)/"
+
             ...
-      - pattern: |
-          $EXEC("=~/(sh|bash|ksh|csh|tcsh|zsh)/",[$ARG, ...],...)
+
+            '
+      - pattern: '$EXEC("=~/(sh|bash|ksh|csh|tcsh|zsh)/",[$ARG, ...],...)
+
+          '
       - patterns:
         - pattern: $EXEC($CMD,[$ARG, ...],...)
-        - pattern-inside: |
-            $CMD = "=~/(sh|bash|ksh|csh|tcsh|zsh)/"
+        - pattern-inside: '$CMD = "=~/(sh|bash|ksh|csh|tcsh|zsh)/"
+
             ...
+
+            '
     - focus-metavariable: $ARG
+  pattern-sources:
+  - patterns:
+    - pattern-inside: "function ... (...,$FUNC,...) {\n  ...\n}\n"
+    - focus-metavariable: $FUNC
+  severity: ERROR

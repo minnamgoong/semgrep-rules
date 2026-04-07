@@ -1,39 +1,41 @@
 rules:
 - id: jwt-exposed-data
-  message: "JWT 토큰 서명 및 디코드 검증 누락 여부 점검."
+  languages:
+  - javascript
+  - typescript
+  message: JWT 토큰 서명 및 디코드 검증 누락 여부 점검.
   metadata:
+    asvs:
+      control_id: 3.5.3 Insecue Stateless Session Tokens
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V3-Session-management.md#v35-token-based-session-management
+      section: 'V3: Session Management Verification Requirements'
+      version: '4'
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-522: Insufficiently Protected Credentials'
+    cwe2021-top25: true
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A02:2017 - Broken Authentication
     - A04:2021 - Insecure Design
     - A06:2025 - Insecure Design
-    cwe:
-    - 'CWE-522: Insufficiently Protected Credentials'
-    source-rule-url: https://semgrep.dev/blog/2020/hardcoded-secrets-unverified-tokens-and-other-common-jwt-mistakes/
-    asvs:
-      section: 'V3: Session Management Verification Requirements'
-      control_id: 3.5.3 Insecue Stateless Session Tokens
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V3-Session-management.md#v35-token-based-session-management
-      version: '4'
-    category: security
-    technology:
-    - jwt
-    cwe2021-top25: true
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
     references:
     - https://owasp.org/Top10/A04_2021-Insecure_Design
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
+    source-rule-url: https://semgrep.dev/blog/2020/hardcoded-secrets-unverified-tokens-and-other-common-jwt-mistakes/
+    subcategory:
+    - audit
+    technology:
+    - jwt
   patterns:
-  - pattern-inside: |
-      $JWT = require('jsonwebtoken');
+  - pattern-inside: '$JWT = require(''jsonwebtoken'');
+
       ...
+
+      '
   - pattern-either:
     - pattern-inside: function (...,$INPUT,...) {...}
     - pattern-inside: function $F(...,$INPUT,...) {...}
   - pattern: $JWT.sign($INPUT,...)
+  severity: WARNING

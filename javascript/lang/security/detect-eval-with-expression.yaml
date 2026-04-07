@@ -1,69 +1,37 @@
 rules:
 - id: detect-eval-with-expression
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    cwe:
-    - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"
-    owasp:
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    source-rule-url: https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-eval-with-expression.js
-    references:
-    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#never_use_eval!
-    category: security
-    technology:
-    - javascript
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code
+      (''Eval Injection'')'
+    impact: MEDIUM
+    likelihood: MEDIUM
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#never_use_eval!
+    source-rule-url: https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-eval-with-expression.js
+    subcategory:
+    - vuln
+    technology:
+    - javascript
   mode: taint
-  pattern-sources:
+  pattern-sanitizers:
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          $PROP = new URLSearchParams($WINDOW. ... .location.search).get('...')
-            ...
-      - pattern-inside: |
-          $PROP = new URLSearchParams(location.search).get('...')
-            ...
-      - pattern-inside: |
-          $PROP = new URLSearchParams($WINDOW. ... .location.hash.substring(1)).get('...')
-            ...
-      - pattern-inside: |
-          $PROP = new URLSearchParams(location.hash.substring(1)).get('...')
-            ...
-    - focus-metavariable: $PROP
-  - patterns:
-    - pattern-either:
-      - pattern-inside: |
-          $PROPS = new URLSearchParams($WINDOW. ... .location.search)
-            ...
-      - pattern-inside: |
-          $PROPS = new URLSearchParams(location.search)
-            ...
-      - pattern-inside: |
-          $PROPS = new
-          URLSearchParams($WINDOW. ... .location.hash.substring(1))
-            ...
-      - pattern-inside: |
-          $PROPS = new URLSearchParams(location.hash.substring(1))
-          ...
-    - pattern: $PROPS.get('...')
-    - focus-metavariable: $PROPS
-  - patterns:
-    - pattern-either:
-      - pattern: location.href
-      - pattern: location.hash
-      - pattern: location.search
-      - pattern: $WINDOW. ... .location.href
-      - pattern: $WINDOW. ... .location.hash
-      - pattern: $WINDOW. ... .location.search
+      - pattern: location.href = $FUNC(...)
+      - pattern: location.hash = $FUNC(...)
+      - pattern: location.search = $FUNC(...)
+      - pattern: $WINDOW. ... .location.href = $FUNC(...)
+      - pattern: $WINDOW. ... .location.hash = $FUNC(...)
+      - pattern: $WINDOW. ... .location.search = $FUNC(...)
   pattern-sinks:
   - patterns:
     - pattern-either:
@@ -74,12 +42,38 @@ rules:
       - pattern: setTimeout(<... $SINK ...>,...)
       - pattern: setInterval(<... $SINK ...>,...)
     - focus-metavariable: $SINK
-  pattern-sanitizers:
+  pattern-sources:
   - patterns:
     - pattern-either:
-      - pattern: location.href = $FUNC(...)
-      - pattern: location.hash = $FUNC(...)
-      - pattern: location.search = $FUNC(...)
-      - pattern: $WINDOW. ... .location.href = $FUNC(...)
-      - pattern: $WINDOW. ... .location.hash = $FUNC(...)
-      - pattern: $WINDOW. ... .location.search = $FUNC(...)
+      - pattern-inside: "$PROP = new URLSearchParams($WINDOW. ... .location.search).get('...')\n\
+          \  ...\n"
+      - pattern-inside: "$PROP = new URLSearchParams(location.search).get('...')\n\
+          \  ...\n"
+      - pattern-inside: "$PROP = new URLSearchParams($WINDOW. ... .location.hash.substring(1)).get('...')\n\
+          \  ...\n"
+      - pattern-inside: "$PROP = new URLSearchParams(location.hash.substring(1)).get('...')\n\
+          \  ...\n"
+    - focus-metavariable: $PROP
+  - patterns:
+    - pattern-either:
+      - pattern-inside: "$PROPS = new URLSearchParams($WINDOW. ... .location.search)\n\
+          \  ...\n"
+      - pattern-inside: "$PROPS = new URLSearchParams(location.search)\n  ...\n"
+      - pattern-inside: "$PROPS = new\nURLSearchParams($WINDOW. ... .location.hash.substring(1))\n\
+          \  ...\n"
+      - pattern-inside: '$PROPS = new URLSearchParams(location.hash.substring(1))
+
+          ...
+
+          '
+    - pattern: $PROPS.get('...')
+    - focus-metavariable: $PROPS
+  - patterns:
+    - pattern-either:
+      - pattern: location.href
+      - pattern: location.hash
+      - pattern: location.search
+      - pattern: $WINDOW. ... .location.href
+      - pattern: $WINDOW. ... .location.hash
+      - pattern: $WINDOW. ... .location.search
+  severity: WARNING

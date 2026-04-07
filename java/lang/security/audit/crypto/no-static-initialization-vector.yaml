@@ -1,46 +1,33 @@
 rules:
 - id: no-static-initialization-vector
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    asvs:
+      control_id: 6.2.5 Insecure Algorithm
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x14-V6-Cryptography.md#v62-algorithms
+      section: V6 Stored Cryptography Verification Requirements
+      version: '4'
+    category: security
+    confidence: HIGH
     cwe:
     - 'CWE-329: Generation of Predictable IV with CBC Mode'
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#STATIC_IV
-    asvs:
-      section: V6 Stored Cryptography Verification Requirements
-      control_id: 6.2.5 Insecure Algorithm
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x14-V6-Cryptography.md#v62-algorithms
-      version: '4'
     references:
     - https://cwe.mitre.org/data/definitions/329.html
-    category: security
-    technology:
-    - java
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#STATIC_IV
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: HIGH
-  severity: WARNING
-  languages: [java]
+    technology:
+    - java
   pattern-either:
-  - pattern: |
-      byte[] $IV = {
-          ...
-      };
-      ...
-      new IvParameterSpec($IV, ...);
-  - pattern: |
-      class $CLASS {
-          byte[] $IV = {
-              ...
-          };
-          ...
-          $METHOD(...) {
-              ...
-              new IvParameterSpec($IV, ...);
-              ...
-          }
-      }
+  - pattern: "byte[] $IV = {\n    ...\n};\n...\nnew IvParameterSpec($IV, ...);\n"
+  - pattern: "class $CLASS {\n    byte[] $IV = {\n        ...\n    };\n    ...\n \
+      \   $METHOD(...) {\n        ...\n        new IvParameterSpec($IV, ...);\n  \
+      \      ...\n    }\n}\n"
+  severity: WARNING

@@ -2,41 +2,65 @@ rules:
 - id: tainted-html-string
   languages:
   - java
-  severity: ERROR
-  message: "동적 HTML 주입 연산 시 외부 오염 유입 데이터가 전달되었습니다. XSS 보호막 무력화를 예방하기 위해 사전 이스케이프해야 합니다."
+  message: 동적 HTML 주입 연산 시 외부 오염 유입 데이터가 전달되었습니다. XSS 보호막 무력화를 예방하기 위해 사전 이스케이프해야
+    합니다.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
-    category: security
+    subcategory:
+    - vuln
     technology:
     - java
     - spring
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: MEDIUM
   mode: taint
+  pattern-propagators:
+  - from: $...TAINTED
+    pattern: (StringBuilder $SB).append($...TAINTED)
+    to: $SB
+  - from: $...TAINTED
+    pattern: $VAR += $...TAINTED
+    to: $VAR
+  pattern-sanitizers:
+  - pattern-either:
+    - pattern: Encode.forHtml(...)
+    - pattern: (PolicyFactory $POLICY).sanitize(...)
+    - pattern: (AntiSamy $AS).scan(...)
+    - pattern: JSoup.clean(...)
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - pattern: new ResponseEntity<>($PAYLOAD, ...)
+      - pattern: new ResponseEntity<$ERROR>($PAYLOAD, ...)
+      - pattern: ResponseEntity. ... .body($PAYLOAD)
+      - patterns:
+        - pattern: 'ResponseEntity.$RESPFUNC($PAYLOAD). ...
+
+            '
+        - metavariable-regex:
+            metavariable: $RESPFUNC
+            regex: ^(ok|of)$
+    - focus-metavariable: $PAYLOAD
+    requires: CONCAT
   pattern-sources:
   - label: INPUT
     patterns:
     - pattern-either:
-      - pattern-inside: |
-          $METHODNAME(..., @$REQ(...) $TYPE $SOURCE,...) {
-            ...
-          }
-      - pattern-inside: |
-          $METHODNAME(..., @$REQ $TYPE $SOURCE,...) {
-            ...
-          }
+      - pattern-inside: "$METHODNAME(..., @$REQ(...) $TYPE $SOURCE,...) {\n  ...\n\
+          }\n"
+      - pattern-inside: "$METHODNAME(..., @$REQ $TYPE $SOURCE,...) {\n  ...\n}\n"
     - metavariable-regex:
         metavariable: $TYPE
         regex: ^(?!(Integer|Long|Float|Double|Char|Boolean|int|long|float|double|char|boolean))
@@ -44,58 +68,40 @@ rules:
         metavariable: $REQ
         regex: (RequestBody|PathVariable|RequestParam|RequestHeader|CookieValue|ModelAttribute)
     - focus-metavariable: $SOURCE
-  - label: CONCAT
-    by-side-effect: true
-    requires: INPUT
+  - by-side-effect: true
+    label: CONCAT
     patterns:
     - pattern-either:
-      - pattern: |
-          "$HTMLSTR" + ...
-      - pattern: |
-          "$HTMLSTR".concat(...)
+      - pattern: '"$HTMLSTR" + ...
+
+          '
+      - pattern: '"$HTMLSTR".concat(...)
+
+          '
       - patterns:
-        - pattern-inside: |
-            StringBuilder $SB = new StringBuilder("$HTMLSTR");
+        - pattern-inside: 'StringBuilder $SB = new StringBuilder("$HTMLSTR");
+
             ...
+
+            '
         - pattern: $SB.append(...)
       - patterns:
-        - pattern-inside: |
-            $VAR = "$HTMLSTR";
+        - pattern-inside: '$VAR = "$HTMLSTR";
+
             ...
+
+            '
         - pattern: $VAR += ...
       - pattern: String.format("$HTMLSTR", ...)
       - patterns:
-        - pattern-inside: |
-            String $VAR = "$HTMLSTR";
+        - pattern-inside: 'String $VAR = "$HTMLSTR";
+
             ...
+
+            '
         - pattern: String.format($VAR, ...)
     - metavariable-regex:
         metavariable: $HTMLSTR
         regex: ^<\w+
-  pattern-propagators:
-  - pattern: (StringBuilder $SB).append($...TAINTED)
-    from: $...TAINTED
-    to: $SB
-  - pattern: $VAR += $...TAINTED
-    from: $...TAINTED
-    to: $VAR
-  pattern-sinks:
-  - requires: CONCAT
-    patterns:
-    - pattern-either:
-      - pattern: new ResponseEntity<>($PAYLOAD, ...)
-      - pattern: new ResponseEntity<$ERROR>($PAYLOAD, ...)
-      - pattern: ResponseEntity. ... .body($PAYLOAD)
-      - patterns:
-        - pattern: |
-            ResponseEntity.$RESPFUNC($PAYLOAD). ...
-        - metavariable-regex:
-            metavariable: $RESPFUNC
-            regex: ^(ok|of)$
-    - focus-metavariable: $PAYLOAD
-  pattern-sanitizers:
-  - pattern-either:
-    - pattern: Encode.forHtml(...)
-    - pattern: (PolicyFactory $POLICY).sanitize(...)
-    - pattern: (AntiSamy $AS).scan(...)
-    - pattern: JSoup.clean(...)
+    requires: INPUT
+  severity: ERROR

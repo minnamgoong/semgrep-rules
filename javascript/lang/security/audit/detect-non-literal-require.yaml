@@ -1,31 +1,32 @@
 rules:
 - id: detect-non-literal-require
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    cwe:
-    - "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"
-    owasp:
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    source-rule-url: https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-non-literal-require.js
-    references:
-    - https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-non-literal-require.js
-    category: security
-    technology:
-    - javascript
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: LOW
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code
+      (''Eval Injection'')'
+    impact: MEDIUM
+    likelihood: MEDIUM
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-non-literal-require.js
+    source-rule-url: https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-non-literal-require.js
+    subcategory:
+    - vuln
+    technology:
+    - javascript
   mode: taint
+  pattern-sinks:
+  - pattern: require(...)
   pattern-sources:
   - patterns:
     - pattern-inside: function ... (..., $ARG,...) {...}
     - focus-metavariable: $ARG
-  pattern-sinks:
-  - pattern: require(...)
+  severity: WARNING

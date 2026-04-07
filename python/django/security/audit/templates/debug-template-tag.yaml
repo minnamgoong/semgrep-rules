@@ -1,25 +1,25 @@
 rules:
 - id: debug-template-tag
   languages:
-    - regex
-  severity: WARNING
-  message: "debug-template-tag 잠재적 결함 분기 정비 요망."
-  pattern-regex: ({% debug %})
-  paths:
-    include:
-      - '*.html'
+  - regex
+  message: debug-template-tag 잠재적 결함 분기 정비 요망.
   metadata:
-    owasp: 'A06:2017 - Security Misconfiguration'
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-489: Active Debug Code'
+    impact: MEDIUM
+    likelihood: LOW
+    owasp: A06:2017 - Security Misconfiguration
     references:
     - https://docs.djangoproject.com/en/4.2/ref/templates/builtins/#debug
     - https://stackoverflow.com/questions/2213977/django-debug-display-all-variables-of-a-page
-    category: security
-    technology:
-    - django
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
+    technology:
+    - django
+  paths:
+    include:
+    - '*.html'
+  pattern-regex: ({% debug %})
+  severity: WARNING

@@ -1,38 +1,43 @@
 rules:
 - id: express-detect-notevil-usage
-  message: "Express 프레임워크 라우팅 및 리디렉션 보안 수사."
-  metadata:
-    category: security
-    references:
-    - https://github.com/mmckegg/notevil
-    cwe:
-    - 'CWE-1104: Use of Unmaintained Third Party Components'
-    owasp:
-    - A06:2021 - Vulnerable and Outdated Components
-    - A03:2025 - Software Supply Chain Failures
-    technology:
-    - javascript
-    - typescript
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: Express 프레임워크 라우팅 및 리디렉션 보안 수사.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-1104: Use of Unmaintained Third Party Components'
+    impact: HIGH
+    likelihood: LOW
+    owasp:
+    - A06:2021 - Vulnerable and Outdated Components
+    - A03:2025 - Software Supply Chain Failures
+    references:
+    - https://github.com/mmckegg/notevil
+    subcategory:
+    - audit
+    technology:
+    - javascript
+    - typescript
   patterns:
   - pattern-either:
-    - pattern-inside: |
-        import $EVAL from 'notevil'
+    - pattern-inside: 'import $EVAL from ''notevil''
+
         ...
-    - pattern-inside: |
-        import {$EVAL} from 'notevil'
+
+        '
+    - pattern-inside: 'import {$EVAL} from ''notevil''
+
         ...
-    - pattern-inside: |
-        $EVAL = require('notevil')
+
+        '
+    - pattern-inside: '$EVAL = require(''notevil'')
+
         ...
+
+        '
   - pattern-either:
     - patterns:
       - pattern: $EVAL(...)
@@ -44,8 +49,9 @@ rules:
         - pattern: $VM.runInThisContext("$CMD", ...)
         - pattern: $VM.compileFunction("$CMD", ...)
       - metavariable-pattern:
+          language: typescript
+          metavariable: $CMD
           patterns:
           - pattern: $EVAL(...)
           - pattern-not: $EVAL('...')
-          metavariable: $CMD
-          language: typescript
+  severity: WARNING

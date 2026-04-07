@@ -1,17 +1,17 @@
 rules:
-  - id: string-concat-in-list
-    patterns:
-      - pattern-either:
-          - pattern-inside: "[...]"
-          - pattern-inside: "{...}"
-      - pattern: '"..." "..."'
-      - pattern-not-inside: f"..."
-      - pattern-not-inside: "{..., $KEY: $VALUE, ...}"
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    severity: WARNING
-    languages:
-      - python
-    metadata:
-      category: correctness
-      technology:
-        - python
+- id: string-concat-in-list
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: correctness
+    technology:
+    - python
+  patterns:
+  - pattern-either:
+    - pattern-inside: '[...]'
+    - pattern-inside: '{...}'
+  - pattern: '"..." "..."'
+  - pattern-not-inside: f"..."
+  - pattern-not-inside: '{..., $KEY: $VALUE, ...}'
+  severity: WARNING

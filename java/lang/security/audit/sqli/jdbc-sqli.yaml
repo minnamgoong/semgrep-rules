@@ -1,59 +1,66 @@
 rules:
 - id: jdbc-sqli
-  message: "잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요."
-  languages: [java]
-  severity: WARNING
-  patterns:
-  - pattern-either:
-    - patterns:
-      - pattern-either:
-        - pattern-inside: |
-            String $SQL = $X + $Y;
-            ...
-        - pattern-inside: |
-            String $SQL = String.format(...);
-            ...
-        - pattern-inside: |
-            $VAL $FUNC(...,String $SQL,...) {
-              ...
-            }
-      - pattern-not-inside: |
-          String $SQL = "..." + "...";
-          ...
-      - pattern: $S.$METHOD($SQL,...)
-    - pattern: |
-        $S.$METHOD(String.format(...),...);
-    - pattern: |
-        $S.$METHOD($X + $Y,...);
-  - pattern-either:
-    - pattern-inside: |
-        java.sql.Statement $S = ...;
-        ...
-    - pattern-inside: |
-        $TYPE $FUNC(...,java.sql.Statement $S,...) {
-          ...
-        }
-  - pattern-not: |
-      $S.$METHOD("..." + "...",...);
-  - metavariable-regex:
-      metavariable: $METHOD
-      regex: ^(executeQuery|execute|executeUpdate|executeLargeUpdate|addBatch|nativeSQL)$
+  languages:
+  - java
+  message: 잠재적 SQL 인젝션 취약점이 감지되었습니다. Parameterized Query나 ORM 모델을 준행하세요.
   metadata:
-    cwe:
-    - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
     category: security
-    technology:
-    - jdbc
+    confidence: LOW
+    cwe:
+    - 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command
+      (''SQL Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
+    technology:
+    - jdbc
+  patterns:
+  - pattern-either:
+    - patterns:
+      - pattern-either:
+        - pattern-inside: 'String $SQL = $X + $Y;
+
+            ...
+
+            '
+        - pattern-inside: 'String $SQL = String.format(...);
+
+            ...
+
+            '
+        - pattern-inside: "$VAL $FUNC(...,String $SQL,...) {\n  ...\n}\n"
+      - pattern-not-inside: 'String $SQL = "..." + "...";
+
+          ...
+
+          '
+      - pattern: $S.$METHOD($SQL,...)
+    - pattern: '$S.$METHOD(String.format(...),...);
+
+        '
+    - pattern: '$S.$METHOD($X + $Y,...);
+
+        '
+  - pattern-either:
+    - pattern-inside: 'java.sql.Statement $S = ...;
+
+        ...
+
+        '
+    - pattern-inside: "$TYPE $FUNC(...,java.sql.Statement $S,...) {\n  ...\n}\n"
+  - pattern-not: '$S.$METHOD("..." + "...",...);
+
+      '
+  - metavariable-regex:
+      metavariable: $METHOD
+      regex: ^(executeQuery|execute|executeUpdate|executeLargeUpdate|addBatch|nativeSQL)$
+  severity: WARNING

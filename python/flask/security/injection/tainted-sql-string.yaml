@@ -1,9 +1,15 @@
 rules:
 - id: tainted-sql-string
-  message: "동적 SQL 문자열 결합이 포착되었습니다. SQL Injection 배후 차단을 위해 Parameterized Query를 사수하세요."
+  languages:
+  - python
+  message: 동적 SQL 문자열 결합이 포착되었습니다. SQL Injection 배후 차단을 위해 Parameterized Query를 사수하세요.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
     - 'CWE-704: Incorrect Type Conversion or Cast'
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
@@ -12,40 +18,35 @@ rules:
     - https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql
     - https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_quick_guide.htm
     - https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-more-specific-text-with-table-expression-literal-column-and-expression-column
-    category: security
+    subcategory:
+    - vuln
     technology:
     - sqlalchemy
     - flask
-    subcategory:
-    - vuln
-    impact: MEDIUM
-    likelihood: MEDIUM
-    confidence: MEDIUM
-  severity: ERROR
-  languages:
-  - python
   mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - pattern: '"$SQLSTR" + ...
+
+          '
+      - pattern: '"$SQLSTR" % ...
+
+          '
+      - pattern: '"$SQLSTR".format(...)
+
+          '
+      - pattern: 'f"$SQLSTR{...}..."
+
+          '
+    - metavariable-regex:
+        metavariable: $SQLSTR
+        regex: \s*(?i)(select|delete|insert|create|update|alter|drop)\b.*
   pattern-sources:
   - patterns:
     - pattern-either:
       - pattern: flask.request.$ANYTHING
       - patterns:
-        - pattern-inside: |
-            @$APP.route(...)
-            def $FUNC(..., $ROUTEVAR, ...):
-              ...
+        - pattern-inside: "@$APP.route(...)\ndef $FUNC(..., $ROUTEVAR, ...):\n  ...\n"
         - pattern: $ROUTEVAR
-  pattern-sinks:
-  - patterns:
-    - pattern-either:
-      - pattern: |
-          "$SQLSTR" + ...
-      - pattern: |
-          "$SQLSTR" % ...
-      - pattern: |
-          "$SQLSTR".format(...)
-      - pattern: |
-          f"$SQLSTR{...}..."
-    - metavariable-regex:
-        metavariable: $SQLSTR
-        regex: \s*(?i)(select|delete|insert|create|update|alter|drop)\b.*
+  severity: ERROR

@@ -1,18 +1,20 @@
 rules:
-  - id: unchecked-subprocess-call
-    patterns:
-      - pattern-either:
-          # ruleid: duplicate-pattern
-          - pattern: |
-              subprocess.call(...)
-            # ruleid: duplicate-pattern
-          - pattern: |
-              subprocess.call(...)
-      - pattern-not-inside: |
-          $S = subprocess.call(...)
-      - pattern-not-inside: |
-          subprocess.call(...) == $X
-    message: >-
-      This is not checking the return value of this subprocess call; if it fails no exception will be raised. Consider subprocess.check_call() instead
-    severity: WARNING
-    fix: subprocess.check_call(...)
+- fix: subprocess.check_call(...)
+  id: unchecked-subprocess-call
+  message: 이는 이 하위 프로세스 호출의 반환 값을 확인하지 않습니다. 실패하면 예외가 발생하지 않습니다. 대신 subprocess.check_call()을
+    고려해 보세요.
+  patterns:
+  - pattern-either:
+    - pattern: 'subprocess.call(...)
+
+        '
+    - pattern: 'subprocess.call(...)
+
+        '
+  - pattern-not-inside: '$S = subprocess.call(...)
+
+      '
+  - pattern-not-inside: 'subprocess.call(...) == $X
+
+      '
+  severity: WARNING

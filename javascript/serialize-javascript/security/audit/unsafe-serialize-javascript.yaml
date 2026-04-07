@@ -1,31 +1,35 @@
 rules:
 - id: unsafe-serialize-javascript
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  metadata:
-    owasp:
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    cwe:
-    - 'CWE-80: Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic XSS)'
-    category: security
-    technology:
-    - serialize-javascript
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-    references:
-    - https://owasp.org/Top10/A03_2021-Injection
   languages:
   - javascript
   - typescript
-  severity: WARNING
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-80: Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic
+      XSS)'
+    impact: MEDIUM
+    likelihood: LOW
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    subcategory:
+    - audit
+    technology:
+    - serialize-javascript
   patterns:
-  - pattern-inside: |
-      $S = require('serialize-javascript');
+  - pattern-inside: '$S = require(''serialize-javascript'');
+
       ...
+
+      '
   - pattern-not-inside: escape(...)
   - pattern-not-inside: encodeURI(...)
-  - pattern: |
-      $S(..., {unsafe: true});
+  - pattern: '$S(..., {unsafe: true});
+
+      '
+  severity: WARNING

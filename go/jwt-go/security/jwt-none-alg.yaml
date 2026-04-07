@@ -1,35 +1,41 @@
 rules:
 - id: jwt-go-none-algorithm
-  message: "Go 보안 및 무결성 관리: jwt-go-none-algorithm 점검 처리 하세요."
+  languages:
+  - go
+  message: 'Go 보안 및 무결성 관리: jwt-go-none-algorithm 점검 처리 하세요.'
   metadata:
+    category: security
+    confidence: HIGH
     cwe:
     - 'CWE-327: Use of a Broken or Risky Cryptographic Algorithm'
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A03:2017 - Sensitive Data Exposure
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
-    source-rule-url: https://semgrep.dev/blog/2020/hardcoded-secrets-unverified-tokens-and-other-common-jwt-mistakes/
-    category: security
-    technology:
-    - jwt
-    confidence: HIGH
     references:
     - https://owasp.org/Top10/A02_2021-Cryptographic_Failures
+    source-rule-url: https://semgrep.dev/blog/2020/hardcoded-secrets-unverified-tokens-and-other-common-jwt-mistakes/
     subcategory:
     - audit
-    likelihood: LOW
-    impact: LOW
-  languages: [go]
-  severity: ERROR
+    technology:
+    - jwt
   patterns:
   - pattern-either:
-    - pattern-inside: |
-        import "github.com/golang-jwt/jwt"
+    - pattern-inside: 'import "github.com/golang-jwt/jwt"
+
         ...
-    - pattern-inside: |
-        import "github.com/dgrijalva/jwt-go"
+
+        '
+    - pattern-inside: 'import "github.com/dgrijalva/jwt-go"
+
         ...
+
+        '
   - pattern-either:
-    - pattern: |
-        jwt.SigningMethodNone
+    - pattern: 'jwt.SigningMethodNone
+
+        '
     - pattern: jwt.UnsafeAllowNoneSignatureType
+  severity: ERROR

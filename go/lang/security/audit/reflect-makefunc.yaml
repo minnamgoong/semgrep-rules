@@ -1,23 +1,23 @@
 rules:
 - id: reflect-makefunc
-  message: "Go 보안 및 무결성 관리: reflect-makefunc 점검 처리 하세요."
+  languages:
+  - go
+  message: 'Go 보안 및 무결성 관리: reflect-makefunc 점검 처리 하세요.'
   metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-913: Improper Control of Dynamically-Managed Code Resources'
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A01:2021 - Broken Access Control
     - A01:2025 - Broken Access Control
-    cwe:
-    - 'CWE-913: Improper Control of Dynamically-Managed Code Resources'
-    category: security
-    technology:
-    - go
-    confidence: LOW
     references:
     - https://owasp.org/Top10/A01_2021-Broken_Access_Control
     subcategory:
     - audit
-    likelihood: LOW
-    impact: LOW
-  severity: ERROR
+    technology:
+    - go
   pattern: reflect.MakeFunc(...)
-  languages:
-  - go
+  severity: ERROR

@@ -1,28 +1,63 @@
 rules:
 - id: express-vm2-injection
-  message: "Express 프레임워크 라우팅 및 리디렉션 보안 수사."
+  languages:
+  - javascript
+  - typescript
+  message: Express 프레임워크 라우팅 및 리디렉션 보안 수사.
   metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
     references:
     - https://cheatsheetseries.owasp.org/cheatsheets/Injection_Prevention_Cheat_Sheet.html
-    cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
-    category: security
-    technology:
-    - express
-    cwe2022-top25: true
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
+    technology:
+    - express
   mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern-inside: 'require(''vm2'')
+
+        ...
+
+        '
+    - pattern-either:
+      - patterns:
+        - pattern-either:
+          - pattern-inside: '$VM = new VM(...)
+
+              ...
+
+              '
+          - pattern-inside: '$VM = new NodeVM(...)
+
+              ...
+
+              '
+        - pattern: '$VM.run(...)
+
+            '
+      - pattern: 'new VM(...).run(...)
+
+          '
+      - pattern: 'new NodeVM(...).run(...)
+
+          '
+      - pattern: 'new VMScript(...)
+
+          '
+      - pattern: 'new VM(...)
+
+          '
+      - pattern: new NodeVM(...)
   pattern-sources:
   - patterns:
     - pattern-either:
@@ -43,11 +78,14 @@ rules:
       - pattern: $REQ.headers
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+      - pattern-inside: '({ $REQ }: Request,$RES: Response, $NEXT: NextFunction) =>
+
           {...}
-      - pattern-inside: |
-          ({ $REQ }: Request,$RES: Response) => {...}
+
+          '
+      - pattern-inside: '({ $REQ }: Request,$RES: Response) => {...}
+
+          '
     - focus-metavariable: $REQ
     - pattern-either:
       - pattern: params
@@ -55,29 +93,4 @@ rules:
       - pattern: cookies
       - pattern: headers
       - pattern: body
-  pattern-sinks:
-  - patterns:
-    - pattern-inside: |
-        require('vm2')
-        ...
-    - pattern-either:
-      - patterns:
-        - pattern-either:
-          - pattern-inside: |
-              $VM = new VM(...)
-              ...
-          - pattern-inside: |
-              $VM = new NodeVM(...)
-              ...
-        - pattern: |
-            $VM.run(...)
-      - pattern: |
-          new VM(...).run(...)
-      - pattern: |
-          new NodeVM(...).run(...)
-      - pattern: |
-          new VMScript(...)
-      - pattern: |
-          new VM(...)
-      - pattern: |-
-          new NodeVM(...)
+  severity: WARNING

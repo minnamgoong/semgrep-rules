@@ -1,9 +1,16 @@
 rules:
 - id: sequelize-weak-tls-version
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - javascript
+  - typescript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-319: Cleartext Transmission of Sensitive Information'
+    impact: LOW
+    likelihood: LOW
     owasp:
     - A03:2017 - Sensitive Data Exposure
     - A02:2021 - Cryptographic Failures
@@ -13,36 +20,17 @@ rules:
     - https://nodejs.org/api/tls.html#tls_class_tls_tlssocket
     - https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options
     - https://nodejs.org/api/tls.html#tls_tls_default_min_version
-    category: security
-    technology:
-    - sequelize
     subcategory:
     - audit
-    likelihood: LOW
-    impact: LOW
-    confidence: LOW
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
+    technology:
+    - sequelize
   patterns:
-  - pattern-inside: |
-      {
-        host: $HOST,
-        database: $DATABASE,
-        dialect: $DIALECT,
-        dialectOptions:
-          { ssl: ... }
-       }
+  - pattern-inside: "{\n  host: $HOST,\n  database: $DATABASE,\n  dialect: $DIALECT,\n\
+      \  dialectOptions:\n    { ssl: ... }\n }\n"
   - pattern-either:
-    - pattern: |
-        {
-          minVersion: 'TLSv1'
-        }
-    - pattern: |
-        {
-          minVersion: 'TLSv1.1'
-        }
+    - pattern: "{\n  minVersion: 'TLSv1'\n}\n"
+    - pattern: "{\n  minVersion: 'TLSv1.1'\n}\n"
   - metavariable-regex:
       metavariable: $DIALECT
-      regex: "['\"](mariadb|mysql|postgres)['\"]"
+      regex: '[''"](mariadb|mysql|postgres)[''"]'
+  severity: WARNING

@@ -1,24 +1,25 @@
 rules:
-  # ruleid: missing-language-field
-  - id: unchecked-subprocess-call
-    patterns:
-      - pattern-either:
-          - pattern: |
-              subprocess.call(...)
-          - pattern: |
-              subprocess.call(...)
-      - pattern-not-inside: |
-          $S = subprocess.call(...)
-      - pattern-not-inside: |
-          subprocess.call(...) == $X
-    message: ""
-    severity: WARNING
-    fix: subprocess.check_call(...)
-    # ok: missing-language-field
-  - id: other-rule
-    languages: [generic]
-    message: "설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검."
-    severity: INFO
-    pattern: <div>hello</div>
-    # ok: missing-language-field
-  
+- fix: subprocess.check_call(...)
+  id: unchecked-subprocess-call
+  message: ''
+  patterns:
+  - pattern-either:
+    - pattern: 'subprocess.call(...)
+
+        '
+    - pattern: 'subprocess.call(...)
+
+        '
+  - pattern-not-inside: '$S = subprocess.call(...)
+
+      '
+  - pattern-not-inside: 'subprocess.call(...) == $X
+
+      '
+  severity: WARNING
+- id: other-rule
+  languages:
+  - generic
+  message: 설정(YAML) 파이프라인 및 가변 인젝션 옵션 단속 점검.
+  pattern: <div>hello</div>
+  severity: INFO

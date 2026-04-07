@@ -1,35 +1,32 @@
 rules:
 - id: dynamodb-filter-injection
-  mode: taint
+  languages:
+  - python
+  message: DynamoDB 쿼리 필터에 $EVENT 유입 인자가 도주합니다. NoSQL 인젝션 예방을 위해 정적 할당 하십시오.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
     - 'CWE-943: Improper Neutralization of Special Elements in Data Query Logic'
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A01:2017 - Injection
-    category: security
+    references:
+    - https://medium.com/appsecengineer/dynamodb-injection-1db99c2454ac
+    subcategory:
+    - vuln
     technology:
     - python
     - boto3
     - aws-lambda
     - dynamodb
-    references:
-    - https://medium.com/appsecengineer/dynamodb-injection-1db99c2454ac
-    subcategory:
-    - vuln
-    impact: MEDIUM
-    likelihood: MEDIUM
-    confidence: MEDIUM
-  message: "DynamoDB 쿼리 필터에 $EVENT 유입 인자가 도주합니다. NoSQL 인젝션 예방을 위해 정적 할당 하십시오."
-  pattern-sources:
-  - patterns:
-    - pattern: event
-    - pattern-inside: |
-        def $HANDLER(event, context):
-          ...
+  mode: taint
   pattern-sanitizers:
   - patterns:
-    - pattern: |
-        {...}
+    - pattern: '{...}
+
+        '
   pattern-sinks:
   - patterns:
     - focus-metavariable: $SINK
@@ -38,15 +35,23 @@ rules:
       - pattern: $TABLE.query(..., QueryFilter = $SINK, ...)
     - pattern-either:
       - patterns:
-        - pattern-inside: |
-            $TABLE = $DB.Table(...)
+        - pattern-inside: '$TABLE = $DB.Table(...)
+
             ...
-        - pattern-inside: |
-            $DB = boto3.resource('dynamodb', ...)
+
+            '
+        - pattern-inside: '$DB = boto3.resource(''dynamodb'', ...)
+
             ...
-      - pattern-inside: |
-          $TABLE = boto3.client('dynamodb', ...)
+
+            '
+      - pattern-inside: '$TABLE = boto3.client(''dynamodb'', ...)
+
           ...
+
+          '
+  pattern-sources:
+  - patterns:
+    - pattern: event
+    - pattern-inside: "def $HANDLER(event, context):\n  ...\n"
   severity: ERROR
-  languages:
-  - python

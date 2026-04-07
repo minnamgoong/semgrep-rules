@@ -1,34 +1,39 @@
 rules:
 - id: detect-angular-translateprovider-translations-method
-  message: "Angular 프론트엔드 결함 주사 점검."
+  languages:
+  - javascript
+  message: Angular 프론트엔드 결함 주사 점검.
   metadata:
-    cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
-    references:
-    - https://docs.angularjs.org/api/ng/service/$sce#trustAsUrl
-    - https://owasp.org/www-chapter-london/assets/slides/OWASPLondon20170727_AngularJS.pdf
     category: security
-    technology:
-    - angular
-    - typescript
+    confidence: LOW
+    cwe:
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
     - A05:2025 - Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
+    references:
+    - https://docs.angularjs.org/api/ng/service/$sce#trustAsUrl
+    - https://owasp.org/www-chapter-london/assets/slides/OWASPLondon20170727_AngularJS.pdf
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  languages:
-  - javascript
-  severity: WARNING
+    technology:
+    - angular
+    - typescript
   patterns:
-  - pattern: |
-      $translateProvider.translations(...,$SOURCE);
-  - pattern-inside: |
-      app.controller(..., function($scope,$sce){
+  - pattern: '$translateProvider.translations(...,$SOURCE);
+
+      '
+  - pattern-inside: 'app.controller(..., function($scope,$sce){
+
       ...
+
       });
+
+      '
+  severity: WARNING

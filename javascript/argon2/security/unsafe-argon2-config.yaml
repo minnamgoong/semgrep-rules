@@ -1,45 +1,49 @@
 rules:
 - id: unsafe-argon2-config
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - javascript
+  - typescript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-916: Use of Password Hash With Insufficient Computational Effort'
+    impact: LOW
+    likelihood: HIGH
+    owasp:
+    - A02:2021 - Cryptographic Failures
+    - A04:2025 - Cryptographic Failures
     references:
     - https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
     - https://eprint.iacr.org/2016/759.pdf
     - https://www.cs.tau.ac.il/~tromer/papers/cache-joc-20090619.pdf
     - https://datatracker.ietf.org/doc/html/rfc9106#section-4
-    category: security
-    cwe:
-    - 'CWE-916: Use of Password Hash With Insufficient Computational Effort'
+    subcategory:
+    - vuln
     technology:
     - argon2
     - cryptography
-    owasp:
-    - A02:2021 - Cryptographic Failures
-    - A04:2025 - Cryptographic Failures
-    subcategory:
-    - vuln
-    impact: LOW
-    likelihood: HIGH
-    confidence: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-inside: |
-        $ARGON = require('argon2');
-        ...
-    - pattern: |
-        {type: ...}
-  pattern-sinks:
-  - patterns:
-    - pattern: |
-        $Y
-    - pattern-inside: |
-        $ARGON.hash(...,$Y)
   pattern-sanitizers:
   - patterns:
-    - pattern: |
-        {type: $ARGON.argon2id}
+    - pattern: '{type: $ARGON.argon2id}'
+  pattern-sinks:
+  - patterns:
+    - pattern: '$Y
+
+        '
+    - pattern-inside: '$ARGON.hash(...,$Y)
+
+        '
+  pattern-sources:
+  - patterns:
+    - pattern-inside: '$ARGON = require(''argon2'');
+
+        ...
+
+        '
+    - pattern: '{type: ...}
+
+        '
+  severity: WARNING

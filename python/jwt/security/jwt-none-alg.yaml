@@ -1,28 +1,29 @@
 rules:
 - id: jwt-python-none-alg
-  message: "JWT 서명 검증에서 none 알고리즘 사용이 감지되었습니다. 변조 토큰 우회를 피하기 위해 명시적 암호화를 지정하세요."
+  languages:
+  - python
+  message: JWT 서명 검증에서 none 알고리즘 사용이 감지되었습니다. 변조 토큰 우회를 피하기 위해 명시적 암호화를 지정하세요.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
     - 'CWE-327: Use of a Broken or Risky Cryptographic Algorithm'
+    impact: MEDIUM
+    likelihood: MEDIUM
     owasp:
     - A03:2017 - Sensitive Data Exposure
     - A02:2021 - Cryptographic Failures
     - A04:2025 - Cryptographic Failures
-    source-rule-url: https://semgrep.dev/blog/2020/hardcoded-secrets-unverified-tokens-and-other-common-jwt-mistakes/
-    category: security
-    technology:
-    - jwt
     references:
     - https://owasp.org/Top10/A02_2021-Cryptographic_Failures
+    source-rule-url: https://semgrep.dev/blog/2020/hardcoded-secrets-unverified-tokens-and-other-common-jwt-mistakes/
     subcategory:
     - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages: [python]
-  severity: ERROR
+    technology:
+    - jwt
   pattern-either:
-  - pattern: |
-      jwt.encode(...,algorithm="none",...)
-  - pattern: |-
-      jwt.decode(...,algorithms=[...,"none",...],...)
+  - pattern: 'jwt.encode(...,algorithm="none",...)
+
+      '
+  - pattern: jwt.decode(...,algorithms=[...,"none",...],...)
+  severity: ERROR

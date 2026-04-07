@@ -1,22 +1,17 @@
 rules:
-  - id: flask-class-method-get-side-effects
-    patterns:
-      - pattern-either:
-          - pattern: |
-              def get(self,...):
-                  ...
-                  $METHOD(...)
-          - pattern: |
-              def get(self,...):
-                  ...
-                  $VAR = $METHOD(...)
-      - metavariable-regex:
-          metavariable: $METHOD
-          regex: (?i)(create|update|delete).*
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    severity: WARNING
-    languages: [python]
-    metadata:
-      category: best-practice
-      technology:
-        - flask
+- id: flask-class-method-get-side-effects
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - flask
+  patterns:
+  - pattern-either:
+    - pattern: "def get(self,...):\n    ...\n    $METHOD(...)\n"
+    - pattern: "def get(self,...):\n    ...\n    $VAR = $METHOD(...)\n"
+  - metavariable-regex:
+      metavariable: $METHOD
+      regex: (?i)(create|update|delete).*
+  severity: WARNING

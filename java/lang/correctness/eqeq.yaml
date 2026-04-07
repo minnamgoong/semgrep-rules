@@ -1,17 +1,19 @@
 rules:
-  - id: eqeq
-    patterns:
-      - pattern-not-inside: assert $X;
-      - pattern-not-inside: |
-          assert $X : $Y;
-      - pattern-either:
-          - pattern: $X == $X
-          - pattern: $X != $X
-      - pattern-not: 1 == 1
-    message: "$X == $X 또는 $X != $X 와 같이 본인 자신을 직접 비교하고 있습니다. 로직 실수이거나 무의미한 연산일 확률이 높습니다."
-    languages: [java]
-    severity: ERROR
-    metadata:
-      category: correctness
-      technology:
-        - java
+- id: eqeq
+  languages:
+  - java
+  message: $X == $X 또는 $X != $X 와 같이 본인 자신을 직접 비교하고 있습니다. 로직 실수이거나 무의미한 연산일 확률이 높습니다.
+  metadata:
+    category: correctness
+    technology:
+    - java
+  patterns:
+  - pattern-not-inside: assert $X;
+  - pattern-not-inside: 'assert $X : $Y;
+
+      '
+  - pattern-either:
+    - pattern: $X == $X
+    - pattern: $X != $X
+  - pattern-not: 1 == 1
+  severity: ERROR

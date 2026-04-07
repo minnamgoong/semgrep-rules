@@ -1,24 +1,22 @@
 rules:
-  - id: azure-appgateway-enables-waf
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    patterns:
-      - pattern: resource
-      - pattern-not-inside: |
-          resource "azurerm_application_gateway" "..." {
-          ...
-          waf_configuration {
-            enabled = true
-          }
-          ...
-          }
-      - pattern-inside: |
-          resource "azurerm_application_gateway" "..." {
-          ...
-          }
-    metadata:
-      category: best-practice
-      technology:
-        - terraform
-        - azure
-    languages: [hcl]
-    severity: WARNING
+- id: azure-appgateway-enables-waf
+  languages:
+  - hcl
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - terraform
+    - azure
+  patterns:
+  - pattern: resource
+  - pattern-not-inside: "resource \"azurerm_application_gateway\" \"...\" {\n...\n\
+      waf_configuration {\n  enabled = true\n}\n...\n}\n"
+  - pattern-inside: 'resource "azurerm_application_gateway" "..." {
+
+      ...
+
+      }
+
+      '
+  severity: WARNING

@@ -1,23 +1,27 @@
 rules:
 - id: missing-zypper-no-confirm-switch
-  severity: WARNING
-  languages: [dockerfile]
-  patterns:
-  - pattern: |
-      RUN ... zypper install ...
-  - pattern-not: |
-      RUN ... zypper install ... -y ...
-  - pattern-not: |
-      RUN ... zypper install ... --no-confirm ...
-  message: "missing-zypper-no-confirm-switch 잠재적 결함 분기 정비 요망."
+  languages:
+  - dockerfile
+  message: missing-zypper-no-confirm-switch 잠재적 결함 분기 정비 요망.
   metadata:
-    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3034
+    category: best-practice
     references:
     - https://github.com/hadolint/hadolint/wiki/DL3034
-    category: best-practice
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3034
     technology:
     - dockerfile
   paths:
     include:
     - '*dockerfile*'
     - '*Dockerfile*'
+  patterns:
+  - pattern: 'RUN ... zypper install ...
+
+      '
+  - pattern-not: 'RUN ... zypper install ... -y ...
+
+      '
+  - pattern-not: 'RUN ... zypper install ... --no-confirm ...
+
+      '
+  severity: WARNING

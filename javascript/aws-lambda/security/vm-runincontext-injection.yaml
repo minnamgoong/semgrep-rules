@@ -1,54 +1,41 @@
 rules:
 - id: vm-runincontext-injection
-  message: "vm.runInContext() 호출에 외부 입력 데이터가 유입되어 샌드박스 우회 위험이 있습니다. 가변 코드 실행 연산을 중단하세요."
-  metadata:
-    owasp:
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    cwe:
-    - "CWE-94: Improper Control of Generation of Code ('Code Injection')"
-    category: security
-    technology:
-    - javascript
-    - aws-lambda
-    cwe2022-top25: true
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-    confidence: MEDIUM
-    references:
-    - https://owasp.org/Top10/A03_2021-Injection
   languages:
   - javascript
   - typescript
-  severity: ERROR
+  message: vm.runInContext() 호출에 외부 입력 데이터가 유입되어 샌드박스 우회 위험이 있습니다. 가변 코드 실행 연산을 중단하세요.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-94: Improper Control of Generation of Code (''Code Injection'')'
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
+    owasp:
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    subcategory:
+    - vuln
+    technology:
+    - javascript
+    - aws-lambda
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern: $EVENT
-    - pattern-either:
-      - pattern-inside: |
-          exports.handler = function ($EVENT, ...) {
-            ...
-          }
-      - pattern-inside: |
-          function $FUNC ($EVENT, ...) {...}
-          ...
-          exports.handler = $FUNC
-      - pattern-inside: |
-          $FUNC = function ($EVENT, ...) {...}
-          ...
-          exports.handler = $FUNC
   pattern-sinks:
   - patterns:
     - pattern-either:
-      - pattern-inside: |
-          require('vm');
+      - pattern-inside: 'require(''vm'');
+
           ...
-      - pattern-inside: |
-          import 'vm'
+
+          '
+      - pattern-inside: 'import ''vm''
+
           ...
+
+          '
     - pattern-either:
       - pattern: $VM.runInContext($X,...)
       - pattern: $VM.runInNewContext($X,...)
@@ -62,3 +49,23 @@ rules:
       - pattern: compileFunction($X,...)
       - pattern: new Script($X,...)
       - pattern: new SourceTextModule($X,...)
+  pattern-sources:
+  - patterns:
+    - pattern: $EVENT
+    - pattern-either:
+      - pattern-inside: "exports.handler = function ($EVENT, ...) {\n  ...\n}\n"
+      - pattern-inside: 'function $FUNC ($EVENT, ...) {...}
+
+          ...
+
+          exports.handler = $FUNC
+
+          '
+      - pattern-inside: '$FUNC = function ($EVENT, ...) {...}
+
+          ...
+
+          exports.handler = $FUNC
+
+          '
+  severity: ERROR

@@ -1,10 +1,11 @@
 rules:
-  - id: is-not-is-not
-    message: "인젝션 및 논리 에러 예방을 위한 is-not-is-not 전사 단속이 요구됩니다."
-    languages: [python]
-    severity: ERROR
-    pattern: $S is (not ...)
-    metadata:
-      category: correctness
-      technology:
-        - python
+- id: is-not-is-not
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 is-not-is-not 전사 단속이 요구됩니다.
+  metadata:
+    category: correctness
+    technology:
+    - python
+  pattern: $S is (not ...)
+  severity: ERROR

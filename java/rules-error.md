@@ -1,22 +1,17 @@
-# Java Semgrep Rules Summary (Severity: ERROR)
+# Java Semgrep Rules Summary
 
-`java` 디렉토리 하위의 규칙 중 Severity가 ERROR인 목록입니다.
+`java` 디렉토리 하위의 규칙 목록입니다. (테스트 파일 제외)
 
 ## AWS-LAMBDA
-
-| Rule ID | Severity | Summary | Path |
+\n| Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
 | `tainted-sql-string` | `ERROR` | AWS Lambda 핸들러 등의 외부 사용자 입력이 직접 SQL 문자열 조립에 사용되었습니다. Parameterized Query를 사용하여 SQL 인젝션을 예방하세요. | `aws-lambda/security/tainted-sql-string.yaml` |
-
-## JBOSS
-
-| Rule ID | Severity | Summary | Path |
+\n## JBOSS
+\n| Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
 | `seam-log-injection` | `ERROR` | Seam Logging API에 외부 데이터가 그대로 주입되었습니다. 표현식 언어(EL)를 통해 로깅 시스템이 공격받을 수 있으므로 주입 전 엄격한 검증을 통과해야 합니다. | `jboss/security/seam-log-injection.yaml` |
-
-## LANG
-
-| Rule ID | Severity | Summary | Path |
+\n## LANG
+\n| Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
 | `assignment-comparison` | `ERROR` | 조건식 내부에서 대입 연산자(=)가 사용되고 있습니다. 의도치 않게 할당이 일어나 비교가 고장날 우려가 있습니다. | `lang/correctness/assignment-comparison.yaml` |
 | `command-injection-formatted-runtime-call` | `ERROR` | Runtime.exec에 동적 조립 문자열(String.format 등)을 인자로 전달하여 커맨드 인젝션 위험이 있습니다. 안정성을 위해 인자 리스트(String[]) 형식으로 전달하세요. | `lang/security/audit/command-injection-formatted-runtime-call.yaml` |
@@ -29,16 +24,12 @@
 | `tainted-cmd-from-http-request` | `ERROR` | HTTP 요청 데이터가 exec 또는 ProcessBuilder 명령 인자로 직주입되고 있습니다. 커맨드 인젝션을 격퇴하기 위해 외부 데이터 사용 시 사전에 구성된 인자형 맵 구조로 매핑하세요. | `lang/security/audit/tainted-cmd-from-http-request.yaml` |
 | `tainted-env-from-http-request` | `ERROR` | HTTP 요청이 시스템 커맨드(`exec`)의 환경 변수로 직주입됩니다. 임의 명령 실행 공격을 예방하기 위해 조치하세요. | `lang/security/audit/tainted-env-from-http-request.yaml` |
 | `xmlinputfactory-external-entities-enabled` | `ERROR` | XMLInputFactory에 외부 엔티티(External Entities)가 허용되어 있습니다. XML External Entity (XXE) 취약점 발생을 예방하기 위해 이를 비활성화하세요. | `lang/security/xmlinputfactory-external-entities-enabled.yaml` |
-
-## RMI
-
-| Rule ID | Severity | Summary | Path |
+\n## RMI
+\n| Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
 | `server-dangerous-object-deserialization` | `ERROR` | RMI 통신 시 임의 객체 수신으로 인한 안전하지 않은 역직렬화 취약점이 가중될 수 있습니다. 허용 클래스 필터링 등을 적용하세요. | `rmi/security/server-dangerous-object-deserialization.yaml` |
-
-## SPRING
-
-| Rule ID | Severity | Summary | Path |
+\n## SPRING
+\n| Rule ID | Severity | Summary | Path |
 | :--- | :---: | :--- | :--- |
 | `spring-actuator-fully-enabled` | `ERROR` | Spring Boot Actuator의 모든 엔드포인트가 완전 개방되어 민감 정보가 노출될 수 있습니다. 필요한 엔티티만 인가하여 사용하세요. | `spring/security/audit/spring-actuator-fully-enabled.yaml` |
 | `tainted-file-path` | `ERROR` | 사용자 입력이 직접 파일 제어 경로 상수로 사용됩니다. Path Traversal 등 디렉토리 도약 시도를 검증하고 소거하세요. | `spring/security/injection/tainted-file-path.yaml` |

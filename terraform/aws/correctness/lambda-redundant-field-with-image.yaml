@@ -1,8 +1,8 @@
 rules:
 - id: lambda-redundant-field-with-image
-  severity: WARNING
-  languages: [hcl]
-  message: "lambda-redundant-field-with-image IaC 보안 설정 정비 및 예방 조치 요망."
+  languages:
+  - hcl
+  message: lambda-redundant-field-with-image IaC 보안 설정 정비 및 예방 조치 요망.
   metadata:
     category: correctness
     references:
@@ -12,12 +12,9 @@ rules:
     - terraform
     - aws-lambda
   patterns:
-  - pattern-inside: |
-      resource "aws_lambda_function" $NAME { 
-        ...
-        package_type = "Image"
-      }
+  - pattern-inside: "resource \"aws_lambda_function\" $NAME { \n  ...\n  package_type\
+      \ = \"Image\"\n}\n"
   - pattern-either:
-      - pattern: handler = ...
-      - pattern: runtime = ...
-    
+    - pattern: handler = ...
+    - pattern: runtime = ...
+  severity: WARNING

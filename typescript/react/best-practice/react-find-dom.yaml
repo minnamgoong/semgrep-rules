@@ -1,19 +1,21 @@
 rules:
-  - id: react-find-dom
-    pattern-either:
-      - pattern: |
-          findDOMNode(...)
-      - pattern: |
-          $DOM.findDOMNode(...)
-    message: "React 컴포넌트 데이터 바인딩 가압 점검."
-    metadata:
-      references:
-        - https://react.dev/reference/react-dom/findDOMNode
-        - https://github.com/yannickcr/eslint-plugin-react/issues/678#issue-165177220
-      category: best-practice
-      technology:
-        - react
-    languages:
-      - typescript
-      - javascript
-    severity: WARNING
+- id: react-find-dom
+  languages:
+  - typescript
+  - javascript
+  message: React 컴포넌트 데이터 바인딩 가압 점검.
+  metadata:
+    category: best-practice
+    references:
+    - https://react.dev/reference/react-dom/findDOMNode
+    - https://github.com/yannickcr/eslint-plugin-react/issues/678#issue-165177220
+    technology:
+    - react
+  pattern-either:
+  - pattern: 'findDOMNode(...)
+
+      '
+  - pattern: '$DOM.findDOMNode(...)
+
+      '
+  severity: WARNING

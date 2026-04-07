@@ -2,34 +2,28 @@ rules:
 - id: tainted-html-string
   languages:
   - python
-  severity: WARNING
-  message: "tainted-html-string 잠재적 결함 분기 정비 요망."
+  message: tainted-html-string 잠재적 결함 분기 정비 요망.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
     - A05:2025 - Injection
-    category: security
-    technology:
-    - aws-lambda
     references:
     - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - aws-lambda
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern: event
-    - pattern-inside: |
-        def $HANDLER(event, context):
-          ...
   pattern-sinks:
   - patterns:
     - pattern-either:
@@ -40,16 +34,24 @@ rules:
           - pattern: '"$HTMLSTR" + ...'
           - pattern: f"$HTMLSTR{...}..."
       - patterns:
-        - pattern-inside: |
-            $HTML = "$HTMLSTR"
+        - pattern-inside: '$HTML = "$HTMLSTR"
+
             ...
+
+            '
         - pattern-either:
           - pattern: $HTML % ...
           - pattern: $HTML.format(...)
           - pattern: $HTML + ...
     - metavariable-pattern:
-        metavariable: $HTMLSTR
         language: generic
+        metavariable: $HTMLSTR
         pattern: <$TAG ...
-    - pattern-not-inside: |
-        print(...)
+    - pattern-not-inside: 'print(...)
+
+        '
+  pattern-sources:
+  - patterns:
+    - pattern: event
+    - pattern-inside: "def $HANDLER(event, context):\n  ...\n"
+  severity: WARNING

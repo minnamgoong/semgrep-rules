@@ -1,13 +1,13 @@
 rules:
 - id: copy-from-own-alias
-  severity: ERROR
-  languages: [generic]
-  message: "자기 자신의 스테이지 레이어를 출처(from)로 명명하는 순환 구성을 경보합니다."
+  languages:
+  - generic
+  message: 자기 자신의 스테이지 레이어를 출처(from)로 명명하는 순환 구성을 경보합니다.
   metadata:
-    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3023
+    category: correctness
     references:
     - https://github.com/hadolint/hadolint/wiki/DL3023
-    category: correctness
+    source-rule-url: https://github.com/hadolint/hadolint/wiki/DL3023
     technology:
     - dockerfile
   paths:
@@ -15,15 +15,26 @@ rules:
     - '*dockerfile*'
     - '*Dockerfile*'
   pattern-either:
-  - pattern: |
-      FROM $IMAGE:$TAG as $REF
+  - pattern: 'FROM $IMAGE:$TAG as $REF
+
       ...
+
       COPY --from=$REF
+
       ...
+
       FROM
-  - pattern: |
-      FROM $IMAGE:$TAG AS $REF
+
+      '
+  - pattern: 'FROM $IMAGE:$TAG AS $REF
+
       ...
+
       COPY --from=$REF
+
       ...
+
       FROM
+
+      '
+  severity: ERROR

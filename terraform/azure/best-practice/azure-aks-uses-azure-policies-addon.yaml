@@ -1,26 +1,22 @@
 rules:
-  - id: azure-aks-uses-azure-policies-addon
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    patterns:
-      - pattern: resource
-      - pattern-not-inside: |
-          resource "azurerm_kubernetes_cluster" "..." {
-          ...
-          addon_profile {
-            azure_policy {
-              enabled = true
-            }
-          }
-          ...
-          }
-      - pattern-inside: |
-          resource "azurerm_kubernetes_cluster" "..." {
-          ...
-          }
-    metadata:
-      category: best-practice
-      technology:
-        - terraform
-        - azure
-    languages: [hcl]
-    severity: INFO
+- id: azure-aks-uses-azure-policies-addon
+  languages:
+  - hcl
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    technology:
+    - terraform
+    - azure
+  patterns:
+  - pattern: resource
+  - pattern-not-inside: "resource \"azurerm_kubernetes_cluster\" \"...\" {\n...\n\
+      addon_profile {\n  azure_policy {\n    enabled = true\n  }\n}\n...\n}\n"
+  - pattern-inside: 'resource "azurerm_kubernetes_cluster" "..." {
+
+      ...
+
+      }
+
+      '
+  severity: INFO

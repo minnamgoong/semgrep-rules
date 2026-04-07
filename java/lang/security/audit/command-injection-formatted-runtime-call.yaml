@@ -1,5 +1,30 @@
 rules:
 - id: command-injection-formatted-runtime-call
+  languages:
+  - java
+  message: Runtime.exec에 동적 조립 문자열(String.format 등)을 인자로 전달하여 커맨드 인젝션 위험이 있습니다. 안정성을
+    위해 인자 리스트(String[]) 형식으로 전달하세요.
+  metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: HIGH
+    likelihood: LOW
+    owasp:
+    - A01:2017 - Injection
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://owasp.org/Top10/A03_2021-Injection
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#COMMAND_INJECTION.
+    subcategory:
+    - audit
+    technology:
+    - java
   patterns:
   - metavariable-pattern:
       metavariable: $RUNTIME
@@ -14,71 +39,70 @@ rules:
     - pattern: $RUNTIME.loadLibrary(String.format(...));
     - patterns:
       - pattern-either:
-        - pattern: | 
-            $RUNTIME.exec("=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c", $ARG,...)
-        - pattern: |
-            $RUNTIME.exec(Arrays.asList("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...),...)
-        - pattern: |
-            $RUNTIME.exec(new String[]{"=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...},...)
+        - pattern: '$RUNTIME.exec("=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c", $ARG,...)
+
+            '
+        - pattern: '$RUNTIME.exec(Arrays.asList("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...),...)
+
+            '
+        - pattern: '$RUNTIME.exec(new String[]{"=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",$ARG,...},...)
+
+            '
         - patterns:
           - pattern-either:
-            - pattern: |
-                $RUNTIME.exec($CMD,"-c",$ARG,...)
-            - pattern: |
-                $RUNTIME.exec(Arrays.asList($CMD,"-c",$ARG,...),...)
-            - pattern: |
-                $RUNTIME.exec(new String[]{$CMD,"-c",$ARG,...},...)
-          - pattern-inside: |
-              $CMD = "=~/(sh|bash|ksh|csh|tcsh|zsh)/";
+            - pattern: '$RUNTIME.exec($CMD,"-c",$ARG,...)
+
+                '
+            - pattern: '$RUNTIME.exec(Arrays.asList($CMD,"-c",$ARG,...),...)
+
+                '
+            - pattern: '$RUNTIME.exec(new String[]{$CMD,"-c",$ARG,...},...)
+
+                '
+          - pattern-inside: '$CMD = "=~/(sh|bash|ksh|csh|tcsh|zsh)/";
+
               ...
+
+              '
         - patterns:
           - pattern-either:
-            - pattern: |
-                $RUNTIME.exec($CMD, $EXECUTE, $ARG, ...)
-          - pattern-inside: |
-              $CMD = new String[]{"=~/(sh|bash|ksh|csh|tcsh|zsh)/", ...};
+            - pattern: '$RUNTIME.exec($CMD, $EXECUTE, $ARG, ...)
+
+                '
+          - pattern-inside: '$CMD = new String[]{"=~/(sh|bash|ksh|csh|tcsh|zsh)/",
+              ...};
+
               ...
+
+              '
         - patterns:
-            - pattern-either:
-                - pattern: | 
-                    $RUNTIME.exec("=~/(sh|bash|ksh|csh|tcsh|zsh)/", $BASH, $ARG,...)
-                - pattern: |
-                    $RUNTIME.exec(Arrays.asList("=~/(sh|bash|ksh|csh|tcsh|zsh)/",$BASH,$ARG,...),...)
-                - pattern: |
-                    $RUNTIME.exec(new String[]{"=~/(sh|bash|ksh|csh|tcsh|zsh)/",$BASH,$ARG,...},...)
-            - pattern-inside: |
-                $BASH = new String[]{"=~/(-c)/", ...};
-                ...
-      - pattern-not-inside: |
-          $ARG = "...";
+          - pattern-either:
+            - pattern: '$RUNTIME.exec("=~/(sh|bash|ksh|csh|tcsh|zsh)/", $BASH, $ARG,...)
+
+                '
+            - pattern: '$RUNTIME.exec(Arrays.asList("=~/(sh|bash|ksh|csh|tcsh|zsh)/",$BASH,$ARG,...),...)
+
+                '
+            - pattern: '$RUNTIME.exec(new String[]{"=~/(sh|bash|ksh|csh|tcsh|zsh)/",$BASH,$ARG,...},...)
+
+                '
+          - pattern-inside: '$BASH = new String[]{"=~/(-c)/", ...};
+
+              ...
+
+              '
+      - pattern-not-inside: '$ARG = "...";
+
           ...
-      - pattern-not: |
-          $RUNTIME.exec("...","...","...",...)
-      - pattern-not: |
-          $RUNTIME.exec(new String[]{"...","...","...",...},...)
-      - pattern-not: |
-          $RUNTIME.exec(Arrays.asList("...","...","...",...),...)
-  message: "Runtime.exec에 동적 조립 문자열(String.format 등)을 인자로 전달하여 커맨드 인젝션 위험이 있습니다. 안정성을 위해 인자 리스트(String[]) 형식으로 전달하세요."
-  metadata:
-    cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
-    owasp:
-    - A01:2017 - Injection
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#COMMAND_INJECTION.
-    category: security
-    technology:
-    - java
-    references:
-    - https://owasp.org/Top10/A03_2021-Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
+
+          '
+      - pattern-not: '$RUNTIME.exec("...","...","...",...)
+
+          '
+      - pattern-not: '$RUNTIME.exec(new String[]{"...","...","...",...},...)
+
+          '
+      - pattern-not: '$RUNTIME.exec(Arrays.asList("...","...","...",...),...)
+
+          '
   severity: ERROR
-  languages:
-  - java

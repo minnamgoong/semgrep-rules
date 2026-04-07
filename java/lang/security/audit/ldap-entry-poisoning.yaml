@@ -1,38 +1,42 @@
 rules:
 - id: ldap-entry-poisoning
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    asvs:
+      control_id: 5.3.7 Injection
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
+      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
+      version: '4'
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-90: Improper Neutralization of Special Elements used in an LDAP Query (''LDAP
+      Injection'')'
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
     - A05:2025 - Injection
-    cwe:
-    - "CWE-90: Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection')"
-    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#LDAP_ENTRY_POISONING
-    asvs:
-      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
-      control_id: 5.3.7 Injection
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
-      version: '4'
     references:
     - https://www.blackhat.com/docs/us-16/materials/us-16-Munoz-A-Journey-From-JNDI-LDAP-Manipulation-To-RCE-wp.pdf
     - https://cheatsheetseries.owasp.org/cheatsheets/LDAP_Injection_Prevention_Cheat_Sheet.html
-    category: security
-    technology:
-    - java
+    source-rule-url: https://find-sec-bugs.github.io/bugs.htm#LDAP_ENTRY_POISONING
     subcategory:
     - audit
-    likelihood: LOW
-    impact: HIGH
-    confidence: LOW
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  severity: WARNING
+    technology:
+    - java
   pattern-either:
-      # SearchControls(int scope, long countlim, int timelim, String[] attrs, boolean retobj, boolean deref)
-  - pattern: |
-      new SearchControls($S, $CL, $TL, $AT, true, $DEREF)
-  - pattern: |
-      SearchControls $VAR = new SearchControls();
+  - pattern: 'new SearchControls($S, $CL, $TL, $AT, true, $DEREF)
+
+      '
+  - pattern: 'SearchControls $VAR = new SearchControls();
+
       ...
+
       $VAR.setReturningObjFlag(true);
-  languages:
-  - java
+
+      '
+  severity: WARNING

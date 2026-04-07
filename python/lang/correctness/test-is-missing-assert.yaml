@@ -1,38 +1,34 @@
 rules:
-  - id: test-is-missing-assert
-    languages:
-      - python
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    patterns:
-      - pattern: $A == $B
-      - pattern-not-inside: assert ...
-      - pattern-not-inside: $X = ...
-      - pattern-not-inside: $X += ...
-      - pattern-not-inside: $X |= ...
-      - pattern-not-inside: $X &= ...
-      - pattern-not-inside: yield $X
-      - pattern-not-inside: $X and $Y
-      - pattern-not-inside: $X or $Y
-      - pattern-not-inside: return ...
-      - pattern-not-inside: $FUNC(...)
-      - pattern-not-inside: |
-          while $EXPR:
-            ...
-      - pattern-not-inside: |
-          with (...):
-            ...
-      - pattern-not-inside: |
-          [...]
-      - pattern-not-inside: |
-          $EXPR[...]
-      - pattern-not-inside: |
-          if ...:
-              ...
-    severity: WARNING
-    paths:
-      include:
-        - test*.py
-    metadata:
-      category: correctness
-      technology:
-        - python
+- id: test-is-missing-assert
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: correctness
+    technology:
+    - python
+  paths:
+    include:
+    - test*.py
+  patterns:
+  - pattern: $A == $B
+  - pattern-not-inside: assert ...
+  - pattern-not-inside: $X = ...
+  - pattern-not-inside: $X += ...
+  - pattern-not-inside: $X |= ...
+  - pattern-not-inside: $X &= ...
+  - pattern-not-inside: yield $X
+  - pattern-not-inside: $X and $Y
+  - pattern-not-inside: $X or $Y
+  - pattern-not-inside: return ...
+  - pattern-not-inside: $FUNC(...)
+  - pattern-not-inside: "while $EXPR:\n  ...\n"
+  - pattern-not-inside: "with (...):\n  ...\n"
+  - pattern-not-inside: '[...]
+
+      '
+  - pattern-not-inside: '$EXPR[...]
+
+      '
+  - pattern-not-inside: "if ...:\n    ...\n"
+  severity: WARNING

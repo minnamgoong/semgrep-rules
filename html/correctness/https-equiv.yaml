@@ -1,16 +1,17 @@
 rules:
-  - id: https-equiv
-    metadata:
-      category: correctness
-      technology:
-        - html
-      references:
-        - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#http-equiv
-    message: "HTTPS 꼬리표 결여 및 메타 데이터 누출 경하 점검."
-    severity: ERROR
-    languages: [html]
-    pattern-either:
-      - pattern: <meta ... https-equiv=...>
-    fix-regex:
-      regex: 'https-equiv='
-      replacement: 'http-equiv='
+- fix-regex:
+    regex: https-equiv=
+    replacement: http-equiv=
+  id: https-equiv
+  languages:
+  - html
+  message: HTTPS 꼬리표 결여 및 메타 데이터 누출 경하 점검.
+  metadata:
+    category: correctness
+    references:
+    - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#http-equiv
+    technology:
+    - html
+  pattern-either:
+  - pattern: <meta ... https-equiv=...>
+  severity: ERROR

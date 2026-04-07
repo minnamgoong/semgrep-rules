@@ -1,14 +1,15 @@
 rules:
 - id: localhost-base-url
+  languages:
+  - generic
+  message: localhost-base-url 잠재적 결함 분기 정비 요망.
+  metadata:
+    category: best-practice
+    references:
+    - https://gohugo.io/
+    technology:
+    - hugo
   patterns:
   - pattern: baseURL = "..."
   - pattern-regex: .*(localhost|127\.0\.0\.1).*
   severity: WARNING
-  message: "localhost-base-url 잠재적 결함 분기 정비 요망."
-  languages: [generic]
-  metadata:
-    references: 
-       - https://gohugo.io/
-    category: best-practice
-    technology:
-    - hugo

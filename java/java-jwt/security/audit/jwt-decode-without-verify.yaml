@@ -1,34 +1,29 @@
 rules:
 - id: java-jwt-decode-without-verify
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: MEDIUM
     cwe:
     - 'CWE-345: Insufficient Verification of Data Authenticity'
+    impact: HIGH
+    likelihood: LOW
     owasp:
     - A08:2021 - Software and Data Integrity Failures
     - A08:2025 - Software or Data Integrity Failures
-    source-rule-url: https://semgrep.dev/blog/2020/hardcoded-secrets-unverified-tokens-and-other-common-jwt-mistakes/
-    category: security
-    technology:
-    - jwt
-    confidence: MEDIUM
     references:
     - https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures
+    source-rule-url: https://semgrep.dev/blog/2020/hardcoded-secrets-unverified-tokens-and-other-common-jwt-mistakes/
     subcategory:
     - vuln
-    likelihood: LOW
-    impact: HIGH
-  languages: [java]
-  severity: WARNING
+    technology:
+    - jwt
   patterns:
-  - pattern: |
-      com.auth0.jwt.JWT.decode(...);
-  - pattern-not-inside: |-
-      class $CLASS {
-        ...
-        $RETURNTYPE $FUNC (...) {
-          ...
-          $VERIFIER.verify(...);
-          ...
-        }
-      }
+  - pattern: 'com.auth0.jwt.JWT.decode(...);
+
+      '
+  - pattern-not-inside: "class $CLASS {\n  ...\n  $RETURNTYPE $FUNC (...) {\n    ...\n\
+      \    $VERIFIER.verify(...);\n    ...\n  }\n}"
+  severity: WARNING

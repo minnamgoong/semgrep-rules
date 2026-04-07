@@ -1,41 +1,31 @@
 rules:
 - id: apollo-axios-ssrf
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
+  languages:
+  - javascript
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
+    category: security
+    confidence: LOW
+    cwe:
+    - 'CWE-918: Server-Side Request Forgery (SSRF)'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A10:2021 - Server-Side Request Forgery (SSRF)
     - A01:2025 - Broken Access Control
-    cwe:
-    - 'CWE-918: Server-Side Request Forgery (SSRF)'
-    category: security
-    technology:
-    - apollo
-    - axios
     references:
     - https://www.cvedetails.com/cve/CVE-2020-28168/
     - https://owasp.org/www-community/attacks/Server_Side_Request_Forgery
-    cwe2022-top25: true
-    cwe2021-top25: true
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
-  languages:
-  - javascript
-  severity: WARNING
+    technology:
+    - apollo
+    - axios
   patterns:
   - pattern: const $RESPONSE = await axios.request($INNERARG,...)
-  - pattern-inside: |
-      Query: {
-        $METHOD(parent, args, context, info) {
-          ...
-          $DATA = args.$DATAVAL
-          ...
-          async function $INNERFUNC(...,$INNERARG,...){
-            ...
-          }
-          ...
-          return $INNERFUNC(...,$DATA,...)
-          }
-        }
+  - pattern-inside: "Query: {\n  $METHOD(parent, args, context, info) {\n    ...\n\
+      \    $DATA = args.$DATAVAL\n    ...\n    async function $INNERFUNC(...,$INNERARG,...){\n\
+      \      ...\n    }\n    ...\n    return $INNERFUNC(...,$DATA,...)\n    }\n  }\n"
+  severity: WARNING

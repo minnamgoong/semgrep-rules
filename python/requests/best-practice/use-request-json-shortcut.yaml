@@ -1,16 +1,16 @@
 rules:
-  - id: python.requests.best-practice.use-request-json-shortcut
-    patterns:
-      - pattern-inside: import json; ...
-      - pattern-inside: import requests; ...
-      - pattern: requests.$METHOD(..., body=json.dumps($BODY), ...)
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    severity: WARNING
-    metadata:
-      references:
-        - https://requests.readthedocs.io/en/stable/user/quickstart/#more-complicated-post-requests
-      category: best-practice
-      technology:
-        - requests
-    languages:
-      - python
+- id: python.requests.best-practice.use-request-json-shortcut
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: best-practice
+    references:
+    - https://requests.readthedocs.io/en/stable/user/quickstart/#more-complicated-post-requests
+    technology:
+    - requests
+  patterns:
+  - pattern-inside: import json; ...
+  - pattern-inside: import requests; ...
+  - pattern: requests.$METHOD(..., body=json.dumps($BODY), ...)
+  severity: WARNING

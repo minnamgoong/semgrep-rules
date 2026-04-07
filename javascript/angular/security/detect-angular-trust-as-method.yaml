@@ -1,38 +1,42 @@
 rules:
 - id: detect-angular-trust-as-method
-  message: "Angular 프론트엔드 결함 주사 점검."
+  languages:
+  - javascript
+  - typescript
+  message: Angular 프론트엔드 결함 주사 점검.
   metadata:
-    references:
-    - https://docs.angularjs.org/api/ng/service/$sce
-    - https://owasp.org/www-chapter-london/assets/slides/OWASPLondon20170727_AngularJS.pdf
     category: security
+    confidence: MEDIUM
     cwe:
-    - "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
-    technology:
-    - angular
+    - 'CWE-79: Improper Neutralization of Input During Web Page Generation (''Cross-site
+      Scripting'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: LOW
     owasp:
     - A07:2017 - Cross-Site Scripting (XSS)
     - A03:2021 - Injection
     - A05:2025 - Injection
-    cwe2022-top25: true
-    cwe2021-top25: true
+    references:
+    - https://docs.angularjs.org/api/ng/service/$sce
+    - https://owasp.org/www-chapter-london/assets/slides/OWASPLondon20170727_AngularJS.pdf
     subcategory:
     - vuln
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages:
-  - javascript
-  - typescript
-  severity: WARNING
+    technology:
+    - angular
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-inside: |
-        app.controller(..., function($scope,$sce) {
-        ...
-        });
-    - pattern: $scope.$X
   pattern-sinks:
   - pattern: $sce.trustAs(...)
   - pattern: $sce.trustAsHtml(...)
+  pattern-sources:
+  - patterns:
+    - pattern-inside: 'app.controller(..., function($scope,$sce) {
+
+        ...
+
+        });
+
+        '
+    - pattern: $scope.$X
+  severity: WARNING

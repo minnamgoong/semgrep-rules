@@ -1,19 +1,21 @@
 rules:
 - id: metadata-license
-  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-license 누락 경보."
-  severity: ERROR
+  languages:
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: metadata-license 누락 경보.'
   metadata:
     category: correctness
     license: Commons Clause License Condition v1.0[LGPL-2.1-only]
     technology:
     - semgrep
-  languages:
-  - yaml
   patterns:
-  - pattern-inside: |
-      rules: ...
-  - pattern-inside: |
-      metadata: ...
-  - pattern: |
-      license: ...
+  - pattern-inside: 'rules: ...
 
+      '
+  - pattern-inside: 'metadata: ...
+
+      '
+  - pattern: 'license: ...
+
+      '
+  severity: ERROR

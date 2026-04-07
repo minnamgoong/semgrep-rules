@@ -1,29 +1,27 @@
 rules:
 - id: libxml2-xxe-taint
-  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: libxml2-xxe-taint 누사 경보."
-  severity: ERROR
-  options:
-    # ruleid: interfile-true-under-metadata-and-options-already-present
-    symbolic_propagation: true
+  languages:
+  - go
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: libxml2-xxe-taint 누사 경보.'
   metadata:
-    likelihood: MEDIUM
-    impact: HIGH
-    confidence: HIGH
-    interfile: true
     category: security
-    subcategory:
-    - vuln
+    confidence: HIGH
     cwe:
     - 'CWE-611: Improper Restriction of XML External Entity Reference'
     cwe2020-top25: true
     cwe2021-top25: true
     cwe2022-top25: true
+    impact: HIGH
+    interfile: true
+    likelihood: MEDIUM
     owasp:
     - A04:2017 - XML External Entities (XXE)
     - A05:2021 - Security Misconfiguration
     - A02:2025 - Security Misconfiguration
     references:
     - https://owasp.org/Top10/A05_2021-Security_Misconfiguration
+    subcategory:
+    - vuln
     technology:
     - go
     - libxml2
@@ -31,61 +29,37 @@ rules:
     - go-net/http
     - gin
     - gin-gonic/gin
-  languages:
-  - go
   mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern-either:
-      - pattern: |
-          ($REQ : http.Request).$FIELD
-      - pattern: |
-          ($REQ : *http.Request).$FIELD
-    - metavariable-regex:
-        metavariable: $FIELD
-        regex: 
-          ^(BasicAuth|Body|Cookie|Cookies|Form|FormValue|GetBody|Host|Header|MultipartReader|ParseForm|ParseMultipartForm|PostForm|PostFormValue|Referer|RequestURI|Trailer|TransferEncoding|URL|UserAgent)$
-  - patterns:
-    - pattern-inside: |
-        import "github.com/gin-gonic/gin"
-        ...
-    - pattern-either:
-      - patterns:
-        - pattern-either:
-          - pattern: |
-              ($CONTEXT : gin.Context).$FIELD
-          - pattern: |
-              ($CONTEXT : *gin.Context).$FIELD
-        - metavariable-regex:
-            metavariable: $FIELD
-            regex: 
-              ^(Cookie|DefaultPostForm|DefaultQuery|FormFile|GetHeader|GetPostForm|GetPostFormArray|GetPostFormMap|GetQuery|GetQueryArray|GetQueryMap|GetRawData|MultipartForm|Param|Params|PostForm|PostFormArray|PostFormMap|Query|QueryArray|QueryMap)$
-      - pattern-either:
-        - pattern: |
-            ($CONTEXT : gin.Context).Request.URL.Query().Get(...)
-        - pattern: |
-            ($CONTEXT : *gin.Context).Request.URL.Query().Get(...)
+  options:
+    symbolic_propagation: true
   pattern-sinks:
   - patterns:
     - patterns:
-      - pattern-inside: |
-          import "$IMPORT"
+      - pattern-inside: 'import "$IMPORT"
+
           ...
+
+          '
       - metavariable-regex:
           metavariable: $IMPORT
           regex: (.*lestrrat-go/libxml2.*)
     - patterns:
       - pattern-either:
         - patterns:
-          - pattern-inside: |
-              $P = parser.New($OPTS)
+          - pattern-inside: '$P = parser.New($OPTS)
+
               ...
-          - pattern: |
-              $P.$PARSE($INPUT)
-        - pattern: |
-            parser.New($OPTS).$PARSE($INPUT)
-        - pattern: |
-            NewCtxt($INPUT, $OPTS)
+
+              '
+          - pattern: '$P.$PARSE($INPUT)
+
+              '
+        - pattern: 'parser.New($OPTS).$PARSE($INPUT)
+
+            '
+        - pattern: 'NewCtxt($INPUT, $OPTS)
+
+            '
       - focus-metavariable: $INPUT
       - metavariable-regex:
           metavariable: $PARSE
@@ -94,8 +68,47 @@ rules:
           metavariable: $OPTS
           patterns:
           - pattern-either:
-            - pattern: |
-                XMLParseNoEnt
-            - pattern: |
-                parser.XMLParseNoEnt
+            - pattern: 'XMLParseNoEnt
 
+                '
+            - pattern: 'parser.XMLParseNoEnt
+
+                '
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - pattern: '($REQ : http.Request).$FIELD
+
+          '
+      - pattern: '($REQ : *http.Request).$FIELD
+
+          '
+    - metavariable-regex:
+        metavariable: $FIELD
+        regex: ^(BasicAuth|Body|Cookie|Cookies|Form|FormValue|GetBody|Host|Header|MultipartReader|ParseForm|ParseMultipartForm|PostForm|PostFormValue|Referer|RequestURI|Trailer|TransferEncoding|URL|UserAgent)$
+  - patterns:
+    - pattern-inside: 'import "github.com/gin-gonic/gin"
+
+        ...
+
+        '
+    - pattern-either:
+      - patterns:
+        - pattern-either:
+          - pattern: '($CONTEXT : gin.Context).$FIELD
+
+              '
+          - pattern: '($CONTEXT : *gin.Context).$FIELD
+
+              '
+        - metavariable-regex:
+            metavariable: $FIELD
+            regex: ^(Cookie|DefaultPostForm|DefaultQuery|FormFile|GetHeader|GetPostForm|GetPostFormArray|GetPostFormMap|GetQuery|GetQueryArray|GetQueryMap|GetRawData|MultipartForm|Param|Params|PostForm|PostFormArray|PostFormMap|Query|QueryArray|QueryMap)$
+      - pattern-either:
+        - pattern: '($CONTEXT : gin.Context).Request.URL.Query().Get(...)
+
+            '
+        - pattern: '($CONTEXT : *gin.Context).Request.URL.Query().Get(...)
+
+            '
+  severity: ERROR

@@ -1,105 +1,36 @@
 rules:
 - id: dangerous-os-exec
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 dangerous-os-exec 전사 단속이 요구됩니다.
+  metadata:
+    asvs:
+      control_id: 5.3.8 OS Command Injection
+      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
+      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
+      version: '4'
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (''OS
+      Command Injection'')'
+    cwe2021-top25: true
+    cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: MEDIUM
+    owasp:
+    - A01:2017 - Injection
+    - A03:2021 - Injection
+    - A05:2025 - Injection
+    references:
+    - https://semgrep.dev/docs/cheat-sheets/python-command-injection/
+    subcategory:
+    - vuln
+    technology:
+    - python
   mode: taint
   options:
     symbolic_propagation: true
-  pattern-sources:
-  - patterns:
-    - pattern-either:
-      - patterns:
-        - pattern-either:
-          - pattern: flask.request.form.get(...)
-          - pattern: flask.request.form[...]
-          - pattern: flask.request.args.get(...)
-          - pattern: flask.request.args[...]
-          - pattern: flask.request.values.get(...)
-          - pattern: flask.request.values[...]
-          - pattern: flask.request.cookies.get(...)
-          - pattern: flask.request.cookies[...]
-          - pattern: flask.request.stream
-          - pattern: flask.request.headers.get(...)
-          - pattern: flask.request.headers[...]
-          - pattern: flask.request.data
-          - pattern: flask.request.full_path
-          - pattern: flask.request.url
-          - pattern: flask.request.json
-          - pattern: flask.request.get_json()
-          - pattern: flask.request.view_args.get(...)
-          - pattern: flask.request.view_args[...]
-          - patterns:
-            - pattern-inside: |
-                @$APP.route(...)
-                def $FUNC(..., $ROUTEVAR, ...):
-                  ...
-            - focus-metavariable: $ROUTEVAR
-      - patterns:
-        - pattern-inside: |
-            def $FUNC(request, ...):
-              ...
-        - pattern-either:
-          - pattern: request.$PROPERTY.get(...)
-          - pattern: request.$PROPERTY[...]
-      - patterns:
-        - pattern-either:
-          - pattern-inside: |
-              @rest_framework.decorators.api_view(...)
-              def $FUNC($REQ, ...):
-                ...
-          - patterns:
-            - pattern-either:
-              - pattern-inside: |
-                  class $VIEW(..., rest_framework.views.APIView, ...):
-                    ...
-              - pattern-inside: |
-                  class $VIEW(..., rest_framework.generics.GenericAPIView, ...):
-                    ...                              
-            - pattern-inside: |
-                def $METHOD(self, $REQ, ...):
-                  ...
-            - metavariable-regex:
-                metavariable: $METHOD
-                regex: (get|post|put|patch|delete|head)
-        - pattern-either:
-          - pattern: $REQ.POST.get(...)
-          - pattern: $REQ.POST[...]
-          - pattern: $REQ.FILES.get(...)
-          - pattern: $REQ.FILES[...]
-          - pattern: $REQ.DATA.get(...)
-          - pattern: $REQ.DATA[...]
-          - pattern: $REQ.QUERY_PARAMS.get(...)
-          - pattern: $REQ.QUERY_PARAMS[...]
-          - pattern: $REQ.data.get(...)
-          - pattern: $REQ.data[...]
-          - pattern: $REQ.query_params.get(...)
-          - pattern: $REQ.query_params[...]
-          - pattern: $REQ.content_type
-          - pattern: $REQ.content_type
-          - pattern: $REQ.stream
-          - pattern: $REQ.stream
-      - patterns:
-        - pattern-either:
-          - pattern-inside: |
-              class $SERVER(..., http.server.BaseHTTPRequestHandler, ...):
-                ...
-          - pattern-inside: |
-              class $SERVER(..., http.server.StreamRequestHandler, ...):
-                ...
-          - pattern-inside: |
-              class $SERVER(..., http.server.DatagramRequestHandler, ...):
-                ...
-        - pattern-either:
-          - pattern: self.requestline
-          - pattern: self.path
-          - pattern: self.headers[...]
-          - pattern: self.headers.get(...)
-          - pattern: self.rfile
-      - patterns:
-        - pattern-inside: |
-            @pyramid.view.view_config( ... )
-            def $VIEW($REQ):
-              ...
-        - pattern: $REQ.$ANYTHING
-        - pattern-not: $REQ.dbsession
   pattern-sinks:
   - patterns:
     - pattern-either:
@@ -129,30 +60,85 @@ rules:
         - metavariable-regex:
             metavariable: $BASH
             regex: (.*)(sh|bash|ksh|csh|tcsh|zsh)
-  message: "인젝션 및 논리 에러 예방을 위한 dangerous-os-exec 전사 단속이 요구됩니다."
-  metadata:
-    cwe:
-    - "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
-    owasp:
-    - A01:2017 - Injection
-    - A03:2021 - Injection
-    - A05:2025 - Injection
-    references:
-    - https://semgrep.dev/docs/cheat-sheets/python-command-injection/
-    asvs:
-      section: 'V5: Validation, Sanitization and Encoding Verification Requirements'
-      control_id: 5.3.8 OS Command Injection
-      control_url: https://github.com/OWASP/ASVS/blob/master/4.0/en/0x13-V5-Validation-Sanitization-Encoding.md#v53-output-encoding-and-injection-prevention-requirements
-      version: '4'
-    confidence: MEDIUM
-    category: security
-    technology:
-    - python
-    cwe2022-top25: true
-    cwe2021-top25: true
-    subcategory:
-    - vuln
-    likelihood: MEDIUM
-    impact: MEDIUM
-  languages: [python]
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - patterns:
+        - pattern-either:
+          - pattern: flask.request.form.get(...)
+          - pattern: flask.request.form[...]
+          - pattern: flask.request.args.get(...)
+          - pattern: flask.request.args[...]
+          - pattern: flask.request.values.get(...)
+          - pattern: flask.request.values[...]
+          - pattern: flask.request.cookies.get(...)
+          - pattern: flask.request.cookies[...]
+          - pattern: flask.request.stream
+          - pattern: flask.request.headers.get(...)
+          - pattern: flask.request.headers[...]
+          - pattern: flask.request.data
+          - pattern: flask.request.full_path
+          - pattern: flask.request.url
+          - pattern: flask.request.json
+          - pattern: flask.request.get_json()
+          - pattern: flask.request.view_args.get(...)
+          - pattern: flask.request.view_args[...]
+          - patterns:
+            - pattern-inside: "@$APP.route(...)\ndef $FUNC(..., $ROUTEVAR, ...):\n\
+                \  ...\n"
+            - focus-metavariable: $ROUTEVAR
+      - patterns:
+        - pattern-inside: "def $FUNC(request, ...):\n  ...\n"
+        - pattern-either:
+          - pattern: request.$PROPERTY.get(...)
+          - pattern: request.$PROPERTY[...]
+      - patterns:
+        - pattern-either:
+          - pattern-inside: "@rest_framework.decorators.api_view(...)\ndef $FUNC($REQ,\
+              \ ...):\n  ...\n"
+          - patterns:
+            - pattern-either:
+              - pattern-inside: "class $VIEW(..., rest_framework.views.APIView, ...):\n\
+                  \  ...\n"
+              - pattern-inside: "class $VIEW(..., rest_framework.generics.GenericAPIView,\
+                  \ ...):\n  ...                              \n"
+            - pattern-inside: "def $METHOD(self, $REQ, ...):\n  ...\n"
+            - metavariable-regex:
+                metavariable: $METHOD
+                regex: (get|post|put|patch|delete|head)
+        - pattern-either:
+          - pattern: $REQ.POST.get(...)
+          - pattern: $REQ.POST[...]
+          - pattern: $REQ.FILES.get(...)
+          - pattern: $REQ.FILES[...]
+          - pattern: $REQ.DATA.get(...)
+          - pattern: $REQ.DATA[...]
+          - pattern: $REQ.QUERY_PARAMS.get(...)
+          - pattern: $REQ.QUERY_PARAMS[...]
+          - pattern: $REQ.data.get(...)
+          - pattern: $REQ.data[...]
+          - pattern: $REQ.query_params.get(...)
+          - pattern: $REQ.query_params[...]
+          - pattern: $REQ.content_type
+          - pattern: $REQ.content_type
+          - pattern: $REQ.stream
+          - pattern: $REQ.stream
+      - patterns:
+        - pattern-either:
+          - pattern-inside: "class $SERVER(..., http.server.BaseHTTPRequestHandler,\
+              \ ...):\n  ...\n"
+          - pattern-inside: "class $SERVER(..., http.server.StreamRequestHandler,\
+              \ ...):\n  ...\n"
+          - pattern-inside: "class $SERVER(..., http.server.DatagramRequestHandler,\
+              \ ...):\n  ...\n"
+        - pattern-either:
+          - pattern: self.requestline
+          - pattern: self.path
+          - pattern: self.headers[...]
+          - pattern: self.headers.get(...)
+          - pattern: self.rfile
+      - patterns:
+        - pattern-inside: "@pyramid.view.view_config( ... )\ndef $VIEW($REQ):\n  ...\n"
+        - pattern: $REQ.$ANYTHING
+        - pattern-not: $REQ.dbsession
   severity: ERROR

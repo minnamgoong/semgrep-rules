@@ -1,16 +1,18 @@
 rules:
 - id: tainted-sql-from-http-request
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  severity: WARNING
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: HIGH
     category: security
+    confidence: HIGH
     cwe:
-    - "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+    - 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command
+      (''SQL Injection'')'
     cwe2021-top25: true
     cwe2022-top25: true
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A01:2017 - Injection
     - A03:2021 - Injection
@@ -25,46 +27,45 @@ rules:
     - java
     - servlets
     - spring
-  languages: [java]
   mode: taint
   options:
-    taint_assume_safe_numbers: true
     taint_assume_safe_booleans: true
-  pattern-sources:
-  - patterns:
-    - pattern-either:
-      - pattern: |
-          (HttpServletRequest $REQ).$REQFUNC(...)
-      - pattern: |
-          (ServletRequest $REQ).$REQFUNC(...) 
-    - metavariable-regex:
-        metavariable: $REQFUNC
-        regex: (getInputStream|getParameter|getParameterMap|getParameterValues|getReader|getCookies|getHeader|getHeaderNames|getHeaders|getPart|getParts|getQueryString)
+    taint_assume_safe_numbers: true
   pattern-sinks:
   - patterns:
     - pattern-either:
-      - pattern: |
-          (java.sql.CallableStatement $STMT) = ...; 
-      - pattern: |
-          (java.sql.Statement $STMT) = ...;
+      - pattern: "(java.sql.CallableStatement $STMT) = ...; \n"
+      - pattern: '(java.sql.Statement $STMT) = ...;
+
           ...
+
           $OUTPUT = $STMT.$FUNC(...);
-      - pattern: |
-          (java.sql.PreparedStatement $STMT) = ...;
-      - pattern: |
-          $VAR = $CONN.prepareStatement(...)
-      - pattern: |
-          $PATH.queryForObject(...);
-      - pattern: |
-          (java.util.Map<String, Object> $STMT) = $PATH.queryForMap(...);
-      - pattern: |
-          (org.springframework.jdbc.support.rowset.SqlRowSet $STMT) = ...;
-      - pattern: |
-          (org.springframework.jdbc.core.JdbcTemplate $TEMPL).batchUpdate(...)
+
+          '
+      - pattern: '(java.sql.PreparedStatement $STMT) = ...;
+
+          '
+      - pattern: '$VAR = $CONN.prepareStatement(...)
+
+          '
+      - pattern: '$PATH.queryForObject(...);
+
+          '
+      - pattern: '(java.util.Map<String, Object> $STMT) = $PATH.queryForMap(...);
+
+          '
+      - pattern: '(org.springframework.jdbc.support.rowset.SqlRowSet $STMT) = ...;
+
+          '
+      - pattern: '(org.springframework.jdbc.core.JdbcTemplate $TEMPL).batchUpdate(...)
+
+          '
       - patterns:
-        - pattern-inside: |
-            (String $SQL) = "$SQLSTR" + ...;
+        - pattern-inside: '(String $SQL) = "$SQLSTR" + ...;
+
             ...
+
+            '
         - pattern: $PATH.$SQLCMD(..., $SQL, ...);
         - metavariable-regex:
             metavariable: $SQLSTR
@@ -72,3 +73,14 @@ rules:
         - metavariable-regex:
             metavariable: $SQLCMD
             regex: (execute|query|executeUpdate|batchUpdate)
+  pattern-sources:
+  - patterns:
+    - pattern-either:
+      - pattern: '(HttpServletRequest $REQ).$REQFUNC(...)
+
+          '
+      - pattern: "(ServletRequest $REQ).$REQFUNC(...) \n"
+    - metavariable-regex:
+        metavariable: $REQFUNC
+        regex: (getInputStream|getParameter|getParameterMap|getParameterValues|getReader|getCookies|getHeader|getHeaderNames|getHeaders|getPart|getParts|getQueryString)
+  severity: WARNING

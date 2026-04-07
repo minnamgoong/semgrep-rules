@@ -1,5 +1,25 @@
 rules:
 - id: disabled-cert-validation
+  languages:
+  - python
+  message: 인젝션 및 논리 에러 예방을 위한 disabled-cert-validation 전사 단속이 요구됩니다.
+  metadata:
+    category: security
+    confidence: MEDIUM
+    cwe:
+    - 'CWE-295: Improper Certificate Validation'
+    impact: MEDIUM
+    likelihood: HIGH
+    owasp:
+    - A03:2017 - Sensitive Data Exposure
+    - A07:2021 - Identification and Authentication Failures
+    - A07:2025 - Authentication Failures
+    references:
+    - https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures
+    subcategory:
+    - vuln
+    technology:
+    - python
   patterns:
   - pattern-either:
     - pattern: urllib3.PoolManager(..., cert_reqs=$REQS, ...)
@@ -13,23 +33,4 @@ rules:
   - metavariable-regex:
       metavariable: $REQS
       regex: (NONE|CERT_NONE|CERT_OPTIONAL|ssl\.CERT_NONE|ssl\.CERT_OPTIONAL|\'NONE\'|\"NONE\"|\'OPTIONAL\'|\"OPTIONAL\")
-  message: "인젝션 및 논리 에러 예방을 위한 disabled-cert-validation 전사 단속이 요구됩니다."
-  metadata:
-    cwe:
-    - 'CWE-295: Improper Certificate Validation'
-    owasp:
-    - A03:2017 - Sensitive Data Exposure
-    - A07:2021 - Identification and Authentication Failures
-    - A07:2025 - Authentication Failures
-    category: security
-    technology:
-    - python
-    references:
-    - https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures
-    subcategory:
-    - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: MEDIUM
-  languages: [python]
   severity: ERROR

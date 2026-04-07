@@ -1,26 +1,16 @@
 rules:
 - id: tainted-xpath-from-http-request
-  message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-  languages: [java]
-  severity: WARNING
-  mode: taint
-  pattern-sources:
-  - patterns:
-    - pattern: |
-        (HttpServletRequest $REQ).$FUNC(...)
-  pattern-sinks:
-  - patterns:
-    - pattern-either:
-      - pattern: |
-          (javax.xml.xpath.XPath $XP).evaluate(...)
-      - pattern: |
-          (javax.xml.xpath.XPath $XP).compile(...).evaluate(...)
+  languages:
+  - java
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
   metadata:
     category: security
-    technology:
-    - java
+    confidence: MEDIUM
     cwe:
-    - "CWE-643: Improper Neutralization of Data within XPath Expressions ('XPath Injection')"
+    - 'CWE-643: Improper Neutralization of Data within XPath Expressions (''XPath
+      Injection'')'
+    impact: MEDIUM
+    likelihood: HIGH
     owasp:
     - A03:2021 - Injection
     - A05:2025 - Injection
@@ -28,6 +18,21 @@ rules:
     - https://owasp.org/Top10/A03_2021-Injection
     subcategory:
     - vuln
-    likelihood: HIGH
-    impact: MEDIUM
-    confidence: MEDIUM
+    technology:
+    - java
+  mode: taint
+  pattern-sinks:
+  - patterns:
+    - pattern-either:
+      - pattern: '(javax.xml.xpath.XPath $XP).evaluate(...)
+
+          '
+      - pattern: '(javax.xml.xpath.XPath $XP).compile(...).evaluate(...)
+
+          '
+  pattern-sources:
+  - patterns:
+    - pattern: '(HttpServletRequest $REQ).$FUNC(...)
+
+        '
+  severity: WARNING

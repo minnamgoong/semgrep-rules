@@ -1,19 +1,24 @@
 rules:
 - id: duplicate-pattern
-  message: "Semgrep 규칙 저작 메타 데이터 정합성 점검: duplicate-pattern 누락 경보."
-  severity: ERROR
+  languages:
+  - yaml
+  message: 'Semgrep 규칙 저작 메타 데이터 정합성 점검: duplicate-pattern 누락 경보.'
   metadata:
     category: correctness
     technology:
     - semgrep
-  languages: [yaml]
   patterns:
   - pattern-inside: 'rules: [..., $RULE, ...]'
-  - pattern-inside: |
-      - pattern: $X
-      ...
-      - pattern: $X
-      ...
-  - pattern: |
-      pattern: $X
+  - pattern-inside: '- pattern: $X
 
+      ...
+
+      - pattern: $X
+
+      ...
+
+      '
+  - pattern: 'pattern: $X
+
+      '
+  severity: ERROR

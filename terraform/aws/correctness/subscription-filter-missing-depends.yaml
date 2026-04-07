@@ -1,10 +1,11 @@
 rules:
 - id: subscription-filter-missing-depends
-  severity: WARNING
-  languages: [hcl]
-  message: "subscription-filter-missing-depends IaC 보안 설정 정비 및 예방 조치 요망."
+  languages:
+  - hcl
+  message: subscription-filter-missing-depends IaC 보안 설정 정비 및 예방 조치 요망.
   metadata:
     category: correctness
+    confidence: MEDIUM
     references:
     - https://stackoverflow.com/questions/38407660/terraform-configuring-cloudwatch-log-subscription-delivery-to-lambda/38428834#38428834
     technology:
@@ -12,15 +13,10 @@ rules:
     - terraform
     - aws-lambda
     - cloudwatch
-    confidence: MEDIUM
   patterns:
-  - pattern: |
-      resource "aws_cloudwatch_log_subscription_filter" $NAME {
-        ...
-        destination_arn = aws_lambda_function.$LAMBDA_NAME.arn
-      }
-  - pattern-not-inside: |
-      resource "aws_cloudwatch_log_subscription_filter" $NAME {
-        ...
-        depends_on = [..., aws_lambda_permission.$PERMISSION_NAME, ...]
-      }
+  - pattern: "resource \"aws_cloudwatch_log_subscription_filter\" $NAME {\n  ...\n\
+      \  destination_arn = aws_lambda_function.$LAMBDA_NAME.arn\n}\n"
+  - pattern-not-inside: "resource \"aws_cloudwatch_log_subscription_filter\" $NAME\
+      \ {\n  ...\n  depends_on = [..., aws_lambda_permission.$PERMISSION_NAME, ...]\n\
+      }\n"
+  severity: WARNING

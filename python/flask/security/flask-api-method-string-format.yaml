@@ -1,35 +1,26 @@
 rules:
 - id: flask-api-method-string-format
-  patterns:
-  - pattern-either:
-    - pattern: |
-        def $METHOD(...,$ARG,...):
-          ...
-          $STRING = "...".format(...,$ARG,...)
-          ...
-          ... = requests.$REQMETHOD($STRING,...)
-    - pattern: |
-        def $METHOD(...,$ARG,...):
-          ...
-          ... = requests.$REQMETHOD("...".format(...,$ARG,...),...)
-  - pattern-inside: |
-      class $CLASS(...):
-        method_decorators = ...
-        ...
-  message: "컨트롤러 연산에 유저 가변 문자열이 수동 가압됩니다. 인젝션 등 우회 타격 부재를 조심하십시오."
-  severity: ERROR
   languages:
   - python
+  message: 컨트롤러 연산에 유저 가변 문자열이 수동 가압됩니다. 인젝션 등 우회 타격 부재를 조심하십시오.
   metadata:
+    category: security
+    confidence: LOW
     cwe:
     - 'CWE-134: Use of Externally-Controlled Format String'
-    category: security
-    technology:
-    - flask
+    impact: MEDIUM
+    likelihood: LOW
     references:
     - https://cwe.mitre.org/data/definitions/134.html
     subcategory:
     - audit
-    likelihood: LOW
-    impact: MEDIUM
-    confidence: LOW
+    technology:
+    - flask
+  patterns:
+  - pattern-either:
+    - pattern: "def $METHOD(...,$ARG,...):\n  ...\n  $STRING = \"...\".format(...,$ARG,...)\n\
+        \  ...\n  ... = requests.$REQMETHOD($STRING,...)\n"
+    - pattern: "def $METHOD(...,$ARG,...):\n  ...\n  ... = requests.$REQMETHOD(\"\
+        ...\".format(...,$ARG,...),...)\n"
+  - pattern-inside: "class $CLASS(...):\n  method_decorators = ...\n  ...\n"
+  severity: ERROR

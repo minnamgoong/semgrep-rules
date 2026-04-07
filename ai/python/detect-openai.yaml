@@ -1,19 +1,19 @@
 rules:
-  - id: detect-openai
-    languages:
-      - python
-    severity: INFO
-    message: "안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오."
-    pattern-either:
-      - pattern: import openai
-      - pattern: from openai import $ANYTHING
-      - pattern: OpenAI(...)
-      - pattern: $CLIENT.chat.completions.$FUNC(...)
-    metadata:
-      references:
-        - https://semgrep.dev/blog/2024/detecting-shadow-ai
-      category: maintainability
-      technology:
-        - genAI
-        - LLMs
-      confidence: LOW
+- id: detect-openai
+  languages:
+  - python
+  message: 안전하지 않은 코드 패턴이 발견되었습니다. 보안 취약점을 방지하기 위해 코드를 점검하고 수정해 주십시오.
+  metadata:
+    category: maintainability
+    confidence: LOW
+    references:
+    - https://semgrep.dev/blog/2024/detecting-shadow-ai
+    technology:
+    - genAI
+    - LLMs
+  pattern-either:
+  - pattern: import openai
+  - pattern: from openai import $ANYTHING
+  - pattern: OpenAI(...)
+  - pattern: $CLIENT.chat.completions.$FUNC(...)
+  severity: INFO
